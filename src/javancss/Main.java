@@ -29,10 +29,10 @@ import java.util.Locale;
  * control to the Javancss class.
  *
  * @author    Chr. Clemens Lee <clemens@kclee.com>
- * @version   $Id: Main.java,v 28.49 2006/10/06 11:46:24 clemens Exp clemens $
+ * @version   $Id: Main.java,v 29.50 2006/10/06 11:46:24 clemens Exp clemens $
  */
 public class Main {
-    public static final String S_RCS_HEADER = "$Header: /home/clemens/src/java/javancss/src/javancss/RCS/Main.java,v 28.49 2006/10/06 11:46:24 clemens Exp clemens $";
+    public static final String S_RCS_HEADER = "$Header: /home/clemens/src/java/javancss/src/javancss/RCS/Main.java,v 29.50 2006/10/06 11:46:24 clemens Exp clemens $";
 
     public static void main(String[] asArgs) {
         Locale.setDefault( Locale.US );
