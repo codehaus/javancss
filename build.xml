@@ -1,0 +1,100 @@
+<?xml version="1.0"?>
+
+<!-- =========================================================================================== -->
+<!-- Ant build.xml for JavaNCSS.                                                                 -->
+<!-- Please edit property JAVACC_HOME.                                                           -->
+<!-- =========================================================================================== -->
+
+<project name="javancss" default="javac" basedir=".">
+
+   <property name="DESTINATION" value="classes"/>
+   <property name="CLASSPATH"   value="${DESTINATION}:lib/ccl.jar:lib/jhbasic.jar:lib/javancss.jar:lib/xalan.jarX:lib/xercesImpl.jarX:lib/xml-apis.jarX"/>
+   <!-- overwrite with e.g. ant -DJAVACC_HOME=/sbcimp/run/tp/sun/JavaCC/2.0/ javacc -->
+   <property name="JAVACC_HOME" value="/usr/local/java/javacc"/>
+
+   <target name="all" depends="clean,javacc,javac"/>
+
+   <target name="javac">
+      <mkdir  dir="${DESTINATION}"/>
+      <javac srcdir     ="src"
+             destdir    ="${DESTINATION}"
+             classpath  ="${CLASSPATH}"
+             debug      ="on"
+             deprecation="on"
+             optimize   ="off"
+             source     ="1.4"
+             excludes   ="**/RCS/*">
+      </javac>
+      <copy file="icons/javancssframe.gif"
+            todir="${DESTINATION}/javancss"/>
+   </target>
+
+   <target name="javacc">
+      <mkdir  dir="${DESTINATION}"/>
+      <java classname="javacc"
+            fork     ="yes"
+            dir      ="${user.dir}/src/javancss">
+         <classpath>
+            <pathelement location="lib/javacc.jar"/>
+         </classpath>
+         <arg value="Java1.1.jj"/>
+      </java>
+   </target>
+
+   <!--<target name="javacc">
+      <mkdir  dir="${DESTINATION}"/>
+      <java classname="COM.sun.labs.javacc.Main"
+            fork     ="yes"
+            dir      ="${user.dir}/src/javancss">
+         <classpath>
+            <pathelement location="${JAVACC_HOME}/bin/lib/JavaCC.zip"/>
+         </classpath>
+         <arg value="Java1.1.jj"/>
+      </java>
+   </target>-->
+
+   <target name="clean">
+      <delete dir="${DESTINATION}"/>
+      <mkdir  dir="${DESTINATION}"/>
+   </target>
+
+   <taskdef name="javancss" 
+            classname="javancss.JavancssAntTask"
+            classpath="${CLASSPATH}:lib/javancssanttask.jar"/>
+
+   <target name="javancss">
+      <javancss srcdir="src"
+                includes="**/*.java"
+                generateReport="yes"/>
+   </target>
+
+   <target name="test">
+      <javancss srcdir="src"
+                includes="**/*.java"
+                generateReport="yes"/>
+   </target>
+
+   <target name="update_manifest" >
+     <jar jarfile="lib/javancss.jar" update="true" >
+       <manifest>
+         <attribute name="Main-Class" value="javancss.Main" />
+         <attribute name="Class-Path" value="jhbasic.jar ccl.jar" />
+       </manifest>
+     </jar>
+   </target>
+
+   <target name="check" depends="javac">
+     <java classname="javancss.Main"
+           classpath="${CLASSPATH}"
+           fork="yes">
+       <arg value="-check"/>
+     </java>
+   </target>
+
+   <target name="jar" >
+     <jar destfile="lib/javancss.jar" basedir="classes">
+     </jar>
+   </target>
+
+
+</project>
