@@ -16,8 +16,8 @@ import javax.swing.JMenuItem;
 import javax.swing.KeyStroke;
 
 /**
- * // ToDo: Info und Hilfe standardmäßig bearbeiten
- * Shortcut ctrl-s wird automatisch für save oder speichern eingefügt
+ * // ToDo: Info und Hilfe standardmï¿½ï¿½ig bearbeiten
+ * Shortcut ctrl-s wird automatisch fï¿½r save oder speichern eingefï¿½gt
  * in MainMenu.MainMenu().
  *
  * @version $Id: Test50.java,v 1.1 2001/01/21 12:07:26 clemens Exp clemens $
@@ -99,7 +99,7 @@ public class MainJMenuBar extends JMenuBar {
             {
                 Vector vFileMenu = (Vector)vMenu_.clone();
                 
-                // --- Alte Dateien in Menu einfügen ---
+                // --- Alte Dateien in Menu einfï¿½gen ---
                 
                 int menuSlot = vFileMenu.size() - 1;
                 if (menuSlot > 1) {
@@ -264,9 +264,9 @@ public class MainJMenuBar extends JMenuBar {
                 remove(_oldFilesStartIndex);
             }
             _oldFilesCount = 0;
-	}
+    }
         
-	public void insertOldFiles(MainJFrame pMainJFrame_) {
+    public void insertOldFiles(MainJFrame pMainJFrame_) {
             Vector vOldFileItems = _getOldFileItems(pMainJFrame_.getInit());
             
             for(int i = 0; i < vOldFileItems.size(); i ++) {
@@ -279,6 +279,6 @@ public class MainJMenuBar extends JMenuBar {
                     insert(miTemp, _oldFilesStartIndex + i);
                 }
             }
-	}
+    }
     }
 }

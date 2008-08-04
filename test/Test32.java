@@ -1,5 +1,5 @@
 /*
- * @(#)Connection.java	1.5 97/02/11
+ * @(#)Connection.java    1.5 97/02/11
  * 
  * Copyright (c) 1995, 1996 Sun Microsystems, Inc. All Rights Reserved.
  * 
@@ -77,7 +77,7 @@ public interface Connection {
      * @exception SQLException if a database-access error occurs.
      */
     PreparedStatement prepareStatement(String sql)
-	    throws SQLException;
+        throws SQLException;
 
     /**
      * A SQL stored procedure call statement is handled by creating a
@@ -100,7 +100,7 @@ public interface Connection {
      * @exception SQLException if a database-access error occurs.
      */
     CallableStatement prepareCall(String sql) throws SQLException;
-						
+                        
     /**
      * A driver may convert the JDBC sql grammar into its system's
      * native SQL grammar prior to sending it; nativeSQL returns the
@@ -245,7 +245,7 @@ public interface Connection {
     /**
      * Transactions are not supported. 
      */
-    int TRANSACTION_NONE	     = 0;
+    int TRANSACTION_NONE         = 0;
 
     /**
      * Dirty reads, non-repeatable reads and phantom reads can occur.

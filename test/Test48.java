@@ -11,13 +11,13 @@ public class Test48 {
     }
 
     public void foo() {
-	Object o = new Test48();
-	if (!((o instanceof Collection) ||
-	      //(Object[].class.isAssignableFrom(o.getClass())))) {
+    Object o = new Test48();
+    if (!((o instanceof Collection) ||
+          //(Object[].class.isAssignableFrom(o.getClass())))) {
               Object[].class.isAssignableFrom(this.getClass()))) {
-	    System.out.println("true");
-	} else {
-	    System.out.println("false");
-	}
+        System.out.println("true");
+    } else {
+        System.out.println("false");
+    }
     }
 }

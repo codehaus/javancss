@@ -48,11 +48,11 @@ public class MTest80 extends BasicInternalFrameUI {
     }   
 
     protected void installDefaults() {
-	Border frameBorder = frame.getBorder();
+    Border frameBorder = frame.getBorder();
         frame.setLayout(internalFrameLayout = createLayoutManager());
         if (frameBorder == null || frameBorder instanceof UIResource) {
             frame.setBorder(new MotifBorders.InternalFrameBorder(frame));
-        }	
+        }    
     }
 
 
@@ -86,78 +86,78 @@ public class MTest80 extends BasicInternalFrameUI {
     protected void uninstallKeyboardActions(){
       super.uninstallKeyboardActions();
       if (isKeyBindingRegistered()){
-	JInternalFrame.JDesktopIcon di = frame.getDesktopIcon();
-	SwingUtilities.replaceUIActionMap(di, null);
-	SwingUtilities.replaceUIInputMap(di, JComponent.WHEN_IN_FOCUSED_WINDOW,
-					 null);
+    JInternalFrame.JDesktopIcon di = frame.getDesktopIcon();
+    SwingUtilities.replaceUIActionMap(di, null);
+    SwingUtilities.replaceUIInputMap(di, JComponent.WHEN_IN_FOCUSED_WINDOW,
+                     null);
       }
     }
     
     protected void setupMenuOpenKey(){
-	super.setupMenuOpenKey();
-	ActionMap map = SwingUtilities.getUIActionMap(frame);
-	if (map != null) {
-	    // BasicInternalFrameUI creates an action with the same name, we override
-	    // it as MotifInternalFrameTitlePane has a titlePane ivar that shadows the
-	    // titlePane ivar in BasicInternalFrameUI, making supers action throw
-	    // an NPE for us.
-	    map.put("showSystemMenu", new AbstractAction(){
-		public void actionPerformed(ActionEvent e){
-		    titlePane.showSystemMenu();
-		}
-		public boolean isEnabled(){
-		    return isKeyBindingActive();
-		}
-	    });
-	}
+    super.setupMenuOpenKey();
+    ActionMap map = SwingUtilities.getUIActionMap(frame);
+    if (map != null) {
+        // BasicInternalFrameUI creates an action with the same name, we override
+        // it as MotifInternalFrameTitlePane has a titlePane ivar that shadows the
+        // titlePane ivar in BasicInternalFrameUI, making supers action throw
+        // an NPE for us.
+        map.put("showSystemMenu", new AbstractAction(){
+        public void actionPerformed(ActionEvent e){
+            titlePane.showSystemMenu();
+        }
+        public boolean isEnabled(){
+            return isKeyBindingActive();
+        }
+        });
+    }
     }
 
     protected void setupMenuCloseKey(){
-	ActionMap map = SwingUtilities.getUIActionMap(frame);
-	if (map != null) {
-	    map.put("hideSystemMenu", new AbstractAction(){
-		public void actionPerformed(ActionEvent e){
-		    titlePane.hideSystemMenu();
-		}
-		public boolean isEnabled(){
-		    return isKeyBindingActive();
-		}
-	    });
-	}
+    ActionMap map = SwingUtilities.getUIActionMap(frame);
+    if (map != null) {
+        map.put("hideSystemMenu", new AbstractAction(){
+        public void actionPerformed(ActionEvent e){
+            titlePane.hideSystemMenu();
+        }
+        public boolean isEnabled(){
+            return isKeyBindingActive();
+        }
+        });
+    }
 
-	// Set up the bindings for the DesktopIcon, it is odd that
-	// we install them, and not the desktop icon.
-	JInternalFrame.JDesktopIcon di = frame.getDesktopIcon();
-	InputMap diInputMap = SwingUtilities.getUIInputMap
-	                  (di, JComponent.WHEN_IN_FOCUSED_WINDOW);
-	if (diInputMap == null) {
-	    Object[] bindings = (Object[])UIManager.get
-		                          ("DesktopIcon.windowBindings");
-	    if (bindings != null) {
-		diInputMap = LookAndFeel.makeComponentInputMap(di, bindings);
+    // Set up the bindings for the DesktopIcon, it is odd that
+    // we install them, and not the desktop icon.
+    JInternalFrame.JDesktopIcon di = frame.getDesktopIcon();
+    InputMap diInputMap = SwingUtilities.getUIInputMap
+                      (di, JComponent.WHEN_IN_FOCUSED_WINDOW);
+    if (diInputMap == null) {
+        Object[] bindings = (Object[])UIManager.get
+                                  ("DesktopIcon.windowBindings");
+        if (bindings != null) {
+        diInputMap = LookAndFeel.makeComponentInputMap(di, bindings);
 
-		SwingUtilities.replaceUIInputMap(di, JComponent.
-					       WHEN_IN_FOCUSED_WINDOW,
-					       diInputMap);
-	    }
-	}
-	ActionMap diActionMap = SwingUtilities.getUIActionMap(di);
-	if (diActionMap == null) {
-	    diActionMap = new ActionMapUIResource();
-	    diActionMap.put("hideSystemMenu", new AbstractAction(){
-		public void actionPerformed(ActionEvent e){
-		    JInternalFrame.JDesktopIcon icon = getFrame().
-			             getDesktopIcon();
-		    MotifDesktopIconUI micon = (MotifDesktopIconUI)icon.
-			                       getUI();
-		    micon.hideSystemMenu();
-		}
-		public boolean isEnabled(){
-		    return isKeyBindingActive();
-		}
-	    });
-	    SwingUtilities.replaceUIActionMap(di, diActionMap);
-	}
+        SwingUtilities.replaceUIInputMap(di, JComponent.
+                           WHEN_IN_FOCUSED_WINDOW,
+                           diInputMap);
+        }
+    }
+    ActionMap diActionMap = SwingUtilities.getUIActionMap(di);
+    if (diActionMap == null) {
+        diActionMap = new ActionMapUIResource();
+        diActionMap.put("hideSystemMenu", new AbstractAction(){
+        public void actionPerformed(ActionEvent e){
+            JInternalFrame.JDesktopIcon icon = getFrame().
+                         getDesktopIcon();
+            MotifDesktopIconUI micon = (MotifDesktopIconUI)icon.
+                                   getUI();
+            micon.hideSystemMenu();
+        }
+        public boolean isEnabled(){
+            return isKeyBindingActive();
+        }
+        });
+        SwingUtilities.replaceUIActionMap(di, diActionMap);
+    }
     }
 
     /** This method is called when the frame becomes selected.

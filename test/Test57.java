@@ -1,5 +1,5 @@
 /*
- * @(#)StrictMath.java	1.9 00/02/02
+ * @(#)StrictMath.java    1.9 00/02/02
  *
  * Copyright 1994-2000 Sun Microsystems, Inc. All Rights Reserved.
  * 
@@ -149,7 +149,7 @@ public final strictfp class StrictMath {
      *          in radians.
      */
     public static double toRadians(double angdeg) {
-	return angdeg / 180.0 * PI;
+    return angdeg / 180.0 * PI;
     }
 
     /**
@@ -161,7 +161,7 @@ public final strictfp class StrictMath {
      *          in degrees.
      */
     public static double toDegrees(double angrad) {
-	return angrad * 180.0 / PI;
+    return angrad * 180.0 / PI;
     }
 
     /**
@@ -437,7 +437,7 @@ public final strictfp class StrictMath {
      * @see     java.lang.Integer#MIN_VALUE
      */
     public static int round(float a) {
-	return (int)floor(a + 0.5f);
+    return (int)floor(a + 0.5f);
     }
 
     /**
@@ -463,7 +463,7 @@ public final strictfp class StrictMath {
      * @see     java.lang.Long#MIN_VALUE
      */
     public static long round(double a) {
-	return (long)floor(a + 0.5d);
+    return (long)floor(a + 0.5d);
     }
 
     private static Random randomNumberGenerator;
@@ -515,7 +515,7 @@ public final strictfp class StrictMath {
      * @see     java.lang.Integer#MIN_VALUE
      */
     public static int abs(int a) {
-	return (a < 0) ? -a : a;
+    return (a < 0) ? -a : a;
     }
 
     /**
@@ -533,7 +533,7 @@ public final strictfp class StrictMath {
      * @see     java.lang.Long#MIN_VALUE
      */
     public static long abs(long a) {
-	return (a < 0) ? -a : a;
+    return (a < 0) ? -a : a;
     }
 
     /**
@@ -586,7 +586,7 @@ public final strictfp class StrictMath {
      * @see     java.lang.Long#MAX_VALUE
      */
     public static int max(int a, int b) {
-	return (a >= b) ? a : b;
+    return (a >= b) ? a : b;
     }
 
     /**
@@ -601,7 +601,7 @@ public final strictfp class StrictMath {
      * @see     java.lang.Long#MAX_VALUE
      */
     public static long max(long a, long b) {
-	return (a >= b) ? a : b;
+    return (a >= b) ? a : b;
     }
 
     private static long negativeZeroFloatBits = Float.floatToIntBits(-0.0f);
@@ -622,12 +622,12 @@ public final strictfp class StrictMath {
      * @return  the larger of <code>a</code> and <code>b</code>.
      */
     public static float max(float a, float b) {
-        if (a != a) return a;	// a is NaN
-	if ((a == 0.0f) && (b == 0.0f)
-	    && (Float.floatToIntBits(a) == negativeZeroFloatBits)) {
-	    return b;
-	}
-	return (a >= b) ? a : b;
+        if (a != a) return a;    // a is NaN
+    if ((a == 0.0f) && (b == 0.0f)
+        && (Float.floatToIntBits(a) == negativeZeroFloatBits)) {
+        return b;
+    }
+    return (a >= b) ? a : b;
     }
 
     /**
@@ -645,12 +645,12 @@ public final strictfp class StrictMath {
      * @return  the larger of <code>a</code> and <code>b</code>.
      */
     public static double max(double a, double b) {
-        if (a != a) return a;	// a is NaN
-	if ((a == 0.0d) && (b == 0.0d)
-	    && (Double.doubleToLongBits(a) == negativeZeroDoubleBits)) {
-	    return b;
-	}
-	return (a >= b) ? a : b;
+        if (a != a) return a;    // a is NaN
+    if ((a == 0.0d) && (b == 0.0d)
+        && (Double.doubleToLongBits(a) == negativeZeroDoubleBits)) {
+        return b;
+    }
+    return (a >= b) ? a : b;
     }
 
     /**
@@ -664,7 +664,7 @@ public final strictfp class StrictMath {
      * @see     java.lang.Long#MIN_VALUE
      */
     public static int min(int a, int b) {
-	return (a <= b) ? a : b;
+    return (a <= b) ? a : b;
     }
 
     /**
@@ -679,7 +679,7 @@ public final strictfp class StrictMath {
      * @see     java.lang.Long#MIN_VALUE
      */
     public static long min(long a, long b) {
-	return (a <= b) ? a : b;
+    return (a <= b) ? a : b;
     }
 
     /**
@@ -697,12 +697,12 @@ public final strictfp class StrictMath {
      * @return  the smaller of <code>a</code> and <code>b.</code>
      */
     public static float min(float a, float b) {
-        if (a != a) return a;	// a is NaN
-	if ((a == 0.0f) && (b == 0.0f)
-	    && (Float.floatToIntBits(b) == negativeZeroFloatBits)) {
-	    return b;
-	}
-	return (a <= b) ? a : b;
+        if (a != a) return a;    // a is NaN
+    if ((a == 0.0f) && (b == 0.0f)
+        && (Float.floatToIntBits(b) == negativeZeroFloatBits)) {
+        return b;
+    }
+    return (a <= b) ? a : b;
     }
 
     /**
@@ -720,12 +720,12 @@ public final strictfp class StrictMath {
      * @return  the smaller of <code>a</code> and <code>b</code>.
      */
     public static double min(double a, double b) {
-        if (a != a) return a;	// a is NaN
-	if ((a == 0.0d) && (b == 0.0d)
-	    && (Double.doubleToLongBits(b) == negativeZeroDoubleBits)) {
-	    return b;
-	}
-	return (a <= b) ? a : b;
+        if (a != a) return a;    // a is NaN
+    if ((a == 0.0d) && (b == 0.0d)
+        && (Double.doubleToLongBits(b) == negativeZeroDoubleBits)) {
+        return b;
+    }
+    return (a <= b) ? a : b;
     }
 
 }

@@ -1,5 +1,5 @@
 /*
- * @(#)ImageLoopItem.java	1.22 95/03/28 James Gosling
+ * @(#)ImageLoopItem.java    1.22 95/03/28 James Gosling
  *
  * Copyright (c) 1994 Sun Microsystems, Inc. All Rights Reserved.
  *
@@ -26,8 +26,8 @@ import net.www.html.*;
  * ImageLoop class. This is a container for a list
  * of images that can be animated.
  *
- * @author 	James Gosling
- * @version 	1.22, 28 Mar 1995
+ * @author     James Gosling
+ * @version     1.22, 28 Mar 1995
  */
 class ImageLoop {
     /**
@@ -47,26 +47,26 @@ class ImageLoop {
      * maximum width and height.
      */
    ImageLoop(URL context, String dir, ImageLoopItem parent) {
-		int maxWidth = 0;
-		int maxHeight = 0;
+        int maxWidth = 0;
+        int maxHeight = 0;
 
-		imgs = new Image[40];
-		for (int i = 1; i < imgs.length; i++) {
-			Image im = parent.getImage(dir + "/T" + i + ".gif");
+        imgs = new Image[40];
+        for (int i = 1; i < imgs.length; i++) {
+            Image im = parent.getImage(dir + "/T" + i + ".gif");
 
-			if (im == null) {
-				break;
-			}
+            if (im == null) {
+                break;
+            }
 
-			imgs[nimgs++] = im;
-			if (im.width > maxWidth) {
-				maxWidth = im.width;
-			}
-			if (im.height > maxHeight) {
-				maxHeight = im.height;
-			}
-		}
-		parent.resize(maxWidth, maxHeight);
+            imgs[nimgs++] = im;
+            if (im.width > maxWidth) {
+                maxWidth = im.width;
+            }
+            if (im.height > maxHeight) {
+                maxHeight = im.height;
+            }
+        }
+        parent.resize(maxWidth, maxHeight);
    }
 }
 
@@ -74,8 +74,8 @@ class ImageLoop {
  * A simple Item class to play an image loop.  The "img" tag parameter
  * indicates what image loop to play.
  *
- * @author 	James Gosling
- * @version 	1.22, 28 Mar 1995
+ * @author     James Gosling
+ * @version     1.22, 28 Mar 1995
  */
 public
 class ImageLoopItem extends Applet implements Runnable {
@@ -112,87 +112,87 @@ class ImageLoopItem extends Applet implements Runnable {
     /**
      * The offscreen image.
      */
-    Image	im;
+    Image    im;
 
    /**
    * The offscreen graphics context
    */
-   Graphics	offscreen;
+   Graphics    offscreen;
 
    /**
    * Initialize the applet. Get attributes.
    */
    public void init() {
-		String at = getAttribute("img");
-		dir = (at != null) ? at : "doc:/demo/images/duke";
-		at = getAttribute("pause");
-		pause = (at != null) ? 0 : 3900;
-	}
+        String at = getAttribute("img");
+        dir = (at != null) ? at : "doc:/demo/images/duke";
+        at = getAttribute("pause");
+        pause = (at != null) ? 0 : 3900;
+    }
 
    /**
    * Run the image loop. This methods is called by class Thread.
    * @see java.lang.Thread
    */
    public void run() {
-		Thread.currentThread().setPriority(Thread.MIN_PRIORITY);
-		loop = new ImageLoop(documentURL, dir, this);
+        Thread.currentThread().setPriority(Thread.MIN_PRIORITY);
+        loop = new ImageLoop(documentURL, dir, this);
 
-		if (loop.nimgs > 1) {
-			while (width > 0 && height > 0 && kicker != null) {
-				if (++loopslot >= loop.nimgs) {
-					loopslot = 0;
-				}
-				repaint();
-				Thread.sleep(100 + ((loopslot == 0) ? pause : 0));
-			}
-		}
-	}
+        if (loop.nimgs > 1) {
+            while (width > 0 && height > 0 && kicker != null) {
+                if (++loopslot >= loop.nimgs) {
+                    loopslot = 0;
+                }
+                repaint();
+                Thread.sleep(100 + ((loopslot == 0) ? pause : 0));
+            }
+        }
+    }
 
     /**
      * Paint the current frame.
      */
    public void paint(Graphics g) {
-		update(g);
+        update(g);
    }
 
-	public void update(Graphics g) {
-		if ((loop != null) && (loop.imgs != null) &&
-			(loopslot < loop.nimgs) && (loop.imgs[loopslot] != null)) {
-			if (im == null) {
-				im = createImage(width, height);
-				offscreen = new Graphics(im);
-				offscreen.setForeground(Color.lightGray);
-			}
-			offscreen.fillRect(0, 0, width, height);
-			offscreen.drawImage(loop.imgs[loopslot], 0, 0);
-			g.drawImage(im, 0, 0);
-		}
+    public void update(Graphics g) {
+        if ((loop != null) && (loop.imgs != null) &&
+            (loopslot < loop.nimgs) && (loop.imgs[loopslot] != null)) {
+            if (im == null) {
+                im = createImage(width, height);
+                offscreen = new Graphics(im);
+                offscreen.setForeground(Color.lightGray);
+            }
+            offscreen.fillRect(0, 0, width, height);
+            offscreen.drawImage(loop.imgs[loopslot], 0, 0);
+            g.drawImage(im, 0, 0);
+        }
    }
 
    /**
    * Start the applet by forking an animation thread.
-	*/
+    */
    public void start() {
-		if (kicker == null) {
-			kicker = new Thread(this);
-			kicker.start();
-		}
+        if (kicker == null) {
+            kicker = new Thread(this);
+            kicker.start();
+        }
    }
 
     /**
      * Stop the applet. The thread will exit because kicker is set to null.
      */
    public void stop() {
-		kicker = null;
+        kicker = null;
    }
 
    /**
    * Pause the thread when the user clicks the mouse in the applet.
    */
    public void mouseDown(int x, int y) {
-		if (threadSuspended)
+        if (threadSuspended)
             kicker.resume();
-	else
+    else
             kicker.suspend();
         threadSuspended = !threadSuspended;
     }

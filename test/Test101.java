@@ -77,15 +77,15 @@ public class Test101 {
      * @since 1.5
      */
     public static final <T> Set<T> emptySet() {
-	return (Set<T>) EMPTY_SET;
+    return (Set<T>) EMPTY_SET;
     }
 
     /**
      * @serial include
      */
     private static class EmptySet extends AbstractSet<Object> implements Serializable {
-	// use serialVersionUID from JDK 1.2.2 for interoperability
-	private static final long serialVersionUID = 1582296315990362920L;
+    // use serialVersionUID from JDK 1.2.2 for interoperability
+    private static final long serialVersionUID = 1582296315990362920L;
 
         public Iterator<Object> iterator() {
             return new Iterator<Object>() {
@@ -134,17 +134,17 @@ public class Test101 {
      * @since 1.5
      */
     public static final <T> List<T> emptyList() {
-	return (List<T>) EMPTY_LIST;
+    return (List<T>) EMPTY_LIST;
     }
 
     /**
      * @serial include
      */
     private static class EmptyList
-	extends AbstractList<Object>
-	implements RandomAccess, Serializable {
-	// use serialVersionUID from JDK 1.2.2 for interoperability
-	private static final long serialVersionUID = 8842843931221139166L;
+    extends AbstractList<Object>
+    implements RandomAccess, Serializable {
+    // use serialVersionUID from JDK 1.2.2 for interoperability
+    private static final long serialVersionUID = 8842843931221139166L;
 
         public int size() {return 0;}
 
@@ -184,12 +184,12 @@ public class Test101 {
      * @since 1.5
      */
     public static final <K,V> Map<K,V> emptyMap() {
-	return (Map<K,V>) EMPTY_MAP;
+    return (Map<K,V>) EMPTY_MAP;
     }
 
     private static class EmptyMap
-	extends AbstractMap<Object,Object>
-	implements Serializable {
+    extends AbstractMap<Object,Object>
+    implements Serializable {
 
         private static final long serialVersionUID = 6428348081105594320L;
 
@@ -201,15 +201,15 @@ public class Test101 {
 
         public boolean containsValue(Object value) {return false;}
 
-	public Object get(Object key)              {return null;}
+    public Object get(Object key)              {return null;}
 
         public Set<Object> keySet()                {return Collections.<Object>emptySet();}
 
         public Collection<Object> values()         {return Collections.<Object>emptySet();}
 
         public Set<Map.Entry<Object,Object>> entrySet() {
-	    return Collections.emptySet();
-	}
+        return Collections.emptySet();
+    }
 
         public boolean equals(Object o) {
             return (o instanceof Map) && ((Map)o).size()==0;
@@ -231,18 +231,18 @@ public class Test101 {
      * @return an immutable set containing only the specified object.
      */
     public static <T> Set<T> singleton(T o) {
-	return new SingletonSet<T>(o);
+    return new SingletonSet<T>(o);
     }
 
     /**
      * @serial include
      */
     private static class SingletonSet<E>
-	extends AbstractSet<E>
-	implements Serializable
+    extends AbstractSet<E>
+    implements Serializable
     {
-	// use serialVersionUID from JDK 1.2.2 for interoperability
-	private static final long serialVersionUID = 3193687207550431679L;
+    // use serialVersionUID from JDK 1.2.2 for interoperability
+    private static final long serialVersionUID = 3193687207550431679L;
 
         final private E element;
 
@@ -281,12 +281,12 @@ public class Test101 {
      * @since 1.3
      */
     public static <T> List<T> singletonList(T o) {
-	return new SingletonList<T>(o);
+    return new SingletonList<T>(o);
     }
 
     private static class SingletonList<E>
-	extends AbstractList<E>
-	implements RandomAccess, Serializable {
+    extends AbstractList<E>
+    implements RandomAccess, Serializable {
 
         static final long serialVersionUID = 3093736618740652951L;
 
@@ -316,16 +316,16 @@ public class Test101 {
      * @since 1.3
      */
     public static <K,V> Map<K,V> singletonMap(K key, V value) {
-	return new SingletonMap<K,V>(key, value);
+    return new SingletonMap<K,V>(key, value);
     }
 
     private static class SingletonMap<K,V>
-	  extends AbstractMap<K,V>
-	  implements Serializable {
-	private static final long serialVersionUID = -6979724477215052911L;
+      extends AbstractMap<K,V>
+      implements Serializable {
+    private static final long serialVersionUID = -6979724477215052911L;
 
         private final K k;
-	private final V v;
+    private final V v;
 
         SingletonMap(K key, V value) {
             k = key;
@@ -346,26 +346,26 @@ public class Test101 {
         private transient Set<Map.Entry<K,V>> entrySet = null;
         private transient Collection<V> values = null;
 
-	public Set<K> keySet() {
-	    if (keySet==null)
-		keySet = singleton(k);
-	    return keySet;
-	}
+    public Set<K> keySet() {
+        if (keySet==null)
+        keySet = singleton(k);
+        return keySet;
+    }
 
-	public Set<Map.Entry<K,V>> entrySet() {
-	    if (entrySet==null)
-		entrySet = singleton((Map.Entry<K,V>)new ImmutableEntry<K,V>(k, v));
-	    return entrySet;
-	}
+    public Set<Map.Entry<K,V>> entrySet() {
+        if (entrySet==null)
+        entrySet = singleton((Map.Entry<K,V>)new ImmutableEntry<K,V>(k, v));
+        return entrySet;
+    }
 
-	public Collection<V> values() {
-	    if (values==null)
-		values = singleton(v);
-	    return values;
-	}
+    public Collection<V> values() {
+        if (values==null)
+        values = singleton(v);
+        return values;
+    }
 
         private static class ImmutableEntry<K,V>
-	    implements Map.Entry<K,V> {
+        implements Map.Entry<K,V> {
             final K k;
             final V v;
 
@@ -410,7 +410,7 @@ public class Test101 {
      * @param  n the number of elements in the returned list.
      * @param  o the element to appear repeatedly in the returned list.
      * @return an immutable list consisting of <tt>n</tt> copies of the
-     * 	       specified object.
+     *            specified object.
      * @throws IllegalArgumentException if n &lt; 0.
      * @see    List#addAll(Collection)
      * @see    List#addAll(int, Collection)
@@ -423,8 +423,8 @@ public class Test101 {
      * @serial include
      */
     private static class CopiesList<E>
-	extends AbstractList<E>
-	implements RandomAccess, Serializable
+    extends AbstractList<E>
+    implements RandomAccess, Serializable
     {
         static final long serialVersionUID = 2739099268398711800L;
 
@@ -463,14 +463,14 @@ public class Test101 {
      * objects that implement the <tt>Comparable</tt> interface in
      * reverse-natural-order.  For example, suppose a is an array of
      * strings. Then: <pre>
-     * 		Arrays.sort(a, Collections.reverseOrder());
+     *         Arrays.sort(a, Collections.reverseOrder());
      * </pre> sorts the array in reverse-lexicographic (alphabetical) order.<p>
      *
      * The returned comparator is serializable.
      *
      * @return a comparator that imposes the reverse of the <i>natural
-     * 	       ordering</i> on a collection of objects that implement
-     *	       the <tt>Comparable</tt> interface.
+     *            ordering</i> on a collection of objects that implement
+     *           the <tt>Comparable</tt> interface.
      * @see Comparable
      */
     public static <T> Comparator<T> reverseOrder() {
@@ -483,10 +483,10 @@ public class Test101 {
      * @serial include
      */
     private static class ReverseComparator<T>
-	implements Comparator<Comparable<Object>>, Serializable {
+    implements Comparator<Comparable<Object>>, Serializable {
 
-	// use serialVersionUID from JDK 1.2.2 for interoperability
-	private static final long serialVersionUID = 7207038068494060240L;
+    // use serialVersionUID from JDK 1.2.2 for interoperability
+    private static final long serialVersionUID = 7207038068494060240L;
 
         public int compare(Comparable<Object> c1, Comparable<Object> c2) {
             return c2.compareTo(c1);
@@ -551,16 +551,16 @@ public class Test101 {
      * @see Enumeration
      */
     public static <T> Enumeration<T> enumeration(final Collection<T> c) {
-	return new Enumeration<T>() {
-	    Iterator<T> i = c.iterator();
+    return new Enumeration<T>() {
+        Iterator<T> i = c.iterator();
 
-	    public boolean hasMoreElements() {
-		return i.hasNext();
-	    }
+        public boolean hasMoreElements() {
+        return i.hasNext();
+        }
 
-	    public T nextElement() {
-		return i.next();
-	    }
+        public T nextElement() {
+        return i.next();
+        }
         };
     }
 

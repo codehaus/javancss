@@ -1,5 +1,5 @@
 /*
- * @(#)AudioItem.java	1.26 95/03/22 James Gosling
+ * @(#)AudioItem.java    1.26 95/03/22 James Gosling
  *
  * Copyright (c) 1994 Sun Microsystems, Inc. All Rights Reserved.
  *
@@ -58,76 +58,76 @@ class AudioItem extends Applet {
      * documentURL, that is because the url is obtained
      * from within the document
      */
-	public void next() {
-		try {
-			stopPlaying(audio);
-			audio = null;
+    public void next() {
+        try {
+            stopPlaying(audio);
+            audio = null;
 
-			String url = sounds;
-			if (sounds.indexOf('|') >= 0) {
-				int start = index;
-				if ((index = sounds.indexOf('|', index)) < 0) {
-					url = sounds.substring(start);
-					index = start;
-				} else {
-					url = sounds.substring(start, index++);
-				}
-			}
-			if (url.length() > 0) {
-				audio = getAudioStream(new URL(documentURL, url));
-				startPlaying(audio);
-			}
-		} catch(Exception e) {
+            String url = sounds;
+            if (sounds.indexOf('|') >= 0) {
+                int start = index;
+                if ((index = sounds.indexOf('|', index)) < 0) {
+                    url = sounds.substring(start);
+                    index = start;
+                } else {
+                    url = sounds.substring(start, index++);
+                }
+            }
+            if (url.length() > 0) {
+                audio = getAudioStream(new URL(documentURL, url));
+                startPlaying(audio);
+            }
+        } catch(Exception e) {
 
-		}
-	}
+        }
+    }
 
     /**
      * Initialize the applet. First resize it, then get the
      * "snd" attribute.
      */
-	public void init() {
-		resize(10, 12);
+    public void init() {
+        resize(10, 12);
 
-		sounds = getAttribute("snd");
-		if (sounds == null) {
-			sounds = "doc:/demo/audio/ding.au";
-		}
-	}
+        sounds = getAttribute("snd");
+        if (sounds == null) {
+            sounds = "doc:/demo/audio/ding.au";
+        }
+    }
 
     /**
      * When the applet is started play the next sound.
      */
    public void start() {
-		next();
+        next();
    }
 
     /**
      * When the applet is stopped, stop playing the current sound.
      */
    public void stop() {
-		if (audio != null) {
-			stopPlaying(audio);
-			audio = null;
-		}
+        if (audio != null) {
+            stopPlaying(audio);
+            audio = null;
+        }
    }
 
     /**
      * When the user clicks in the applet, play the next sound.
      */
    public void mouseUp(int x, int y) {
-		next();
+        next();
    }
 
     /**
      * Paint an audio icon.
      */
     public void paint(Graphics g) {
-	double f = ((double)(height - 1)) / ((width - 1) * 2);
-	int offset = height / 2;
-	for (int i = width - 1; i >= 0; i -= 3) {
-	    int h = (int)(i * f);
-	    g.drawLine(i, offset - h, i, offset + h);
-	}
+    double f = ((double)(height - 1)) / ((width - 1) * 2);
+    int offset = height / 2;
+    for (int i = width - 1; i >= 0; i -= 3) {
+        int h = (int)(i * f);
+        g.drawLine(i, offset - h, i, offset + h);
+    }
     }
 }

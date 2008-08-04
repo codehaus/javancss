@@ -111,8 +111,8 @@ public abstract class Collect
 
 
     this.statistics = new Hashtable();
-  	/* postcondition */
-  	if (!((statistics!=null))) throw new jass.runtime.PostconditionException("idebughc.Collect","Collect()",112,"statistics_initialized");
+      /* postcondition */
+      if (!((statistics!=null))) throw new jass.runtime.PostconditionException("idebughc.Collect","Collect()",112,"statistics_initialized");
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jassParameters = new jass.runtime.traceAssertion.Parameter[] {}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc", "Collect", "Collect()", false), jassParameters);
 
   }
@@ -133,17 +133,17 @@ public abstract class Collect
   public boolean checkDebugCollectRef(Debug d)
   {
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jass.runtime.traceAssertion.Parameter[] jassParameters; jassParameters = new jass.runtime.traceAssertion.Parameter[] {new jass.runtime.traceAssertion.Parameter(d)}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc", "Collect", "checkDebugCollectRef(idebughc.Debug)", true), jassParameters);
-  	boolean jassResult;
+      boolean jassResult;
 
-  	/* precondition */
-  	if (!((d!=null))) throw new jass.runtime.PreconditionException("idebughc.Collect","checkDebugCollectRef(idebughc.Debug)",128,"d_non_null");
-  	jassResult = ( (d.collect == this));
-  	/* postcondition */
-  	if (!((jassResult==(d.collect==this)))) throw new jass.runtime.PostconditionException("idebughc.Collect","checkDebugCollectRef(idebughc.Debug)",132,"result_correct");
+      /* precondition */
+      if (!((d!=null))) throw new jass.runtime.PreconditionException("idebughc.Collect","checkDebugCollectRef(idebughc.Debug)",128,"d_non_null");
+      jassResult = ( (d.collect == this));
+      /* postcondition */
+      if (!((jassResult==(d.collect==this)))) throw new jass.runtime.PostconditionException("idebughc.Collect","checkDebugCollectRef(idebughc.Debug)",132,"result_correct");
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jassParameters = new jass.runtime.traceAssertion.Parameter[] {new jass.runtime.traceAssertion.Parameter(jassResult)}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc", "Collect", "checkDebugCollectRef(idebughc.Debug)", false), jassParameters);
 
 
-  	return jassResult;
+      return jassResult;
   }
 
   /**
@@ -165,13 +165,13 @@ public abstract class Collect
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jass.runtime.traceAssertion.Parameter[] jassParameters; jassParameters = new jass.runtime.traceAssertion.Parameter[] {new jass.runtime.traceAssertion.Parameter(d)}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc", "Collect", "setDebug(idebughc.Debug)", true), jassParameters);
 
 
-  	/* precondition */
-  	if (!((d!=null))) throw new jass.runtime.PreconditionException("idebughc.Collect","setDebug(idebughc.Debug)",149,"d_non_null");
-  	if (!(jassInternal_checkDebugCollectRef(d))) throw new jass.runtime.PreconditionException("idebughc.Collect","setDebug(idebughc.Debug)",150,"correct_debug_instance");
+      /* precondition */
+      if (!((d!=null))) throw new jass.runtime.PreconditionException("idebughc.Collect","setDebug(idebughc.Debug)",149,"d_non_null");
+      if (!(jassInternal_checkDebugCollectRef(d))) throw new jass.runtime.PreconditionException("idebughc.Collect","setDebug(idebughc.Debug)",150,"correct_debug_instance");
         
     debug = d;
-  	/* postcondition */
-  	if (!((debug==d))) throw new jass.runtime.PostconditionException("idebughc.Collect","setDebug(idebughc.Debug)",154,"debug_valid");
+      /* postcondition */
+      if (!((debug==d))) throw new jass.runtime.PostconditionException("idebughc.Collect","setDebug(idebughc.Debug)",154,"debug_valid");
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jassParameters = new jass.runtime.traceAssertion.Parameter[] {}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc", "Collect", "setDebug(idebughc.Debug)", false), jassParameters);
 
   }
@@ -191,13 +191,13 @@ public abstract class Collect
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jass.runtime.traceAssertion.Parameter[] jassParameters; jassParameters = new jass.runtime.traceAssertion.Parameter[] {new jass.runtime.traceAssertion.Parameter(statistic)}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc", "Collect", "register(idebughc.Statistic)", true), jassParameters);
 
 
-  	/* precondition */
-  	if (!((statistic!=null))) throw new jass.runtime.PreconditionException("idebughc.Collect","register(idebughc.Statistic)",167,"statistic_non_null");
-  	if (!(jassInternal_checkStatisticID(statistic))) throw new jass.runtime.PreconditionException("idebughc.Collect","register(idebughc.Statistic)",168,"statistic_id_unchanged");
+      /* precondition */
+      if (!((statistic!=null))) throw new jass.runtime.PreconditionException("idebughc.Collect","register(idebughc.Statistic)",167,"statistic_non_null");
+      if (!(jassInternal_checkStatisticID(statistic))) throw new jass.runtime.PreconditionException("idebughc.Collect","register(idebughc.Statistic)",168,"statistic_id_unchanged");
 
     statistics.put(statistic, statistic);
-  	/* postcondition */
-  	if (!(jassInternal_isRegistered(statistic))) throw new jass.runtime.PostconditionException("idebughc.Collect","register(idebughc.Statistic)",172,"statistic_registered");
+      /* postcondition */
+      if (!(jassInternal_isRegistered(statistic))) throw new jass.runtime.PostconditionException("idebughc.Collect","register(idebughc.Statistic)",172,"statistic_registered");
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jassParameters = new jass.runtime.traceAssertion.Parameter[] {}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc", "Collect", "register(idebughc.Statistic)", false), jassParameters);
 
   }
@@ -215,25 +215,25 @@ public abstract class Collect
   public boolean checkStatisticID(Statistic statistic)
   {
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jass.runtime.traceAssertion.Parameter[] jassParameters; jassParameters = new jass.runtime.traceAssertion.Parameter[] {new jass.runtime.traceAssertion.Parameter(statistic)}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc", "Collect", "checkStatisticID(idebughc.Statistic)", true), jassParameters);
-  	boolean jassResult;
+      boolean jassResult;
 
-  	/* precondition */
-  	if (!((statistic!=null))) throw new jass.runtime.PreconditionException("idebughc.Collect","checkStatisticID(idebughc.Statistic)",186,"statistic_non_null");
+      /* precondition */
+      if (!((statistic!=null))) throw new jass.runtime.PreconditionException("idebughc.Collect","checkStatisticID(idebughc.Statistic)",186,"statistic_non_null");
 
     Object oldValue = statistics.get(statistic);
     if(oldValue != null) {
-    		jassResult = ( (oldValue == statistic));
+            jassResult = ( (oldValue == statistic));
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jassParameters = new jass.runtime.traceAssertion.Parameter[] {new jass.runtime.traceAssertion.Parameter(jassResult)}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc", "Collect", "checkStatisticID(idebughc.Statistic)", false), jassParameters);
 
 // make sure value hasn't changed.
 
-    		return jassResult;
+            return jassResult;
     }
-  	jassResult = ( true);
+      jassResult = ( true);
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jassParameters = new jass.runtime.traceAssertion.Parameter[] {new jass.runtime.traceAssertion.Parameter(jassResult)}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc", "Collect", "checkStatisticID(idebughc.Statistic)", false), jassParameters);
 
 
-  	return jassResult;
+      return jassResult;
   }
 
   /**
@@ -251,12 +251,12 @@ public abstract class Collect
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jass.runtime.traceAssertion.Parameter[] jassParameters; jassParameters = new jass.runtime.traceAssertion.Parameter[] {new jass.runtime.traceAssertion.Parameter(statistic)}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc", "Collect", "unregister(idebughc.Statistic)", true), jassParameters);
 
 
-  	/* precondition */
-  	if (!((statistic!=null))) throw new jass.runtime.PreconditionException("idebughc.Collect","unregister(idebughc.Statistic)",206,"statistic_non_null");
+      /* precondition */
+      if (!((statistic!=null))) throw new jass.runtime.PreconditionException("idebughc.Collect","unregister(idebughc.Statistic)",206,"statistic_non_null");
 
     statistics.remove(statistic);
-  	/* postcondition */
-  	if (!(!jassInternal_isRegistered(statistic))) throw new jass.runtime.PostconditionException("idebughc.Collect","unregister(idebughc.Statistic)",210,"statistic_unregistered");
+      /* postcondition */
+      if (!(!jassInternal_isRegistered(statistic))) throw new jass.runtime.PostconditionException("idebughc.Collect","unregister(idebughc.Statistic)",210,"statistic_unregistered");
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jassParameters = new jass.runtime.traceAssertion.Parameter[] {}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc", "Collect", "unregister(idebughc.Statistic)", false), jassParameters);
 
   }
@@ -273,15 +273,15 @@ public abstract class Collect
   public boolean isRegistered(Statistic statistic)
   {
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jass.runtime.traceAssertion.Parameter[] jassParameters; jassParameters = new jass.runtime.traceAssertion.Parameter[] {new jass.runtime.traceAssertion.Parameter(statistic)}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc", "Collect", "isRegistered(idebughc.Statistic)", true), jassParameters);
-  	boolean jassResult;
+      boolean jassResult;
 
-  	/* precondition */
-  	if (!((statistic!=null))) throw new jass.runtime.PreconditionException("idebughc.Collect","isRegistered(idebughc.Statistic)",223,"statistic_non_null");
-  	jassResult = ((statistics.get(statistic) == statistic));
+      /* precondition */
+      if (!((statistic!=null))) throw new jass.runtime.PreconditionException("idebughc.Collect","isRegistered(idebughc.Statistic)",223,"statistic_non_null");
+      jassResult = ((statistics.get(statistic) == statistic));
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jassParameters = new jass.runtime.traceAssertion.Parameter[] {new jass.runtime.traceAssertion.Parameter(jassResult)}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc", "Collect", "isRegistered(idebughc.Statistic)", false), jassParameters);
 
 
-  	return jassResult;
+      return jassResult;
   }
 
   /**
@@ -387,15 +387,15 @@ public abstract class Collect
   protected final boolean isValidCategory(String category)
   {
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jass.runtime.traceAssertion.Parameter[] jassParameters; jassParameters = new jass.runtime.traceAssertion.Parameter[] {new jass.runtime.traceAssertion.Parameter(category)}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc", "Collect", "isValidCategory(java.lang.String)", true), jassParameters);
-  	boolean jassResult;
+      boolean jassResult;
 
-  	/* precondition */
-  	if (!((category!=null))) throw new jass.runtime.PreconditionException("idebughc.Collect","isValidCategory(java.lang.String)",329,"category_non_null");
-  	jassResult = ( debug.debugUtilities.categoryTest(category));
+      /* precondition */
+      if (!((category!=null))) throw new jass.runtime.PreconditionException("idebughc.Collect","isValidCategory(java.lang.String)",329,"category_non_null");
+      jassResult = ( debug.debugUtilities.categoryTest(category));
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jassParameters = new jass.runtime.traceAssertion.Parameter[] {new jass.runtime.traceAssertion.Parameter(jassResult)}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc", "Collect", "isValidCategory(java.lang.String)", false), jassParameters);
 
 
-  	return jassResult;
+      return jassResult;
   }
 
   /**
@@ -412,16 +412,16 @@ public abstract class Collect
   protected final boolean isValidLevel(int level)
   {
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jass.runtime.traceAssertion.Parameter[] jassParameters; jassParameters = new jass.runtime.traceAssertion.Parameter[] {new jass.runtime.traceAssertion.Parameter(level)}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc", "Collect", "isValidLevel(int)", true), jassParameters);
-  	boolean jassResult;
+      boolean jassResult;
 
-  	jassResult = ( debug.debugUtilities.levelTest(level));
+      jassResult = ( debug.debugUtilities.levelTest(level));
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jassParameters = new jass.runtime.traceAssertion.Parameter[] {new jass.runtime.traceAssertion.Parameter(jassResult)}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc", "Collect", "isValidLevel(int)", false), jassParameters);
 
 
-  	return jassResult;
+      return jassResult;
   }
 
-	/* --- The following methods of class idebughc.Collect are generated by JASS --- */
+    /* --- The following methods of class idebughc.Collect are generated by JASS --- */
 
 
   
@@ -456,25 +456,25 @@ public abstract class Collect
   }
 
 
-	protected void finalize () throws java.lang.Throwable {
+    protected void finalize () throws java.lang.Throwable {
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jass.runtime.traceAssertion.Parameter[] jassParameters; jassParameters = new jass.runtime.traceAssertion.Parameter[] {}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc", "Collect", "finalize()", true), jassParameters);
-		super.finalize();
+        super.finalize();
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jassParameters = new jass.runtime.traceAssertion.Parameter[] {}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc", "Collect", "finalize()", false), jassParameters);
-	}
+    }
 
-	public boolean equals (java.lang.Object par0) {
+    public boolean equals (java.lang.Object par0) {
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jass.runtime.traceAssertion.Parameter[] jassParameters; jassParameters = new jass.runtime.traceAssertion.Parameter[] {new jass.runtime.traceAssertion.Parameter(par0)}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc", "Collect", "equals(java.lang.Object)", true), jassParameters);
-		boolean returnValue = super.equals(par0);
+        boolean returnValue = super.equals(par0);
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jassParameters = new jass.runtime.traceAssertion.Parameter[] {new jass.runtime.traceAssertion.Parameter(returnValue)}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc", "Collect", "equals(java.lang.Object)", false), jassParameters);
-		return returnValue;
-	}
+        return returnValue;
+    }
 
-	public java.lang.String toString () {
+    public java.lang.String toString () {
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jass.runtime.traceAssertion.Parameter[] jassParameters; jassParameters = new jass.runtime.traceAssertion.Parameter[] {}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc", "Collect", "toString()", true), jassParameters);
-		java.lang.String returnValue = super.toString();
+        java.lang.String returnValue = super.toString();
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jassParameters = new jass.runtime.traceAssertion.Parameter[] {new jass.runtime.traceAssertion.Parameter(returnValue)}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc", "Collect", "toString()", false), jassParameters);
-		return returnValue;
-	}
+        return returnValue;
+    }
   
   // Package Methods
   // Private Methods

@@ -1,5 +1,5 @@
 /*
- * @(#)Math.java	1.50 00/02/02
+ * @(#)Math.java    1.50 00/02/02
  *
  * Copyright 1994-2000 Sun Microsystems, Inc. All Rights Reserved.
  * 
@@ -69,7 +69,7 @@ public final strictfp class Math {
      * @return  the sine of the argument.
      */
     public static double sin(double a) {
-	return StrictMath.sin(a); // default impl. delegates to StrictMath
+    return StrictMath.sin(a); // default impl. delegates to StrictMath
     }
     
     /**
@@ -84,7 +84,7 @@ public final strictfp class Math {
      * @return  the cosine of the argument.
      */
     public static double cos(double a) {
-	return StrictMath.cos(a); // default impl. delegates to StrictMath
+    return StrictMath.cos(a); // default impl. delegates to StrictMath
     }
    
     /**
@@ -102,7 +102,7 @@ public final strictfp class Math {
      * @return  the tangent of the argument.
      */
     public static double tan(double a) {
-	return StrictMath.tan(a); // default impl. delegates to StrictMath
+    return StrictMath.tan(a); // default impl. delegates to StrictMath
     }
 
     /**
@@ -122,7 +122,7 @@ public final strictfp class Math {
      * @return  the arc sine of the argument.
      */
     public static double asin(double a) {
-	return StrictMath.asin(a); // default impl. delegates to StrictMath
+    return StrictMath.asin(a); // default impl. delegates to StrictMath
     }
 
     /**
@@ -139,7 +139,7 @@ public final strictfp class Math {
      * @return  the arc cosine of the argument.
      */
     public static double acos(double a) {
-	return StrictMath.acos(a); // default impl. delegates to StrictMath
+    return StrictMath.acos(a); // default impl. delegates to StrictMath
     }
 
     /**
@@ -158,7 +158,7 @@ public final strictfp class Math {
      * @return  the arc tangent of the argument.
      */
     public static double atan(double a) {
-	return StrictMath.atan(a); // default impl. delegates to StrictMath
+    return StrictMath.atan(a); // default impl. delegates to StrictMath
     }
 
     /**
@@ -171,7 +171,7 @@ public final strictfp class Math {
      * @since   1.2
      */
     public static double toRadians(double angdeg) {
-	return angdeg / 180.0 * PI;
+    return angdeg / 180.0 * PI;
     }
 
     /**
@@ -184,7 +184,7 @@ public final strictfp class Math {
      * @since   1.2
      */
     public static double toDegrees(double angrad) {
-	return angrad * 180.0 / PI;
+    return angrad * 180.0 / PI;
     }
 
     /**
@@ -204,7 +204,7 @@ public final strictfp class Math {
      *          the natural logarithms.
      */
     public static double exp(double a) {
-	return StrictMath.exp(a); // default impl. delegates to StrictMath
+    return StrictMath.exp(a); // default impl. delegates to StrictMath
     }
 
     /**
@@ -225,7 +225,7 @@ public final strictfp class Math {
      *          <code>a</code>.
      */
     public static double log(double a) {
-	return StrictMath.log(a); // default impl. delegates to StrictMath
+    return StrictMath.log(a); // default impl. delegates to StrictMath
     }
 
     /**
@@ -247,11 +247,11 @@ public final strictfp class Math {
      *          If the argument is NaN or less than zero, the result is NaN.
      */
     public static double sqrt(double a) {
-	return StrictMath.sqrt(a); // default impl. delegates to StrictMath
-				   // Note that hardware sqrt instructions
-				   // frequently can be directly used by JITs
-				   // and should be much faster than doing
-				   // Math.sqrt in software.
+    return StrictMath.sqrt(a); // default impl. delegates to StrictMath
+                   // Note that hardware sqrt instructions
+                   // frequently can be directly used by JITs
+                   // and should be much faster than doing
+                   // Math.sqrt in software.
     }
 
     /**
@@ -300,7 +300,7 @@ public final strictfp class Math {
      *          and is equal to a mathematical integer. 
      */
     public static double ceil(double a) {
-	return StrictMath.ceil(a); // default impl. delegates to StrictMath
+    return StrictMath.ceil(a); // default impl. delegates to StrictMath
     }
 
     /**
@@ -319,7 +319,7 @@ public final strictfp class Math {
      *          and is equal to a mathematical integer. 
      */
     public static double floor(double a) {
-	return StrictMath.floor(a); // default impl. delegates to StrictMath
+    return StrictMath.floor(a); // default impl. delegates to StrictMath
     }
 
     /**
@@ -338,7 +338,7 @@ public final strictfp class Math {
      *          equal to a mathematical integer.
      */
     public static double rint(double a) {
-	return StrictMath.rint(a); // default impl. delegates to StrictMath
+    return StrictMath.rint(a); // default impl. delegates to StrictMath
     }
 
     /**
@@ -393,7 +393,7 @@ public final strictfp class Math {
      *          (<i>b</i>,&nbsp;<i>a</i>) in Cartesian coordinates.
      */
     public static double atan2(double a, double b) {
-	return StrictMath.atan2(a, b); // default impl. delegates to StrictMath
+    return StrictMath.atan2(a, b); // default impl. delegates to StrictMath
     }
 
     /**
@@ -469,7 +469,7 @@ public final strictfp class Math {
      * @return  the value <code>a<sup>b</sup></code>.
      */
     public static double pow(double a, double b) {
-	return StrictMath.pow(a, b); // default impl. delegates to StrictMath
+    return StrictMath.pow(a, b); // default impl. delegates to StrictMath
     }
 
     /**
@@ -495,7 +495,7 @@ public final strictfp class Math {
      * @see     java.lang.Integer#MIN_VALUE
      */
     public static int round(float a) {
-	return (int)floor(a + 0.5f);
+    return (int)floor(a + 0.5f);
     }
 
     /**
@@ -521,7 +521,7 @@ public final strictfp class Math {
      * @see     java.lang.Long#MIN_VALUE
      */
     public static long round(double a) {
-	return (long)floor(a + 0.5d);
+    return (long)floor(a + 0.5d);
     }
 
     private static Random randomNumberGenerator;
@@ -572,7 +572,7 @@ public final strictfp class Math {
      * @see     java.lang.Integer#MIN_VALUE
      */
     public static int abs(int a) {
-	return (a < 0) ? -a : a;
+    return (a < 0) ? -a : a;
     }
 
     /**
@@ -590,7 +590,7 @@ public final strictfp class Math {
      * @see     java.lang.Long#MIN_VALUE
      */
     public static long abs(long a) {
-	return (a < 0) ? -a : a;
+    return (a < 0) ? -a : a;
     }
 
     /**
@@ -643,7 +643,7 @@ public final strictfp class Math {
      * @see     java.lang.Long#MAX_VALUE
      */
     public static int max(int a, int b) {
-	return (a >= b) ? a : b;
+    return (a >= b) ? a : b;
     }
 
     /**
@@ -658,7 +658,7 @@ public final strictfp class Math {
      * @see     java.lang.Long#MAX_VALUE
      */
     public static long max(long a, long b) {
-	return (a >= b) ? a : b;
+    return (a >= b) ? a : b;
     }
 
     private static long negativeZeroFloatBits = Float.floatToIntBits(-0.0f);
@@ -679,12 +679,12 @@ public final strictfp class Math {
      * @return  the larger of <code>a</code> and <code>b</code>.
      */
     public static float max(float a, float b) {
-        if (a != a) return a;	// a is NaN
-	if ((a == 0.0f) && (b == 0.0f)
-	    && (Float.floatToIntBits(a) == negativeZeroFloatBits)) {
-	    return b;
-	}
-	return (a >= b) ? a : b;
+        if (a != a) return a;    // a is NaN
+    if ((a == 0.0f) && (b == 0.0f)
+        && (Float.floatToIntBits(a) == negativeZeroFloatBits)) {
+        return b;
+    }
+    return (a >= b) ? a : b;
     }
 
     /**
@@ -702,12 +702,12 @@ public final strictfp class Math {
      * @return  the larger of <code>a</code> and <code>b</code>.
      */
     public static double max(double a, double b) {
-        if (a != a) return a;	// a is NaN
-	if ((a == 0.0d) && (b == 0.0d)
-	    && (Double.doubleToLongBits(a) == negativeZeroDoubleBits)) {
-	    return b;
-	}
-	return (a >= b) ? a : b;
+        if (a != a) return a;    // a is NaN
+    if ((a == 0.0d) && (b == 0.0d)
+        && (Double.doubleToLongBits(a) == negativeZeroDoubleBits)) {
+        return b;
+    }
+    return (a >= b) ? a : b;
     }
 
     /**
@@ -721,7 +721,7 @@ public final strictfp class Math {
      * @see     java.lang.Long#MIN_VALUE
      */
     public static int min(int a, int b) {
-	return (a <= b) ? a : b;
+    return (a <= b) ? a : b;
     }
 
     /**
@@ -736,7 +736,7 @@ public final strictfp class Math {
      * @see     java.lang.Long#MIN_VALUE
      */
     public static long min(long a, long b) {
-	return (a <= b) ? a : b;
+    return (a <= b) ? a : b;
     }
 
     /**
@@ -754,12 +754,12 @@ public final strictfp class Math {
      * @return  the smaller of <code>a</code> and <code>b.</code>
      */
     public static float min(float a, float b) {
-        if (a != a) return a;	// a is NaN
-	if ((a == 0.0f) && (b == 0.0f)
-	    && (Float.floatToIntBits(b) == negativeZeroFloatBits)) {
-	    return b;
-	}
-	return (a <= b) ? a : b;
+        if (a != a) return a;    // a is NaN
+    if ((a == 0.0f) && (b == 0.0f)
+        && (Float.floatToIntBits(b) == negativeZeroFloatBits)) {
+        return b;
+    }
+    return (a <= b) ? a : b;
     }
 
     /**
@@ -777,12 +777,12 @@ public final strictfp class Math {
      * @return  the smaller of <code>a</code> and <code>b</code>.
      */
     public static double min(double a, double b) {
-        if (a != a) return a;	// a is NaN
-	if ((a == 0.0d) && (b == 0.0d)
-	    && (Double.doubleToLongBits(b) == negativeZeroDoubleBits)) {
-	    return b;
-	}
-	return (a <= b) ? a : b;
+        if (a != a) return a;    // a is NaN
+    if ((a == 0.0d) && (b == 0.0d)
+        && (Double.doubleToLongBits(b) == negativeZeroDoubleBits)) {
+        return b;
+    }
+    return (a <= b) ? a : b;
     }
 
 }

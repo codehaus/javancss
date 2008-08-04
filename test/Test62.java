@@ -286,14 +286,14 @@ public class Debug implements Cloneable
   public Object clone()
   {
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jass.runtime.traceAssertion.Parameter[] jassParameters; jassParameters = new jass.runtime.traceAssertion.Parameter[] {}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc", "Debug", "clone()", true), jassParameters);
-  	java.lang.Object jassResult;
+      java.lang.Object jassResult;
 
     try {
-  		jassResult = ( super.clone());
+          jassResult = ( super.clone());
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jassParameters = new jass.runtime.traceAssertion.Parameter[] {new jass.runtime.traceAssertion.Parameter(jassResult)}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc", "Debug", "clone()", false), jassParameters);
 
 
-  		return jassResult;
+          return jassResult;
     } catch (CloneNotSupportedException cnse) {
       throw new RuntimeException(cnse.getMessage());
     }
@@ -333,9 +333,9 @@ public class Debug implements Cloneable
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jass.runtime.traceAssertion.Parameter[] jassParameters; jassParameters = new jass.runtime.traceAssertion.Parameter[] {new jass.runtime.traceAssertion.Parameter(dc), new jass.runtime.traceAssertion.Parameter(c)}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc", "Debug", "Debug(idebughc.DebugConstants,idebughc.Collect)", true), jassParameters);
 
 
-  	/* precondition */
-  	if (!((dc!=null))) throw new jass.runtime.PreconditionException("idebughc.Debug","Debug(idebughc.DebugConstants,idebughc.Collect)",321,"dc_non_null");
-  	if (!((c!=null))) throw new jass.runtime.PreconditionException("idebughc.Debug","Debug(idebughc.DebugConstants,idebughc.Collect)",322,"c_non_null");
+      /* precondition */
+      if (!((dc!=null))) throw new jass.runtime.PreconditionException("idebughc.Debug","Debug(idebughc.DebugConstants,idebughc.Collect)",321,"dc_non_null");
+      if (!((c!=null))) throw new jass.runtime.PreconditionException("idebughc.Debug","Debug(idebughc.DebugConstants,idebughc.Collect)",322,"c_non_null");
 
     init(dc, c);
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jassParameters = new jass.runtime.traceAssertion.Parameter[] {}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc", "Debug", "Debug(idebughc.DebugConstants,idebughc.Collect)", false), jassParameters);
@@ -360,12 +360,12 @@ public class Debug implements Cloneable
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jass.runtime.traceAssertion.Parameter[] jassParameters; jassParameters = new jass.runtime.traceAssertion.Parameter[] {new jass.runtime.traceAssertion.Parameter(d)}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc", "Debug", "setOutputInterface(idebughc.DebugOutput)", true), jassParameters);
 
 
-  	/* precondition */
-  	if (!((d!=null))) throw new jass.runtime.PreconditionException("idebughc.Debug","setOutputInterface(idebughc.DebugOutput)",340,"d_not_null");
+      /* precondition */
+      if (!((d!=null))) throw new jass.runtime.PreconditionException("idebughc.Debug","setOutputInterface(idebughc.DebugOutput)",340,"d_not_null");
 
     this.debugOutputInterface = d;
-  	/* postcondition */
-  	if (!((jassInternal_getOutputInterface()==d))) throw new jass.runtime.PostconditionException("idebughc.Debug","setOutputInterface(idebughc.DebugOutput)",344,"output_interface_set");
+      /* postcondition */
+      if (!((jassInternal_getOutputInterface()==d))) throw new jass.runtime.PostconditionException("idebughc.Debug","setOutputInterface(idebughc.DebugOutput)",344,"output_interface_set");
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jassParameters = new jass.runtime.traceAssertion.Parameter[] {}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc", "Debug", "setOutputInterface(idebughc.DebugOutput)", false), jassParameters);
 
   }
@@ -380,13 +380,13 @@ public class Debug implements Cloneable
   public Assert getAssert()
   {
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jass.runtime.traceAssertion.Parameter[] jassParameters; jassParameters = new jass.runtime.traceAssertion.Parameter[] {}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc", "Debug", "getAssert()", true), jassParameters);
-  	idebughc.Assert jassResult;
+      idebughc.Assert jassResult;
 
-  	jassResult = ( assert);
+      jassResult = ( assert);
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jassParameters = new jass.runtime.traceAssertion.Parameter[] {new jass.runtime.traceAssertion.Parameter(jassResult)}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc", "Debug", "getAssert()", false), jassParameters);
 
 
-  	return jassResult;
+      return jassResult;
   }
 
 
@@ -400,13 +400,13 @@ public class Debug implements Cloneable
   public Collect getCollect()
   {
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jass.runtime.traceAssertion.Parameter[] jassParameters; jassParameters = new jass.runtime.traceAssertion.Parameter[] {}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc", "Debug", "getCollect()", true), jassParameters);
-  	idebughc.Collect jassResult;
+      idebughc.Collect jassResult;
 
-  	jassResult = ( collect);
+      jassResult = ( collect);
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jassParameters = new jass.runtime.traceAssertion.Parameter[] {new jass.runtime.traceAssertion.Parameter(jassResult)}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc", "Debug", "getCollect()", false), jassParameters);
 
 
-  	return jassResult;
+      return jassResult;
   }
 
   /**
@@ -420,24 +420,24 @@ public class Debug implements Cloneable
   public DebugOutput getOutputInterface()
   {
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jass.runtime.traceAssertion.Parameter[] jassParameters; jassParameters = new jass.runtime.traceAssertion.Parameter[] {}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc", "Debug", "getOutputInterface()", true), jassParameters);
-  	idebughc.DebugOutput jassResult;
+      idebughc.DebugOutput jassResult;
 
     Thread currentThread = Thread.currentThread();
     
     if (threadHashtable.containsKey(currentThread)) {
       Context debugContext = 
         (Context)(threadHashtable.get(currentThread));
-    		jassResult = ( debugContext.getOutputInterface());
+            jassResult = ( debugContext.getOutputInterface());
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jassParameters = new jass.runtime.traceAssertion.Parameter[] {new jass.runtime.traceAssertion.Parameter(jassResult)}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc", "Debug", "getOutputInterface()", false), jassParameters);
 
 
-    		return jassResult;
+            return jassResult;
     } else {
-    	jassResult = ( this.debugOutputInterface);
+        jassResult = ( this.debugOutputInterface);
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jassParameters = new jass.runtime.traceAssertion.Parameter[] {new jass.runtime.traceAssertion.Parameter(jassResult)}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc", "Debug", "getOutputInterface()", false), jassParameters);
 
 
-    	return jassResult;
+        return jassResult;
     }
   }
 
@@ -451,13 +451,13 @@ public class Debug implements Cloneable
   public DebugConstants getDebugConstants()
   {
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jass.runtime.traceAssertion.Parameter[] jassParameters; jassParameters = new jass.runtime.traceAssertion.Parameter[] {}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc", "Debug", "getDebugConstants()", true), jassParameters);
-  	idebughc.DebugConstants jassResult;
+      idebughc.DebugConstants jassResult;
 
-  	jassResult = ( debugConstants);
+      jassResult = ( debugConstants);
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jassParameters = new jass.runtime.traceAssertion.Parameter[] {new jass.runtime.traceAssertion.Parameter(jassResult)}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc", "Debug", "getDebugConstants()", false), jassParameters);
 
 
-  	return jassResult;
+      return jassResult;
   }
 
   /**
@@ -471,13 +471,13 @@ public class Debug implements Cloneable
   public synchronized boolean isOn()
   {
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jass.runtime.traceAssertion.Parameter[] jassParameters; jassParameters = new jass.runtime.traceAssertion.Parameter[] {}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc", "Debug", "isOn()", true), jassParameters);
-  	boolean jassResult;
+      boolean jassResult;
 
-  	jassResult = ( isOn);
+      jassResult = ( isOn);
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jassParameters = new jass.runtime.traceAssertion.Parameter[] {new jass.runtime.traceAssertion.Parameter(jassResult)}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc", "Debug", "isOn()", false), jassParameters);
 
 
-  	return jassResult;
+      return jassResult;
   }
  
   /**
@@ -496,10 +496,10 @@ public class Debug implements Cloneable
   public synchronized boolean isOn(Thread thread)
   {
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jass.runtime.traceAssertion.Parameter[] jassParameters; jassParameters = new jass.runtime.traceAssertion.Parameter[] {new jass.runtime.traceAssertion.Parameter(thread)}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc", "Debug", "isOn(java.lang.Thread)", true), jassParameters);
-  	boolean jassResult;
+      boolean jassResult;
 
-  	/* precondition */
-  	if (!((thread!=null))) throw new jass.runtime.PreconditionException("idebughc.Debug","isOn(java.lang.Thread)",430,"thread_non_null");
+      /* precondition */
+      if (!((thread!=null))) throw new jass.runtime.PreconditionException("idebughc.Debug","isOn(java.lang.Thread)",430,"thread_non_null");
 
     // Make sure that there is a legal entry in the threadHashtable
     // for this particular thread.
@@ -508,18 +508,18 @@ public class Debug implements Cloneable
       // Get the object that describes the per-thread debugging state.
       Context debugContext = 
         (Context)(threadHashtable.get(thread));
-    		jassResult = ( debugContext.isOn());
+            jassResult = ( debugContext.isOn());
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jassParameters = new jass.runtime.traceAssertion.Parameter[] {new jass.runtime.traceAssertion.Parameter(jassResult)}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc", "Debug", "isOn(java.lang.Thread)", false), jassParameters);
 
 
-    		return jassResult;
+            return jassResult;
     }
     else {
-    	jassResult = ( false);
+        jassResult = ( false);
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jassParameters = new jass.runtime.traceAssertion.Parameter[] {new jass.runtime.traceAssertion.Parameter(jassResult)}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc", "Debug", "isOn(java.lang.Thread)", false), jassParameters);
 
 
-    	return jassResult;
+        return jassResult;
     }
   }
 
@@ -535,13 +535,13 @@ public class Debug implements Cloneable
   public synchronized boolean isOff()
   {
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jass.runtime.traceAssertion.Parameter[] jassParameters; jassParameters = new jass.runtime.traceAssertion.Parameter[] {}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc", "Debug", "isOff()", true), jassParameters);
-  	boolean jassResult;
+      boolean jassResult;
 
-  	jassResult = ( (!isOn()));
+      jassResult = ( (!isOn()));
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jassParameters = new jass.runtime.traceAssertion.Parameter[] {new jass.runtime.traceAssertion.Parameter(jassResult)}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc", "Debug", "isOff()", false), jassParameters);
 
 
-  	return jassResult;
+      return jassResult;
   }
   
 
@@ -561,15 +561,15 @@ public class Debug implements Cloneable
   public synchronized boolean isOff(Thread thread)
   {
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jass.runtime.traceAssertion.Parameter[] jassParameters; jassParameters = new jass.runtime.traceAssertion.Parameter[] {new jass.runtime.traceAssertion.Parameter(thread)}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc", "Debug", "isOff(java.lang.Thread)", true), jassParameters);
-  	boolean jassResult;
+      boolean jassResult;
 
-  	/* precondition */
-  	if (!((thread!=null))) throw new jass.runtime.PreconditionException("idebughc.Debug","isOff(java.lang.Thread)",474,"thread_non_null");
-  	jassResult = ( (!isOn(thread)));
+      /* precondition */
+      if (!((thread!=null))) throw new jass.runtime.PreconditionException("idebughc.Debug","isOff(java.lang.Thread)",474,"thread_non_null");
+      jassResult = ( (!isOn(thread)));
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jassParameters = new jass.runtime.traceAssertion.Parameter[] {new jass.runtime.traceAssertion.Parameter(jassResult)}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc", "Debug", "isOff(java.lang.Thread)", false), jassParameters);
 
 
-  	return jassResult;
+      return jassResult;
   }
   
   /**
@@ -628,20 +628,20 @@ public class Debug implements Cloneable
                                           int level)
   {
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jass.runtime.traceAssertion.Parameter[] jassParameters; jassParameters = new jass.runtime.traceAssertion.Parameter[] {new jass.runtime.traceAssertion.Parameter(category), new jass.runtime.traceAssertion.Parameter(level)}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc", "Debug", "addCategory(java.lang.String,int)", true), jassParameters);
-  	boolean jassResult;
+      boolean jassResult;
 
-  	/* precondition */
-  	if (!((category!=null))) throw new jass.runtime.PreconditionException("idebughc.Debug","addCategory(java.lang.String,int)",523,"category_non_null");
-  	if (!((category.length()>0))) throw new jass.runtime.PreconditionException("idebughc.Debug","addCategory(java.lang.String,int)",524,"category_nonzero_length");
+      /* precondition */
+      if (!((category!=null))) throw new jass.runtime.PreconditionException("idebughc.Debug","addCategory(java.lang.String,int)",523,"category_non_null");
+      if (!((category.length()>0))) throw new jass.runtime.PreconditionException("idebughc.Debug","addCategory(java.lang.String,int)",524,"category_nonzero_length");
 
     // Get a reference to the global category hashtable.
     Hashtable categoryHashtable = 
       (Hashtable)(threadHashtable.get("GLOBAL_CATEGORIES"));
-  	jassResult = ( addCategoryToHashtable(categoryHashtable, category, level));
+      jassResult = ( addCategoryToHashtable(categoryHashtable, category, level));
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jassParameters = new jass.runtime.traceAssertion.Parameter[] {new jass.runtime.traceAssertion.Parameter(jassResult)}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc", "Debug", "addCategory(java.lang.String,int)", false), jassParameters);
 
 
-  	return jassResult;
+      return jassResult;
   }
 
   /**
@@ -660,20 +660,20 @@ public class Debug implements Cloneable
   public synchronized boolean removeCategory(String category)
   {
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jass.runtime.traceAssertion.Parameter[] jassParameters; jassParameters = new jass.runtime.traceAssertion.Parameter[] {new jass.runtime.traceAssertion.Parameter(category)}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc", "Debug", "removeCategory(java.lang.String)", true), jassParameters);
-  	boolean jassResult;
+      boolean jassResult;
 
-  	/* precondition */
-  	if (!((category!=null))) throw new jass.runtime.PreconditionException("idebughc.Debug","removeCategory(java.lang.String)",547,"category_non_null");
-  	if (!((category.length()>0))) throw new jass.runtime.PreconditionException("idebughc.Debug","removeCategory(java.lang.String)",548,"category_nonzero_length");
+      /* precondition */
+      if (!((category!=null))) throw new jass.runtime.PreconditionException("idebughc.Debug","removeCategory(java.lang.String)",547,"category_non_null");
+      if (!((category.length()>0))) throw new jass.runtime.PreconditionException("idebughc.Debug","removeCategory(java.lang.String)",548,"category_nonzero_length");
 
     // Get a reference to the global category hashtable.
     Hashtable categoryHashtable = 
       (Hashtable)(threadHashtable.get("GLOBAL_CATEGORIES"));
-  	jassResult = ( removeCategoryFromHashtable(categoryHashtable, category));
+      jassResult = ( removeCategoryFromHashtable(categoryHashtable, category));
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jassParameters = new jass.runtime.traceAssertion.Parameter[] {new jass.runtime.traceAssertion.Parameter(jassResult)}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc", "Debug", "removeCategory(java.lang.String)", false), jassParameters);
 
 
-  	return jassResult;
+      return jassResult;
   }
 
 
@@ -692,21 +692,21 @@ public class Debug implements Cloneable
   public synchronized boolean containsCategory(String category)
   {
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jass.runtime.traceAssertion.Parameter[] jassParameters; jassParameters = new jass.runtime.traceAssertion.Parameter[] {new jass.runtime.traceAssertion.Parameter(category)}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc", "Debug", "containsCategory(java.lang.String)", true), jassParameters);
-  	boolean jassResult;
+      boolean jassResult;
 
-  	/* precondition */
-  	if (!((category!=null))) throw new jass.runtime.PreconditionException("idebughc.Debug","containsCategory(java.lang.String)",571,"category_non_null");
-  	if (!((category.length()>0))) throw new jass.runtime.PreconditionException("idebughc.Debug","containsCategory(java.lang.String)",572,"category_nonzero_length");
+      /* precondition */
+      if (!((category!=null))) throw new jass.runtime.PreconditionException("idebughc.Debug","containsCategory(java.lang.String)",571,"category_non_null");
+      if (!((category.length()>0))) throw new jass.runtime.PreconditionException("idebughc.Debug","containsCategory(java.lang.String)",572,"category_nonzero_length");
 
     // Get global category hashtable.
     Hashtable hashtable = 
       (Hashtable)(threadHashtable.get("GLOBAL_CATEGORIES"));
-  	jassResult = ( (hashtable.containsKey(category)));
+      jassResult = ( (hashtable.containsKey(category)));
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jassParameters = new jass.runtime.traceAssertion.Parameter[] {new jass.runtime.traceAssertion.Parameter(jassResult)}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc", "Debug", "containsCategory(java.lang.String)", false), jassParameters);
 
 // If entry exists, return a true; otherwise return a false.
 
-  	return jassResult;
+      return jassResult;
   }
   
   /**
@@ -724,16 +724,16 @@ public class Debug implements Cloneable
   public synchronized Enumeration listCategories()
   {
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jass.runtime.traceAssertion.Parameter[] jassParameters; jassParameters = new jass.runtime.traceAssertion.Parameter[] {}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc", "Debug", "listCategories()", true), jassParameters);
-  	java.util.Enumeration jassResult;
+      java.util.Enumeration jassResult;
 
     // Get global category hashtable.
     Hashtable hashtable = 
       (Hashtable)(threadHashtable.get("GLOBAL_CATEGORIES"));
-  	jassResult = ( (hashtable.elements()));
+      jassResult = ( (hashtable.elements()));
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jassParameters = new jass.runtime.traceAssertion.Parameter[] {new jass.runtime.traceAssertion.Parameter(jassResult)}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc", "Debug", "listCategories()", false), jassParameters);
 
 
-  	return jassResult;
+      return jassResult;
   }
 
   /**
@@ -752,8 +752,8 @@ public class Debug implements Cloneable
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jass.runtime.traceAssertion.Parameter[] jassParameters; jassParameters = new jass.runtime.traceAssertion.Parameter[] {new jass.runtime.traceAssertion.Parameter(classRef)}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc", "Debug", "addClass(java.lang.Class)", true), jassParameters);
 
 
-  	/* precondition */
-  	if (!((classRef!=null))) throw new jass.runtime.PreconditionException("idebughc.Debug","addClass(java.lang.Class)",615,"classRef_non_null");
+      /* precondition */
+      if (!((classRef!=null))) throw new jass.runtime.PreconditionException("idebughc.Debug","addClass(java.lang.Class)",615,"classRef_non_null");
 
     //  Get a reference to the global class hashtable.
     Hashtable classHashtable = 
@@ -783,9 +783,9 @@ public class Debug implements Cloneable
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jass.runtime.traceAssertion.Parameter[] jassParameters; jassParameters = new jass.runtime.traceAssertion.Parameter[] {new jass.runtime.traceAssertion.Parameter(className)}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc", "Debug", "addClass(java.lang.String)", true), jassParameters);
 
 
-  	/* precondition */
-  	if (!((className!=null))) throw new jass.runtime.PreconditionException("idebughc.Debug","addClass(java.lang.String)",639,"className_non_null");
-  	if (!((className.length()>0))) throw new jass.runtime.PreconditionException("idebughc.Debug","addClass(java.lang.String)",640,"className_nonzero_length");
+      /* precondition */
+      if (!((className!=null))) throw new jass.runtime.PreconditionException("idebughc.Debug","addClass(java.lang.String)",639,"className_non_null");
+      if (!((className.length()>0))) throw new jass.runtime.PreconditionException("idebughc.Debug","addClass(java.lang.String)",640,"className_nonzero_length");
 
     //  Get a reference to the global class hashtable.
     Hashtable classHashtable = 
@@ -811,8 +811,8 @@ public class Debug implements Cloneable
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jass.runtime.traceAssertion.Parameter[] jassParameters; jassParameters = new jass.runtime.traceAssertion.Parameter[] {new jass.runtime.traceAssertion.Parameter(classRef)}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc", "Debug", "removeClass(java.lang.Class)", true), jassParameters);
 
 
-  	/* precondition */
-  	if (!((classRef!=null))) throw new jass.runtime.PreconditionException("idebughc.Debug","removeClass(java.lang.Class)",660,"classRef_non_null");
+      /* precondition */
+      if (!((classRef!=null))) throw new jass.runtime.PreconditionException("idebughc.Debug","removeClass(java.lang.Class)",660,"classRef_non_null");
 
     //  Get a reference to the global class hashtable.
     Hashtable classHashtable = 
@@ -842,9 +842,9 @@ public class Debug implements Cloneable
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jass.runtime.traceAssertion.Parameter[] jassParameters; jassParameters = new jass.runtime.traceAssertion.Parameter[] {new jass.runtime.traceAssertion.Parameter(className)}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc", "Debug", "removeClass(java.lang.String)", true), jassParameters);
 
 
-  	/* precondition */
-  	if (!((className!=null))) throw new jass.runtime.PreconditionException("idebughc.Debug","removeClass(java.lang.String)",684,"className_non_null");
-  	if (!((className.length()>0))) throw new jass.runtime.PreconditionException("idebughc.Debug","removeClass(java.lang.String)",685,"className_nonzero_length");
+      /* precondition */
+      if (!((className!=null))) throw new jass.runtime.PreconditionException("idebughc.Debug","removeClass(java.lang.String)",684,"className_non_null");
+      if (!((className.length()>0))) throw new jass.runtime.PreconditionException("idebughc.Debug","removeClass(java.lang.String)",685,"className_nonzero_length");
 
     //  Get a reference to the global class hashtable.
     Hashtable classHashtable = 
@@ -872,24 +872,24 @@ public class Debug implements Cloneable
   public synchronized Context getContext(Thread thread)
   {
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jass.runtime.traceAssertion.Parameter[] jassParameters; jassParameters = new jass.runtime.traceAssertion.Parameter[] {new jass.runtime.traceAssertion.Parameter(thread)}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc", "Debug", "getContext(java.lang.Thread)", true), jassParameters);
-  	idebughc.Context jassResult;
+      idebughc.Context jassResult;
 
-  	/* precondition */
-  	if (!((thread!=null))) throw new jass.runtime.PreconditionException("idebughc.Debug","getContext(java.lang.Thread)",709,"thread_non_null");
+      /* precondition */
+      if (!((thread!=null))) throw new jass.runtime.PreconditionException("idebughc.Debug","getContext(java.lang.Thread)",709,"thread_non_null");
 
     if (threadHashtable.containsKey(thread)) {
-    	jassResult = ( (Context)(threadHashtable.get(thread)));
+        jassResult = ( (Context)(threadHashtable.get(thread)));
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jassParameters = new jass.runtime.traceAssertion.Parameter[] {new jass.runtime.traceAssertion.Parameter(jassResult)}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc", "Debug", "getContext(java.lang.Thread)", false), jassParameters);
 
 
-    	return jassResult;
+        return jassResult;
     }
     else {
-    	jassResult = ( null);
+        jassResult = ( null);
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jassParameters = new jass.runtime.traceAssertion.Parameter[] {new jass.runtime.traceAssertion.Parameter(jassResult)}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc", "Debug", "getContext(java.lang.Thread)", false), jassParameters);
 
 
-    	return jassResult;
+        return jassResult;
     }
   }
 
@@ -910,24 +910,24 @@ public class Debug implements Cloneable
   public synchronized boolean addContext(Context debugContext)
   {
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jass.runtime.traceAssertion.Parameter[] jassParameters; jassParameters = new jass.runtime.traceAssertion.Parameter[] {new jass.runtime.traceAssertion.Parameter(debugContext)}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc", "Debug", "addContext(idebughc.Context)", true), jassParameters);
-  	boolean jassResult;
+      boolean jassResult;
 
-  	/* precondition */
-  	if (!((debugContext!=null))) throw new jass.runtime.PreconditionException("idebughc.Debug","addContext(idebughc.Context)",731,"context_non_null");
+      /* precondition */
+      if (!((debugContext!=null))) throw new jass.runtime.PreconditionException("idebughc.Debug","addContext(idebughc.Context)",731,"context_non_null");
 
     if (debugContext != null) {
       threadHashtable.put(debugContext.getThread(), debugContext);
-    		jassResult = ( true);
+            jassResult = ( true);
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jassParameters = new jass.runtime.traceAssertion.Parameter[] {new jass.runtime.traceAssertion.Parameter(jassResult)}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc", "Debug", "addContext(idebughc.Context)", false), jassParameters);
 
 
-    		return jassResult;
+            return jassResult;
     } else {
-    	jassResult = ( false);
+        jassResult = ( false);
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jassParameters = new jass.runtime.traceAssertion.Parameter[] {new jass.runtime.traceAssertion.Parameter(jassResult)}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc", "Debug", "addContext(idebughc.Context)", false), jassParameters);
 
 
-    	return jassResult;
+        return jassResult;
     }
   }
 
@@ -949,25 +949,25 @@ public class Debug implements Cloneable
   public synchronized boolean removeContext(Context debugContext)
   {
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jass.runtime.traceAssertion.Parameter[] jassParameters; jassParameters = new jass.runtime.traceAssertion.Parameter[] {new jass.runtime.traceAssertion.Parameter(debugContext)}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc", "Debug", "removeContext(idebughc.Context)", true), jassParameters);
-  	boolean jassResult;
+      boolean jassResult;
 
-  	/* precondition */
-  	if (!((debugContext!=null))) throw new jass.runtime.PreconditionException("idebughc.Debug","removeContext(idebughc.Context)",755,"context_non_null");
+      /* precondition */
+      if (!((debugContext!=null))) throw new jass.runtime.PreconditionException("idebughc.Debug","removeContext(idebughc.Context)",755,"context_non_null");
 
     if ((debugContext != null) && 
         (threadHashtable.containsKey(debugContext))) {
       threadHashtable.remove(debugContext);
-    		jassResult = ( true);
+            jassResult = ( true);
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jassParameters = new jass.runtime.traceAssertion.Parameter[] {new jass.runtime.traceAssertion.Parameter(jassResult)}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc", "Debug", "removeContext(idebughc.Context)", false), jassParameters);
 
 
-    		return jassResult;
+            return jassResult;
     } else {
-    	jassResult = ( false);
+        jassResult = ( false);
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jassParameters = new jass.runtime.traceAssertion.Parameter[] {new jass.runtime.traceAssertion.Parameter(jassResult)}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc", "Debug", "removeContext(idebughc.Context)", false), jassParameters);
 
 
-    	return jassResult;
+        return jassResult;
     }
   }
 
@@ -988,16 +988,16 @@ public class Debug implements Cloneable
   public synchronized Enumeration listClasses()
   {
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jass.runtime.traceAssertion.Parameter[] jassParameters; jassParameters = new jass.runtime.traceAssertion.Parameter[] {}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc", "Debug", "listClasses()", true), jassParameters);
-  	java.util.Enumeration jassResult;
+      java.util.Enumeration jassResult;
 
     // Get global category hashtable.
     Hashtable hashtable = 
       (Hashtable)(threadHashtable.get("GLOBAL_CLASSES"));
-  	jassResult = ( (hashtable.elements()));
+      jassResult = ( (hashtable.elements()));
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jassParameters = new jass.runtime.traceAssertion.Parameter[] {new jass.runtime.traceAssertion.Parameter(jassResult)}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc", "Debug", "listClasses()", false), jassParameters);
 
 
-  	return jassResult;
+      return jassResult;
   }
   
   /**
@@ -1014,22 +1014,22 @@ public class Debug implements Cloneable
   public synchronized boolean setLevel(int level)
   {
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jass.runtime.traceAssertion.Parameter[] jassParameters; jassParameters = new jass.runtime.traceAssertion.Parameter[] {new jass.runtime.traceAssertion.Parameter(level)}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc", "Debug", "setLevel(int)", true), jassParameters);
-  	boolean jassResult;
+      boolean jassResult;
 
     if ((level >= debugConstants.LEVEL_MIN) && 
         (level <= debugConstants.LEVEL_MAX)) {
       this.level = level;
-    		jassResult = ( true);
+            jassResult = ( true);
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jassParameters = new jass.runtime.traceAssertion.Parameter[] {new jass.runtime.traceAssertion.Parameter(jassResult)}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc", "Debug", "setLevel(int)", false), jassParameters);
 
 
-    		return jassResult;
+            return jassResult;
     } else {
-    	jassResult = ( false);
+        jassResult = ( false);
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jassParameters = new jass.runtime.traceAssertion.Parameter[] {new jass.runtime.traceAssertion.Parameter(jassResult)}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc", "Debug", "setLevel(int)", false), jassParameters);
 
 
-    	return jassResult;
+        return jassResult;
     }
     
   }
@@ -1045,13 +1045,13 @@ public class Debug implements Cloneable
   public synchronized int getLevel()
   {
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jass.runtime.traceAssertion.Parameter[] jassParameters; jassParameters = new jass.runtime.traceAssertion.Parameter[] {}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc", "Debug", "getLevel()", true), jassParameters);
-  	int jassResult;
+      int jassResult;
 
-  	jassResult = ( level);
+      jassResult = ( level);
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jassParameters = new jass.runtime.traceAssertion.Parameter[] {new jass.runtime.traceAssertion.Parameter(jassResult)}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc", "Debug", "getLevel()", false), jassParameters);
 
 
-  	return jassResult;
+      return jassResult;
   }
 
   /**
@@ -1069,13 +1069,13 @@ public class Debug implements Cloneable
   public synchronized Enumeration listThreads()
   {
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jass.runtime.traceAssertion.Parameter[] jassParameters; jassParameters = new jass.runtime.traceAssertion.Parameter[] {}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc", "Debug", "listThreads()", true), jassParameters);
-  	java.util.Enumeration jassResult;
+      java.util.Enumeration jassResult;
 
-  	jassResult = ( threadHashtable.keys());
+      jassResult = ( threadHashtable.keys());
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jassParameters = new jass.runtime.traceAssertion.Parameter[] {new jass.runtime.traceAssertion.Parameter(jassResult)}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc", "Debug", "listThreads()", false), jassParameters);
 
 
-  	return jassResult;
+      return jassResult;
   }
 
   // Protected Methods
@@ -1102,7 +1102,7 @@ public class Debug implements Cloneable
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jass.runtime.traceAssertion.Parameter[] jassParameters; jassParameters = new jass.runtime.traceAssertion.Parameter[] {new jass.runtime.traceAssertion.Parameter(dc), new jass.runtime.traceAssertion.Parameter(c)}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc", "Debug", "init(idebughc.DebugConstants,idebughc.Collect)", true), jassParameters);
 
 
-  	idebughc.Debug jassOld = (idebughc.Debug)this.clone();
+      idebughc.Debug jassOld = (idebughc.Debug)this.clone();
     threadHashtable = new Hashtable();
     Hashtable categoryHashtable = new Hashtable();
     threadHashtable.put("GLOBAL_CATEGORIES", categoryHashtable);
@@ -1117,13 +1117,13 @@ public class Debug implements Cloneable
     this.collect = c;
 
     debugUtilities = new Utilities(this);
-  	/* postcondition */
-  	if (!((threadHashtable!=null))) throw new jass.runtime.PostconditionException("idebughc.Debug","init(idebughc.DebugConstants,idebughc.Collect)",873,"threadHashtable_valid");
-  	if (!((jassInternal_getAssert()!=null))) throw new jass.runtime.PostconditionException("idebughc.Debug","init(idebughc.DebugConstants,idebughc.Collect)",874,"assert_valid");
-  	if (!((jassInternal_getCollect()==c))) throw new jass.runtime.PostconditionException("idebughc.Debug","init(idebughc.DebugConstants,idebughc.Collect)",875,"collect_valid");
-  	if (!((debugUtilities!=null))) throw new jass.runtime.PostconditionException("idebughc.Debug","init(idebughc.DebugConstants,idebughc.Collect)",876,"debugUtilities_valid");
-  	if (!((jassInternal_getDebugConstants()==dc))) throw new jass.runtime.PostconditionException("idebughc.Debug","init(idebughc.DebugConstants,idebughc.Collect)",877,"debugConstants_valid");
-  	if (!(isOn == jassOld.isOn && level == jassOld.level && jass.runtime.Tool.referenceEquals(debugOutputInterface,jassOld.debugOutputInterface))) throw new jass.runtime.PostconditionException("idebughc.Debug","init(idebughc.DebugConstants,idebughc.Collect)",-1,"Method has changed old value.");
+      /* postcondition */
+      if (!((threadHashtable!=null))) throw new jass.runtime.PostconditionException("idebughc.Debug","init(idebughc.DebugConstants,idebughc.Collect)",873,"threadHashtable_valid");
+      if (!((jassInternal_getAssert()!=null))) throw new jass.runtime.PostconditionException("idebughc.Debug","init(idebughc.DebugConstants,idebughc.Collect)",874,"assert_valid");
+      if (!((jassInternal_getCollect()==c))) throw new jass.runtime.PostconditionException("idebughc.Debug","init(idebughc.DebugConstants,idebughc.Collect)",875,"collect_valid");
+      if (!((debugUtilities!=null))) throw new jass.runtime.PostconditionException("idebughc.Debug","init(idebughc.DebugConstants,idebughc.Collect)",876,"debugUtilities_valid");
+      if (!((jassInternal_getDebugConstants()==dc))) throw new jass.runtime.PostconditionException("idebughc.Debug","init(idebughc.DebugConstants,idebughc.Collect)",877,"debugConstants_valid");
+      if (!(isOn == jassOld.isOn && level == jassOld.level && jass.runtime.Tool.referenceEquals(debugOutputInterface,jassOld.debugOutputInterface))) throw new jass.runtime.PostconditionException("idebughc.Debug","init(idebughc.DebugConstants,idebughc.Collect)",-1,"Method has changed old value.");
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jassParameters = new jass.runtime.traceAssertion.Parameter[] {}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc", "Debug", "init(idebughc.DebugConstants,idebughc.Collect)", false), jassParameters);
 
   }
@@ -1152,38 +1152,38 @@ public class Debug implements Cloneable
     addCategoryToHashtable(Hashtable hashtable, String category, int level)
   {
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jass.runtime.traceAssertion.Parameter[] jassParameters; jassParameters = new jass.runtime.traceAssertion.Parameter[] {new jass.runtime.traceAssertion.Parameter(hashtable), new jass.runtime.traceAssertion.Parameter(category), new jass.runtime.traceAssertion.Parameter(level)}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc", "Debug", "addCategoryToHashtable(java.util.Hashtable,java.lang.String,int)", true), jassParameters);
-  	boolean jassResult;
+      boolean jassResult;
 
-  	/* precondition */
-  	if (!((hashtable!=null))) throw new jass.runtime.PreconditionException("idebughc.Debug","addCategoryToHashtable(java.util.Hashtable,java.lang.String,int)",904,"hashtable_non_null");
-  	if (!((category!=null))) throw new jass.runtime.PreconditionException("idebughc.Debug","addCategoryToHashtable(java.util.Hashtable,java.lang.String,int)",905,"category_non_null");
-  	if (!((category.length()>0))) throw new jass.runtime.PreconditionException("idebughc.Debug","addCategoryToHashtable(java.util.Hashtable,java.lang.String,int)",906,"category_nonzero_length");
+      /* precondition */
+      if (!((hashtable!=null))) throw new jass.runtime.PreconditionException("idebughc.Debug","addCategoryToHashtable(java.util.Hashtable,java.lang.String,int)",904,"hashtable_non_null");
+      if (!((category!=null))) throw new jass.runtime.PreconditionException("idebughc.Debug","addCategoryToHashtable(java.util.Hashtable,java.lang.String,int)",905,"category_non_null");
+      if (!((category.length()>0))) throw new jass.runtime.PreconditionException("idebughc.Debug","addCategoryToHashtable(java.util.Hashtable,java.lang.String,int)",906,"category_nonzero_length");
 
     // See if an entry for the passed category exists.
     if (hashtable.containsKey(category)) {
       if (((Integer)(hashtable.get(category))).intValue() != level) {
-      	jassResult = ( false);
+          jassResult = ( false);
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jassParameters = new jass.runtime.traceAssertion.Parameter[] {new jass.runtime.traceAssertion.Parameter(jassResult)}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc", "Debug", "addCategoryToHashtable(java.util.Hashtable,java.lang.String,int)", false), jassParameters);
 
 
-      	return jassResult;
+          return jassResult;
       }
       else {
-      	jassResult = ( true);
+          jassResult = ( true);
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jassParameters = new jass.runtime.traceAssertion.Parameter[] {new jass.runtime.traceAssertion.Parameter(jassResult)}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc", "Debug", "addCategoryToHashtable(java.util.Hashtable,java.lang.String,int)", false), jassParameters);
 
 
-      	return jassResult;
+          return jassResult;
       }
     }
 
     // Add a new entry for the passed category.
     hashtable.put(category, new Integer(level));
-  	jassResult = ( true);
+      jassResult = ( true);
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jassParameters = new jass.runtime.traceAssertion.Parameter[] {new jass.runtime.traceAssertion.Parameter(jassResult)}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc", "Debug", "addCategoryToHashtable(java.util.Hashtable,java.lang.String,int)", false), jassParameters);
 
 
-  	return jassResult;
+      return jassResult;
   }
 
   /**
@@ -1204,24 +1204,24 @@ public class Debug implements Cloneable
     removeCategoryFromHashtable(Hashtable hashtable, String category)
   {
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jass.runtime.traceAssertion.Parameter[] jassParameters; jassParameters = new jass.runtime.traceAssertion.Parameter[] {new jass.runtime.traceAssertion.Parameter(hashtable), new jass.runtime.traceAssertion.Parameter(category)}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc", "Debug", "removeCategoryFromHashtable(java.util.Hashtable,java.lang.String)", true), jassParameters);
-  	boolean jassResult;
+      boolean jassResult;
 
-  	/* precondition */
-  	if (!((hashtable!=null))) throw new jass.runtime.PreconditionException("idebughc.Debug","removeCategoryFromHashtable(java.util.Hashtable,java.lang.String)",937,"hashtable_non_null");
-  	if (!((category!=null))) throw new jass.runtime.PreconditionException("idebughc.Debug","removeCategoryFromHashtable(java.util.Hashtable,java.lang.String)",938,"category_non_null");
-  	if (!((category.length()>0))) throw new jass.runtime.PreconditionException("idebughc.Debug","removeCategoryFromHashtable(java.util.Hashtable,java.lang.String)",939,"category_nonzero_length");
+      /* precondition */
+      if (!((hashtable!=null))) throw new jass.runtime.PreconditionException("idebughc.Debug","removeCategoryFromHashtable(java.util.Hashtable,java.lang.String)",937,"hashtable_non_null");
+      if (!((category!=null))) throw new jass.runtime.PreconditionException("idebughc.Debug","removeCategoryFromHashtable(java.util.Hashtable,java.lang.String)",938,"category_non_null");
+      if (!((category.length()>0))) throw new jass.runtime.PreconditionException("idebughc.Debug","removeCategoryFromHashtable(java.util.Hashtable,java.lang.String)",939,"category_nonzero_length");
 
     // If is in the hashtable, remove it.
     if (hashtable.containsKey(category))
       hashtable.remove(category);
-  	jassResult = ( true);
+      jassResult = ( true);
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jassParameters = new jass.runtime.traceAssertion.Parameter[] {new jass.runtime.traceAssertion.Parameter(jassResult)}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc", "Debug", "removeCategoryFromHashtable(java.util.Hashtable,java.lang.String)", false), jassParameters);
 
 
-  	return jassResult;
+      return jassResult;
   }
 
-	/* --- The following methods of class idebughc.Debug are generated by JASS --- */
+    /* --- The following methods of class idebughc.Debug are generated by JASS --- */
 
 
   
@@ -1263,25 +1263,25 @@ public class Debug implements Cloneable
   }
 
 
-	protected void finalize () throws java.lang.Throwable {
+    protected void finalize () throws java.lang.Throwable {
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jass.runtime.traceAssertion.Parameter[] jassParameters; jassParameters = new jass.runtime.traceAssertion.Parameter[] {}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc", "Debug", "finalize()", true), jassParameters);
-		super.finalize();
+        super.finalize();
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jassParameters = new jass.runtime.traceAssertion.Parameter[] {}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc", "Debug", "finalize()", false), jassParameters);
-	}
+    }
 
-	public boolean equals (java.lang.Object par0) {
+    public boolean equals (java.lang.Object par0) {
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jass.runtime.traceAssertion.Parameter[] jassParameters; jassParameters = new jass.runtime.traceAssertion.Parameter[] {new jass.runtime.traceAssertion.Parameter(par0)}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc", "Debug", "equals(java.lang.Object)", true), jassParameters);
-		boolean returnValue = super.equals(par0);
+        boolean returnValue = super.equals(par0);
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jassParameters = new jass.runtime.traceAssertion.Parameter[] {new jass.runtime.traceAssertion.Parameter(returnValue)}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc", "Debug", "equals(java.lang.Object)", false), jassParameters);
-		return returnValue;
-	}
+        return returnValue;
+    }
 
-	public java.lang.String toString () {
+    public java.lang.String toString () {
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jass.runtime.traceAssertion.Parameter[] jassParameters; jassParameters = new jass.runtime.traceAssertion.Parameter[] {}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc", "Debug", "toString()", true), jassParameters);
-		java.lang.String returnValue = super.toString();
+        java.lang.String returnValue = super.toString();
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jassParameters = new jass.runtime.traceAssertion.Parameter[] {new jass.runtime.traceAssertion.Parameter(returnValue)}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc", "Debug", "toString()", false), jassParameters);
-		return returnValue;
-	}
+        return returnValue;
+    }
   
 } // end of class Debug
 

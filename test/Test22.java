@@ -4,133 +4,133 @@ import java.io.*;
 import java.util.Vector;
 
 class Daten {
-	private static	String ae = "ä";
-	private static	String AE = "A";
-	private static	String oe = "ö";
-	private static	String OE = "Ö";
-	private static	String ue = "ü";
-	private static	String UE = "Ü";
-	private static	String SS = "ß";
+    private static    String ae = "ï¿½";
+    private static    String AE = "A";
+    private static    String oe = "ï¿½";
+    private static    String OE = "ï¿½";
+    private static    String ue = "ï¿½";
+    private static    String UE = "ï¿½";
+    private static    String SS = "ï¿½";
 
-	private static int _jahr = 1963;
-	private static int _spieltag = 1;
-	private static String _sDatei;
-	private static int _anzGamer;
-	private static String _asGamer[] = new String[4];
-	private static String _asSpVerein[] = new String[4];
-	private static int _aPlaetze[] = new int[4];
+    private static int _jahr = 1963;
+    private static int _spieltag = 1;
+    private static String _sDatei;
+    private static int _anzGamer;
+    private static String _asGamer[] = new String[4];
+    private static String _asSpVerein[] = new String[4];
+    private static int _aPlaetze[] = new int[4];
 
-	private static String _asSpieler[] = new String[717];
-	private static String _asVerein[]  = new String[154];
-	private static String _asTrainer[] = new String[69];
+    private static String _asSpieler[] = new String[717];
+    private static String _asVerein[]  = new String[154];
+    private static String _asTrainer[] = new String[69];
 
-	private static int _aaSpDaten[][] = new int[696][12];
+    private static int _aaSpDaten[][] = new int[696][12];
    private static int _aaN[][] = new int[5][65];
    private static int _aT[] = new int[65];
    private static String _asT[] = new String[65];
 
 
-	private static int _aSk[] = new int[154];
+    private static int _aSk[] = new int[154];
 
-	private static String _asKlasse[] = new String[6];
-	private static String _asStatus[] = new String[6];
+    private static String _asKlasse[] = new String[6];
+    private static String _asStatus[] = new String[6];
 
-	private static boolean _lesenDateien () {
-		DataInputStream dipDaten;
-		//FileInputStream
+    private static boolean _lesenDateien () {
+        DataInputStream dipDaten;
+        //FileInputStream
 
-		try {
-			dipDaten = new DataInputStream(
-								new FileInputStream("../dateien/spieler.txt"));
-			for(int nr = 0; nr < 696; nr++) {
-				_asSpieler[nr] = dipDaten.readLine();
-			}
-			dipDaten.close();
-			dipDaten = null;
+        try {
+            dipDaten = new DataInputStream(
+                                new FileInputStream("../dateien/spieler.txt"));
+            for(int nr = 0; nr < 696; nr++) {
+                _asSpieler[nr] = dipDaten.readLine();
+            }
+            dipDaten.close();
+            dipDaten = null;
 
-			dipDaten = new DataInputStream(
-								new FileInputStream("../dateien/vereine.txt"));
-			for(int nr = 0; nr < 154; nr++) {
-				_asVerein[nr] = dipDaten.readLine();
-			}
-			dipDaten.close();
-			dipDaten = null;
+            dipDaten = new DataInputStream(
+                                new FileInputStream("../dateien/vereine.txt"));
+            for(int nr = 0; nr < 154; nr++) {
+                _asVerein[nr] = dipDaten.readLine();
+            }
+            dipDaten.close();
+            dipDaten = null;
 
-			dipDaten = new DataInputStream(
-								new FileInputStream("../dateien/vereined.txt"));
-			for(int nr = 64; nr < 153; nr++) {
-				String sZahl = dipDaten.readLine();
+            dipDaten = new DataInputStream(
+                                new FileInputStream("../dateien/vereined.txt"));
+            for(int nr = 64; nr < 153; nr++) {
+                String sZahl = dipDaten.readLine();
             _aSk[nr] = Integer.parseInt(sZahl);
-			}
-			dipDaten.close();
-			dipDaten = null;
+            }
+            dipDaten.close();
+            dipDaten = null;
 
-			dipDaten = new DataInputStream(
-								new FileInputStream("../dateien/spielerd.txt"));
-			for(int spieler = 0; spieler < 696; spieler++) {
-				for(int eigensch = 0; eigensch < 12; eigensch++) {
-					String sZahl = dipDaten.readLine();
+            dipDaten = new DataInputStream(
+                                new FileInputStream("../dateien/spielerd.txt"));
+            for(int spieler = 0; spieler < 696; spieler++) {
+                for(int eigensch = 0; eigensch < 12; eigensch++) {
+                    String sZahl = dipDaten.readLine();
                _aaSpDaten[spieler][eigensch] = Integer.parseInt(sZahl);
-				}
-			}
-			dipDaten.close();
-			dipDaten = null;
+                }
+            }
+            dipDaten.close();
+            dipDaten = null;
 
-			return(false);
-		} catch (Exception e) {
-			// Achtung, hier muá gepanict werden
-			return(true);
-		}
-	}
+            return(false);
+        } catch (Exception e) {
+            // Achtung, hier muï¿½ gepanict werden
+            return(true);
+        }
+    }
 
-	public static boolean init() {
-		_asKlasse[0] = "Amateur";
-		_asKlasse[1] = "Ersatzspieler";
-		_asKlasse[2] = "Mitl"+ae+"ufer";
-		_asKlasse[3] = "Stammspieler";
-		_asKlasse[4] = "Nationalspieler";
-		_asKlasse[5] = "Superstar";
-		_asStatus[0] = "   ";
-		_asStatus[1] = " > ";
-		_asStatus[2] = " . ";
-		_asStatus[3] = " * ";
-		_asStatus[4] = " R ";
-		_asStatus[5] = " V ";
+    public static boolean init() {
+        _asKlasse[0] = "Amateur";
+        _asKlasse[1] = "Ersatzspieler";
+        _asKlasse[2] = "Mitl"+ae+"ufer";
+        _asKlasse[3] = "Stammspieler";
+        _asKlasse[4] = "Nationalspieler";
+        _asKlasse[5] = "Superstar";
+        _asStatus[0] = "   ";
+        _asStatus[1] = " > ";
+        _asStatus[2] = " . ";
+        _asStatus[3] = " * ";
+        _asStatus[4] = " R ";
+        _asStatus[5] = " V ";
 
-		if (_lesenDateien()) {
-			// Fehler
-			return(true);
-		}
+        if (_lesenDateien()) {
+            // Fehler
+            return(true);
+        }
 
-		//		   frmAltesSpiel.Show 1
-   	//If g_AltesSpielJa = True Then
-      //	Call laden
-      //	GoTo Hauptprogramm2
-   	//End If
+        //           frmAltesSpiel.Show 1
+       //If g_AltesSpielJa = True Then
+      //    Call laden
+      //    GoTo Hauptprogramm2
+       //End If
 
-  	   for(int i = 0; i < 64; i++) {
-	      _aaN[0][i] = i+1;
-   	}
-   	for(int gamer = 0; gamer < 4; gamer++) {
-			_aPlaetze[gamer] = 10000;
-		}
+         for(int i = 0; i < 64; i++) {
+          _aaN[0][i] = i+1;
+       }
+       for(int gamer = 0; gamer < 4; gamer++) {
+            _aPlaetze[gamer] = 10000;
+        }
 
-		return(false);
-	}
+        return(false);
+    }
 
-	public static void putDatei(String sDatei) {
-//		static boolean bNurEinmal = true;
+    public static void putDatei(String sDatei) {
+//        static boolean bNurEinmal = true;
 
-//		if (bNurEinmal == false) {
-			// panic
-//			System.out.println("panic in putDatei");
-//		}
+//        if (bNurEinmal == false) {
+            // panic
+//            System.out.println("panic in putDatei");
+//        }
 
-//		bNurEinmal = false;
-		this._sDatei = sDatei;		// bug report
-	}
+//        bNurEinmal = false;
+        this._sDatei = sDatei;        // bug report
+    }
 
-	public static void doPlan() {
+    public static void doPlan() {
       _aT[0] = 1; _aT[1] = 2; _aT[2] = 3; _aT[3] = 4; _aT[4] = 41; _aT[5] = 5;
       _aT[6] = -1;
       _aT[7] = 6; _aT[8] = 7; _aT[9] = 42; _aT[10] = 8; _aT[11] = 51;
@@ -189,207 +189,207 @@ class Daten {
             _asT[i] = _asT[i] + _aT[i] + ". Bundesligaspieltag";
          }
       }
-	}
+    }
 
-	public static void putAnzGamer(int ANZGAMER) {
-		if (!(1 <= ANZGAMER <= 4)) {
-			System.out.println("panic in putAnzGamer!");
-		}
-		_anzGamer = ANZGAMER;
-	}
+    public static void putAnzGamer(int ANZGAMER) {
+        if (!(1 <= ANZGAMER <= 4)) {
+            System.out.println("panic in putAnzGamer!");
+        }
+        _anzGamer = ANZGAMER;
+    }
 
-	public static void putNextGamer(String sGamer) {
-		//static int counterGamer = 0;
+    public static void putNextGamer(String sGamer) {
+        //static int counterGamer = 0;
 
-		//if (counterGamer == _anzGamer) {
-		//	System.out.println("panic in putNextGamer!");
-		//}
-		//_asGamer[counterGamer++] = sGamer;
-	}
+        //if (counterGamer == _anzGamer) {
+        //    System.out.println("panic in putNextGamer!");
+        //}
+        //_asGamer[counterGamer++] = sGamer;
+    }
 
-	public static void putVerein(int gamer, int vereinsNr) {
-		_asSpVerein[gamer] = _asVerein[vereinsNr];
-		_aaN[0][vereinsNr] = 69 - gamer;				// warum dieses?
-	}
+    public static void putVerein(int gamer, int vereinsNr) {
+        _asSpVerein[gamer] = _asVerein[vereinsNr];
+        _aaN[0][vereinsNr] = 69 - gamer;                // warum dieses?
+    }
 
-	public static void putStadionname(int gamer, String sStadion) {
-		_asSpVerein[gamer] = _asVerein[vereinsNr];
-	}
+    public static void putStadionname(int gamer, String sStadion) {
+        _asSpVerein[gamer] = _asVerein[vereinsNr];
+    }
 
-	public static String[] getVereine() {
-		String asTemp[] = (String[])_asVerein.clone();
+    public static String[] getVereine() {
+        String asTemp[] = (String[])_asVerein.clone();
 
-		return(asTemp);
-	}
+        return(asTemp);
+    }
 }
 
 class InputWindow extends Window {
-	private Interface _if;
-	private TextField _txtInput = new TextField(30);
+    private Interface _if;
+    private TextField _txtInput = new TextField(30);
 
-	InputWindow(Interface ifParent, String sPrint, String sInit) {
-		super(ifParent);
-		_if = ifParent;
+    InputWindow(Interface ifParent, String sPrint, String sInit) {
+        super(ifParent);
+        _if = ifParent;
 
-		this.add("West", new Label(sPrint));
-		_txtInput.setText(sInit);
-		this.add("East", _txtInput);
-		this.add("South", new Button("   OK   "));
-		this.pack();
-	}
+        this.add("West", new Label(sPrint));
+        _txtInput.setText(sInit);
+        this.add("East", _txtInput);
+        this.add("South", new Button("   OK   "));
+        this.pack();
+    }
 
-	public boolean action(Event evt, Object obj) {
-   	if (evt.target instanceof Button) {
-   		_if.putInput(_txtInput.getText());
-	   	dispose();
-     	}
+    public boolean action(Event evt, Object obj) {
+       if (evt.target instanceof Button) {
+           _if.putInput(_txtInput.getText());
+           dispose();
+         }
       return(true);
-  	}
+      }
 }
 
 class SelectFromListWindow extends Window {
-	private Interface _if;
-	private List _lst;
+    private Interface _if;
+    private List _lst;
 
-	SelectFromListWindow(Interface ifParent, String sPrint,
-		String[] asListItem) {
-		super(ifParent);
-		_if = ifParent;
+    SelectFromListWindow(Interface ifParent, String sPrint,
+        String[] asListItem) {
+        super(ifParent);
+        _if = ifParent;
 
-		this.add("North", new Label(sPrint));
-		_lst = new List(asListItem.length, false);
-		for(int zeile = 0; zeile < asListItem.length; zeile++) {
-			_lst.addItem(asListItem[zeile]);
-		}
-		this.add("Center", _lst);
-		this.add("South", new Button("   OK   "));
-		this.pack();
-	}
+        this.add("North", new Label(sPrint));
+        _lst = new List(asListItem.length, false);
+        for(int zeile = 0; zeile < asListItem.length; zeile++) {
+            _lst.addItem(asListItem[zeile]);
+        }
+        this.add("Center", _lst);
+        this.add("South", new Button("   OK   "));
+        this.pack();
+    }
 
-	public boolean action(Event evt, Object obj) {
-   	if (evt.target instanceof Button) {
-   		_if.putInput(_lst.getSelectedIndex());
-	   	dispose();
-     	}
+    public boolean action(Event evt, Object obj) {
+       if (evt.target instanceof Button) {
+           _if.putInput(_lst.getSelectedIndex());
+           dispose();
+         }
       return true;
-  	}
+      }
 }
 
 class ShowMsgBox extends Window {
-	ShowMsgBox(Frame frmParent, String sPrint) {
-		super(frmParent);
+    ShowMsgBox(Frame frmParent, String sPrint) {
+        super(frmParent);
 
-		this.add("North", new Label(sPrint));
-		this.add("South", new Button("   OK   "));
-		this.pack();
-		this.show();
-	}
+        this.add("North", new Label(sPrint));
+        this.add("South", new Button("   OK   "));
+        this.pack();
+        this.show();
+    }
 
-	public boolean action(Event evt, Object obj) {
-   	if (evt.target instanceof Button) {
-	   	dispose();
-     	}
+    public boolean action(Event evt, Object obj) {
+       if (evt.target instanceof Button) {
+           dispose();
+         }
       return(true);
-  	}
+      }
 }
 
 class Interface extends Frame {
-	//Frame frmSimSoccer;
-	//Panel	panHauptmenue;
-	private String _sInput;
-	private String _Input;
+    //Frame frmSimSoccer;
+    //Panel    panHauptmenue;
+    private String _sInput;
+    private String _Input;
 
-	Interface() {
-		super("Rund ist der Ball");
+    Interface() {
+        super("Rund ist der Ball");
 
-		this.pack();
-		this.resize(800, 600);
-		this.show();
+        this.pack();
+        this.resize(800, 600);
+        this.show();
    }
 
-	public void putInput(String sInputFromWindow) {
-		_sInput = sInputFromWindow;
-	}
+    public void putInput(String sInputFromWindow) {
+        _sInput = sInputFromWindow;
+    }
 
-	public void putInput(int InputFromWindow) {
-		_Input = InputFromWindow;
-	}
+    public void putInput(int InputFromWindow) {
+        _Input = InputFromWindow;
+    }
 
-	public String input(String sPrint, String sInit) {
+    public String input(String sPrint, String sInit) {
       InputWindow winInput = new InputWindow(this, sPrint, sInit);
 
-		winInput.show();		// Seiteneffekt: setzt _sInput
+        winInput.show();        // Seiteneffekt: setzt _sInput
 
-		return(_sInput);
-	}
+        return(_sInput);
+    }
 
-	public int selectFromList(String sPrint, String[] asListItem) {
-		SelectFromListWindow winList = new SelectFromListWindow(this, sPrint,
-														asListItem);
+    public int selectFromList(String sPrint, String[] asListItem) {
+        SelectFromListWindow winList = new SelectFromListWindow(this, sPrint,
+                                                        asListItem);
 
-		winList.show();		// Seiteneffekt: setzt _Input
+        winList.show();        // Seiteneffekt: setzt _Input
 
-		return(_Input);
-	}
+        return(_Input);
+    }
 }
 
 public class SimSoccer {
-	Interface _ifSimSoccer;
+    Interface _ifSimSoccer;
 
    private boolean _init() {
-		if (Daten.init()) {
-			return(true);
-		}
-		_ifSimSoccer = new Interface();
+        if (Daten.init()) {
+            return(true);
+        }
+        _ifSimSoccer = new Interface();
 
-		// altes Spiel?
-		// Dateiname erfragen
-		Daten.putDatei(_ifSimSoccer.input("Name der Datei: ", ""));
-		Daten.doPlan();
-		// Anzahl Spieler
+        // altes Spiel?
+        // Dateiname erfragen
+        Daten.putDatei(_ifSimSoccer.input("Name der Datei: ", ""));
+        Daten.doPlan();
+        // Anzahl Spieler
       do {
          int anzGamer = Integer.parseInt(
             _ifSimSoccer.input("Anzahl der Mitspieler: ", "1"));
       } while (!(1 <= anzGamer <= 4));
       Daten.putAnzGamer(anzGamer);
-      // fr jeden Spieler
+      // fï¿½r jeden Spieler
       Vector vBesetzteVer = new Vector(5);
       vBesetzteVer.addElement(new Integer(-1));
       for (int spieler = 0; spieler < anzGamer; spieler++) {
-	      // 	Name eingeben
-	      String sGamer = _ifSimSoccer.input("Name des"+spieler+". Spielers:",
-	      							"");
-	      Daten.putNextGamer(sGamer);
-	      // 	Verein Ausw„hlen
-	      do {
-	      	int auswahl = _ifSimSoccer.selectFromList(sGamer+
-						   	   	", wählen Sie bitte Ihren Verein aus!",
-						   	   	Daten.getVereine());
-				if (vBesetzteVer.contains(new Integer(auswahl))) {
-					ShowMsgBox smbTemp = new ShowMsgBox(_ifSimSoccer, "Keinen oder schon besetzten Verein ausgew„hlt!");
-				}
-			} while (vBesetzteVer.contains(new Integer(auswahl)));
-			vBesetzteVer.addElement(new Integer(auswahl));
-   	   Daten.putVerein(spieler, auswahl);
-			// 	Stadionname eingeben
-			Daten.putStadionname(spieler, _ifSimSoccer.input(
-				"Name des Stadions (Artikel Name Stadion): ", ""));
-		}
-		//Ausgabe.
+          //     Name eingeben
+          String sGamer = _ifSimSoccer.input("Name des"+spieler+". Spielers:",
+                                      "");
+          Daten.putNextGamer(sGamer);
+          //     Verein Auswï¿½hlen
+          do {
+              int auswahl = _ifSimSoccer.selectFromList(sGamer+
+                                      ", wï¿½hlen Sie bitte Ihren Verein aus!",
+                                      Daten.getVereine());
+                if (vBesetzteVer.contains(new Integer(auswahl))) {
+                    ShowMsgBox smbTemp = new ShowMsgBox(_ifSimSoccer, "Keinen oder schon besetzten Verein ausgewï¿½hlt!");
+                }
+            } while (vBesetzteVer.contains(new Integer(auswahl)));
+            vBesetzteVer.addElement(new Integer(auswahl));
+          Daten.putVerein(spieler, auswahl);
+            //     Stadionname eingeben
+            Daten.putStadionname(spieler, _ifSimSoccer.input(
+                "Name des Stadions (Artikel Name Stadion): ", ""));
+        }
+        //Ausgabe.
 
-		return(false);
+        return(false);
    }
 
    //public void start(){
 
    //}
 
-	public static void main(String args[]) {
-		if (_init()) {
-			return;
-		}
-		//frmSimSoccer.add("Center", panHauptmenue);
-		//frmSimSoccer.pack();
-	}
+    public static void main(String args[]) {
+        if (_init()) {
+            return;
+        }
+        //frmSimSoccer.add("Center", panHauptmenue);
+        //frmSimSoccer.pack();
+    }
 }
 
