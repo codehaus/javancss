@@ -41,7 +41,7 @@ import javancss.test.JavancssTest;
  * invokes the Java parser.
  *
  * @author    Chr. Clemens Lee <clemens@kclee.com>
- *            , recursive feature by Pääkö Hannu
+ *            , recursive feature by Pï¿½ï¿½kï¿½ Hannu
  *            , additional javadoc metrics by Emilio Gongora <emilio@sms.nl>
  *            , and Guillermo Rodriguez <guille@sms.nl>.
  * @version   $Id: Javancss.java,v 1.22 2006/04/16 11:42:19 clemens Exp clemens $
@@ -341,19 +341,19 @@ public class Javancss implements Exitable,
     }
 
     public String printObjectNcss() {
-	return getFormatter().printObjectNcss();
+        return getFormatter().printObjectNcss();
     }
 
     public String printFunctionNcss() {
-	return getFormatter().printFunctionNcss();
+        return getFormatter().printFunctionNcss();
     }
 
     public String printPackageNcss() {
-	return getFormatter().printPackageNcss();
+        return getFormatter().printPackageNcss();
     }
 
     public String printJavaNcss() {
-	return getFormatter().printJavaNcss();
+        return getFormatter().printJavaNcss();
     }
 
     public Javancss(Vector vJavaSourceFiles_) {
@@ -462,7 +462,7 @@ public class Javancss implements Exitable,
         {
             return;
         }
-	   
+           
         for( int i = 0; i < files.length; i++ )
         {
             String newFileName = FileUtil.concatPath( sFile
@@ -634,10 +634,10 @@ public class Javancss implements Exitable,
             }
         }
 
-	if ( useXML() )
-	{
-	    ps.print( XmlFormatter.printStart() );
-	}
+        if ( useXML() )
+        {
+            ps.print( XmlFormatter.printStart() );
+        }
 
         if (htOptions.get( "package" ) != null ||
             htOptions.get( "all" ) != null)
@@ -669,14 +669,14 @@ public class Javancss implements Exitable,
             ps.print( printJavaNcss() );
         }
 
-	if ( useXML() )
-	{
-	    if ( !bNoNCSS )
+        if ( useXML() )
+        {
+            if ( !bNoNCSS )
             {
-		ps.print( printJavaNcss() );
-            }	    
-	    ps.println( "</javancss>" );
-	}
+                ps.print( printJavaNcss() );
+            }            
+            ps.println( "</javancss>" );
+        }
 
         if ( sOutputFile != null )
         {
@@ -759,17 +759,17 @@ public class Javancss implements Exitable,
 
     public boolean useXML()
     {
-	return _bXML
+        return _bXML
                || (_pInit != null && _pInit.getOptions().get( "xml" ) != null );
     }
 
     public Formatter getFormatter()
     {
-	if ( useXML() )
-	{
-	    return new XmlFormatter( this );
-	}
+        if ( useXML() )
+        {
+            return new XmlFormatter( this );
+        }
 
-	return new AsciiFormatter( this );
+        return new AsciiFormatter( this );
     }
 }

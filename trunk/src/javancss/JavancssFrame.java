@@ -97,7 +97,7 @@ public class JavancssFrame extends MainJFrame {
         try {
             FileUtil.appendFile(sClassesFullFileName,
                                 _txtObject.getText());
-			sSuccessMessage += "\n" + sClassesFullFileName;
+                        sSuccessMessage += "\n" + sClassesFullFileName;
         } catch(Exception eClasses) {
             SwingUtil.showMessage(this, "Error: could not append to file '" +
                                 sClassesFullFileName + "'.\n" + eClasses);
@@ -132,7 +132,7 @@ public class JavancssFrame extends MainJFrame {
 
         vMenus.addElement(vFileMenu);
         vMenus.addElement(vHelpMenu);
-		
+                
         setMenuBar(vMenus);
     }
 
@@ -305,35 +305,35 @@ public class JavancssFrame extends MainJFrame {
         }
     }
 
-	public void setVisible(boolean bVisible_) {
-		if (bVisible_) {
-			_oldThreadPriority = Thread.currentThread().getPriority();
-			_pAnimationPanel.start();
-			Thread.currentThread().setPriority(Thread.MIN_PRIORITY);
-		} else {
-			_pAnimationPanel.stop();
-		}
+        public void setVisible(boolean bVisible_) {
+                if (bVisible_) {
+                        _oldThreadPriority = Thread.currentThread().getPriority();
+                        _pAnimationPanel.start();
+                        Thread.currentThread().setPriority(Thread.MIN_PRIORITY);
+                } else {
+                        _pAnimationPanel.stop();
+                }
 
-		super.setVisible(bVisible_);
-	}
+                super.setVisible(bVisible_);
+        }
 
-	public void setSelectedTab(String sTab_) {
-		Util.panicIf(Util.isEmpty(sTab_));
+        public void setSelectedTab(String sTab_) {
+                Util.panicIf(Util.isEmpty(sTab_));
 
-		if (!_bNoError) {
-			return;
-		}
-		if (sTab_.equals(S_METHODS)) {
-			/*_pTabbedPane.setSelectedComponent(_txtFunction);*/
-			_pTabbedPane.setSelectedIndex(2);
-		} else if (sTab_.equals(S_CLASSES)) {
-			/*_pTabbedPane.setSelectedComponent(_txtObject);*/
-			_pTabbedPane.setSelectedIndex(1);
-		} else {
-			/*_pTabbedPane.setSelectedComponent(_txtPackage);*/
-			_pTabbedPane.setSelectedIndex(0);
-		}
-	}
+                if (!_bNoError) {
+                        return;
+                }
+                if (sTab_.equals(S_METHODS)) {
+                        /*_pTabbedPane.setSelectedComponent(_txtFunction);*/
+                        _pTabbedPane.setSelectedIndex(2);
+                } else if (sTab_.equals(S_CLASSES)) {
+                        /*_pTabbedPane.setSelectedComponent(_txtObject);*/
+                        _pTabbedPane.setSelectedIndex(1);
+                } else {
+                        /*_pTabbedPane.setSelectedComponent(_txtPackage);*/
+                        _pTabbedPane.setSelectedIndex(0);
+                }
+        }
 
     private boolean _bAboutSelected = false;
 

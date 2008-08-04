@@ -22,7 +22,7 @@ public class XmlFormatterTest extends Test {
     private void _checkParsing()
         throws Exception
     {
-	Javancss pJavancss = new Javancss( FileUtil.concatPath( _sTestDir, "Test57.java" ) );
+        Javancss pJavancss = new Javancss( FileUtil.concatPath( _sTestDir, "Test57.java" ) );
         pJavancss.setXML( true );
 
         String sXML = XmlFormatter.printStart()
@@ -49,7 +49,7 @@ public class XmlFormatterTest extends Test {
             Util.print( "skipped: 'xalan.jar' and or 'xerces.jar' library missing." );
         }
 
-	pJavancss = new Javancss( FileUtil.concatPath( _sTestDir, "Test117.java" ) );
+        pJavancss = new Javancss( FileUtil.concatPath( _sTestDir, "Test117.java" ) );
         pJavancss.setXML( true );
 
         sXML = XmlFormatter.printStart()
@@ -60,7 +60,7 @@ public class XmlFormatterTest extends Test {
                + XmlFormatter.printEnd();
         Assert( Util.isEmpty( sXML ) == false );
 
-	pJavancss = new Javancss( FileUtil.concatPath( _sTestDir, "Test118.java" ) );
+        pJavancss = new Javancss( FileUtil.concatPath( _sTestDir, "Test118.java" ) );
         pJavancss.setXML( true );
 
         sXML = XmlFormatter.printStart()
@@ -78,7 +78,7 @@ public class XmlFormatterTest extends Test {
     private void _checkXML2Text()
         throws Exception
     {
-	Javancss pJavancss = new Javancss( FileUtil.concatPath( _sTestDir, "Test32.java" ) );
+        Javancss pJavancss = new Javancss( FileUtil.concatPath( _sTestDir, "Test32.java" ) );
         pJavancss.setXML( true );
 
         String sXML = XmlFormatter.printStart()
