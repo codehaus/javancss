@@ -44,7 +44,7 @@ import javax.swing.border.*;
  * gui mode or not, class 'Main' is used.
  *
  * @author  <a href="http://www.kclee.com/clemens/">Chr. Clemens Lee</a> (<a href="mailto:clemens@kclee.com"><i>clemens@kclee.com</i></a>)
- * @version $Id: JavancssFrame.java,v 1.12 2006/04/16 11:42:20 clemens Exp clemens $
+ * @version $Id$
  */
 public class JavancssFrame extends MainJFrame {
     public static final String S_PACKAGES = "Packages";

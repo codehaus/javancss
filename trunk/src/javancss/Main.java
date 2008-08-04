@@ -29,7 +29,7 @@ import java.util.Locale;
  * control to the Javancss class.
  *
  * @author    Chr. Clemens Lee <clemens@kclee.com>
- * @version   $Id: Main.java,v 29.50 2006/10/06 11:46:24 clemens Exp clemens $
+ * @version   $Id$
  */
 public class Main {
     public static final String S_RCS_HEADER = "$Header: /home/clemens/src/java/javancss/src/javancss/RCS/Main.java,v 29.50 2006/10/06 11:46:24 clemens Exp clemens $";

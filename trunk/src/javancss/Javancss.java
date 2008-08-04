@@ -44,7 +44,7 @@ import javancss.test.JavancssTest;
  *            , recursive feature by P��k� Hannu
  *            , additional javadoc metrics by Emilio Gongora <emilio@sms.nl>
  *            , and Guillermo Rodriguez <guille@sms.nl>.
- * @version   $Id: Javancss.java,v 1.22 2006/04/16 11:42:19 clemens Exp clemens $
+ * @version   $Id$
  */
 public class Javancss implements Exitable,
                                  JavancssConstants

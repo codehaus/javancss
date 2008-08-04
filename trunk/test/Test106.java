@@ -33,7 +33,7 @@ import javax.persistence.PersistenceContext;
  * Comment
  *
  * @author <a href="mailto:bill@jboss.org">Bill Burke</a>
- * @version $Revision: 1.1 $
+ * @version $Revision$
  */
 @Stateless
 @Remote(EntityTest.class)

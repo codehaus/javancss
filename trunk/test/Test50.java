@@ -20,7 +20,7 @@ import javax.swing.KeyStroke;
  * Shortcut ctrl-s wird automatisch f�r save oder speichern eingef�gt
  * in MainMenu.MainMenu().
  *
- * @version $Id: Test50.java,v 1.1 2001/01/21 12:07:26 clemens Exp clemens $
+ * @version $Id$
  */
 public class MainJMenuBar extends JMenuBar {
     public static final String S_HELP_CONTENTS = "&Contents...";

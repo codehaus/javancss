@@ -1,7 +1,7 @@
 /*
  * Software Engineering Tools.
  *
- * $Id: Test58.java,v 1.1 2001/07/10 06:37:22 clemens Exp clemens $
+ * $Id$
  *
  * Copyright (c) 1997-2001 Joseph Kiniry
  * Copyright (c) 2000-2001 KindSoftware, LLC
@@ -47,7 +47,7 @@ import java.util.Date;
  * <p> Event is a utility base class from which all log/monitoring events
  * can derive or have embedded. </p>
 *
- * @version $Revision: 1.1 $ $Date: 2001/07/10 06:37:22 $
+ * @version $Revision$ $Date$
  * @history BON design for Dali by Donnie, Todd, and Joe.  Adopted during
  * design phase of Dali into IDebug.
  * @author Joseph Kiniry <joe@kindsoftware.com <joe@kindsoftware.com>

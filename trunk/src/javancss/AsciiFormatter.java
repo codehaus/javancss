@@ -33,7 +33,7 @@ import java.util.Vector;
  *
  * @author    Chr. Clemens Lee <clemens@kclee.com>
  *            , Windows 13 10 line feed feature by John Wilson.
- * @version   $Id: AsciiFormatter.java,v 1.7 2006/04/16 11:42:17 clemens Exp clemens $
+ * @version   $Id$
  */
 public class AsciiFormatter implements Formatter
                                        , JavancssConstants

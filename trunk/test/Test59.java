@@ -1,7 +1,7 @@
 /*
  * Software Engineering Tools.
  *
- * $Id: Test59.java,v 1.1 2001/07/10 06:37:22 clemens Exp clemens $
+ * $Id$
  *
  * Copyright (c) 1997-2001 Joseph Kiniry
  * Copyright (c) 2000-2001 KindSoftware, LLC
@@ -47,7 +47,7 @@ import java.util.Hashtable;
 /**
  * <p> A collection of shared algorithms for the this package. </p>
 *
- * @version $Revision: 1.1 $ $Date: 2001/07/10 06:37:22 $
+ * @version $Revision$ $Date$
  * @author Joseph R. Kiniry <joe@kindsoftware.com>
 * @see Debug
  * @see Context

@@ -32,7 +32,7 @@ import javax.ejb.ActivationConfigProperty;
  * are MDB's with a published typed interface.
  * 
  * @author <a href="mailto:bill@jboss.org">Bill Burke</a>
- * @version $Revision: 1.1 $
+ * @version $Revision$
  */
 @Target(ElementType.TYPE) @Retention(RetentionPolicy.RUNTIME)
 public @interface Consumer

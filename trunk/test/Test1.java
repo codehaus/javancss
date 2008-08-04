@@ -2,7 +2,7 @@
 // Program: Jacob
 //  Author: Chr. Clemens Lahme
 //    Date: 14. 8. 1996
-// $Id: Test1.java,v 1.2 1998/01/22 15:01:59 clemens Exp clemens $
+// $Id$
 //*************************************************************
 // Datei Pfade werden immer mit \ am Ende verwaltet!
 ////////////////////////////////////////////////////////////////

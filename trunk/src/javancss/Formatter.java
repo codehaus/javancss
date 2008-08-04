@@ -29,7 +29,7 @@ package javancss;
  * class.
  *
  * @author  Chr. Clemens Lee <clemens@kclee.com>
- * @version $Id: Formatter.java,v 1.2 2006/04/16 11:42:18 clemens Exp clemens $
+ * @version $Id$
  */
 public interface Formatter
 {

@@ -12,7 +12,7 @@ import javancss.XmlFormatter;
  * This test class checks that the xml output feature is
  * working properly.
  *
- * @version $Id: XmlFormatterTest.java,v 1.4 2006/06/12 21:37:41 clemens Exp clemens $
+ * @version $Id$
  * @author  Chr. Clemens Lee
  */
 public class XmlFormatterTest extends Test {

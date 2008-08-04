@@ -33,7 +33,7 @@ import java.util.Vector;
  * Generates XML output of Java metrics.
  *
  * @author    Chr. Clemens Lee <clemens@kclee.com>
- * @version   $Id: XmlFormatter.java,v 1.6 2006/04/16 11:42:25 clemens Exp clemens $
+ * @version   $Id$
  */
 public class XmlFormatter implements Formatter
                                      , JavancssConstants

@@ -1,7 +1,7 @@
 /*
  * Software Engineering Tools.
  *
- * $Id: Test62.java,v 1.1 2001/07/10 06:37:22 clemens Exp clemens $
+ * $Id$
  *
  * Copyright (c) 1997-2001 Joseph Kiniry
  * Copyright (c) 2000-2001 KindSoftware, LLC
@@ -118,7 +118,7 @@ import java.util.Hashtable;
  * are adding all classes currently defined and all classes that might
  * ever be defined in this VM.
  *
- * @version $Revision: 1.1 $ $Date: 2001/07/10 06:37:22 $
+ * @version $Revision$ $Date$
  * @author Joseph R. Kiniry <joe@kindsoftware.com>
  * @history Versions 0.01 through 0.10 were developed as
  * <code>edu.caltech.cs.kiniry.coding.Debug</code>.  New revision

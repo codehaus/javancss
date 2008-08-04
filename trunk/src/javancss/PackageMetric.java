@@ -25,7 +25,7 @@ package javancss;
  * Basic data class to store all metrics attached to a package.
  *
  * @author  Chr. Clemens Lee <clemens@kclee.com>
- * @version $Id: PackageMetric.java,v 1.5 2006/04/16 11:42:24 clemens Exp clemens $
+ * @version $Id$
  */
 public class PackageMetric 
 {

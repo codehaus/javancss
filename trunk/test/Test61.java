@@ -1,7 +1,7 @@
  /*
  * Software Engineering Tools.
  *
- * $Id: Test61.java,v 1.1 2001/07/10 06:37:22 clemens Exp clemens $
+ * $Id$
  *
  * Copyright (c) 1997-2001 Joseph Kiniry
  * Copyright (c) 2000-2001 KindSoftware, LLC
@@ -70,7 +70,7 @@ import java.util.Hashtable;
  * herein). </li>
  * </ul>
  *
- * @version $Revision: 1.1 $ $Date: 2001/07/10 06:37:22 $
+ * @version $Revision$ $Date$
  * @author Joseph R. Kiniry <joe@kindsoftware.com>
  * @history BON design for Dali by Donnie, Todd, and Joe.  Adopted during
  * design phase of DALi into IDebug.

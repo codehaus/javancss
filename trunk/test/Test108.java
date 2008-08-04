@@ -29,7 +29,7 @@ package org.jboss.annotation.internal;
  * 
  * 
  * @author <a href="kabir.khan@jboss.com">Kabir Khan</a>
- * @version $Revision: 1.1 $
+ * @version $Revision$
  */
 public @interface DefaultInterceptorMarker {
 
