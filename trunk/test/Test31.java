@@ -1,5 +1,5 @@
 /*
- * @(#)Socket.java	1.29 97/02/10
+ * @(#)Socket.java    1.29 97/02/10
  * 
  * Copyright (c) 1995, 1996 Sun Microsystems, Inc. All Rights Reserved.
  * 
@@ -58,8 +58,8 @@ class Socket {
      * @since   JDK1.1
      */
     protected Socket() {
-	impl = (factory != null) ? factory.createSocketImpl() : 
-	    new PlainSocketImpl();
+    impl = (factory != null) ? factory.createSocketImpl() : 
+        new PlainSocketImpl();
     }
 
     /**
@@ -72,7 +72,7 @@ class Socket {
      * @since   JDK1.1
      */
     protected Socket(SocketImpl impl) throws SocketException {
-	this.impl = impl;
+    this.impl = impl;
     }
 
     /** 
@@ -92,9 +92,9 @@ class Socket {
      * @since      JDK1.0
      */
     public Socket(String host, int port)
-	throws UnknownHostException, IOException
+    throws UnknownHostException, IOException
     {
-	this(InetAddress.getByName(host), port, null, 0, true);
+    this(InetAddress.getByName(host), port, null, 0, true);
     }
 
     /** 
@@ -114,7 +114,7 @@ class Socket {
      * @since      JDK1.0
      */
     public Socket(InetAddress address, int port) throws IOException {
-	this(address, port, null, 0, true);
+    this(address, port, null, 0, true);
     }
 
     /** 
@@ -128,8 +128,8 @@ class Socket {
      * @since   JDK1.1
      */
     public Socket(String host, int port, InetAddress localAddr, 
-		  int localPort) throws IOException {
-	this(InetAddress.getByName(host), port, localAddr, localPort, true);
+          int localPort) throws IOException {
+    this(InetAddress.getByName(host), port, localAddr, localPort, true);
     }
 
     /** 
@@ -143,9 +143,9 @@ class Socket {
      * @since   JDK1.1
      */
     public Socket(InetAddress address, int port, InetAddress localAddr, 
-		  int localPort) throws IOException {
-		      this(address, port, localAddr, localPort, true);
-    };	
+          int localPort) throws IOException {
+              this(address, port, localAddr, localPort, true);
+    };    
 
     /**
      * Creates a stream socket and connects it to the specified port 
@@ -171,7 +171,7 @@ class Socket {
      * @deprecated Use DatagramSocket instead for UDP transport.
      */
     public Socket(String host, int port, boolean stream) throws IOException {
-	this(InetAddress.getByName(host), port, null, 0, stream);
+    this(InetAddress.getByName(host), port, null, 0, stream);
     }
 
     /**
@@ -198,39 +198,39 @@ class Socket {
      * @deprecated Use DatagramSocket instead for UDP transport.
      */
     public Socket(InetAddress host, int port, boolean stream) throws IOException {
-	this(host, port, null, 0, stream);
+    this(host, port, null, 0, stream);
     }
     
     private Socket(InetAddress address, int port, InetAddress localAddr, 
-		  int localPort, boolean stream) throws IOException {
-	this();
+          int localPort, boolean stream) throws IOException {
+    this();
 
-	if (port < 0 || port > 0xFFFF) {
-	    throw new IllegalArgumentException("port out range:"+port);
-	}
+    if (port < 0 || port > 0xFFFF) {
+        throw new IllegalArgumentException("port out range:"+port);
+    }
 
-	if (localPort < 0 || localPort > 0xFFFF) {
-	    throw new IllegalArgumentException("port out range:"+localPort);
-	}
+    if (localPort < 0 || localPort > 0xFFFF) {
+        throw new IllegalArgumentException("port out range:"+localPort);
+    }
 
-	SecurityManager security = System.getSecurityManager();
-	if (security != null) {
-	    security.checkConnect(address.getHostAddress(), port);
-	}
+    SecurityManager security = System.getSecurityManager();
+    if (security != null) {
+        security.checkConnect(address.getHostAddress(), port);
+    }
 
-	try {
-	    impl.create(stream); 
-	    if (localAddr != null || localPort > 0) {
-		if (localAddr == null) {
-		    localAddr = InetAddress.anyLocalAddress;
-		}
-		impl.bind(localAddr, localPort);
-	    }
-	    impl.connect(address, port);
-	} catch (SocketException e) {
-	    impl.close();
-	    throw e;
-	}
+    try {
+        impl.create(stream); 
+        if (localAddr != null || localPort > 0) {
+        if (localAddr == null) {
+            localAddr = InetAddress.anyLocalAddress;
+        }
+        impl.bind(localAddr, localPort);
+        }
+        impl.connect(address, port);
+    } catch (SocketException e) {
+        impl.close();
+        throw e;
+    }
     }
 
     /**
@@ -240,7 +240,7 @@ class Socket {
      * @since   JDK1.0
      */
     public InetAddress getInetAddress() {
-	return impl.getInetAddress();
+    return impl.getInetAddress();
     }
 
     /**
@@ -249,13 +249,13 @@ class Socket {
      * @since   JDK1.1
      */
     public InetAddress getLocalAddress() {
-	InetAddress in = null;
-	try {
-	    in = (InetAddress) impl.getOption(SocketOptions.SO_BINDADDR);
-	} catch (Exception e) {
-	    in = InetAddress.anyLocalAddress; // "0.0.0.0"
-	}
-	return in;
+    InetAddress in = null;
+    try {
+        in = (InetAddress) impl.getOption(SocketOptions.SO_BINDADDR);
+    } catch (Exception e) {
+        in = InetAddress.anyLocalAddress; // "0.0.0.0"
+    }
+    return in;
     }
 
     /**
@@ -265,7 +265,7 @@ class Socket {
      * @since   JDK1.0
      */
     public int getPort() {
-	return impl.getPort();
+    return impl.getPort();
     }
 
     /**
@@ -275,7 +275,7 @@ class Socket {
      * @since   JDK1.0
      */
     public int getLocalPort() {
-	return impl.getLocalPort();
+    return impl.getLocalPort();
     }
 
     /**
@@ -287,7 +287,7 @@ class Socket {
      * @since      JDK1.0
      */
     public InputStream getInputStream() throws IOException {
-	return impl.getInputStream();
+    return impl.getInputStream();
     }
 
     /**
@@ -299,7 +299,7 @@ class Socket {
      * @since      JDK1.0
      */
     public OutputStream getOutputStream() throws IOException {
-	return impl.getOutputStream();
+    return impl.getOutputStream();
     }
 
     /**
@@ -308,7 +308,7 @@ class Socket {
      * @since   JDK1.1
      */
     public void setTcpNoDelay(boolean on) throws SocketException {
-	impl.setOption(SocketOptions.TCP_NODELAY, new Boolean(on));
+    impl.setOption(SocketOptions.TCP_NODELAY, new Boolean(on));
     }
 
     /**
@@ -317,7 +317,7 @@ class Socket {
      * @since   JDK1.1
      */
     public boolean getTcpNoDelay() throws SocketException {
-	return ((Boolean) impl.getOption(SocketOptions.TCP_NODELAY)).booleanValue();
+    return ((Boolean) impl.getOption(SocketOptions.TCP_NODELAY)).booleanValue();
     }
 
     /**
@@ -326,11 +326,11 @@ class Socket {
      * @since   JDK1.1
      */
     public void setSoLinger(boolean on, int val) throws SocketException {
-	if (!on) {
-	    impl.setOption(SocketOptions.SO_LINGER, new Boolean(on));
-	} else {
-	    impl.setOption(SocketOptions.SO_LINGER, new Integer(val));
-	}
+    if (!on) {
+        impl.setOption(SocketOptions.SO_LINGER, new Boolean(on));
+    } else {
+        impl.setOption(SocketOptions.SO_LINGER, new Integer(val));
+    }
     }
 
     /**
@@ -340,12 +340,12 @@ class Socket {
      * @since   JDK1.1
      */
     public int getSoLinger() throws SocketException {
-	Object o = impl.getOption(SocketOptions.SO_LINGER);
-	if (o instanceof Integer) {
-	    return ((Integer) o).intValue();
-	} else {
-	    return -1;
-	}
+    Object o = impl.getOption(SocketOptions.SO_LINGER);
+    if (o instanceof Integer) {
+        return ((Integer) o).intValue();
+    } else {
+        return -1;
+    }
     }
 
     /**
@@ -362,7 +362,7 @@ class Socket {
      * @since   JDK 1.1
      */
     public synchronized void setSoTimeout(int timeout) throws SocketException {
-	impl.setOption(SocketOptions.SO_TIMEOUT, new Integer(timeout));
+    impl.setOption(SocketOptions.SO_TIMEOUT, new Integer(timeout));
     }
 
     /**
@@ -372,13 +372,13 @@ class Socket {
      * @since   JDK1.1
      */
     public synchronized int getSoTimeout() throws SocketException {
-	Object o = impl.getOption(SocketOptions.SO_TIMEOUT);
-	/* extra type safety */
-	if (o instanceof Integer) {
-	    return ((Integer) o).intValue();
-	} else {
-	    return 0;
-	}
+    Object o = impl.getOption(SocketOptions.SO_TIMEOUT);
+    /* extra type safety */
+    if (o instanceof Integer) {
+        return ((Integer) o).intValue();
+    } else {
+        return 0;
+    }
     }
 
     /**
@@ -388,7 +388,7 @@ class Socket {
      * @since      JDK1.0
      */
     public synchronized void close() throws IOException {
-	impl.close();
+    impl.close();
     }
 
     /**
@@ -398,9 +398,9 @@ class Socket {
      * @since   JDK1.0
      */
     public String toString() {
-	return "Socket[addr=" + impl.getInetAddress() +
-	    ",port=" + impl.getPort() + 
-	    ",localport=" + impl.getLocalPort() + "]";
+    return "Socket[addr=" + impl.getInetAddress() +
+        ",port=" + impl.getPort() + 
+        ",localport=" + impl.getLocalPort() + "]";
     }
 
     /**
@@ -424,15 +424,15 @@ class Socket {
      * @since      JDK1.0
      */
     public static synchronized void setSocketImplFactory(SocketImplFactory fac)
-	throws IOException
+    throws IOException
     {
-	if (factory != null) {
-	    throw new SocketException("factory already defined");
-	}
-	SecurityManager security = System.getSecurityManager();
-	if (security != null) {
-	    security.checkSetFactory();
-	}
-	factory = fac;
+    if (factory != null) {
+        throw new SocketException("factory already defined");
+    }
+    SecurityManager security = System.getSecurityManager();
+    if (security != null) {
+        security.checkSetFactory();
+    }
+    factory = fac;
     }
 }

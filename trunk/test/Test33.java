@@ -1,5 +1,5 @@
 /*
- * @(#)DecimalFormat.java	1.28 97/06/20
+ * @(#)DecimalFormat.java    1.28 97/06/20
  *
  * (C) Copyright Taligent, Inc. 1996 - All Rights Reserved
  * (C) Copyright IBM Corp. 1996 - All Rights Reserved
@@ -174,7 +174,7 @@ import java.lang.ClassNotFoundException;
  * Requested Features
  * Symbol Meaning
  * $      currency symbol as decimal point
- * …   escapes text
+ * ï¿½   escapes text
  * \u2030 divide by 1000 and show as per/mil
  */
 public class DecimalFormat extends NumberFormat {
@@ -353,7 +353,7 @@ public class DecimalFormat extends NumberFormat {
             digitList.decimalAt = -1;
             int backup = -1;
             int tentativeDecimal = -1;
-	    boolean sawZeroDigit = false; // Temporary fix to 4048975 [LIU]
+        boolean sawZeroDigit = false; // Temporary fix to 4048975 [LIU]
             for (;start < text.length(); ++start) {
                 char ch = text.charAt(start);
                 if (symbols.getZeroDigit() < ch && ch <= (char)
@@ -362,7 +362,7 @@ public class DecimalFormat extends NumberFormat {
                     digitList.decimalAt = tentativeDecimal;
                     digitList.append(ch - symbols.getZeroDigit() + '0');
                 } else if (ch == symbols.getZeroDigit()) {
-		    sawZeroDigit = true; // Temporary fix 4048975 [LIU]
+            sawZeroDigit = true; // Temporary fix 4048975 [LIU]
                     if (digitList.count == 0 && tentativeDecimal == -1) // [LIU]
                         continue;
                     backup = -1;
@@ -392,18 +392,18 @@ public class DecimalFormat extends NumberFormat {
                         isLongMIN_VALUE(digitList))
                     longResult = Long.MIN_VALUE;
                 else {
-		    if (digitList.count == 0)
-		      { // Temporary fix 4048975 [LIU]
-			if (!sawZeroDigit) return null;
-			longResult = 0;
-		      } else
-		    longResult = digitList.getLong();
-		}
+            if (digitList.count == 0)
+              { // Temporary fix 4048975 [LIU]
+            if (!sawZeroDigit) return null;
+            longResult = 0;
+              } else
+            longResult = digitList.getLong();
+        }
             } else {
-		if (digitList.count == 0)
-		    return null;
+        if (digitList.count == 0)
+            return null;
                 doubleResult = digitList.getDouble();
-	    }
+        }
         }
 
         // check for positiveSuffix
@@ -636,21 +636,21 @@ public class DecimalFormat extends NumberFormat {
       if (!super.equals(obj)) return false; // super does class check
       DecimalFormat other = (DecimalFormat) obj;
       return (positivePrefix.equals(other.positivePrefix)
-      	&& positiveSuffix.equals(other.positiveSuffix)
-      	&& negativePrefix.equals(other.negativePrefix)
-      	&& negativeSuffix.equals(other.negativeSuffix)
-      	&& multiplier == other.multiplier
-      	&& groupingSize == other.groupingSize
-      	&& decimalSeparatorAlwaysShown == other.decimalSeparatorAlwaysShown
-      	&& symbols.equals(other.symbols));
+          && positiveSuffix.equals(other.positiveSuffix)
+          && negativePrefix.equals(other.negativePrefix)
+          && negativeSuffix.equals(other.negativeSuffix)
+          && multiplier == other.multiplier
+          && groupingSize == other.groupingSize
+          && decimalSeparatorAlwaysShown == other.decimalSeparatorAlwaysShown
+          && symbols.equals(other.symbols));
     }
 
     /**
      * Overrides hashCode
      */
     public int hashCode() {
-    	return super.hashCode() * 37 + positivePrefix.hashCode();
-    	// just enough fields for a reasonable distribution
+        return super.hashCode() * 37 + positivePrefix.hashCode();
+        // just enough fields for a reasonable distribution
     }
 
     /**

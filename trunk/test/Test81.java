@@ -43,18 +43,18 @@ public class Test81 extends BasicComboBoxUI {
      */
     public void paintCurrentValue(Graphics g, Rectangle bounds,
                                   boolean hasFocus) {
-	if (XPStyle.getXP() != null) {
-	    bounds.x += 2;
-	    bounds.y += 2;
-	    bounds.width -= 3;
-	    bounds.height -= 4;
-	} else {
-	    bounds.x += 1;
-	    bounds.y += 1;
-	    bounds.width -= 2;
-	    bounds.height -= 2;
-	}
-	super.paintCurrentValue(g, bounds, hasFocus);
+    if (XPStyle.getXP() != null) {
+        bounds.x += 2;
+        bounds.y += 2;
+        bounds.width -= 3;
+        bounds.height -= 4;
+    } else {
+        bounds.x += 1;
+        bounds.y += 1;
+        bounds.width -= 2;
+        bounds.height -= 2;
+    }
+    super.paintCurrentValue(g, bounds, hasFocus);
     }
     
     public Dimension getPreferredSize( JComponent c ) {
@@ -75,21 +75,21 @@ public class Test81 extends BasicComboBoxUI {
      */
     protected LayoutManager createLayoutManager() {
         return new BasicComboBoxUI.ComboBoxLayoutManager() {
-	    public void layoutContainer(Container parent) {
-		super.layoutContainer(parent);
+        public void layoutContainer(Container parent) {
+        super.layoutContainer(parent);
 
-		if (XPStyle.getXP() != null && arrowButton != null) {
-		    Dimension d = parent.getSize();
-		    Insets insets = getInsets();
-		    int buttonWidth = arrowButton.getPreferredSize().width;
-		    arrowButton.setBounds(WindowsUtils.isLeftToRight((JComboBox)parent)
-					  ? (d.width - insets.right - buttonWidth)
-					  : insets.left,
-					  insets.top,
-					  buttonWidth, d.height - insets.top - insets.bottom);
-		}
-	    }
-	};
+        if (XPStyle.getXP() != null && arrowButton != null) {
+            Dimension d = parent.getSize();
+            Insets insets = getInsets();
+            int buttonWidth = arrowButton.getPreferredSize().width;
+            arrowButton.setBounds(WindowsUtils.isLeftToRight((JComboBox)parent)
+                      ? (d.width - insets.right - buttonWidth)
+                      : insets.left,
+                      insets.top,
+                      buttonWidth, d.height - insets.top - insets.bottom);
+        }
+        }
+    };
     }
 
     protected void installKeyboardActions() {
@@ -109,7 +109,7 @@ public class Test81 extends BasicComboBoxUI {
      * @see javax.swing.JComboBox#setEditor
      */
     protected ComboBoxEditor createEditor() {
-	return new WindowsComboBoxEditor();
+    return new WindowsComboBoxEditor();
     }
  
     /**
@@ -119,18 +119,18 @@ public class Test81 extends BasicComboBoxUI {
      * @return a button which represents the popup control
      */
     protected JButton createArrowButton() {
-	if (XPStyle.getXP() != null) {
-	    return new XPComboBoxButton();
-	} else {
-	    return super.createArrowButton();
-	}
+    if (XPStyle.getXP() != null) {
+        return new XPComboBoxButton();
+    } else {
+        return super.createArrowButton();
+    }
     }
 
     private static class XPComboBoxButton extends XPStyle.GlyphButton {
         public XPComboBoxButton() {
-	    super("combobox.dropdownbutton");
-	    setRequestFocusEnabled(false);
-	}   
+        super("combobox.dropdownbutton");
+        setRequestFocusEnabled(false);
+    }   
 
         public Dimension getPreferredSize() {
             return new Dimension(17, 20);
@@ -178,9 +178,9 @@ public class Test81 extends BasicComboBoxUI {
         }
 
         protected class InvocationKeyHandler extends BasicComboPopup.InvocationKeyHandler {
-	    protected InvocationKeyHandler() {
-		WindowsComboPopup.this.super();
-	    }
+        protected InvocationKeyHandler() {
+        WindowsComboPopup.this.super();
+        }
         }
     }
 

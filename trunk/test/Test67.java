@@ -38,10 +38,10 @@ public class Test67 extends Assert
         assert (n - i >= 2);
         assert n - i >= 2;
         assert cr.isUnderflow();
-	assert (scale >= 0);  // && scale <= Integer.MAX_VALUE
-	assert (scale == longScale && // bla bla
-		Math.abs(longScale) <= Integer.MAX_VALUE)  // bla bla
-	    						   // bla
-	    :longScale;
+    assert (scale >= 0);  // && scale <= Integer.MAX_VALUE
+    assert (scale == longScale && // bla bla
+        Math.abs(longScale) <= Integer.MAX_VALUE)  // bla bla
+                                   // bla
+        :longScale;
     }
 }

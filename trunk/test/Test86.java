@@ -10,8 +10,8 @@ import java.util.*;
  */
 public class Test86 {
     static class NoOpAP implements AnnotationProcessor {
-	NoOpAP() {}
-	public void process(){}
+    NoOpAP() {}
+    public void process(){}
     }
 
     /**
@@ -22,34 +22,34 @@ public class Test86 {
      */
     static class CompositeAnnotationProcessor implements AnnotationProcessor {
     
-	private List<AnnotationProcessor> aps = 
-	    new LinkedList<AnnotationProcessor>();
+    private List<AnnotationProcessor> aps = 
+        new LinkedList<AnnotationProcessor>();
 
-	/**
-	 * Constructs a new composite annotation processor.
-	 * @param aps  the component annotation processors
-	 */
-	public CompositeAnnotationProcessor(Collection<AnnotationProcessor> aps) {
-	    this.aps.addAll(aps);
-	}
+    /**
+     * Constructs a new composite annotation processor.
+     * @param aps  the component annotation processors
+     */
+    public CompositeAnnotationProcessor(Collection<AnnotationProcessor> aps) {
+        this.aps.addAll(aps);
+    }
 
-	/**
-	 * Constructs a new composite annotation processor.
-	 * @param aps  the component annotation processors
-	 */
-	public CompositeAnnotationProcessor(AnnotationProcessor... aps) {
-	    for(AnnotationProcessor ap: aps)
-		this.aps.add(ap);
-	}
+    /**
+     * Constructs a new composite annotation processor.
+     * @param aps  the component annotation processors
+     */
+    public CompositeAnnotationProcessor(AnnotationProcessor... aps) {
+        for(AnnotationProcessor ap: aps)
+        this.aps.add(ap);
+    }
 
-	/**
-	 * Invokes the <tt>process</tt> method of each component processor,
-	 * in the order in which the processors were passed to the constructor.
-	 */
-	public void process() { 
-	    for(AnnotationProcessor ap: aps)
-		ap.process();
-	}
+    /**
+     * Invokes the <tt>process</tt> method of each component processor,
+     * in the order in which the processors were passed to the constructor.
+     */
+    public void process() { 
+        for(AnnotationProcessor ap: aps)
+        ap.process();
+    }
     }
  
 
@@ -71,7 +71,7 @@ public class Test86 {
      * @since 1.5
      */
     public static AnnotationProcessor getCompositeAnnotationProcessor(AnnotationProcessor... aps) {
-	return new CompositeAnnotationProcessor(aps);
+    return new CompositeAnnotationProcessor(aps);
     }
  
     /**
@@ -85,7 +85,7 @@ public class Test86 {
      * @since 1.5
      */
     public static AnnotationProcessor getCompositeAnnotationProcessor(Collection<AnnotationProcessor> aps) {
-	return new CompositeAnnotationProcessor(aps);
+    return new CompositeAnnotationProcessor(aps);
     }
 }
 

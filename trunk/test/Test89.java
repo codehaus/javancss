@@ -17,33 +17,33 @@ public class Test89 {
      * A filter that selects only <tt>public</tt> declarations.
      */
     public static final DeclarationFilter FILTER_PUBLIC =
-	    new AccessFilter(PUBLIC);
+        new AccessFilter(PUBLIC);
 
     /**
      * A filter that selects only <tt>protected</tt> declarations.
      */
     public static final DeclarationFilter FILTER_PROTECTED =
-	    new AccessFilter(PROTECTED);
+        new AccessFilter(PROTECTED);
 
     /**
      * A filter that selects only <tt>public</tt> or <tt>protected</tt>
      * declarations.
      */
     public static final DeclarationFilter FILTER_PUBLIC_OR_PROTECTED =
-	    new AccessFilter(PUBLIC, PROTECTED);
+        new AccessFilter(PUBLIC, PROTECTED);
 
     /**
      * A filter that selects only package-private (<i>default</i>)
      * declarations.
      */
     public static final DeclarationFilter FILTER_PACKAGE =
-	    new AccessFilter();
+        new AccessFilter();
 
     /**
      * A filter that selects only <tt>private</tt> declarations.
      */
     public static final DeclarationFilter FILTER_PRIVATE =
-	    new AccessFilter(PRIVATE);
+        new AccessFilter(PRIVATE);
 
 
     /**
@@ -64,12 +64,12 @@ public class Test89 {
      * @return a filter that matches declarations containing <tt>mods</tt>
      */
     public static DeclarationFilter getFilter(
-					     final Collection<Modifier> mods) {
-	return new DeclarationFilter() {
-	    public boolean matches(Declaration d) {
-		return d.getModifiers().containsAll(mods);
-	    }
-	};
+                         final Collection<Modifier> mods) {
+    return new DeclarationFilter() {
+        public boolean matches(Declaration d) {
+        return d.getModifiers().containsAll(mods);
+        }
+    };
     }
 
     /**
@@ -84,12 +84,12 @@ public class Test89 {
      * @return a filter that selects declarations of a particular kind
      */
     public static DeclarationFilter getFilter(
-				     final Class<? extends Declaration> kind) {
-	return new DeclarationFilter() {
-	    public boolean matches(Declaration d) {
-		return kind.isInstance(d);
-	    }
-	};
+                     final Class<? extends Declaration> kind) {
+    return new DeclarationFilter() {
+        public boolean matches(Declaration d) {
+        return kind.isInstance(d);
+        }
+    };
     }
 
     /**
@@ -98,16 +98,16 @@ public class Test89 {
      *
      * @param f  filter to be composed with this one
      * @return a filter that selects those declarations selected by
-     *		both this filter and another
+     *        both this filter and another
      */
     public DeclarationFilter and(DeclarationFilter f) {
-	final DeclarationFilter f1 = this;
-	final DeclarationFilter f2 = f;
-	return new DeclarationFilter() {
-	    public boolean matches(Declaration d) {
-		return f1.matches(d) && f2.matches(d);
-	    }
-	};
+    final DeclarationFilter f1 = this;
+    final DeclarationFilter f2 = f;
+    return new DeclarationFilter() {
+        public boolean matches(Declaration d) {
+        return f1.matches(d) && f2.matches(d);
+        }
+    };
     }
 
     /**
@@ -116,16 +116,16 @@ public class Test89 {
      *
      * @param f  filter to be composed with this one
      * @return a filter that selects those declarations selected by
-     *		either this filter or another
+     *        either this filter or another
      */
     public DeclarationFilter or(DeclarationFilter f) {
-	final DeclarationFilter f1 = this;
-	final DeclarationFilter f2 = f;
-	return new DeclarationFilter() {
-	    public boolean matches(Declaration d) {
-		return f1.matches(d) || f2.matches(d);
-	    }
-	};
+    final DeclarationFilter f1 = this;
+    final DeclarationFilter f2 = f;
+    return new DeclarationFilter() {
+        public boolean matches(Declaration d) {
+        return f1.matches(d) || f2.matches(d);
+        }
+    };
     }
 
     /**
@@ -136,11 +136,11 @@ public class Test89 {
      * by this filter
      */
     public DeclarationFilter not() {
-	return new DeclarationFilter() {
-	    public boolean matches(Declaration d) {
-		return !DeclarationFilter.this.matches(d);
-	    }
-	};
+    return new DeclarationFilter() {
+        public boolean matches(Declaration d) {
+        return !DeclarationFilter.this.matches(d);
+        }
+    };
     }
 
 
@@ -156,7 +156,7 @@ public class Test89 {
      * @return <tt>true</tt> if this filter matches the given declaration
      */
     public boolean matches(Declaration decl) {
-	return true;
+    return true;
     }
 
     /**
@@ -170,13 +170,13 @@ public class Test89 {
      * @return the declarations matched by this filter
      */
     public <D extends Declaration> Collection<D> filter(Collection<D> decls) {
-	ArrayList<D> res = new ArrayList<D>(decls.size());
-	for (D d : decls) {
-	    if (matches(d)) {
-		res.add(d);
-	    }
-	}
-	return res;
+    ArrayList<D> res = new ArrayList<D>(decls.size());
+    for (D d : decls) {
+        if (matches(d)) {
+        res.add(d);
+        }
+    }
+    return res;
     }
 
     /**
@@ -189,19 +189,19 @@ public class Test89 {
      * @param <D>      type of the declarations being returned
      * @param decls    declarations being filtered
      * @param resType  type of the declarations being returned --
-     *			the reflective view of <tt>D</tt>
+     *            the reflective view of <tt>D</tt>
      * @return the declarations matched by this filter, restricted to those
-     *			of the specified type
+     *            of the specified type
      */
     public <D extends Declaration> Collection<D>
-	    filter(Collection<? extends Declaration> decls, Class<D> resType) {
-	ArrayList<D> res = new ArrayList<D>(decls.size());
-	for (Declaration d : decls) {
-	    if (resType.isInstance(d) && matches(d)) {
-		res.add(resType.cast(d));
-	    }
-	}
-	return res;
+        filter(Collection<? extends Declaration> decls, Class<D> resType) {
+    ArrayList<D> res = new ArrayList<D>(decls.size());
+    for (Declaration d : decls) {
+        if (resType.isInstance(d) && matches(d)) {
+        res.add(resType.cast(d));
+        }
+    }
+    return res;
     }
 
 
@@ -211,38 +211,38 @@ public class Test89 {
      */
     private static class AccessFilter extends DeclarationFilter {
 
-	// The first access modifier to filter on, or null if we're looking
-	// for declarations with no access modifiers.
-	private Modifier mod1 = null;
+    // The first access modifier to filter on, or null if we're looking
+    // for declarations with no access modifiers.
+    private Modifier mod1 = null;
 
-	// The second access modifier to filter on, or null if none.
-	private Modifier mod2 = null;
+    // The second access modifier to filter on, or null if none.
+    private Modifier mod2 = null;
 
-	// Returns a filter that matches declarations with no access
-	// modifiers.
-	AccessFilter() {
-	}
+    // Returns a filter that matches declarations with no access
+    // modifiers.
+    AccessFilter() {
+    }
 
-	// Returns a filter that matches m.
-	AccessFilter(Modifier m) {
-	    mod1 = m;
-	}
+    // Returns a filter that matches m.
+    AccessFilter(Modifier m) {
+        mod1 = m;
+    }
 
-	// Returns a filter that matches either m1 or m2.
-	AccessFilter(Modifier m1, Modifier m2) {
-	    mod1 = m1;
-	    mod2 = m2;
-	}
+    // Returns a filter that matches either m1 or m2.
+    AccessFilter(Modifier m1, Modifier m2) {
+        mod1 = m1;
+        mod2 = m2;
+    }
 
-	public boolean matches(Declaration d) {
-	    Collection<Modifier> mods = d.getModifiers();
-	    if (mod1 == null) {	// looking for package private
-		return !(mods.contains(PUBLIC) ||
-			 mods.contains(PROTECTED) ||
-			 mods.contains(PRIVATE));
-	    }
-	    return mods.contains(mod1) &&
-		   (mod2 == null || mods.contains(mod2));
-	}
+    public boolean matches(Declaration d) {
+        Collection<Modifier> mods = d.getModifiers();
+        if (mod1 == null) {    // looking for package private
+        return !(mods.contains(PUBLIC) ||
+             mods.contains(PROTECTED) ||
+             mods.contains(PRIVATE));
+        }
+        return mods.contains(mod1) &&
+           (mod2 == null || mods.contains(mod2));
+    }
     }
 }

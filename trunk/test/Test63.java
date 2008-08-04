@@ -77,12 +77,12 @@ class Utilities
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jass.runtime.traceAssertion.Parameter[] jassParameters; jassParameters = new jass.runtime.traceAssertion.Parameter[] {new jass.runtime.traceAssertion.Parameter(d)}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc", "Utilities", "Utilities(idebughc.Debug)", true), jassParameters);
 
 
-  	/* precondition */
-  	if (!((d!=null))) throw new jass.runtime.PreconditionException("idebughc.Utilities","Utilities(idebughc.Debug)",77,"d_non_null");
+      /* precondition */
+      if (!((d!=null))) throw new jass.runtime.PreconditionException("idebughc.Utilities","Utilities(idebughc.Debug)",77,"d_non_null");
 
     this.debug = d;
-  	/* postcondition */
-  	if (!((debug==d))) throw new jass.runtime.PostconditionException("idebughc.Utilities","Utilities(idebughc.Debug)",81,"debug_is_valid");
+      /* postcondition */
+      if (!((debug==d))) throw new jass.runtime.PostconditionException("idebughc.Utilities","Utilities(idebughc.Debug)",81,"debug_is_valid");
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jassParameters = new jass.runtime.traceAssertion.Parameter[] {}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc", "Utilities", "Utilities(idebughc.Debug)", false), jassParameters);
 
   }
@@ -149,9 +149,9 @@ class Utilities
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jass.runtime.traceAssertion.Parameter[] jassParameters; jassParameters = new jass.runtime.traceAssertion.Parameter[] {new jass.runtime.traceAssertion.Parameter(hashtable), new jass.runtime.traceAssertion.Parameter(className)}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(null, new jass.runtime.traceAssertion.MethodReference("idebughc", "Utilities", "addClassToHashtable(java.util.Hashtable,java.lang.String)", true), jassParameters);
 
 
-  	/* precondition */
-  	if (!((hashtable!=null))) throw new jass.runtime.PreconditionException("idebughc.Utilities","addClassToHashtable(java.util.Hashtable,java.lang.String)",132,"hashtable_non_null");
-  	if (!((className!=null))) throw new jass.runtime.PreconditionException("idebughc.Utilities","addClassToHashtable(java.util.Hashtable,java.lang.String)",133,"className_non_null");
+      /* precondition */
+      if (!((hashtable!=null))) throw new jass.runtime.PreconditionException("idebughc.Utilities","addClassToHashtable(java.util.Hashtable,java.lang.String)",132,"hashtable_non_null");
+      if (!((className!=null))) throw new jass.runtime.PreconditionException("idebughc.Utilities","addClassToHashtable(java.util.Hashtable,java.lang.String)",133,"className_non_null");
 
     // If we are adding "*", the tabled should be cleared and the "*"
     // should be inserted.
@@ -192,9 +192,9 @@ class Utilities
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jass.runtime.traceAssertion.Parameter[] jassParameters; jassParameters = new jass.runtime.traceAssertion.Parameter[] {new jass.runtime.traceAssertion.Parameter(hashtable), new jass.runtime.traceAssertion.Parameter(className)}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(null, new jass.runtime.traceAssertion.MethodReference("idebughc", "Utilities", "removeClassFromHashtable(java.util.Hashtable,java.lang.String)", true), jassParameters);
 
 
-  	/* precondition */
-  	if (!((hashtable!=null))) throw new jass.runtime.PreconditionException("idebughc.Utilities","removeClassFromHashtable(java.util.Hashtable,java.lang.String)",168,"hashtable_non_null");
-  	if (!((className!=null))) throw new jass.runtime.PreconditionException("idebughc.Utilities","removeClassFromHashtable(java.util.Hashtable,java.lang.String)",169,"className_non_null");
+      /* precondition */
+      if (!((hashtable!=null))) throw new jass.runtime.PreconditionException("idebughc.Utilities","removeClassFromHashtable(java.util.Hashtable,java.lang.String)",168,"hashtable_non_null");
+      if (!((className!=null))) throw new jass.runtime.PreconditionException("idebughc.Utilities","removeClassFromHashtable(java.util.Hashtable,java.lang.String)",169,"className_non_null");
 
     // If we are removing the class "*", just clear the hashtable.
     if (className.equals("*")) {
@@ -217,7 +217,7 @@ class Utilities
   synchronized boolean levelTest(int level)
   {
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jass.runtime.traceAssertion.Parameter[] jassParameters; jassParameters = new jass.runtime.traceAssertion.Parameter[] {new jass.runtime.traceAssertion.Parameter(level)}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc", "Utilities", "levelTest(int)", true), jassParameters);
-  	boolean jassResult;
+      boolean jassResult;
 
     // Get the current thread.
     Thread currentThread = Thread.currentThread();
@@ -229,18 +229,18 @@ class Utilities
       // passed debugging level, print out the message.
 
       if ((level >= debug.getLevel()) && sourceClassValid()) {
-      	jassResult = ( true);
+          jassResult = ( true);
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jassParameters = new jass.runtime.traceAssertion.Parameter[] {new jass.runtime.traceAssertion.Parameter(jassResult)}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc", "Utilities", "levelTest(int)", false), jassParameters);
 
 
-      	return jassResult;
+          return jassResult;
       }
       else {
-      	jassResult = ( false);
+          jassResult = ( false);
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jassParameters = new jass.runtime.traceAssertion.Parameter[] {new jass.runtime.traceAssertion.Parameter(jassResult)}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc", "Utilities", "levelTest(int)", false), jassParameters);
 
 
-      	return jassResult;
+          return jassResult;
       }
     }
 
@@ -251,20 +251,20 @@ class Utilities
 
     // If there is no context, we should not give the ok to print.
     if (debugContext == null) {
-    	jassResult = ( false);
+        jassResult = ( false);
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jassParameters = new jass.runtime.traceAssertion.Parameter[] {new jass.runtime.traceAssertion.Parameter(jassResult)}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc", "Utilities", "levelTest(int)", false), jassParameters);
 
 
-    	return jassResult;
+        return jassResult;
     }
 
     // Check to see if this thread has debugging enabled.
     if (debugContext.isOn() == false) {
-    	jassResult = ( false);
+        jassResult = ( false);
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jassParameters = new jass.runtime.traceAssertion.Parameter[] {new jass.runtime.traceAssertion.Parameter(jassResult)}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc", "Utilities", "levelTest(int)", false), jassParameters);
 
 
-    	return jassResult;
+        return jassResult;
     }
 
     // Now, see the current per-thread debugging level is >= the
@@ -272,17 +272,17 @@ class Utilities
     // message.
 
     if ((level >= debugContext.getLevel()) && sourceClassValid()) {
-    	jassResult = ( true);
+        jassResult = ( true);
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jassParameters = new jass.runtime.traceAssertion.Parameter[] {new jass.runtime.traceAssertion.Parameter(jassResult)}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc", "Utilities", "levelTest(int)", false), jassParameters);
 
 
-    	return jassResult;
+        return jassResult;
     }
-  	jassResult = ( false);
+      jassResult = ( false);
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jassParameters = new jass.runtime.traceAssertion.Parameter[] {new jass.runtime.traceAssertion.Parameter(jassResult)}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc", "Utilities", "levelTest(int)", false), jassParameters);
 
 
-  	return jassResult;
+      return jassResult;
   }
 
   /**
@@ -297,10 +297,10 @@ class Utilities
   synchronized boolean categoryTest(String category)
   {
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jass.runtime.traceAssertion.Parameter[] jassParameters; jassParameters = new jass.runtime.traceAssertion.Parameter[] {new jass.runtime.traceAssertion.Parameter(category)}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc", "Utilities", "categoryTest(java.lang.String)", true), jassParameters);
-  	boolean jassResult;
+      boolean jassResult;
 
-  	/* precondition */
-  	if (!((category!=null))) throw new jass.runtime.PreconditionException("idebughc.Utilities","categoryTest(java.lang.String)",237,"category_non_null");
+      /* precondition */
+      if (!((category!=null))) throw new jass.runtime.PreconditionException("idebughc.Utilities","categoryTest(java.lang.String)",237,"category_non_null");
 
     int categoryLevel = 0;
 
@@ -328,18 +328,18 @@ class Utilities
         // the passed category, print out the message.
 
         if ((categoryLevel >= debug.getLevel()) && sourceClassValid()) {
-        	jassResult = ( true);
+            jassResult = ( true);
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jassParameters = new jass.runtime.traceAssertion.Parameter[] {new jass.runtime.traceAssertion.Parameter(jassResult)}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc", "Utilities", "categoryTest(java.lang.String)", false), jassParameters);
 
 
-        	return jassResult;
+            return jassResult;
         }
         else {
-        	jassResult = ( false);
+            jassResult = ( false);
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jassParameters = new jass.runtime.traceAssertion.Parameter[] {new jass.runtime.traceAssertion.Parameter(jassResult)}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc", "Utilities", "categoryTest(java.lang.String)", false), jassParameters);
 
 
-        	return jassResult;
+            return jassResult;
         }
       }
     }
@@ -352,29 +352,29 @@ class Utilities
 
     // If there is no context, we should not give the ok to print.
     if (debugContext == null) {
-    	jassResult = ( false);
+        jassResult = ( false);
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jassParameters = new jass.runtime.traceAssertion.Parameter[] {new jass.runtime.traceAssertion.Parameter(jassResult)}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc", "Utilities", "categoryTest(java.lang.String)", false), jassParameters);
 
 
-    	return jassResult;
+        return jassResult;
     }
 
     // Check to see if this thread has debugging enabled.
     if (debugContext.isOn() == false) {
-    	jassResult = ( false);
+        jassResult = ( false);
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jassParameters = new jass.runtime.traceAssertion.Parameter[] {new jass.runtime.traceAssertion.Parameter(jassResult)}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc", "Utilities", "categoryTest(java.lang.String)", false), jassParameters);
 
 
-    	return jassResult;
+        return jassResult;
     }
 
     // Check to see if this category is defined for the current thread.
     if (!debugContext.containsCategory(category)) {
-    	jassResult = ( false);
+        jassResult = ( false);
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jassParameters = new jass.runtime.traceAssertion.Parameter[] {new jass.runtime.traceAssertion.Parameter(jassResult)}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc", "Utilities", "categoryTest(java.lang.String)", false), jassParameters);
 
 
-    	return jassResult;
+        return jassResult;
     }
 
     // The current thread has context, debugging is enabled, the
@@ -387,17 +387,17 @@ class Utilities
     // this condition holds, print the message.
 
     if ((categoryLevel >= debugContext.getLevel()) && sourceClassValid()) {
-    	jassResult = ( true);
+        jassResult = ( true);
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jassParameters = new jass.runtime.traceAssertion.Parameter[] {new jass.runtime.traceAssertion.Parameter(jassResult)}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc", "Utilities", "categoryTest(java.lang.String)", false), jassParameters);
 
 
-    	return jassResult;
+        return jassResult;
     }
-  	jassResult = ( false);
+      jassResult = ( false);
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jassParameters = new jass.runtime.traceAssertion.Parameter[] {new jass.runtime.traceAssertion.Parameter(jassResult)}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc", "Utilities", "categoryTest(java.lang.String)", false), jassParameters);
 
 
-  	return jassResult;
+      return jassResult;
   }
 
   /**
@@ -412,7 +412,7 @@ class Utilities
   synchronized boolean sourceClassValid()
   {
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jass.runtime.traceAssertion.Parameter[] jassParameters; jassParameters = new jass.runtime.traceAssertion.Parameter[] {}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc", "Utilities", "sourceClassValid()", true), jassParameters);
-  	boolean jassResult;
+      boolean jassResult;
 
     int index, startIndex, parenIndex;
     Throwable throwable;
@@ -479,19 +479,19 @@ class Utilities
 
       if ((classHashtable.containsKey("*")) &&
           (!classHashtable.containsKey(className))) {
-      	jassResult = ( true);
+          jassResult = ( true);
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jassParameters = new jass.runtime.traceAssertion.Parameter[] {new jass.runtime.traceAssertion.Parameter(jassResult)}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc", "Utilities", "sourceClassValid()", false), jassParameters);
 
 
-      	return jassResult;
+          return jassResult;
       }
       else
         if (classHashtable.containsKey(className)) {
-        	jassResult = ( true);
+            jassResult = ( true);
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jassParameters = new jass.runtime.traceAssertion.Parameter[] {new jass.runtime.traceAssertion.Parameter(jassResult)}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc", "Utilities", "sourceClassValid()", false), jassParameters);
 
 
-        	return jassResult;
+            return jassResult;
         }
     }
 
@@ -505,11 +505,11 @@ class Utilities
     // false.
 
     if (!debug.threadHashtable.containsKey(currentThread)) {
-    	jassResult = ( false);
+        jassResult = ( false);
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jassParameters = new jass.runtime.traceAssertion.Parameter[] {new jass.runtime.traceAssertion.Parameter(jassResult)}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc", "Utilities", "sourceClassValid()", false), jassParameters);
 
 
-    	return jassResult;
+        return jassResult;
     }
 
     // The table has the key, so get the record for this thread.
@@ -519,11 +519,11 @@ class Utilities
     // Is debugging turned on at all for this thread? If not, return a
     // false.
     if (!debugContext.isOn()) {
-    	jassResult = ( false);
+        jassResult = ( false);
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jassParameters = new jass.runtime.traceAssertion.Parameter[] {new jass.runtime.traceAssertion.Parameter(jassResult)}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc", "Utilities", "sourceClassValid()", false), jassParameters);
 
 
-    	return jassResult;
+        return jassResult;
     }
 
     // Debugging is enabled for this thread, so perform the same check as
@@ -531,56 +531,56 @@ class Utilities
     // information.  This time, if we fail, we fail.
     if (debugContext.containsClass("*")) {
       if (debugContext.containsClass(className)) {
-      	jassResult = ( false);
+          jassResult = ( false);
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jassParameters = new jass.runtime.traceAssertion.Parameter[] {new jass.runtime.traceAssertion.Parameter(jassResult)}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc", "Utilities", "sourceClassValid()", false), jassParameters);
 
 
-      	return jassResult;
+          return jassResult;
       }
       else {
-      	jassResult = ( true);
+          jassResult = ( true);
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jassParameters = new jass.runtime.traceAssertion.Parameter[] {new jass.runtime.traceAssertion.Parameter(jassResult)}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc", "Utilities", "sourceClassValid()", false), jassParameters);
 
 
-      	return jassResult;
+          return jassResult;
       }
     } else {
       if (debugContext.containsClass(className)) {
-      	jassResult = ( true);
+          jassResult = ( true);
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jassParameters = new jass.runtime.traceAssertion.Parameter[] {new jass.runtime.traceAssertion.Parameter(jassResult)}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc", "Utilities", "sourceClassValid()", false), jassParameters);
 
 
-      	return jassResult;
+          return jassResult;
       }
       else {
-      	jassResult = ( false);
+          jassResult = ( false);
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jassParameters = new jass.runtime.traceAssertion.Parameter[] {new jass.runtime.traceAssertion.Parameter(jassResult)}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc", "Utilities", "sourceClassValid()", false), jassParameters);
 
 
-      	return jassResult;
+          return jassResult;
       }
     }
   }
 
-	protected void finalize () throws java.lang.Throwable {
+    protected void finalize () throws java.lang.Throwable {
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jass.runtime.traceAssertion.Parameter[] jassParameters; jassParameters = new jass.runtime.traceAssertion.Parameter[] {}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc", "Utilities", "finalize()", true), jassParameters);
-		super.finalize();
+        super.finalize();
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jassParameters = new jass.runtime.traceAssertion.Parameter[] {}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc", "Utilities", "finalize()", false), jassParameters);
-	}
+    }
 
-	public boolean equals (java.lang.Object par0) {
+    public boolean equals (java.lang.Object par0) {
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jass.runtime.traceAssertion.Parameter[] jassParameters; jassParameters = new jass.runtime.traceAssertion.Parameter[] {new jass.runtime.traceAssertion.Parameter(par0)}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc", "Utilities", "equals(java.lang.Object)", true), jassParameters);
-		boolean returnValue = super.equals(par0);
+        boolean returnValue = super.equals(par0);
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jassParameters = new jass.runtime.traceAssertion.Parameter[] {new jass.runtime.traceAssertion.Parameter(returnValue)}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc", "Utilities", "equals(java.lang.Object)", false), jassParameters);
-		return returnValue;
-	}
+        return returnValue;
+    }
 
-	public java.lang.String toString () {
+    public java.lang.String toString () {
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jass.runtime.traceAssertion.Parameter[] jassParameters; jassParameters = new jass.runtime.traceAssertion.Parameter[] {}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc", "Utilities", "toString()", true), jassParameters);
-		java.lang.String returnValue = super.toString();
+        java.lang.String returnValue = super.toString();
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jassParameters = new jass.runtime.traceAssertion.Parameter[] {new jass.runtime.traceAssertion.Parameter(returnValue)}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc", "Utilities", "toString()", false), jassParameters);
-		return returnValue;
-	}
+        return returnValue;
+    }
 
   // Private Methods
 

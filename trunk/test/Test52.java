@@ -23,7 +23,7 @@ public class Test52
   {
     public Inner()
     {
-	Test52.this.super();
+    Test52.this.super();
     }
   }
 }

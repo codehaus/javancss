@@ -38,16 +38,16 @@ public class Test76
     extends com.sun.corba.se.impl.io.OutputStreamHook
 {
     private UtilSystemException wrapper = UtilSystemException.get(
-	CORBALogDomains.RPC_ENCODING ) ;
+    CORBALogDomains.RPC_ENCODING ) ;
 
     private static Bridge bridge = 
-	(Bridge)AccessController.doPrivileged(
-	    new PrivilegedAction() {
-		public Object run() {
-		    return Bridge.get() ;
-		}
-	    } 
-	) ;
+    (Bridge)AccessController.doPrivileged(
+        new PrivilegedAction() {
+        public Object run() {
+            return Bridge.get() ;
+        }
+        } 
+    ) ;
 
     private org.omg.CORBA_2_3.portable.OutputStream orbStream;
 
@@ -67,9 +67,9 @@ public class Test76
     private Object[] writeObjectArgList = {this};
 
     public IIOPOutputStream()
-	throws java.io.IOException
+    throws java.io.IOException
    {
-	super();
+    super();
     }
 
     // If using RMI-IIOP stream format version 2, this tells
@@ -88,19 +88,19 @@ public class Test76
     }
 
     public final void setOrbStream(org.omg.CORBA_2_3.portable.OutputStream os) {
-    	orbStream = os;
+        orbStream = os;
     }
 
     public final org.omg.CORBA_2_3.portable.OutputStream getOrbStream() {
-    	return orbStream;
+        return orbStream;
     }
 
     public final void increaseRecursionDepth(){
-	recursionDepth++;
+    recursionDepth++;
     }
 
     public final int decreaseRecursionDepth(){
-	return --recursionDepth;
+    return --recursionDepth;
     }
 
     /**
@@ -109,11 +109,11 @@ public class Test76
      * @since     JDK1.1.6
      */
     public final void writeObjectOverride(Object obj)
-	throws IOException
+    throws IOException
     {
         writeObjectState.writeData(this);
 
-	Util.writeAbstractObject((OutputStream)orbStream, obj);
+    Util.writeAbstractObject((OutputStream)orbStream, obj);
     }
 
     /**
@@ -128,34 +128,34 @@ public class Test76
 
         streamFormatVersion = formatVersion;
 
-    	Object prevObject = currentObject;
-    	ObjectStreamClass prevClassDesc = currentClassDesc;
-    	simpleWriteDepth++;
+        Object prevObject = currentObject;
+        ObjectStreamClass prevClassDesc = currentClassDesc;
+        simpleWriteDepth++;
 
-    	try {
-	    // if (!checkSpecialClasses(obj) && !checkSubstitutableSpecialClasses(obj))
-	    outputObject(obj);
+        try {
+        // if (!checkSpecialClasses(obj) && !checkSubstitutableSpecialClasses(obj))
+        outputObject(obj);
 
-    	} catch (IOException ee) {
-    	    if (abortIOException == null)
-		abortIOException = ee;
-    	} finally {
-    	    /* Restore state of previous call incase this is a nested call */
+        } catch (IOException ee) {
+            if (abortIOException == null)
+        abortIOException = ee;
+        } finally {
+            /* Restore state of previous call incase this is a nested call */
             streamFormatVersion = oldStreamFormatVersion;
-    	    simpleWriteDepth--;
-    	    currentObject = prevObject;
-    	    currentClassDesc = prevClassDesc;
-    	}
+            simpleWriteDepth--;
+            currentObject = prevObject;
+            currentClassDesc = prevClassDesc;
+        }
 
-    	/* If the recursion depth is 0, test for and clear the pending exception.
-    	 * If there is a pending exception throw it.
-    	 */
-    	IOException pending = abortIOException;
-    	if (simpleWriteDepth == 0)
-    	    abortIOException = null;
-    	if (pending != null) {
-	    bridge.throwException( pending ) ;
-    	}
+        /* If the recursion depth is 0, test for and clear the pending exception.
+         * If there is a pending exception throw it.
+         */
+        IOException pending = abortIOException;
+        if (simpleWriteDepth == 0)
+            abortIOException = null;
+        if (pending != null) {
+        bridge.throwException( pending ) ;
+        }
     }
 
     // Required by the superclass.
@@ -172,19 +172,19 @@ public class Test76
     /* throws IOException */
     {
         try {
-	    if (currentObject == null || currentClassDesc == null)
-		// XXX I18N, Logging needed.
-		throw new NotActiveException("defaultWriteObjectDelegate");
+        if (currentObject == null || currentClassDesc == null)
+        // XXX I18N, Logging needed.
+        throw new NotActiveException("defaultWriteObjectDelegate");
 
-	    ObjectStreamField[] fields =
-		currentClassDesc.getFieldsNoCopy();
-	    if (fields.length > 0) {
-		outputClassFields(currentObject, currentClassDesc.forClass(),
-				  fields);
-	    }
+        ObjectStreamField[] fields =
+        currentClassDesc.getFieldsNoCopy();
+        if (fields.length > 0) {
+        outputClassFields(currentObject, currentClassDesc.forClass(),
+                  fields);
+        }
         } catch(IOException ioe) {
-	    bridge.throwException(ioe);
-	}
+        bridge.throwException(ioe);
+    }
     }
 
     /**
@@ -196,12 +196,12 @@ public class Test76
     /* throws SecurityException */
     {
         return false;
-		
+        
     }
 
 
     protected final void annotateClass(Class<?> cl) throws IOException{
-	// XXX I18N, Logging needed.
+    // XXX I18N, Logging needed.
         throw new IOException("Method annotateClass not supported");
     }
 
@@ -217,14 +217,14 @@ public class Test76
         try{
             orbStream.flush();
         } catch(Error e) {
-	    IOException ioexc = new IOException(e.getMessage());
-	    ioexc.initCause(e) ;
-	    throw ioexc ;
-	}
+        IOException ioexc = new IOException(e.getMessage());
+        ioexc.initCause(e) ;
+        throw ioexc ;
+    }
     }
 
     protected final Object replaceObject(Object obj) throws IOException{
-	// XXX I18N, Logging needed.
+    // XXX I18N, Logging needed.
         throw new IOException("Method replaceObject not supported");
     }
 
@@ -242,22 +242,22 @@ public class Test76
         try{
             //orbStream.reset();
 
-	    if (currentObject != null || currentClassDesc != null)
-		// XXX I18N, Logging needed.
-		throw new IOException("Illegal call to reset");
+        if (currentObject != null || currentClassDesc != null)
+        // XXX I18N, Logging needed.
+        throw new IOException("Illegal call to reset");
 
-	    abortIOException = null;
+        abortIOException = null;
 
-	    if (classDescStack == null)
-		classDescStack = new java.util.Stack();
-	    else
-		classDescStack.setSize(0);
+        if (classDescStack == null)
+        classDescStack = new java.util.Stack();
+        else
+        classDescStack.setSize(0);
 
         } catch(Error e) {
-	    IOException ioexc = new IOException(e.getMessage());
-	    ioexc.initCause(e) ;
-	    throw ioexc ;
-	}
+        IOException ioexc = new IOException(e.getMessage());
+        ioexc.initCause(e) ;
+        throw ioexc ;
+    }
     }
 
     public final void write(byte b[]) throws IOException{
@@ -266,10 +266,10 @@ public class Test76
 
             orbStream.write_octet_array(b, 0, b.length);
         } catch(Error e) {
-	    IOException ioexc = new IOException(e.getMessage());
-	    ioexc.initCause(e) ;
-	    throw ioexc ;
-	}
+        IOException ioexc = new IOException(e.getMessage());
+        ioexc.initCause(e) ;
+        throw ioexc ;
+    }
     }
 
     public final void write(byte b[], int off, int len) throws IOException{
@@ -278,10 +278,10 @@ public class Test76
 
             orbStream.write_octet_array(b, off, len);
         } catch(Error e) {
-	    IOException ioexc = new IOException(e.getMessage());
-	    ioexc.initCause(e) ;
-	    throw ioexc ;
-	}
+        IOException ioexc = new IOException(e.getMessage());
+        ioexc.initCause(e) ;
+        throw ioexc ;
+    }
     }
 
     public final void write(int data) throws IOException{
@@ -290,10 +290,10 @@ public class Test76
 
             orbStream.write_octet((byte)(data & 0xFF));
         } catch(Error e) {
-	    IOException ioexc = new IOException(e.getMessage());
-	    ioexc.initCause(e) ;
-	    throw ioexc ;
-	}
+        IOException ioexc = new IOException(e.getMessage());
+        ioexc.initCause(e) ;
+        throw ioexc ;
+    }
     }
 
     public final void writeBoolean(boolean data) throws IOException{
@@ -302,10 +302,10 @@ public class Test76
 
             orbStream.write_boolean(data);
         } catch(Error e) {
-	    IOException ioexc = new IOException(e.getMessage());
-	    ioexc.initCause(e) ;
-	    throw ioexc ;
-	}
+        IOException ioexc = new IOException(e.getMessage());
+        ioexc.initCause(e) ;
+        throw ioexc ;
+    }
     }
 
     public final void writeByte(int data) throws IOException{
@@ -314,10 +314,10 @@ public class Test76
 
             orbStream.write_octet((byte)data);
         } catch(Error e) {
-	    IOException ioexc = new IOException(e.getMessage());
-	    ioexc.initCause(e) ;
-	    throw ioexc ;
-	}
+        IOException ioexc = new IOException(e.getMessage());
+        ioexc.initCause(e) ;
+        throw ioexc ;
+    }
     }
 
     public final void writeBytes(String data) throws IOException{
@@ -327,10 +327,10 @@ public class Test76
             byte buf[] = data.getBytes();
             orbStream.write_octet_array(buf, 0, buf.length);
         } catch(Error e) {
-	    IOException ioexc = new IOException(e.getMessage());
-	    ioexc.initCause(e) ;
-	    throw ioexc ;
-	}
+        IOException ioexc = new IOException(e.getMessage());
+        ioexc.initCause(e) ;
+        throw ioexc ;
+    }
     }
 
     public final void writeChar(int data) throws IOException{
@@ -339,10 +339,10 @@ public class Test76
 
             orbStream.write_wchar((char)data);
         } catch(Error e) {
-	    IOException ioexc = new IOException(e.getMessage());
-	    ioexc.initCause(e) ;
-	    throw ioexc ;
-	}
+        IOException ioexc = new IOException(e.getMessage());
+        ioexc.initCause(e) ;
+        throw ioexc ;
+    }
     }
 
     public final void writeChars(String data) throws IOException{
@@ -352,10 +352,10 @@ public class Test76
             char buf[] = data.toCharArray();
             orbStream.write_wchar_array(buf, 0, buf.length);
         } catch(Error e) {
-	    IOException ioexc = new IOException(e.getMessage());
-	    ioexc.initCause(e) ;
-	    throw ioexc ;
-	}
+        IOException ioexc = new IOException(e.getMessage());
+        ioexc.initCause(e) ;
+        throw ioexc ;
+    }
     }
 
     public final void writeDouble(double data) throws IOException{
@@ -364,10 +364,10 @@ public class Test76
 
             orbStream.write_double(data);
         } catch(Error e) {
-	    IOException ioexc = new IOException(e.getMessage());
-	    ioexc.initCause(e) ;
-	    throw ioexc ;
-	}
+        IOException ioexc = new IOException(e.getMessage());
+        ioexc.initCause(e) ;
+        throw ioexc ;
+    }
     }
 
     public final void writeFloat(float data) throws IOException{
@@ -376,10 +376,10 @@ public class Test76
 
             orbStream.write_float(data);
         } catch(Error e) {
-	    IOException ioexc = new IOException(e.getMessage());
-	    ioexc.initCause(e) ;
-	    throw ioexc ;
-	}
+        IOException ioexc = new IOException(e.getMessage());
+        ioexc.initCause(e) ;
+        throw ioexc ;
+    }
     }
 
     public final void writeInt(int data) throws IOException{
@@ -388,10 +388,10 @@ public class Test76
 
             orbStream.write_long(data);
         } catch(Error e) {
-	    IOException ioexc = new IOException(e.getMessage());
-	    ioexc.initCause(e) ;
-	    throw ioexc ;
-	}
+        IOException ioexc = new IOException(e.getMessage());
+        ioexc.initCause(e) ;
+        throw ioexc ;
+    }
     }
 
     public final void writeLong(long data) throws IOException{
@@ -400,10 +400,10 @@ public class Test76
 
             orbStream.write_longlong(data);
         } catch(Error e) {
-	    IOException ioexc = new IOException(e.getMessage());
-	    ioexc.initCause(e) ;
-	    throw ioexc ;
-	}
+        IOException ioexc = new IOException(e.getMessage());
+        ioexc.initCause(e) ;
+        throw ioexc ;
+    }
     }
 
     public final void writeShort(int data) throws IOException{
@@ -412,10 +412,10 @@ public class Test76
 
             orbStream.write_short((short)data);
         } catch(Error e) {
-	    IOException ioexc = new IOException(e.getMessage());
-	    ioexc.initCause(e) ;
-	    throw ioexc ;
-	}
+        IOException ioexc = new IOException(e.getMessage());
+        ioexc.initCause(e) ;
+        throw ioexc ;
+    }
     }
 
     protected final void writeStreamHeader() throws IOException{
@@ -440,10 +440,10 @@ public class Test76
 
             internalWriteUTF(orbStream, data);
         } catch(Error e) {
-	    IOException ioexc = new IOException(e.getMessage());
-	    ioexc.initCause(e) ;
-	    throw ioexc ;
-	}
+        IOException ioexc = new IOException(e.getMessage());
+        ioexc.initCause(e) ;
+        throw ioexc ;
+    }
     }
 
     // INTERNAL UTILITY METHODS
@@ -453,19 +453,19 @@ public class Test76
      */
     private boolean checkSpecialClasses(Object obj) throws IOException {
 
-    	/*
-    	 * If this is a class, don't allow substitution
-    	 */
-    	//if (obj instanceof Class) {
+        /*
+         * If this is a class, don't allow substitution
+         */
+        //if (obj instanceof Class) {
         //    throw new IOException("Serialization of Class not supported");
-    	//}
+        //}
 
-    	if (obj instanceof ObjectStreamClass) {
-	    // XXX I18N, Logging needed.
+        if (obj instanceof ObjectStreamClass) {
+        // XXX I18N, Logging needed.
             throw new IOException("Serialization of ObjectStreamClass not supported");
-    	}
+        }
 
-    	return false;
+        return false;
     }
 
     /*
@@ -473,19 +473,19 @@ public class Test76
      * These classes are replaceable.
      */
     private boolean checkSubstitutableSpecialClasses(Object obj)
-	throws IOException
+    throws IOException
     {
-    	if (obj instanceof String) {
-    	    orbStream.write_value((java.io.Serializable)obj);
-    	    return true;
-    	}
+        if (obj instanceof String) {
+            orbStream.write_value((java.io.Serializable)obj);
+            return true;
+        }
 
-    	//if (obj.getClass().isArray()) {
-    	//    outputArray(obj);
-    	//    return true;
-    	//}
+        //if (obj.getClass().isArray()) {
+        //    outputArray(obj);
+        //    return true;
+        //}
 
-    	return false;
+        return false;
     }
 
     /*
@@ -493,51 +493,51 @@ public class Test76
      */
     private void outputObject(final Object obj) throws IOException{
 
-    	currentObject = obj;
-    	Class currclass = obj.getClass();
+        currentObject = obj;
+        Class currclass = obj.getClass();
 
-    	/* Get the Class descriptor for this class,
-    	 * Throw a NotSerializableException if there is none.
-    	 */
-    	currentClassDesc = ObjectStreamClass.lookup(currclass);
-    	if (currentClassDesc == null) {
-	    // XXX I18N, Logging needed.
-    	    throw new NotSerializableException(currclass.getName());
-    	}
+        /* Get the Class descriptor for this class,
+         * Throw a NotSerializableException if there is none.
+         */
+        currentClassDesc = ObjectStreamClass.lookup(currclass);
+        if (currentClassDesc == null) {
+        // XXX I18N, Logging needed.
+            throw new NotSerializableException(currclass.getName());
+        }
 
-    	/* If the object is externalizable,
-    	 * call writeExternal.
-    	 * else do Serializable processing.
-    	 */
-    	if (currentClassDesc.isExternalizable()) {
-	    // Write format version
-	    orbStream.write_octet(streamFormatVersion);
+        /* If the object is externalizable,
+         * call writeExternal.
+         * else do Serializable processing.
+         */
+        if (currentClassDesc.isExternalizable()) {
+        // Write format version
+        orbStream.write_octet(streamFormatVersion);
 
-    	    Externalizable ext = (Externalizable)obj;
-    	    ext.writeExternal(this);
+            Externalizable ext = (Externalizable)obj;
+            ext.writeExternal(this);
             
-    	} else {
+        } else {
 
-    	    /* The object's classes should be processed from supertype to subtype
-    	     * Push all the clases of the current object onto a stack.
-    	     * Remember the stack pointer where this set of classes is being pushed.
-    	     */
-    	    int stackMark = classDescStack.size();
-    	    try {
-    		ObjectStreamClass next;
-    		while ((next = currentClassDesc.getSuperclass()) != null) {
-    		    classDescStack.push(currentClassDesc);
-    		    currentClassDesc = next;
-    		}
+            /* The object's classes should be processed from supertype to subtype
+             * Push all the clases of the current object onto a stack.
+             * Remember the stack pointer where this set of classes is being pushed.
+             */
+            int stackMark = classDescStack.size();
+            try {
+            ObjectStreamClass next;
+            while ((next = currentClassDesc.getSuperclass()) != null) {
+                classDescStack.push(currentClassDesc);
+                currentClassDesc = next;
+            }
 
-    		/*
-    		 * For currentClassDesc and all the pushed class descriptors
-    		 *    If the class is writing its own data
-    		 *		  set blockData = true; call the class writeObject method
-    		 *    If not
-    		 *     invoke either the defaultWriteObject method.
-    		 */
-    		do {
+            /*
+             * For currentClassDesc and all the pushed class descriptors
+             *    If the class is writing its own data
+             *          set blockData = true; call the class writeObject method
+             *    If not
+             *     invoke either the defaultWriteObject method.
+             */
+            do {
 
                     WriteObjectState oldState = writeObjectState;
 
@@ -554,12 +554,12 @@ public class Test76
                         setState(oldState);
                     }
 
-    		} while (classDescStack.size() > stackMark &&
-    			 (currentClassDesc = (ObjectStreamClass)classDescStack.pop()) != null);
-    	    } finally {
-		classDescStack.setSize(stackMark);
-    	    }
-    	}
+            } while (classDescStack.size() > stackMark &&
+                 (currentClassDesc = (ObjectStreamClass)classDescStack.pop()) != null);
+            } finally {
+        classDescStack.setSize(stackMark);
+            }
+        }
     }
 
     /*
@@ -568,36 +568,36 @@ public class Test76
      * the reader returns a boolean...fix later
      */
     private void invokeObjectWriter(ObjectStreamClass osc, Object obj)
-	throws IOException
+    throws IOException
     {
-	Class c = osc.forClass() ;
+    Class c = osc.forClass() ;
 
-    	try {
+        try {
 
-	    // Write format version
+        // Write format version
             orbStream.write_octet(streamFormatVersion);
 
             writeObjectState.enterWriteObject(this);
 
-	    // writeObject(obj, c, this);
-	    osc.writeObjectMethod.invoke( obj, writeObjectArgList ) ;
+        // writeObject(obj, c, this);
+        osc.writeObjectMethod.invoke( obj, writeObjectArgList ) ;
 
             writeObjectState.exitWriteObject(this);
 
-    	} catch (InvocationTargetException e) {
-    	    Throwable t = e.getTargetException();
-    	    if (t instanceof IOException)
-    		throw (IOException)t;
-    	    else if (t instanceof RuntimeException)
-    		throw (RuntimeException) t;
-    	    else if (t instanceof Error)
-    		throw (Error) t;
-    	    else
-		// XXX I18N, Logging needed.
-    		throw new Error("invokeObjectWriter internal error",e);
-    	} catch (IllegalAccessException e) {
-    	    // cannot happen
-    	}
+        } catch (InvocationTargetException e) {
+            Throwable t = e.getTargetException();
+            if (t instanceof IOException)
+            throw (IOException)t;
+            else if (t instanceof RuntimeException)
+            throw (RuntimeException) t;
+            else if (t instanceof Error)
+            throw (Error) t;
+            else
+        // XXX I18N, Logging needed.
+            throw new Error("invokeObjectWriter internal error",e);
+        } catch (IllegalAccessException e) {
+            // cannot happen
+        }
     }
 
     void writeField(ObjectStreamField field, Object value) throws IOException {
@@ -607,58 +607,58 @@ public class Test76
                     orbStream.write_octet((byte)0);
                 else
                     orbStream.write_octet(((Byte)value).byteValue());
-		break;
-	    case 'C':
+        break;
+        case 'C':
                 if (value == null)
                     orbStream.write_wchar((char)0);
                 else
                     orbStream.write_wchar(((Character)value).charValue());
-		break;
-	    case 'F':
+        break;
+        case 'F':
                 if (value == null)
                     orbStream.write_float((float)0);
                 else
                     orbStream.write_float(((Float)value).floatValue());
-		break;
+        break;
             case 'D':
                 if (value == null)
                     orbStream.write_double((double)0);
                 else
                     orbStream.write_double(((Double)value).doubleValue());
-		break;
-	    case 'I':
+        break;
+        case 'I':
                 if (value == null)
                     orbStream.write_long((int)0);
                 else
                     orbStream.write_long(((Integer)value).intValue());
-		break;
-	    case 'J':
+        break;
+        case 'J':
                 if (value == null)
                     orbStream.write_longlong((long)0);
                 else
                     orbStream.write_longlong(((Long)value).longValue());
-		break;
-	    case 'S':
+        break;
+        case 'S':
                 if (value == null)
                     orbStream.write_short((short)0);
                 else
                     orbStream.write_short(((Short)value).shortValue());
-		break;
-	    case 'Z':
+        break;
+        case 'Z':
                 if (value == null)
                     orbStream.write_boolean(false);
                 else
                     orbStream.write_boolean(((Boolean)value).booleanValue());
-		break;
-	    case '[':
-	    case 'L':
+        break;
+        case '[':
+        case 'L':
                 // What to do if it's null?
                 writeObjectField(field, value);
-		break;
-	    default:
-		// XXX I18N, Logging needed.
-		throw new InvalidClassException(currentClassDesc.getName());
-	    }
+        break;
+        default:
+        // XXX I18N, Logging needed.
+        throw new InvalidClassException(currentClassDesc.getName());
+        }
     }
 
     private void writeObjectField(ObjectStreamField field,
@@ -670,7 +670,7 @@ public class Test76
         else {
             Class type = field.getType();
             int callType = ValueHandlerImpl.kValueType;
-					
+                    
             if (type.isInterface()) { 
                 String className = type.getName();
                 
@@ -693,7 +693,7 @@ public class Test76
                     callType = ValueHandlerImpl.kAbstractType;
                 }
             }
-					
+                    
             switch (callType) {
             case ValueHandlerImpl.kRemoteType: 
                 Util.writeRemoteObject(orbStream, objectValue);
@@ -719,62 +719,62 @@ public class Test76
      * write* method on this class.
      */
     private void outputClassFields(Object o, Class cl,
-				   ObjectStreamField[] fields)
-	throws IOException, InvalidClassException {
+                   ObjectStreamField[] fields)
+    throws IOException, InvalidClassException {
 
-    	for (int i = 0; i < fields.length; i++) {
-    	    if (fields[i].getField() == null)
-		// XXX I18N, Logging needed.
-    		throw new InvalidClassException(cl.getName(),
-						"Nonexistent field " + fields[i].getName());
+        for (int i = 0; i < fields.length; i++) {
+            if (fields[i].getField() == null)
+        // XXX I18N, Logging needed.
+            throw new InvalidClassException(cl.getName(),
+                        "Nonexistent field " + fields[i].getName());
 
-	    try {
-		switch (fields[i].getTypeCode()) {
-		    case 'B':
-			byte byteValue = fields[i].getField().getByte( o ) ;
-			orbStream.write_octet(byteValue);
-			break;
-		    case 'C':
-			char charValue = fields[i].getField().getChar( o ) ;
-			orbStream.write_wchar(charValue);
-			break;
-		    case 'F':
-			float floatValue = fields[i].getField().getFloat( o ) ;
-			orbStream.write_float(floatValue);
-			break;
-		    case 'D' :
-			double doubleValue = fields[i].getField().getDouble( o ) ;
-			orbStream.write_double(doubleValue);
-			break;
-		    case 'I':
-			int intValue = fields[i].getField().getInt( o ) ;
-			orbStream.write_long(intValue);
-			break;
-		    case 'J':
-			long longValue = fields[i].getField().getLong( o ) ;
-			orbStream.write_longlong(longValue);
-			break;
-		    case 'S':
-			short shortValue = fields[i].getField().getShort( o ) ;
-			orbStream.write_short(shortValue);
-			break;
-		    case 'Z':
-			boolean booleanValue = fields[i].getField().getBoolean( o ) ;
-			orbStream.write_boolean(booleanValue);
-			break;
-		    case '[':
-		    case 'L':
-			Object objectValue = fields[i].getField().get( o ) ;
-			writeObjectField(fields[i], objectValue);
-			break;
-		    default:
-			// XXX I18N, Logging needed.
-			throw new InvalidClassException(cl.getName());
-		}
-	    } catch (IllegalAccessException exc) {
-		throw wrapper.illegalFieldAccess( exc, fields[i].getName() ) ;
-	    }
-    	}
+        try {
+        switch (fields[i].getTypeCode()) {
+            case 'B':
+            byte byteValue = fields[i].getField().getByte( o ) ;
+            orbStream.write_octet(byteValue);
+            break;
+            case 'C':
+            char charValue = fields[i].getField().getChar( o ) ;
+            orbStream.write_wchar(charValue);
+            break;
+            case 'F':
+            float floatValue = fields[i].getField().getFloat( o ) ;
+            orbStream.write_float(floatValue);
+            break;
+            case 'D' :
+            double doubleValue = fields[i].getField().getDouble( o ) ;
+            orbStream.write_double(doubleValue);
+            break;
+            case 'I':
+            int intValue = fields[i].getField().getInt( o ) ;
+            orbStream.write_long(intValue);
+            break;
+            case 'J':
+            long longValue = fields[i].getField().getLong( o ) ;
+            orbStream.write_longlong(longValue);
+            break;
+            case 'S':
+            short shortValue = fields[i].getField().getShort( o ) ;
+            orbStream.write_short(shortValue);
+            break;
+            case 'Z':
+            boolean booleanValue = fields[i].getField().getBoolean( o ) ;
+            orbStream.write_boolean(booleanValue);
+            break;
+            case '[':
+            case 'L':
+            Object objectValue = fields[i].getField().get( o ) ;
+            writeObjectField(fields[i], objectValue);
+            break;
+            default:
+            // XXX I18N, Logging needed.
+            throw new InvalidClassException(cl.getName());
+        }
+        } catch (IllegalAccessException exc) {
+        throw wrapper.illegalFieldAccess( exc, fields[i].getName() ) ;
+        }
+        }
     }
 }
 

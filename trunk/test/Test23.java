@@ -18,11 +18,11 @@ public interface Net {
     public void setStartPosition(int modus) {
     }
 
-	public void nextStep () {
-	}
+    public void nextStep () {
+    }
 
-	/**schaufelt alle neuen Gewichte zu den alten um*/
-	public void move () {
-	}
+    /**schaufelt alle neuen Gewichte zu den alten um*/
+    public void move () {
+    }
 }
 

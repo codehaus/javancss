@@ -73,12 +73,12 @@ public class TestSuiteThread extends Thread
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jass.runtime.traceAssertion.Parameter[] jassParameters; jassParameters = new jass.runtime.traceAssertion.Parameter[] {new jass.runtime.traceAssertion.Parameter(tm)}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc.testsuite", "TestSuiteThread", "TestSuiteThread(java.lang.String)", true), jassParameters);
 
 
-  	/* precondition */
-  	if (!((tm.equals("console")||tm.equals("servletlog")||tm.equals("window")||tm.equals("writer")))) throw new jass.runtime.PreconditionException("idebughc.testsuite.TestSuiteThread","TestSuiteThread(java.lang.String)",73,"tm_valid");
+      /* precondition */
+      if (!((tm.equals("console")||tm.equals("servletlog")||tm.equals("window")||tm.equals("writer")))) throw new jass.runtime.PreconditionException("idebughc.testsuite.TestSuiteThread","TestSuiteThread(java.lang.String)",73,"tm_valid");
 
     this.testMode = tm;
-  	/* postcondition */
-  	if (!((testMode==tm))) throw new jass.runtime.PostconditionException("idebughc.testsuite.TestSuiteThread","TestSuiteThread(java.lang.String)",78,"testMode_is_valid");
+      /* postcondition */
+      if (!((testMode==tm))) throw new jass.runtime.PostconditionException("idebughc.testsuite.TestSuiteThread","TestSuiteThread(java.lang.String)",78,"testMode_is_valid");
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jassParameters = new jass.runtime.traceAssertion.Parameter[] {}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc.testsuite", "TestSuiteThread", "TestSuiteThread(java.lang.String)", false), jassParameters);
 
   }
@@ -421,57 +421,57 @@ public class TestSuiteThread extends Thread
 
   }
 
-	protected void finalize () throws java.lang.Throwable {
+    protected void finalize () throws java.lang.Throwable {
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jass.runtime.traceAssertion.Parameter[] jassParameters; jassParameters = new jass.runtime.traceAssertion.Parameter[] {}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc.testsuite", "TestSuiteThread", "finalize()", true), jassParameters);
-		super.finalize();
+        super.finalize();
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jassParameters = new jass.runtime.traceAssertion.Parameter[] {}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc.testsuite", "TestSuiteThread", "finalize()", false), jassParameters);
-	}
+    }
 
-	public boolean equals (java.lang.Object par0) {
+    public boolean equals (java.lang.Object par0) {
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jass.runtime.traceAssertion.Parameter[] jassParameters; jassParameters = new jass.runtime.traceAssertion.Parameter[] {new jass.runtime.traceAssertion.Parameter(par0)}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc.testsuite", "TestSuiteThread", "equals(java.lang.Object)", true), jassParameters);
-		boolean returnValue = super.equals(par0);
+        boolean returnValue = super.equals(par0);
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jassParameters = new jass.runtime.traceAssertion.Parameter[] {new jass.runtime.traceAssertion.Parameter(returnValue)}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc.testsuite", "TestSuiteThread", "equals(java.lang.Object)", false), jassParameters);
-		return returnValue;
-	}
+        return returnValue;
+    }
 
-	public java.lang.String toString () {
+    public java.lang.String toString () {
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jass.runtime.traceAssertion.Parameter[] jassParameters; jassParameters = new jass.runtime.traceAssertion.Parameter[] {}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc.testsuite", "TestSuiteThread", "toString()", true), jassParameters);
-		java.lang.String returnValue = super.toString();
+        java.lang.String returnValue = super.toString();
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jassParameters = new jass.runtime.traceAssertion.Parameter[] {new jass.runtime.traceAssertion.Parameter(returnValue)}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc.testsuite", "TestSuiteThread", "toString()", false), jassParameters);
-		return returnValue;
-	}
+        return returnValue;
+    }
 
-	public void interrupt () {
+    public void interrupt () {
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jass.runtime.traceAssertion.Parameter[] jassParameters; jassParameters = new jass.runtime.traceAssertion.Parameter[] {}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc.testsuite", "TestSuiteThread", "interrupt()", true), jassParameters);
-		super.interrupt();
+        super.interrupt();
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jassParameters = new jass.runtime.traceAssertion.Parameter[] {}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc.testsuite", "TestSuiteThread", "interrupt()", false), jassParameters);
-	}
+    }
 
-	public boolean isInterrupted () {
+    public boolean isInterrupted () {
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jass.runtime.traceAssertion.Parameter[] jassParameters; jassParameters = new jass.runtime.traceAssertion.Parameter[] {}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc.testsuite", "TestSuiteThread", "isInterrupted()", true), jassParameters);
-		boolean returnValue = super.isInterrupted();
+        boolean returnValue = super.isInterrupted();
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jassParameters = new jass.runtime.traceAssertion.Parameter[] {new jass.runtime.traceAssertion.Parameter(returnValue)}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc.testsuite", "TestSuiteThread", "isInterrupted()", false), jassParameters);
-		return returnValue;
-	}
+        return returnValue;
+    }
 
-	public void destroy () {
+    public void destroy () {
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jass.runtime.traceAssertion.Parameter[] jassParameters; jassParameters = new jass.runtime.traceAssertion.Parameter[] {}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc.testsuite", "TestSuiteThread", "destroy()", true), jassParameters);
-		super.destroy();
+        super.destroy();
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jassParameters = new jass.runtime.traceAssertion.Parameter[] {}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc.testsuite", "TestSuiteThread", "destroy()", false), jassParameters);
-	}
+    }
 
-	public java.lang.ClassLoader getContextClassLoader () {
+    public java.lang.ClassLoader getContextClassLoader () {
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jass.runtime.traceAssertion.Parameter[] jassParameters; jassParameters = new jass.runtime.traceAssertion.Parameter[] {}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc.testsuite", "TestSuiteThread", "getContextClassLoader()", true), jassParameters);
-		java.lang.ClassLoader returnValue = super.getContextClassLoader();
+        java.lang.ClassLoader returnValue = super.getContextClassLoader();
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jassParameters = new jass.runtime.traceAssertion.Parameter[] {new jass.runtime.traceAssertion.Parameter(returnValue)}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc.testsuite", "TestSuiteThread", "getContextClassLoader()", false), jassParameters);
-		return returnValue;
-	}
+        return returnValue;
+    }
 
-	public void setContextClassLoader (java.lang.ClassLoader par0) {
+    public void setContextClassLoader (java.lang.ClassLoader par0) {
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jass.runtime.traceAssertion.Parameter[] jassParameters; jassParameters = new jass.runtime.traceAssertion.Parameter[] {new jass.runtime.traceAssertion.Parameter(par0)}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc.testsuite", "TestSuiteThread", "setContextClassLoader(java.lang.ClassLoader)", true), jassParameters);
-		super.setContextClassLoader(par0);
+        super.setContextClassLoader(par0);
     jass.runtime.traceAssertion.CommunicationManager.internalAction = true; jassParameters = new jass.runtime.traceAssertion.Parameter[] {}; jass.runtime.traceAssertion.CommunicationManager.internalAction = false; jass.runtime.traceAssertion.CommunicationManager.communicate(this, new jass.runtime.traceAssertion.MethodReference("idebughc.testsuite", "TestSuiteThread", "setContextClassLoader(java.lang.ClassLoader)", false), jassParameters);
-	} // end of inner class DummyServletContext
+    } // end of inner class DummyServletContext
 
   // Protected Methods
   // Package Methods
