@@ -36,7 +36,7 @@ import java.util.Vector;
  * @version   $Id: AsciiFormatter.java,v 1.7 2006/04/16 11:42:17 clemens Exp clemens $
  */
 public class AsciiFormatter implements Formatter
-				       , JavancssConstants
+                                       , JavancssConstants
 {
     static final int LEN_NR = 3;
     private static final String NL = System.getProperty("line.separator");
@@ -52,45 +52,45 @@ public class AsciiFormatter implements Formatter
 
     private String _formatListHeader( int lines, String[] header )
     {
-	_header = header;
+        _header = header;
 
-	_nr = 0;
+        _nr = 0;
 
-	StringBuffer sRetVal = new StringBuffer();
+        StringBuffer sRetVal = new StringBuffer();
 
         _length = Util.itoa( lines ).length();
         int spaces = Math.max( 0, _length - LEN_NR );
         _length = spaces + LEN_NR;
         sRetVal.append( Util.multiplyChar(' ', spaces) );
-	sRetVal.append( "Nr." );
-	for( int nr = 0; nr < header.length; nr++ )
-	{
-	    sRetVal.append( " " ).append( header[ nr ] );
-	}
-	sRetVal.append( NL );
+        sRetVal.append( "Nr." );
+        for( int nr = 0; nr < header.length; nr++ )
+        {
+            sRetVal.append( " " ).append( header[ nr ] );
+        }
+        sRetVal.append( NL );
 
-	return sRetVal.toString();
+        return sRetVal.toString();
     }
 
     StringBuffer _line = new StringBuffer();
 
     private String _formatListLine( String name, int[] value )
     {
-	StringBuffer sLine = new StringBuffer();
+        StringBuffer sLine = new StringBuffer();
 
-	_nr++;
-	sLine.append( Util.paddWithSpace( _nr, _length ) );
-	for( int index = 0; index < _header.length - 1; index++ )
-	{
-	    sLine.append( " " );
-	    sLine.append( Util.paddWithSpace( value[ index ]
-					      , _header[ index ].length() ) );
-	}
-	sLine.append( " " );
-	sLine.append( name );
-	sLine.append( NL );
+        _nr++;
+        sLine.append( Util.paddWithSpace( _nr, _length ) );
+        for( int index = 0; index < _header.length - 1; index++ )
+        {
+            sLine.append( " " );
+            sLine.append( Util.paddWithSpace( value[ index ]
+                                              , _header[ index ].length() ) );
+        }
+        sLine.append( " " );
+        sLine.append( name );
+        sLine.append( NL );
 
-	return sLine.toString();
+        return sLine.toString();
     }
 
     private double _divide( int divident, int divisor )
@@ -100,7 +100,7 @@ public class AsciiFormatter implements Formatter
             dRetVal = Math.round(((double)divident/(double)divisor)*100)/100.0;
         }
 
-	return dRetVal;
+        return dRetVal;
     }
 
     private double _divide( long divident, long divisor )
@@ -110,33 +110,33 @@ public class AsciiFormatter implements Formatter
             dRetVal = Math.round(((double)divident/(double)divisor)*100)/100.0;
         }
 
-	return dRetVal;
+        return dRetVal;
     }
 
     private String _formatPackageMatrix( int packages
-					 , int classesSum
-					 , int functionsSum
+                                         , int classesSum
+                                         , int functionsSum
                                          , int javadocsSum
-					 , int ncssSum      )
+                                         , int ncssSum      )
     {
         ((DecimalFormat)_pNumberFormat).applyPattern( "###0.00" );
         int maxItemLength = _pNumberFormat.format(ncssSum).length();
         maxItemLength = Math.max(9, maxItemLength);
         String sRetVal = Util.paddWithSpace( "Packages"
-					     , maxItemLength ) 
-	    + " " 
-	    + Util.paddWithSpace("Classes", maxItemLength) 
-	    + " " 
-	    + Util.paddWithSpace("Functions", maxItemLength) 
-	    + " " 
-	    + Util.paddWithSpace("NCSS", maxItemLength) 
-	    + " " 
-	    + Util.paddWithSpace("Javadocs", maxItemLength) 
-	    + " | per" + NL;
+                                             , maxItemLength ) 
+            + " " 
+            + Util.paddWithSpace("Classes", maxItemLength) 
+            + " " 
+            + Util.paddWithSpace("Functions", maxItemLength) 
+            + " " 
+            + Util.paddWithSpace("NCSS", maxItemLength) 
+            + " " 
+            + Util.paddWithSpace("Javadocs", maxItemLength) 
+            + " | per" + NL;
 
         sRetVal += Util.multiplyChar( '-', (maxItemLength + 1)*6 + 1 )
-	    + NL
-	    + Util.paddWithSpace(_pNumberFormat.format
+            + NL
+            + Util.paddWithSpace(_pNumberFormat.format
                                       (packages), maxItemLength) + " " +
                Util.paddWithSpace(_pNumberFormat.format
                                   (classesSum), maxItemLength) + " " +
@@ -149,47 +149,47 @@ public class AsciiFormatter implements Formatter
 
 
         sRetVal += Util.multiplyChar( ' ', maxItemLength + 1 ) 
-	    + Util.paddWithSpace( _pNumberFormat.format( _divide( classesSum, packages ) )
-				  , maxItemLength )
-	    + " "
-	    + Util.paddWithSpace( _pNumberFormat.format( _divide( functionsSum, packages ) )
-				  , maxItemLength )
-	    + " " 
-	    + Util.paddWithSpace( _pNumberFormat.format( _divide( ncssSum, packages ) )
-				  , maxItemLength )
-	    + " " 
-	    + Util.paddWithSpace( _pNumberFormat.format( _divide( javadocsSum, packages ) )
-				  , maxItemLength )
-	    + " | Package" + NL;
+            + Util.paddWithSpace( _pNumberFormat.format( _divide( classesSum, packages ) )
+                                  , maxItemLength )
+            + " "
+            + Util.paddWithSpace( _pNumberFormat.format( _divide( functionsSum, packages ) )
+                                  , maxItemLength )
+            + " " 
+            + Util.paddWithSpace( _pNumberFormat.format( _divide( ncssSum, packages ) )
+                                  , maxItemLength )
+            + " " 
+            + Util.paddWithSpace( _pNumberFormat.format( _divide( javadocsSum, packages ) )
+                                  , maxItemLength )
+            + " | Package" + NL;
 
         sRetVal += Util.multiplyChar( ' ', (maxItemLength + 1)*2 ) 
-	    + Util.paddWithSpace( _pNumberFormat.format( _divide( functionsSum, classesSum ) )
+            + Util.paddWithSpace( _pNumberFormat.format( _divide( functionsSum, classesSum ) )
                                   , maxItemLength ) 
-	    + " " 
-	    + Util.paddWithSpace( _pNumberFormat.format( _divide( ncssSum, classesSum ) )
-				  , maxItemLength )
-	    + " " 
-	    + Util.paddWithSpace( _pNumberFormat.format( _divide( javadocsSum, classesSum ) )
+            + " " 
+            + Util.paddWithSpace( _pNumberFormat.format( _divide( ncssSum, classesSum ) )
+                                  , maxItemLength )
+            + " " 
+            + Util.paddWithSpace( _pNumberFormat.format( _divide( javadocsSum, classesSum ) )
                                   , maxItemLength ) 
-	    + " | Class" + NL;
-	
-	sRetVal += Util.multiplyChar( ' ', (maxItemLength + 1)*3 )
+            + " | Class" + NL;
+        
+        sRetVal += Util.multiplyChar( ' ', (maxItemLength + 1)*3 )
                + Util.paddWithSpace( _pNumberFormat.format( _divide( ncssSum, functionsSum ) )
                                      , maxItemLength )
                + " "
                + Util.paddWithSpace( _pNumberFormat.format( _divide( javadocsSum, functionsSum ) )
-				  , maxItemLength )
+                                  , maxItemLength )
                + " | Function" + NL;
         ((DecimalFormat)_pNumberFormat).applyPattern( "#,##0.00" );
         
-	return sRetVal;
+        return sRetVal;
     }
 
     public AsciiFormatter( Javancss javancss )
     {
-	super();
+        super();
 
-	_javancss = javancss;
+        _javancss = javancss;
 
         _pNumberFormat = NumberFormat.getInstance( Locale.US );
         ((DecimalFormat)_pNumberFormat).applyPattern( "#,##0.00" );
@@ -197,24 +197,24 @@ public class AsciiFormatter implements Formatter
 
     public String printPackageNcss() 
     {
-	Vector vPackageMetrics = _javancss.getPackageMetrics();
+        Vector vPackageMetrics = _javancss.getPackageMetrics();
 
         int packages = vPackageMetrics.size();
 
         String sRetVal = _formatListHeader( packages
-					    , new String[] {   "  Classes"
-							     , "Functions"
-						             , "     NCSS"
-							     , " Javadocs"
-						             , "Package" } );
+                                            , new String[] {   "  Classes"
+                                                             , "Functions"
+                                                             , "     NCSS"
+                                                             , " Javadocs"
+                                                             , "Package" } );
 
         int classesSum   = 0;
         int functionsSum = 0;
         int javadocsSum  = 0;
         int ncssSum      = 0;
         for( Enumeration ePackages = vPackageMetrics.elements()
-	     ; ePackages.hasMoreElements()
-	     ; )
+             ; ePackages.hasMoreElements()
+             ; )
         {
             PackageMetric pPackageMetric = (PackageMetric)ePackages.nextElement();
 
@@ -222,44 +222,44 @@ public class AsciiFormatter implements Formatter
             functionsSum += pPackageMetric.functions;
             ncssSum      += pPackageMetric.ncss;
             javadocsSum  += pPackageMetric.javadocs;
-	    sRetVal += _formatListLine( pPackageMetric.name
-					, new int[] { pPackageMetric.classes
-						      , pPackageMetric.functions
-						      , pPackageMetric.ncss
+            sRetVal += _formatListLine( pPackageMetric.name
+                                        , new int[] { pPackageMetric.classes
+                                                      , pPackageMetric.functions
+                                                      , pPackageMetric.ncss
                                                       , pPackageMetric.javadocs
                                         } );
         }
 
-	int packagesLength = Util.itoa( packages ).length();
-	int spaces = Math.max( packagesLength, LEN_NR ) + 1;
+        int packagesLength = Util.itoa( packages ).length();
+        int spaces = Math.max( packagesLength, LEN_NR ) + 1;
         sRetVal += Util.multiplyChar
                (' ', spaces ) +
                "--------- --------- --------- ---------" + NL;
 
         sRetVal += Util.multiplyChar(' ', spaces ) 
-	    + Util.paddWithSpace( classesSum, 9 )
-	    + " "
-	    + Util.paddWithSpace( functionsSum, 9 )
-	    + " "
-	    + Util.paddWithSpace( ncssSum, 9 )
-	    + " "
-	    + Util.paddWithSpace( javadocsSum, 9 )
-	    + " Total" + NL + NL;
+            + Util.paddWithSpace( classesSum, 9 )
+            + " "
+            + Util.paddWithSpace( functionsSum, 9 )
+            + " "
+            + Util.paddWithSpace( ncssSum, 9 )
+            + " "
+            + Util.paddWithSpace( javadocsSum, 9 )
+            + " Total" + NL + NL;
 
-	sRetVal += _formatPackageMatrix( packages
-					 , classesSum
-					 , functionsSum
+        sRetVal += _formatPackageMatrix( packages
+                                         , classesSum
+                                         , functionsSum
                                          , javadocsSum
-					 , ncssSum      );
+                                         , ncssSum      );
 
         return sRetVal;
     }
 
     private String _formatObjectResume( int objects
-					, long lObjectSum
-					, long lFunctionSum
-					, long lClassesSum
-					, long lJVDCSum     )
+                                        , long lObjectSum
+                                        , long lFunctionSum
+                                        , long lClassesSum
+                                        , long lJVDCSum     )
     {
         double fAverageNcss     = _divide( lObjectSum  , objects );
         double fAverageFuncs    = _divide( lFunctionSum, objects );
@@ -280,27 +280,27 @@ public class AsciiFormatter implements Formatter
                                   (fAverageJavadocs), 9) + NL;
         sRetVal += "Program NCSS:                    " +
                Util.paddWithSpace(pNumberFormat.format
-				  (_javancss.getNcss()), 9) + NL;
-	
-	return sRetVal;
+                                  (_javancss.getNcss()), 9) + NL;
+        
+        return sRetVal;
     }
 
     public String printObjectNcss() {
-	Vector vObjectMetrics = _javancss.getObjectMetrics();
+        Vector vObjectMetrics = _javancss.getObjectMetrics();
 
         String sRetVal = _formatListHeader( vObjectMetrics.size()
-					    , new String[] { "NCSS"
-							     , "Functions"
-							     , "Classes"
-							     , "Javadocs"
-							     , "Class"     } );
+                                            , new String[] { "NCSS"
+                                                             , "Functions"
+                                                             , "Classes"
+                                                             , "Javadocs"
+                                                             , "Class"     } );
         long lFunctionSum = 0;
         long lClassesSum  = 0;
         long lObjectSum   = 0;
         long lJVDCSum     = 0;
         for( Enumeration eClasses = vObjectMetrics.elements()
-	     ; eClasses.hasMoreElements()
-	     ; )
+             ; eClasses.hasMoreElements()
+             ; )
         {
             Vector vClassMetrics = (Vector)eClasses.nextElement();
             String sClass = (String)vClassMetrics.elementAt(OBJ_NAME);
@@ -313,27 +313,27 @@ public class AsciiFormatter implements Formatter
             lClassesSum  += (long)classes;
             lJVDCSum     += (long)jvdcs;
             sRetVal += _formatListLine( sClass
-					, new int[] { objectNcss
-						      , functions
-						      , classes
-						      , jvdcs     } );
+                                        , new int[] { objectNcss
+                                                      , functions
+                                                      , classes
+                                                      , jvdcs     } );
         }
 
-	sRetVal += _formatObjectResume( vObjectMetrics.size()
-					, lObjectSum
-					, lFunctionSum
-					, lClassesSum
-					, lJVDCSum            );
+        sRetVal += _formatObjectResume( vObjectMetrics.size()
+                                        , lObjectSum
+                                        , lFunctionSum
+                                        , lClassesSum
+                                        , lJVDCSum            );
         
         return sRetVal;
     }
 
     private String _formatFunctionResume( int functions
-					  , long lFunctionSum
-					  , long lCCNSum
-					  , long lJVDCSum     )
+                                          , long lFunctionSum
+                                          , long lCCNSum
+                                          , long lJVDCSum     )
     {
-	StringBuffer sRetVal = new StringBuffer();
+        StringBuffer sRetVal = new StringBuffer();
 
         double fAverageNcss = _divide( lFunctionSum, functions );
         double fAverageCCN  = _divide( lCCNSum     , functions );
@@ -353,56 +353,56 @@ public class AsciiFormatter implements Formatter
                append(NL);
         sRetVal.append("Program NCSS:          ").append
                (Util.paddWithSpace(pNumberFormat.format
-				   (_javancss.getNcss()), 10)).
-	       append(NL);
+                                   (_javancss.getNcss()), 10)).
+               append(NL);
 
-	return sRetVal.toString();
+        return sRetVal.toString();
     }
 
     public String printFunctionNcss() 
     {
         StringBuffer sRetVal = new StringBuffer(80000);
 
-	Vector vFunctionMetrics = _javancss.getFunctionMetrics();
+        Vector vFunctionMetrics = _javancss.getFunctionMetrics();
 
         sRetVal.append( _formatListHeader( vFunctionMetrics.size()
-					   , new String[] { "NCSS"
-							    , "CCN"
-							    , "JVDC"
-							    , "Function" } ) );
+                                           , new String[] { "NCSS"
+                                                            , "CCN"
+                                                            , "JVDC"
+                                                            , "Function" } ) );
 
         long lFunctionSum = 0;
         long lCCNSum      = 0;
         long lJVDCSum     = 0;
         for( Enumeration eFunctions = vFunctionMetrics.elements()
-	     ; eFunctions.hasMoreElements()
-	     ; )
+             ; eFunctions.hasMoreElements()
+             ; )
         {
             Vector vSingleFunctionMetrics = (Vector)eFunctions.nextElement();
             String sFunction = null;
-	    sFunction = (String)vSingleFunctionMetrics.elementAt(FCT_NAME);
+            sFunction = (String)vSingleFunctionMetrics.elementAt(FCT_NAME);
             int functionNcss = ((Integer)vSingleFunctionMetrics.elementAt(FCT_NCSS)).intValue();
             int functionCCN  = ((Integer)vSingleFunctionMetrics.elementAt(FCT_CCN )).intValue();
             int functionJVDC = ((Integer)vSingleFunctionMetrics.elementAt(FCT_JVDC)).intValue();
             lFunctionSum += (long)functionNcss;
             lCCNSum      += (long)functionCCN;
             lJVDCSum     += (long)functionJVDC; 
-	    sRetVal.append( _formatListLine( sFunction
-					     , new int[] { functionNcss
-							   , functionCCN
-							   , functionJVDC } ) );
+            sRetVal.append( _formatListLine( sFunction
+                                             , new int[] { functionNcss
+                                                           , functionCCN
+                                                           , functionJVDC } ) );
         }
 
-	sRetVal.append( _formatFunctionResume( vFunctionMetrics.size()
-					       , lFunctionSum
-					       , lCCNSum
-					       , lJVDCSum              ) );
+        sRetVal.append( _formatFunctionResume( vFunctionMetrics.size()
+                                               , lFunctionSum
+                                               , lCCNSum
+                                               , lJVDCSum              ) );
 
         return sRetVal.toString();
     }
 
     public String printJavaNcss()
     {
-	return "Java NCSS: " + _javancss.getNcss() + NL;
+        return "Java NCSS: " + _javancss.getNcss() + NL;
     }
 }

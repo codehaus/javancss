@@ -50,31 +50,31 @@ public class JavancssTest extends    Test
     private void _doNcssTest( int testNumber, int expectedNcss )
     {
         Javancss pJavancss = new Javancss( FileUtil.concatPath( _sTestDir
-								, "Test" 
-								  + testNumber 
-								  + ".java"    ) );
-	int ncss = pJavancss.getNcss();
+                                                                , "Test" 
+                                                                  + testNumber 
+                                                                  + ".java"    ) );
+        int ncss = pJavancss.getNcss();
         bugIf( ncss != expectedNcss
-	       , "Parsing file Test"
-	         + testNumber
-	         + ".java failed. Ncss is "
-	         + ncss 
-	         + " and not "
-	         + expectedNcss
-	         + "."                      );
+               , "Parsing file Test"
+                 + testNumber
+                 + ".java failed. Ncss is "
+                 + ncss 
+                 + " and not "
+                 + expectedNcss
+                 + "."                      );
     }
 
     private void _doNcssTest( int testNumber )
     {
         Javancss pJavancss = new Javancss( FileUtil.concatPath( _sTestDir
-								, "Test" 
-								  + testNumber 
-								  + ".java"    ) );
-	int ncss = pJavancss.getNcss();
+                                                                , "Test" 
+                                                                  + testNumber 
+                                                                  + ".java"    ) );
+        int ncss = pJavancss.getNcss();
         bugIf( ncss == 0
-	       , "Parsing file Test"
-	         + testNumber
-	         + ".java failed. Ncss is 0" );
+               , "Parsing file Test"
+                 + testNumber
+                 + ".java failed. Ncss is 0" );
     }
 
     /**
@@ -88,7 +88,7 @@ public class JavancssTest extends    Test
     private void _checkJavadocs()
     {
         Javancss pJavancss = new Javancss( FileUtil.concatPath( _sTestDir
-								, "Test20.java" ) );
+                                                                , "Test20.java" ) );
         
         Vector vObjectMetrics = pJavancss.getObjectMetrics();
         Vector vClassMetrics  = (Vector)vObjectMetrics.elementAt( 0 );
@@ -237,16 +237,16 @@ public class JavancssTest extends    Test
         String sLocalPath = _sTestDir; //FileUtil.getClassPath(this);
         Util.debug( this, "_doIt()._sTestDir: " + _sTestDir );
 
-	boolean bSkip = false;
-	/*
+        boolean bSkip = false;
+        /*
         bSkip = true;
         // */
 
         Javancss pJavancss = null;
 
-	if ( !bSkip ) {
-		_checkJavadocLines();
-		
+        if ( !bSkip ) {
+                _checkJavadocLines();
+                
         _checkInnerClasses();
 
         // Nr. 1
@@ -478,33 +478,33 @@ public class JavancssTest extends    Test
                , "Parsing file Test51.java failed!" );
 
         pJavancss = new Javancss( FileUtil.concatPath(sLocalPath, "Test52.java") );
-	int test52ncss = pJavancss.getNcss();
+        int test52ncss = pJavancss.getNcss();
         bugIf( test52ncss != 12
                , "Parsing file Test52.java failed. Ncss is " + test52ncss + " and not 12." );
 
         pJavancss = new Javancss( FileUtil.concatPath(sLocalPath, "Test53.java") );
-	int test53ncss = pJavancss.getNcss();
+        int test53ncss = pJavancss.getNcss();
         bugIf( test53ncss != 4
                , "Parsing file Test53.java failed. Ncss is " + test53ncss + " and not 4." );
 
-	_doNcssTest( 54, 9 );
-	_doNcssTest( 55, 5 );
-	_doNcssTest( 56 );
-	_doNcssTest( 57 );
+        _doNcssTest( 54, 9 );
+        _doNcssTest( 55, 5 );
+        _doNcssTest( 56 );
+        _doNcssTest( 57 );
 
-	}
+        }
 
-	pJavancss = measureTestFile( sLocalPath, 56 );
-	String sOutput56 = pJavancss.printPackageNcss();
+        pJavancss = measureTestFile( sLocalPath, 56 );
+        String sOutput56 = pJavancss.printPackageNcss();
         sOutput56 += "\n";
-	sOutput56 += pJavancss.printObjectNcss();
+        sOutput56 += pJavancss.printObjectNcss();
         sOutput56 += "\n";
-	sOutput56 += pJavancss.printFunctionNcss();
+        sOutput56 += pJavancss.printFunctionNcss();
         sOutput56 = Util.replace( sOutput56, "\r\n", "\n" );
-	String sCompare56 = FileUtil.readFile( FileUtil.concatPath( sLocalPath, "Output56.txt" ) );
-	Assert( sOutput56.equals( sCompare56 )
-		, "File test/Output56.txt and javancss output differs:\n"
-		+ sOutput56 );
+        String sCompare56 = FileUtil.readFile( FileUtil.concatPath( sLocalPath, "Output56.txt" ) );
+        Assert( sOutput56.equals( sCompare56 )
+                , "File test/Output56.txt and javancss output differs:\n"
+                + sOutput56 );
         FileUtil.writeFile( "t", sOutput56 );
 
         XmlFormatterTest xmlTest = new XmlFormatterTest( this );
@@ -512,30 +512,30 @@ public class JavancssTest extends    Test
         xmlTest.run();
         setTests( xmlTest );
 
-	_doNcssTest( 58,  37 );
-	_doNcssTest( 59, 122 );
-	_doNcssTest( 60,  35 );
-	_doNcssTest( 61, 203 );
-	_doNcssTest( 62, 616 );
-	_doNcssTest( 63, 330 );
-	_doNcssTest( 64,  70 );
-	_doNcssTest( 65, 301 );
+        _doNcssTest( 58,  37 );
+        _doNcssTest( 59, 122 );
+        _doNcssTest( 60,  35 );
+        _doNcssTest( 61, 203 );
+        _doNcssTest( 62, 616 );
+        _doNcssTest( 63, 330 );
+        _doNcssTest( 64,  70 );
+        _doNcssTest( 65, 301 );
         _doNcssTest( 66,   3 );
         _doNcssTest( 67,  31 );
 
         // check that javadocs are countet correctly
         // after patches for additional comment counting
-	pJavancss = new Javancss( FileUtil.concatPath( sLocalPath, "Test32.java" ) );
-	String sOutput32 = pJavancss.printPackageNcss();
+        pJavancss = new Javancss( FileUtil.concatPath( sLocalPath, "Test32.java" ) );
+        String sOutput32 = pJavancss.printPackageNcss();
         sOutput32 += "\n";
-	sOutput32 += pJavancss.printObjectNcss();
+        sOutput32 += pJavancss.printObjectNcss();
         sOutput32 += "\n";
-	sOutput32 += pJavancss.printFunctionNcss();
+        sOutput32 += pJavancss.printFunctionNcss();
         sOutput32 = Util.replace( sOutput32, "\r\n", "\n" );
-	String sCompare32 = FileUtil.readFile( FileUtil.concatPath( sLocalPath, "Output32.txt" ) );
-	Assert( sOutput32.equals( sCompare32 )
-		, "File test/Output32.txt and javancss output differs:\n"
-		+ sOutput32 );
+        String sCompare32 = FileUtil.readFile( FileUtil.concatPath( sLocalPath, "Output32.txt" ) );
+        Assert( sOutput32.equals( sCompare32 )
+                , "File test/Output32.txt and javancss output differs:\n"
+                + sOutput32 );
 
         // more comment counting
         _doNcssTest( 68, 3 );
@@ -624,19 +624,19 @@ public class JavancssTest extends    Test
     }
 
     private void _doJvdcsTest(int testFileNumber, int expectedJvdcsResult) {
-		Javancss pJavancss;
-		pJavancss = new Javancss( FileUtil.concatPath( _sTestDir
-		                                               , "Test" + testFileNumber + ".java"    ) );
-		Vector vObjectMetrics = pJavancss.getObjectMetrics();
-		Vector vClassMetrics = (Vector)vObjectMetrics.elementAt( 0 );
-		int jvdcs      = ((Integer)vClassMetrics.elementAt(OBJ_JVDCS)).intValue();
-		/*int jvdc = pJavancss.getJvdc();*/
-		bugIf( jvdcs != expectedJvdcsResult
-		   , "Parsing file Test" + testFileNumber + ".java failed. Jvdc is "
-		     + jvdcs 
-		     + " and not " + expectedJvdcsResult + "."
-		       );
-	}
+                Javancss pJavancss;
+                pJavancss = new Javancss( FileUtil.concatPath( _sTestDir
+                                                               , "Test" + testFileNumber + ".java"    ) );
+                Vector vObjectMetrics = pJavancss.getObjectMetrics();
+                Vector vClassMetrics = (Vector)vObjectMetrics.elementAt( 0 );
+                int jvdcs      = ((Integer)vClassMetrics.elementAt(OBJ_JVDCS)).intValue();
+                /*int jvdc = pJavancss.getJvdc();*/
+                bugIf( jvdcs != expectedJvdcsResult
+                   , "Parsing file Test" + testFileNumber + ".java failed. Jvdc is "
+                     + jvdcs 
+                     + " and not " + expectedJvdcsResult + "."
+                       );
+        }
 
     /**
      * Tests the cyclomatic complexity number measurement.
@@ -668,7 +668,7 @@ public class JavancssTest extends    Test
         pJavancss = measureTestFile( sLocalPath, 72 );
         vFunctions = pJavancss.getFunctionMetrics();
         int expectedCCN = 4;
-		int methodIndex = 0;      
+                int methodIndex = 0;      
         assertCCN( vFunctions, methodIndex, expectedCCN );
         
         expectedCCN = 4 + 1;
@@ -690,20 +690,20 @@ public class JavancssTest extends    Test
         _exitSubTest();
     }
 
-	private void assertCCN(Vector vFunctions, int methodIndex, int expectedCCN) {
-		int ccn;
-		ccn = getCCN( vFunctions, methodIndex );
-		Assert( ccn == expectedCCN
-		        , "Expected ccn was " + expectedCCN + " but the result is: " + ccn );		
-	}
+        private void assertCCN(Vector vFunctions, int methodIndex, int expectedCCN) {
+                int ccn;
+                ccn = getCCN( vFunctions, methodIndex );
+                Assert( ccn == expectedCCN
+                        , "Expected ccn was " + expectedCCN + " but the result is: " + ccn );                
+        }
 
-	private int getCCN(Vector vFunctions, int methodIndex) {
-		return ((Integer)((Vector)vFunctions.elementAt(methodIndex)).elementAt(FCT_CCN)).intValue();
-	}
+        private int getCCN(Vector vFunctions, int methodIndex) {
+                return ((Integer)((Vector)vFunctions.elementAt(methodIndex)).elementAt(FCT_CCN)).intValue();
+        }
 
-	private Javancss measureTestFile(String sLocalPath, int testFileId) {
-		return new Javancss(FileUtil.concatPath(sLocalPath, "Test" + testFileId + ".java"));
-	}
+        private Javancss measureTestFile(String sLocalPath, int testFileId) {
+                return new Javancss(FileUtil.concatPath(sLocalPath, "Test" + testFileId + ".java"));
+        }
 
     public void setTestDir( String sTestDir_ ) {
         _sTestDir = sTestDir_;

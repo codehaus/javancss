@@ -432,11 +432,11 @@ TOKEN :
 |
   < CHARACTER_LITERAL:
       "'"
-					 // "\r" eigendlich noch dazu, aber wegen bug
-					 // in java/text/TextBoundaryData.java
-					 // in zeile 55 columne 12 und zeile 69
-					 // columne 12 hier entfernt.
-					 // (   (~["'","\\","\n","\r"])
+                                         // "\r" eigendlich noch dazu, aber wegen bug
+                                         // in java/text/TextBoundaryData.java
+                                         // in zeile 55 columne 12 und zeile 69
+                                         // columne 12 hier entfernt.
+                                         // (   (~["'","\\","\n","\r"])
       (   (~["\\","\n"])
         | ("\\"
             ( ["n","t","b","r","f","\\","'","\""]
@@ -594,10 +594,10 @@ void CompilationUnit() :
     _bPrivate = true;//false;
 }
 {
-	{
-		_sPackage = "";
-		_pPackageMetric = new PackageMetric();      // this object manages the metrics
-	}
+        {
+                _sPackage = "";
+                _pPackageMetric = new PackageMetric();      // this object manages the metrics
+        }
   [ LOOKAHEAD( ( Annotation() )* "package" ) PackageDeclaration() ]
   ( ImportDeclaration() )*
   ( TypeDeclaration() 
@@ -870,40 +870,40 @@ void ClassDeclaration() :
 
 void UnmodifiedClassDeclaration() :
 {
-	String sOldClass = _sClass;
-	int oldNcss = _ncss;
-	int oldFunctions = _functions;
-	int oldClasses = _classes;
+        String sOldClass = _sClass;
+        int oldNcss = _ncss;
+        int oldFunctions = _functions;
+        int oldClasses = _classes;
 }
 {
-	{
-		if (!_sClass.equals("")) {
-			_sClass += ".";
-		}
-		_sClass += new String(getToken(2).image);
-		_classLevel ++;
-	}
+        {
+                if (!_sClass.equals("")) {
+                        _sClass += ".";
+                }
+                _sClass += new String(getToken(2).image);
+                _classLevel ++;
+        }
         Modifiers()
   "class" Identifier() [TypeParameters()] [ "extends" Name() [TypeArguments()] ] [ "implements" NameList() ]
   ClassBody()
-	{
-		_ncss++;
+        {
+                _ncss++;
                 Util.debug( "_ncss++" );
-		_classLevel--;
-		if (_classLevel == 0) {
-			//_topLevelClasses++;
-			Vector vMetrics = new Vector();
-			vMetrics.addElement(new String(_sPackage + _sClass));
-			vMetrics.addElement(new Integer(_ncss - oldNcss));
-			vMetrics.addElement(new Integer(_functions - oldFunctions));
-			vMetrics.addElement(new Integer(_classes - oldClasses));
+                _classLevel--;
+                if (_classLevel == 0) {
+                        //_topLevelClasses++;
+                        Vector vMetrics = new Vector();
+                        vMetrics.addElement(new String(_sPackage + _sClass));
+                        vMetrics.addElement(new Integer(_ncss - oldNcss));
+                        vMetrics.addElement(new Integer(_functions - oldFunctions));
+                        vMetrics.addElement(new Integer(_classes - oldClasses));
                         Token lastToken = getToken( 0 );
                         vMetrics.addElement( new Integer( lastToken.endLine ) );
                         vMetrics.addElement( new Integer( lastToken.endColumn ) );
                         //vMetrics.addElement( new Integer( _javadocs ) );
-			_vClasses.addElement(vMetrics);
-			_pPackageMetric.functions += _functions - oldFunctions;
-			_pPackageMetric.classes++;
+                        _vClasses.addElement(vMetrics);
+                        _pPackageMetric.functions += _functions - oldFunctions;
+                        _pPackageMetric.classes++;
 
                         // added by SMS
                         _pPackageMetric.javadocs += _javadocs;
@@ -911,11 +911,11 @@ void UnmodifiedClassDeclaration() :
                         //_pPackageMetric.singleLn += token_source._iSingleComments - oldSingle;
                         //_pPackageMetric.multiLn += token_source._iMultiComments - oldMulti;
                         //
-		}
-		_functions = oldFunctions;
-		_classes = oldClasses + 1;
-		_sClass = sOldClass;
-	}
+                }
+                _functions = oldFunctions;
+                _classes = oldClasses + 1;
+                _sClass = sOldClass;
+        }
 }
 
 void ClassBody() :
@@ -1160,38 +1160,38 @@ void NestedInterfaceDeclaration() :
 
 void UnmodifiedInterfaceDeclaration() :
 {
-	String sOldClass = _sClass;
-	int oldNcss = _ncss;
-	int oldFunctions = _functions;
-	int oldClasses = _classes;
+        String sOldClass = _sClass;
+        int oldNcss = _ncss;
+        int oldFunctions = _functions;
+        int oldClasses = _classes;
 }
 {
-	{
-		if (!_sClass.equals("")) {
-			_sClass += ".";
-		}
-		_sClass += new String(getToken(2).image);
-		_classLevel ++;
-	}
+        {
+                if (!_sClass.equals("")) {
+                        _sClass += ".";
+                }
+                _sClass += new String(getToken(2).image);
+                _classLevel ++;
+        }
   "interface" Identifier() [TypeParameters()] [ "extends" NameList() ]
   "{" ( InterfaceMemberDeclaration() )* "}"
-	{
-		_ncss++;
+        {
+                _ncss++;
                 Util.debug( "_ncss++" );
-		_classLevel--;
-		if (_classLevel == 0) 
+                _classLevel--;
+                if (_classLevel == 0) 
                 {
-			//_topLevelClasses++;
-			Vector vMetrics = new Vector();
-			vMetrics.addElement(new String(_sPackage + _sClass));
-			vMetrics.addElement(new Integer(_ncss - oldNcss));
-			vMetrics.addElement(new Integer(_functions - oldFunctions));
-			vMetrics.addElement(new Integer(_classes - oldClasses));
+                        //_topLevelClasses++;
+                        Vector vMetrics = new Vector();
+                        vMetrics.addElement(new String(_sPackage + _sClass));
+                        vMetrics.addElement(new Integer(_ncss - oldNcss));
+                        vMetrics.addElement(new Integer(_functions - oldFunctions));
+                        vMetrics.addElement(new Integer(_classes - oldClasses));
                         vMetrics.addElement( Util.getConstantObject() );
                         vMetrics.addElement( Util.getConstantObject() );
-			_vClasses.addElement(vMetrics);
-			_pPackageMetric.functions += _functions - oldFunctions;
-			_pPackageMetric.classes++;
+                        _vClasses.addElement(vMetrics);
+                        _pPackageMetric.functions += _functions - oldFunctions;
+                        _pPackageMetric.classes++;
 
                         // added by SMS
                         _pPackageMetric.javadocs += _javadocs;
@@ -1199,11 +1199,11 @@ void UnmodifiedInterfaceDeclaration() :
                         //_pPackageMetric.singleLn += token_source._iSingleComments - oldSingle;
                         //_pPackageMetric.multiLn += token_source._iMultiComments - oldMulti;
                         //
-		}
-		_functions = oldFunctions;
-		_classes = oldClasses + 1;
-		_sClass = sOldClass;
-	}
+                }
+                _functions = oldFunctions;
+                _classes = oldClasses + 1;
+                _sClass = sOldClass;
+        }
 }
 
 void InterfaceMemberDeclaration() :
@@ -1284,7 +1284,7 @@ void VariableDeclarator() :
 void VariableDeclaratorId() :
 {}
 {
-	("enum"|Identifier()) ( "[" "]" { _sName += "[]"; })*
+        ("enum"|Identifier()) ( "[" "]" { _sName += "[]"; })*
 }
 
 void VariableInitializer() :
@@ -1418,10 +1418,10 @@ void MethodDeclaration() :
             }
         }     
   MethodDeclarator() [ "throws" NameList() ]
-	{ 
-		_cyc = 1;
-		_bReturn = false;
-	}
+        { 
+                _cyc = 1;
+                _bReturn = false;
+        }
   ( Block() | ";" )
          // note: the second ";" is just for a bug in java/sql/Connection.java
          // at line 182 column 38 as of sun jdk 1.1.5. The same
@@ -1518,27 +1518,27 @@ void MethodDeclaration() :
 void MethodDeclarator() :
 {}
 {
-	{
-		_sFunction = "." + new String(getToken(1).image);
-	}
+        {
+                _sFunction = "." + new String(getToken(1).image);
+        }
   Identifier() FormalParameters()
-	{
-		_sFunction += _sParameter;
-	}
+        {
+                _sFunction += _sParameter;
+        }
   ( "[" "]" { _sFunction += "[]"; } )*
 }
 
 void FormalParameters() :
 {}
 {
-	{
-		_sParameter = "(";
-	}
+        {
+                _sParameter = "(";
+        }
   "(" [ FormalParameter() { _sParameter += _sName; }
   ( "," FormalParameter() { _sParameter += "," + _sName; } )* ] ")"
-	{
-		_sParameter += ")";
-	}
+        {
+                _sParameter += ")";
+        }
 }
 
 void FormalParameter() :
@@ -1551,11 +1551,11 @@ void FormalParameter() :
 
 void ConstructorDeclaration() :
 {
-	int oldNcss = _ncss;
-	int oldFunctions = _functions;
-	String sOldFunction = _sFunction;
-	int oldcyc = _cyc;
-	boolean bOldReturn = _bReturn;
+        int oldNcss = _ncss;
+        int oldFunctions = _functions;
+        String sOldFunction = _sFunction;
+        int oldcyc = _cyc;
+        boolean bOldReturn = _bReturn;
         Token tmpToken = null;
         int jvdc = 0;
     
@@ -1592,14 +1592,14 @@ void ConstructorDeclaration() :
             if ( tmpToken == null ) {
                 tmpToken = getToken( 0 );
             }
-		_cyc = 1;
-		_sFunction = _sPackage + _sClass + "." + getToken(0).image;
-	}
+                _cyc = 1;
+                _sFunction = _sPackage + _sClass + "." + getToken(0).image;
+        }
   FormalParameters()
-	{
-		_sFunction += _sParameter;
-		_bReturn = false;
-	}
+        {
+                _sFunction += _sParameter;
+                _bReturn = false;
+        }
   [ "throws" NameList() ]
          //{ System.out.println( "\n\nInside ContructorDeclaration\n" ); }
   "{"
@@ -1645,11 +1645,11 @@ void ConstructorDeclaration() :
     ( BlockStatement() )*
          //{ System.out.println( "\n\nAfter BlockStatement\n" ); }
   "}"
-			// this is just because of a nonconformance to the JLS
-			// in java/net/Socket.java at line 148 column 6 as of
-			// sun jdk 1.1.5
-			//[ ";" ]
-	{
+                        // this is just because of a nonconformance to the JLS
+                        // in java/net/Socket.java at line 148 column 6 as of
+                        // sun jdk 1.1.5
+                        //[ ";" ]
+        {
 
             /*
                 while( tmpToken.specialToken != null ) {
@@ -1660,17 +1660,17 @@ void ConstructorDeclaration() :
                     tmpToken = tmpToken.specialToken;
                 }
             */
-		if (_bReturn) {
-			_cyc--;
-		}
-		_ncss++;
+                if (_bReturn) {
+                        _cyc--;
+                }
+                _ncss++;
                 Util.debug( "_ncss++" );
 
-		Vector vFunctionMetrics = new Vector();
-		vFunctionMetrics.addElement(new String(_sFunction));
-		vFunctionMetrics.addElement(new Integer(_ncss - oldNcss));
-		vFunctionMetrics.addElement(new Integer(_cyc));
-		vFunctionMetrics.addElement( new Integer(jvdc) );
+                Vector vFunctionMetrics = new Vector();
+                vFunctionMetrics.addElement(new String(_sFunction));
+                vFunctionMetrics.addElement(new Integer(_ncss - oldNcss));
+                vFunctionMetrics.addElement(new Integer(_cyc));
+                vFunctionMetrics.addElement( new Integer(jvdc) );
 
                 // added by SMS
                 vFunctionMetrics.addElement( new Integer(jvdcLines));        
@@ -1678,12 +1678,12 @@ void ConstructorDeclaration() :
                 vFunctionMetrics.addElement( new Integer(token_source._iMultiComments - oldMulti));
                 //
         
-		_vFunctions.addElement(vFunctionMetrics);
-		_sFunction = sOldFunction;
-		_functions = oldFunctions + 1;
-		_cyc = oldcyc;
-		_bReturn = bOldReturn;
-	}
+                _vFunctions.addElement(vFunctionMetrics);
+                _sFunction = sOldFunction;
+                _functions = oldFunctions + 1;
+                _cyc = oldcyc;
+                _bReturn = bOldReturn;
+        }
 }
 
 void ExplicitConstructorInvocation() :
@@ -1710,7 +1710,7 @@ void Initializer() :
 {}
 {
   [ "static" ] Block()
-	{ _ncss++;       Util.debug( "_ncss++" );}
+        { _ncss++;       Util.debug( "_ncss++" );}
 }
 
 /*
@@ -1723,17 +1723,17 @@ void Type() :
    LOOKAHEAD(2) ReferenceType()
  |
    PrimitiveType()
-	  {
-		  _sName = (new String(getToken(0).image));
-	  }
+          {
+                  _sName = (new String(getToken(0).image));
+          }
 }
 /*
 ccl 2008-01-24
 {
   ( PrimitiveType()
-	  {
-		  _sName = (new String(getToken(0).image));
-	  }
+          {
+                  _sName = (new String(getToken(0).image));
+          }
     | Name() 
     [TypeArguments() ["." Identifier()] ]
 ) ( "[" "]" { _sName += "[]"; } )*
@@ -1788,15 +1788,15 @@ void Name() :
 {}
 {
     ("enum"|Identifier()) //<IDENTIFIER> // no Identifier() because of assert type for field declaration
-	{
-		_sName = new String(getToken(0).image);
+        {
+                _sName = new String(getToken(0).image);
                 _tmpResultToken = getToken( 0 );
                 Util.debug( "Name._tmpResultToken: " + _tmpResultToken );
-	}
+        }
     ( LOOKAHEAD(2) "." ("enum"|Identifier())
-	{
-		_sName += "." + (new String(getToken(0).image));
-	}
+        {
+                _sName += "." + (new String(getToken(0).image));
+        }
   )*
 }
 
@@ -2118,41 +2118,41 @@ void ArgumentList() :
 
 void AllocationExpression() :
 {
-	String sOldClass = _sClass;
-	int oldNcss = _ncss;
-	int oldFunctions = _functions;
-	int oldClasses = _classes;
-	String sName;
+        String sOldClass = _sClass;
+        int oldNcss = _ncss;
+        int oldFunctions = _functions;
+        int oldClasses = _classes;
+        String sName;
 }
 {
   LOOKAHEAD(2)
   "new" PrimitiveType() ArrayDimsAndInits()
 |
          "new" Name()
-			// this is all for anonymous classes
-			{ sName = _sName; }
+                        // this is all for anonymous classes
+                        { sName = _sName; }
   [TypeArguments()]
       (
       ArrayDimsAndInits()
     |
       Arguments()
-		[
-		 {
-			 if (!_sClass.equals("")) {
-				 _sClass += ".";
-			 }
-			 /*_sClass += sName;*/
-			 _sClass += sName + "$" + _anonClassCount++;
-			 _classLevel ++;
-		 }
-			ClassBody()
-			{
-				_classLevel--;
-				_functions = oldFunctions;
-				_classes = oldClasses + 1;
-				_sClass = sOldClass;
-			}
-		]
+                [
+                 {
+                         if (!_sClass.equals("")) {
+                                 _sClass += ".";
+                         }
+                         /*_sClass += sName;*/
+                         _sClass += sName + "$" + _anonClassCount++;
+                         _classLevel ++;
+                 }
+                        ClassBody()
+                        {
+                                _classLevel--;
+                                _functions = oldFunctions;
+                                _classes = oldClasses + 1;
+                                _sClass = sOldClass;
+                        }
+                ]
     )
 }
 
@@ -2176,7 +2176,7 @@ void ArrayDimsAndInits() :
 
 void Statement() :
 {
-	_bReturn = false;
+        _bReturn = false;
         //{ System.out.println( "\n\nBefore Statement\n" ); }
 }
 {
@@ -2192,22 +2192,22 @@ void Statement() :
 |
          //{ System.out.println( "\n\nBefore Statement Expression\n" ); }
   StatementExpression() ";"
-	{ _ncss++;       Util.debug( "_ncss++" );}
+        { _ncss++;       Util.debug( "_ncss++" );}
   //{ System.out.println( "\n\nHit Statement Expression\n" ); }
 |
   SwitchStatement()
 |
   IfStatement()
-	{ _cyc++; }
+        { _cyc++; }
 |
   WhileStatement()
-	{ _cyc++; }
+        { _cyc++; }
 |
   DoStatement()
-	{ _cyc++; }
+        { _cyc++; }
 |
   ForStatement()
-	{ _cyc++; }
+        { _cyc++; }
 |
   BreakStatement()
 |
@@ -2226,7 +2226,7 @@ void LabeledStatement() :
 {}
 {
   Identifier() ":" Statement()
-	{ _ncss++;       Util.debug( "_ncss++" );}
+        { _ncss++;       Util.debug( "_ncss++" );}
 }
 
 void AssertStatementLookahead() :
@@ -2264,9 +2264,9 @@ void BlockStatement() :
     //LOOKAHEAD([ "final" ] FieldTypeLookahead() Identifier())
   LOOKAHEAD( Modifiers() Type() ("enum"|<IDENTIFIER>) (";"|"="|","|"[""]") )
   LocalVariableDeclaration() ";"
-	{ 
-		_ncss++;       Util.debug( "_ncss++" );
-	}
+        { 
+                _ncss++;       Util.debug( "_ncss++" );
+        }
 |
   Statement()
 |
@@ -2320,30 +2320,30 @@ void StatementExpression() :
 void SwitchStatement() :
 {}
 {
-	{
-		_localCases = 0;
-	}
+        {
+                _localCases = 0;
+        }
   "switch" "(" Expression() ")" "{"
     ( SwitchLabel() ( BlockStatement() )* )*
   "}"
-	{ _ncss++;       Util.debug( "_ncss++" );}
+        { _ncss++;       Util.debug( "_ncss++" );}
 }
 
 void SwitchLabel() :
 {}
 {
   "case" Expression() ":"
-	{
-		_ncss++;
+        {
+                _ncss++;
                 Util.debug( "_ncss++" );
-		_localCases++;
-		_cyc++;
-	}
+                _localCases++;
+                _cyc++;
+        }
 |
   "default" ":"
-	{
-		_ncss++;       Util.debug( "_ncss++" );
-	}
+        {
+                _ncss++;       Util.debug( "_ncss++" );
+        }
 }
 
 void IfStatement() :
@@ -2355,21 +2355,21 @@ void IfStatement() :
 {}
 {
   "if" "(" Expression() ")" Statement() [ LOOKAHEAD(1) "else" { _ncss++;       Util.debug( "_ncss++" );} Statement() ]
-	{ _ncss++;       Util.debug( "_ncss++" );}
+        { _ncss++;       Util.debug( "_ncss++" );}
 }
 
 void WhileStatement() :
 {}
 {
   "while" "(" Expression() ")" Statement()
-	{ _ncss++;       Util.debug( "_ncss++" ); }
+        { _ncss++;       Util.debug( "_ncss++" ); }
 }
 
 void DoStatement() :
 {}
 {
   "do" Statement() "while" "(" Expression() ")" ";"
-	{ _ncss++;       Util.debug( "_ncss++" );}
+        { _ncss++;       Util.debug( "_ncss++" );}
 }
 
 void ForStatement() :
@@ -2383,7 +2383,7 @@ void ForStatement() :
  [ ForInit() ] ";" [ Expression() ] ";" [ ForUpdate() ] 
       )
 ")" Statement()
-	{ _ncss++;       Util.debug( "_ncss++" );}
+        { _ncss++;       Util.debug( "_ncss++" );}
 }
 
 void ForInit() :
@@ -2411,44 +2411,44 @@ void BreakStatement() :
 {}
 {
   "break" [ Identifier() ] ";"
-	{ _ncss++;       Util.debug( "_ncss++" );}
+        { _ncss++;       Util.debug( "_ncss++" );}
 }
 
 void ContinueStatement() :
 {}
 {
   "continue" [ Identifier() ] ";"
-	{ _ncss++;       Util.debug( "_ncss++" );}
+        { _ncss++;       Util.debug( "_ncss++" );}
 }
 
 void ReturnStatement() :
 {}
 {
   "return" [ Expression() ] ";"
-	{
-		_ncss++;
+        {
+                _ncss++;
                 Util.debug( "_ncss++" );
-		_cyc++;
-		_bReturn = true;
-	}
+                _cyc++;
+                _bReturn = true;
+        }
 }
 
 void ThrowStatement() :
 {}
 {
   "throw" Expression() ";"
-	{ 
-		_ncss++; 
+        { 
+                _ncss++; 
                 Util.debug( "_ncss++" );
-		_cyc++;
-	}
+                _cyc++;
+        }
 }
 
 void SynchronizedStatement() :
 {}
 {
   "synchronized" "(" Expression() ")" Block()
-	{ _ncss++;       Util.debug( "_ncss++" ); }
+        { _ncss++;       Util.debug( "_ncss++" ); }
 }
 
 void TryStatement() :
@@ -2685,10 +2685,10 @@ void ClassOrInterfaceDeclaration(int modifiers):
 
 void EnumDeclaration(int modifiers):
 {
-	String sOldClass = _sClass;
-	int oldClasses = _classes;
-	int oldNcss = _ncss;
-	int oldFunctions = _functions;
+        String sOldClass = _sClass;
+        int oldClasses = _classes;
+        int oldNcss = _ncss;
+        int oldFunctions = _functions;
 
         // Chris Povirk
         int oldSingle;
@@ -2698,11 +2698,11 @@ void EnumDeclaration(int modifiers):
     { Util.debug( "EnumDeclaration().START" ); }
     "enum" <IDENTIFIER>
          {
-		if (!_sClass.equals("")) {
-			_sClass += ".";
-		}
-		_sClass += new String(getToken(0).image);
-		_classLevel ++;
+                if (!_sClass.equals("")) {
+                        _sClass += ".";
+                }
+                _sClass += new String(getToken(0).image);
+                _classLevel ++;
          }
   [ ImplementsList(false) ]
 {
@@ -2795,7 +2795,7 @@ void EnumBody():
            }
     
    [ EnumConstant() ( LOOKAHEAD(2) "," EnumConstant() )* ]
-	[ "," ]
+        [ "," ]
    [ ";" ( ClassOrInterfaceBodyDeclaration(false) )* ]
    "}"
 }
@@ -2811,7 +2811,7 @@ void ClassOrInterfaceType():
 {
   <IDENTIFIER>
 {
-		_sName = new String(getToken(0).image);
+                _sName = new String(getToken(0).image);
                 if ( _tmpResultToken == null )
                 {
                   _tmpResultToken = getToken( 0 );
@@ -2820,9 +2820,9 @@ void ClassOrInterfaceType():
 }
 [ LOOKAHEAD(4) TypeArguments() ]
   ( LOOKAHEAD(2) "." <IDENTIFIER>
-	{
-		_sName += "." + (new String(getToken(0).image));
-	}
+        {
+                _sName += "." + (new String(getToken(0).image));
+        }
  [ LOOKAHEAD(2) TypeArguments() ] )*
 }
 
