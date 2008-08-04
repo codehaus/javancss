@@ -26,7 +26,7 @@ package javancss;
  * structures containing Java metric data.
  *
  * @author    Chr. Clemens Lee <clemens@kclee.com>
- * $Id: JavancssConstants.java,v 1.5 2006/04/16 11:42:20 clemens Exp clemens $
+ * $Id$
  */
 public interface JavancssConstants
 {

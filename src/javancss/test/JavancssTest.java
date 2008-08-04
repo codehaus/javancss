@@ -39,7 +39,7 @@ import javancss.PackageMetric;
 /**
  * Test class for the JavaNCSS application.
  *
- *   $Id: JavancssTest.java,v 1.34 2006/10/06 11:46:43 clemens Exp clemens $
+ *   $Id$
  *   3. 9. 1996
  */
 public class JavancssTest extends    Test 

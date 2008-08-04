@@ -1,7 +1,7 @@
 /*
  * Software Engineering Tools.
  *
- * $Id: Test64.java,v 1.1 2001/07/10 06:37:22 clemens Exp clemens $
+ * $Id$
  *
  * Copyright (c) 1997-2001 Joseph Kiniry
  * Copyright (c) 2000-2001 KindSoftware, LLC
@@ -52,7 +52,7 @@ import javax.swing.*;
  * <p> The primary class used to send messages to a window created by
  * the IDebug framework. </p>
  *
- * @version $Revision: 1.1 $ $Date: 2001/07/10 06:37:22 $
+ * @version $Revision$ $Date$
  * @author Joseph R. Kiniry <joe@kindsoftware.com>
  * @concurrency (GUARDED) All methods are synchronized.
  * @see Context

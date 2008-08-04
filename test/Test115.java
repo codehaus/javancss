@@ -25,7 +25,7 @@ import java.util.*;
  *              Emilio Gongora, <emilio@sms.nl> and
  *              Guillermo Rodriguez, <guille@sms.nl>.
  *            Anonymous class count patch by Vesa Karvonnen, <vesa_karvonen@hotmail.com> 2002-10-30.
- * @version   2000-01-31 $Id: Test115.java,v 1.1 2006/06/12 21:37:45 clemens Exp clemens $
+ * @version   2000-01-31 $Id$
  */
 public class JavaParser implements JavaParserConstants {
     {

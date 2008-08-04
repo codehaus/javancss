@@ -1,7 +1,7 @@
 /*
  * Software Engineering Tools.
  *
- * $Id: Test65.java,v 1.1 2001/07/10 06:37:22 clemens Exp clemens $
+ * $Id$
  *
  * Copyright (c) 1997-2001 Joseph Kiniry
  * Copyright (c) 2000-2001 KindSoftware, LLC
@@ -45,7 +45,7 @@ import idebughc.*;
 /**
  * <p> TestSuite is the black-box testsuite for the Debug class. </p>
  *
- * @version $Date: 2001/07/10 06:37:22 $
+ * @version $Date$
  * @author Joseph R. Kiniry <joe@kindsoftware.com>
  *
  * @note The actual code of the IDebug test suite.

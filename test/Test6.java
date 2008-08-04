@@ -14,7 +14,7 @@ import java.lang.Math;
 import ccl.awt.*;
 
 /**
- *   $Id: Test6.java,v 1.2 1998/01/22 15:01:59 clemens Exp clemens $
+ *   $Id$
  */
 public class Util {
     private static Random _rnd = new Random();

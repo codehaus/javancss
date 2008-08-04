@@ -7,7 +7,7 @@ import org.apache.commons.lang.enum.Enum;
 component.
  *
  *  @author Howard Lewis Ship
- *  @version $Id: Test120.java,v 1.1 2006/06/12 21:37:45 clemens Exp clemens $
+ *  @version $Id$
  *
  **/
 public final class Test120 extends Enum {

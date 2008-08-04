@@ -7,7 +7,7 @@ import java.io.*;
  *
  * @author <a href="mailto:jonl@muppetlabs.com">Jonathan Locke</a>
  * @author <a href="mailto:jon@latchkey.com">Jon S. Stevens</a>
- * @version $Id: Test92.java,v 1.1 2006/04/16 11:42:31 clemens Exp clemens $
+ * @version $Id$
  */
 public class Test92
 {
