@@ -546,10 +546,10 @@ public class Javancss implements Exitable,
             }
            
             Vector newFiles = new Vector();
-            Enumeration enum = _vJavaSourceFiles.elements();
-            while( enum.hasMoreElements() ) 
+            Enumeration iter = _vJavaSourceFiles.elements();
+            while( iter.hasMoreElements() ) 
             {
-                String fileName = FileUtil.normalizeFileName( (String)enum.nextElement() );
+                String fileName = FileUtil.normalizeFileName( (String)iter.nextElement() );
                 File   file = new File( fileName );
                 if( file.isDirectory() ) 
                 {
