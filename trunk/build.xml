@@ -55,7 +55,15 @@
 
    <target name="clean">
       <delete dir="${DESTINATION}"/>
-      <mkdir  dir="${DESTINATION}"/>
+      <delete file="${user.dir}/lib/javancss.jar"/>
+      <delete file="${user.dir}/src/javancss/JavaCharStream.java"/>
+      <delete file="${user.dir}/src/javancss/JavaParser.java"/>
+      <delete file="${user.dir}/src/javancss/JavaParserConstants.java"/>
+      <delete file="${user.dir}/src/javancss/JavaParserTokenManager.java"/>
+      <delete file="${user.dir}/src/javancss/ParseException.java"/>
+      <delete file="${user.dir}/src/javancss/Token.java"/>
+      <delete file="${user.dir}/src/javancss/TokenMgrError.java"/>
+      <delete file="${user.dir}/t"/>
    </target>
 
    <target name="taskdef">
