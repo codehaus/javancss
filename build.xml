@@ -33,11 +33,11 @@
       <mkdir  dir="${DESTINATION}"/>
       <java classname="javacc"
             fork     ="yes"
-            dir      ="${user.dir}/src/javancss">
+            dir      ="${user.dir}/src/main/java/javancss">
          <classpath>
             <pathelement location="lib/javacc.jar"/>
          </classpath>
-         <arg value="Java1.1.jj"/>
+         <arg value="../../javacc/Java1.1.jj"/>
       </java>
    </target>
 
@@ -56,13 +56,13 @@
    <target name="clean">
       <delete dir="${DESTINATION}"/>
       <delete file="${user.dir}/lib/javancss.jar"/>
-      <delete file="${user.dir}/src/javancss/JavaCharStream.java"/>
-      <delete file="${user.dir}/src/javancss/JavaParser.java"/>
-      <delete file="${user.dir}/src/javancss/JavaParserConstants.java"/>
-      <delete file="${user.dir}/src/javancss/JavaParserTokenManager.java"/>
-      <delete file="${user.dir}/src/javancss/ParseException.java"/>
-      <delete file="${user.dir}/src/javancss/Token.java"/>
-      <delete file="${user.dir}/src/javancss/TokenMgrError.java"/>
+      <delete file="${user.dir}/src/main/java/javancss/JavaCharStream.java"/>
+      <delete file="${user.dir}/src/main/java/javancss/JavaParser.java"/>
+      <delete file="${user.dir}/src/main/java/javancss/JavaParserConstants.java"/>
+      <delete file="${user.dir}/src/main/java/javancss/JavaParserTokenManager.java"/>
+      <delete file="${user.dir}/src/main/java/javancss/ParseException.java"/>
+      <delete file="${user.dir}/src/main/java/javancss/Token.java"/>
+      <delete file="${user.dir}/src/main/java/javancss/TokenMgrError.java"/>
       <delete file="${user.dir}/t"/>
    </target>
 
