@@ -213,6 +213,7 @@
       <groupId>javancss</groupId>
       <artifactId>jhbasic</artifactId>
       <version>29.50</version>
+      <optional>true</optional>
     </dependency>
   </dependencies>
 
