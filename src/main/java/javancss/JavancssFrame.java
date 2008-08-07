@@ -299,41 +299,41 @@ public class JavancssFrame extends MainJFrame {
             }
             
             try {
-                Thread.currentThread().sleep(500);
+                Thread.sleep(500);
             } catch (InterruptedException e) {
             }
         }
     }
 
-        public void setVisible(boolean bVisible_) {
-                if (bVisible_) {
-                        _oldThreadPriority = Thread.currentThread().getPriority();
-                        _pAnimationPanel.start();
-                        Thread.currentThread().setPriority(Thread.MIN_PRIORITY);
-                } else {
-                        _pAnimationPanel.stop();
-                }
-
-                super.setVisible(bVisible_);
+    public void setVisible(boolean bVisible_) {
+        if (bVisible_) {
+            _oldThreadPriority = Thread.currentThread().getPriority();
+            _pAnimationPanel.start();
+            Thread.currentThread().setPriority(Thread.MIN_PRIORITY);
+        } else {
+            _pAnimationPanel.stop();
         }
 
-        public void setSelectedTab(String sTab_) {
-                Util.panicIf(Util.isEmpty(sTab_));
+        super.setVisible(bVisible_);
+    }
 
-                if (!_bNoError) {
-                        return;
-                }
-                if (sTab_.equals(S_METHODS)) {
-                        /*_pTabbedPane.setSelectedComponent(_txtFunction);*/
-                        _pTabbedPane.setSelectedIndex(2);
-                } else if (sTab_.equals(S_CLASSES)) {
-                        /*_pTabbedPane.setSelectedComponent(_txtObject);*/
-                        _pTabbedPane.setSelectedIndex(1);
-                } else {
-                        /*_pTabbedPane.setSelectedComponent(_txtPackage);*/
-                        _pTabbedPane.setSelectedIndex(0);
-                }
+    public void setSelectedTab(String sTab_) {
+        Util.panicIf(Util.isEmpty(sTab_));
+
+        if (!_bNoError) {
+            return;
         }
+        if (sTab_.equals(S_METHODS)) {
+            /*_pTabbedPane.setSelectedComponent(_txtFunction);*/
+            _pTabbedPane.setSelectedIndex(2);
+        } else if (sTab_.equals(S_CLASSES)) {
+            /*_pTabbedPane.setSelectedComponent(_txtObject);*/
+            _pTabbedPane.setSelectedIndex(1);
+        } else {
+            /*_pTabbedPane.setSelectedComponent(_txtPackage);*/
+            _pTabbedPane.setSelectedIndex(0);
+        }
+    }
 
     private boolean _bAboutSelected = false;
 
@@ -365,12 +365,12 @@ public class JavancssFrame extends MainJFrame {
                 }
                 sStartURL = "file:" + sStartURL;
                 Util.debug("JavancssFrame.actionPerformed(): sStartURL: " + sStartURL);
-                try {
+                /*try {
                     URL urlHelpDocument = new URL(sStartURL);
                     //HtmlViewer pHtmlViewer = new HtmlViewer(urlHelpDocument);
                 } catch(Exception pException) {
                     Util.debug("JavancssFrame.actionPerformed(..).pException: " + pException);
-                }
+                }*/
             }
         }
     }
