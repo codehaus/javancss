@@ -703,7 +703,7 @@ public class Javancss implements Exitable,
     }
 
     /**
-     * JDCL stands for javadoc coment lines (while jvdc stands
+     * JDCL stands for javadoc comment lines (while jvdc stands
      * for number of javadoc comments).
      */
     public int getJdcl() {
