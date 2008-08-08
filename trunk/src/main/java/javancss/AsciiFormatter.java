@@ -265,21 +265,20 @@ public class AsciiFormatter implements Formatter
         double fAverageFuncs    = _divide( lFunctionSum, objects );
         double fAverageClasses  = _divide( lClassesSum , objects );
         double fAverageJavadocs = _divide( lJVDCSum    , objects );
-        NumberFormat pNumberFormat = new DecimalFormat("#,##0.00");
         String sRetVal = "Average Object NCSS:             " +
-               Util.paddWithSpace(pNumberFormat.format
+               Util.paddWithSpace(_pNumberFormat.format
                                   (fAverageNcss),     9) + NL;
         sRetVal += "Average Object Functions:        " +
-               Util.paddWithSpace(pNumberFormat.format
+               Util.paddWithSpace(_pNumberFormat.format
                                   (fAverageFuncs),    9) + NL;
         sRetVal += "Average Object Inner Classes:    " +
-               Util.paddWithSpace(pNumberFormat.format
+               Util.paddWithSpace(_pNumberFormat.format
                                   (fAverageClasses),  9) + NL;
         sRetVal += "Average Object Javadoc Comments: " +
-               Util.paddWithSpace(pNumberFormat.format
+               Util.paddWithSpace(_pNumberFormat.format
                                   (fAverageJavadocs), 9) + NL;
         sRetVal += "Program NCSS:                    " +
-               Util.paddWithSpace(pNumberFormat.format
+               Util.paddWithSpace(_pNumberFormat.format
                                   (_javancss.getNcss()), 9) + NL;
         
         return sRetVal;
@@ -338,21 +337,20 @@ public class AsciiFormatter implements Formatter
         double fAverageNcss = _divide( lFunctionSum, functions );
         double fAverageCCN  = _divide( lCCNSum     , functions );
         double fAverageJVDC = _divide( lJVDCSum    , functions );
-        NumberFormat pNumberFormat = new DecimalFormat("#,##0.00");
         sRetVal.append("Average Function NCSS: ").append
-               (Util.paddWithSpace(pNumberFormat.format
+               (Util.paddWithSpace(_pNumberFormat.format
                                    (fAverageNcss), 10)).
                append(NL);
         sRetVal.append("Average Function CCN:  ").append
-               (Util.paddWithSpace(pNumberFormat.format
+               (Util.paddWithSpace(_pNumberFormat.format
                                    (fAverageCCN),  10)).
                append(NL);
         sRetVal.append("Average Function JVDC: ").append
-               (Util.paddWithSpace(pNumberFormat.format
+               (Util.paddWithSpace(_pNumberFormat.format
                                    (fAverageJVDC), 10)).
                append(NL);
         sRetVal.append("Program NCSS:          ").append
-               (Util.paddWithSpace(pNumberFormat.format
+               (Util.paddWithSpace(_pNumberFormat.format
                                    (_javancss.getNcss()), 10)).
                append(NL);
 
