@@ -23,7 +23,6 @@ package javancss;
 
 import ccl.util.*;
 import java.util.*;
-import java.io.BufferedOutputStream;
 import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -32,7 +31,8 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.PrintStream;
+import java.io.OutputStream;
+import java.io.PrintWriter;
 import java.io.Reader;
 import java.awt.event.*;
 import javancss.test.JavancssTest;
@@ -618,31 +618,33 @@ public class Javancss implements Exitable,
         boolean bNoNCSS = false;
 
         String sOutputFile = (String)htOptions.get( "out" );
-        PrintStream ps = System.out;
+        OutputStream out = System.out;
         if (sOutputFile != null)
         {
             try 
             {
-                ps = new PrintStream( new BufferedOutputStream( new FileOutputStream( FileUtil.normalizeFileName( sOutputFile ) ) ) );
+                out = new FileOutputStream( FileUtil.normalizeFileName( sOutputFile ) );
             } catch ( Exception exception ) {
                 Util.printlnErr( "Error opening output file '" 
                                  + sOutputFile 
                                  + "': " + exception.getMessage() );
                 
-                ps = System.out;
+                out = System.out;
                 sOutputFile = null;
             }
         }
+        // TODO: encoding configuration support for result output
+        PrintWriter pw = new PrintWriter(out);
 
         if ( useXML() )
         {
-            ps.print( XmlFormatter.printStart() );
+            pw.print( XmlFormatter.printStart() );
         }
 
         if (htOptions.get( "package" ) != null ||
             htOptions.get( "all" ) != null)
         {
-            ps.print( printPackageNcss() );
+            pw.print( printPackageNcss() );
             bNoNCSS = true;
         }
         if (htOptions.get( "object" ) != null ||
@@ -650,9 +652,9 @@ public class Javancss implements Exitable,
         {
             if ( bNoNCSS )
             {
-                ps.println();
+                pw.println();
             }
-            ps.print( printObjectNcss() );
+            pw.print( printObjectNcss() );
             bNoNCSS = true;
         }
         if (htOptions.get( "function" ) != null ||
@@ -660,33 +662,33 @@ public class Javancss implements Exitable,
         {
             if ( bNoNCSS )
             {
-                ps.println();
+                pw.println();
             }
-            ps.print( printFunctionNcss() );
+            pw.print( printFunctionNcss() );
             bNoNCSS = true;
         }
         if (!bNoNCSS) {
-            ps.print( printJavaNcss() );
+            pw.print( printJavaNcss() );
         }
 
         if ( useXML() )
         {
             if ( !bNoNCSS )
             {
-                ps.print( printJavaNcss() );
+                pw.print( printJavaNcss() );
             }            
-            ps.println( "</javancss>" );
+            pw.println( "</javancss>" );
         }
 
         if ( sOutputFile != null )
         {
-            ps.close();
+            pw.close();
         } else
         {
             // standard out is used
-            //ps.flush();
+            //pw.flush();
         }
-        ps = null;
+        pw = null;
     }
 
     public int getNcss() {
