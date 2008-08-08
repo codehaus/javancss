@@ -63,7 +63,6 @@
       <delete file="${user.dir}/src/main/java/javancss/ParseException.java"/>
       <delete file="${user.dir}/src/main/java/javancss/Token.java"/>
       <delete file="${user.dir}/src/main/java/javancss/TokenMgrError.java"/>
-      <delete file="${user.dir}/t"/>
    </target>
 
    <target name="taskdef">
