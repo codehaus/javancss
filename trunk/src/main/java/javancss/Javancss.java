@@ -32,8 +32,10 @@ import java.io.InputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.io.Reader;
+import java.io.UnsupportedEncodingException;
 import java.awt.event.*;
 import javancss.test.JavancssTest;
 
@@ -510,8 +512,9 @@ public class Javancss implements Exitable,
      * javancss.Main.
      * Other constructors might be helpful to use Javancss out
      * of other programs.
+     * @throws UnsupportedEncodingException 
      */
-    public Javancss(String[] asArgs_, String sRcsHeader_) {
+    public Javancss(String[] asArgs_, String sRcsHeader_) throws UnsupportedEncodingException {
         _pInit = new Init(this, asArgs_, sRcsHeader_, S_INIT__FILE_CONTENT);
         if (_bExit) {
             return;
@@ -634,7 +637,7 @@ public class Javancss implements Exitable,
             }
         }
         // TODO: encoding configuration support for result output
-        PrintWriter pw = new PrintWriter(out);
+        PrintWriter pw = useXML() ? new PrintWriter(new OutputStreamWriter(out, "UTF-8")) : new PrintWriter(out);
 
         if ( useXML() )
         {
