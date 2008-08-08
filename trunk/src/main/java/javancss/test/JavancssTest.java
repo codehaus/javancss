@@ -505,7 +505,6 @@ public class JavancssTest extends    Test
         Assert( sOutput56.equals( sCompare56 )
                 , "File test/Output56.txt and javancss output differs:\n"
                 + sOutput56 );
-        FileUtil.writeFile( "t", sOutput56 );
 
         XmlFormatterTest xmlTest = new XmlFormatterTest( this );
         xmlTest.setTestDir( _sTestDir );
