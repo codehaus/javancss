@@ -131,12 +131,12 @@ public class XmlFormatterTest extends Test {
 
     public static void main( String[] asArg_ ) 
     {
-        Test pTest = (Test)(new XmlFormatterTest());
+        XmlFormatterTest pTest = new XmlFormatterTest();
+        pTest.setTestDir( "test" );
         pTest.setVerbose( true );
+        pTest.setTiming ( true );
         pTest.run();
         pTest.printResult();
-
-        System.exit( 0 );
     }
 
     private String _sTestDir = null;

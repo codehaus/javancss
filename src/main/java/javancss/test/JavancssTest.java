@@ -245,252 +245,252 @@ public class JavancssTest extends    Test
         Javancss pJavancss = null;
 
         if ( !bSkip ) {
-                _checkJavadocLines();
+            _checkJavadocLines();
                 
-        _checkInnerClasses();
-
-        // Nr. 1
-        pJavancss = new Javancss(FileUtil.concatPath(sLocalPath, "Test1.java"));
-        int ncss1 = pJavancss.getNcss();
-        bugIf(ncss1 != 318, "Ncss: " + ncss1);
-
-        // Nr. 2
-        pJavancss = new Javancss(FileUtil.concatPath(sLocalPath, "Test2.java"));
-        bugIf(pJavancss.getNcss() != 8);
-        // Nr. 3
-        pJavancss = new Javancss(FileUtil.concatPath(sLocalPath, "Test3.java"));
-        bugIf(pJavancss.getNcss() != 69);
-        // Nr. 4
-        pJavancss = new Javancss(FileUtil.concatPath(sLocalPath, "Test4.java"));
-        bugIf(pJavancss.getNcss() != 11);
-        // Nr. 5
-        pJavancss = new Javancss(FileUtil.concatPath(sLocalPath, "Test5.java"));
-        bugIf(pJavancss.getNcss() != 16);
-        // Nr. 6
-        pJavancss = new Javancss(FileUtil.concatPath(sLocalPath, "Test6.java"));
-        int ncss6 = pJavancss.getNcss();
-        bugIf(ncss6 != 565, "Ncss: " + ncss6);
-        bugIf(pJavancss.getLOC() != 1254, "LOC: " + pJavancss.getLOC());
-        // Nr. 8
-        pJavancss = new Javancss(FileUtil.concatPath(sLocalPath, "Test7.java"));
-        bugIf(pJavancss.getNcss() != 30, "Ncss: " + pJavancss.getNcss());
-        // Nr. 9
-        Javancss pJavancss8 = new Javancss(FileUtil.concatPath(sLocalPath, "Test8.java"));
-        bugIf(pJavancss.getNcss() != pJavancss8.getNcss());
-        // Nr. 10
-        pJavancss = new Javancss(FileUtil.concatPath(sLocalPath, "Test9.java"));
-        bugIf(ncss1 != pJavancss.getLOC(), "LOC: " + pJavancss.getLOC());
-        // Nr. 11
-        pJavancss = new Javancss(FileUtil.concatPath(sLocalPath, "Test10.java"));
-        bugIf(pJavancss.getLOC() != ncss6, "LOC: " + pJavancss.getLOC());
-        bugIf(pJavancss.getLOC() != pJavancss.getNcss(), "NCSS: " + pJavancss.getNcss());
-        pJavancss = new Javancss(FileUtil.concatPath(sLocalPath, "Test11.java"));
-        bugIf(pJavancss.getLOC() != pJavancss.getNcss(), "NCSS: " + pJavancss.getNcss() +
-              ", LOC: " + pJavancss.getLOC());
-        pJavancss = new Javancss(FileUtil.concatPath(sLocalPath, "Test12.java"));
-        bugIf(pJavancss.getLOC() != pJavancss.getNcss(), "NCSS: " + pJavancss.getNcss() +
-              ", LOC: " + pJavancss.getLOC());
-        Vector vFunctions = pJavancss.getFunctionMetrics();
-        String sFirstFunction = (String)((Vector)vFunctions.elementAt(0)).elementAt(FCT_NAME);
-        bugIf( sFirstFunction == null );
-        /*System.out.println( sFirstFunction );*/
-        bugIf(!sFirstFunction.equals("Test12.readFile(URL)"), sFirstFunction);
-        pJavancss = new Javancss(FileUtil.concatPath(sLocalPath, "Test13.java"));
-        bugIf(pJavancss.getLOC() != pJavancss.getNcss(), "NCSS: " + pJavancss.getNcss() +
-              ", LOC: " + pJavancss.getLOC());
-        pJavancss = new Javancss(FileUtil.concatPath(sLocalPath, "Test14.java"));
-        bugIf(pJavancss.getLOC() != pJavancss.getNcss(), "NCSS: " + pJavancss.getNcss() +
-              ", LOC: " + pJavancss.getLOC());
-        pJavancss = new Javancss(FileUtil.concatPath(sLocalPath, "Test15.java"));
-        bugIf(pJavancss.getLOC() != pJavancss.getNcss(), "NCSS: " + pJavancss.getNcss() +
-              ", LOC: " + pJavancss.getLOC());
-        pJavancss = new Javancss(FileUtil.concatPath(sLocalPath, "Test16.java"));
-        bugIf(pJavancss.getNcss() != 4);
-        pJavancss = new Javancss(FileUtil.concatPath(sLocalPath, "Test17.java"));
-        bugIf(pJavancss.getLOC() != pJavancss.getNcss(), "NCSS: " + pJavancss.getNcss() +
-              ", LOC: " + pJavancss.getLOC());
-        pJavancss = new Javancss(FileUtil.concatPath(sLocalPath, "Test18.java"));
-        bugIf(pJavancss.getLOC() != pJavancss.getNcss(), "NCSS: " + pJavancss.getNcss() +
-              ", LOC: " + pJavancss.getLOC());
-        // Nr. 22
-        pJavancss = new Javancss(FileUtil.concatPath(sLocalPath, "Test19.java"));
-        vFunctions = pJavancss.getFunctionMetrics();
-        sFirstFunction = (String)((Vector)vFunctions.elementAt(0)).elementAt(FCT_NAME);
-        bugIf(!sFirstFunction.equals("test.Test19.foo(String[],Controller)"), sFirstFunction);
-        sFirstFunction = (String)((Vector)vFunctions.elementAt(3)).elementAt(FCT_NAME);
-        bugIf(!sFirstFunction.equals("test.Test19.main(String[])"));
-        // Nr. 24
-        pJavancss = new Javancss(FileUtil.concatPath(sLocalPath, "Test20.java"));
-        bugIf(pJavancss.getNcss() != 46, "NCSS: " + pJavancss.getNcss());
-        // Nr. 25
-        pJavancss = new Javancss(FileUtil.concatPath(sLocalPath, "Test21.java"));
-        bugIf(pJavancss.getNcss() != 67, "NCSS: " + pJavancss.getNcss());
-        // Nr. 26
-        pJavancss = new Javancss(FileUtil.concatPath(sLocalPath, "Test22.java"));
-        bugIf(pJavancss.getNcss() != 283, "NCSS: " + pJavancss.getNcss());
-        // Nr. 27
-        pJavancss = new Javancss(FileUtil.concatPath(sLocalPath, "Test23.java"));
-        bugIf(pJavancss.getNcss() != 10, "NCSS: " + pJavancss.getNcss());
-        vFunctions = pJavancss.getFunctionMetrics();
-        bugIf(vFunctions.size() != 7);
-        bugIf(new Javancss(FileUtil.concatPath(sLocalPath, "Test24.java")).
-            getFunctionMetrics().size() != vFunctions.size());
-        // Nr. 30
-        pJavancss = new Javancss(FileUtil.concatPath(sLocalPath, "Test25.java"));
-        bugIf(pJavancss.getNcss() != 12);
-        bugIf(pJavancss.getFunctionMetrics().size() != 9);
-        // Nr. 32
-        pJavancss = new Javancss(FileUtil.concatPath(sLocalPath, "Test26.java"));
-        bugIf(pJavancss.getNcss() != 47, "NCSS: " + pJavancss.getNcss());
-        // Nr. 33
-        pJavancss = new Javancss(FileUtil.concatPath(sLocalPath, "Test27.java"));
-        bugIf(pJavancss.getNcss() != 4, "NCSS: " + pJavancss.getNcss());
-        // Nr. 34
-        pJavancss = new Javancss(FileUtil.concatPath(sLocalPath, "Test28.java"));
-        bugIf(pJavancss.getNcss() != 465, "NCSS: " + pJavancss.getNcss());
-        // Nr. 35
-        String sTogether;
-        String sTest11 = "";
-        String sTest12 = "";
-        try {
-            sTest11 = FileUtil.readFile(FileUtil.concatPath(sLocalPath, "Test11.java"));
-            sTest12 = FileUtil.readFile(FileUtil.concatPath(sLocalPath, "Test12.java"));
-            bugIf(false);
-        } catch(Exception e) {
-            bugIf(true);
-        }
-        sTogether = sTest11 + sTest12;
-        pJavancss = new Javancss(new StringBufferInputStream(sTogether));
-        vFunctions = pJavancss.getFunctionMetrics();
-        Util.debug("JavancssTest._doIt().vFunctions: " + vFunctions);
-        sFirstFunction = (String)((Vector)vFunctions.elementAt(0)).elementAt(FCT_NAME);
-        bugIf(!sFirstFunction.equals("ccl.util.Test11.atoi(String)"));
-        String sSomeFunction = (String)((Vector)vFunctions.elementAt(32)).elementAt(FCT_NAME);
-        bugIf(!sSomeFunction.equals("Test12.readFile(URL)"), "Function: " + sSomeFunction);
-        Vector vPackages = pJavancss.getPackageMetrics();
-        bugIf(vPackages.size() != 2);
-        String[] asArg = new String[3];
-        asArg[0] = FileUtil.concatPath(sLocalPath, "Test11.java");
-        asArg[1] = asArg[0];
-        asArg[2] = FileUtil.concatPath(sLocalPath, "Test12.java");
-        int ncss38 = pJavancss.getNcss();
-        
-        // turn stdout off
-        PrintStream psStdout = System.out;
-        System.setOut(new PrintStream(new ByteArrayOutputStream()));
-        
-        pJavancss = new Javancss(asArg, "$Header: /home/clemens/src/java/javancss/src/javancss/test/RCS/JavancssTest.java,v 1.34 2006/10/06 11:46:43 clemens Exp clemens $");
-        
-        // turn stdout on
-        System.setOut(psStdout);
-        
-        vPackages = pJavancss.getPackageMetrics();
-        bugIf(vPackages.size() != 2);
-        bugIf(ncss38 == pJavancss.getNcss());
-        // Nr. 41
-        pJavancss = new Javancss(FileUtil.concatPath(sLocalPath, "Test29.java"));
-        bugIf(pJavancss.getNcss() != 1, "NCSS: " + pJavancss.getNcss());
-        // Nr. 42
-        // missing lf in last line/<EOF> not in single line
-        try 
-        {
-            pJavancss = new Javancss( FileUtil.concatPath( sLocalPath
-                                                           , "Test35.java" ) );
-            bugIf( pJavancss.getNcss() != 1 );
-        } catch(Exception eEOF) {
-            bugIf( true, "}<EOF>" );
-        }
-        try {
-            pJavancss = new Javancss( FileUtil.concatPath( sLocalPath, "Test36.java" ) );
-            bugIf( pJavancss.getNcss() != 1 );
-        } catch(Error eEOF) {
-            bugIf( true, "//<EOF>" );
-        }
-        try {
-            pJavancss = new Javancss(FileUtil.concatPath(sLocalPath, "Test37.java"));
-            bugIf(pJavancss.getNcss() != 1);
-        } catch(Error eCTRLZ) {
-            bugIf(true, "//ctrl-Z");
-        }
-        try {
-            pJavancss = new Javancss(FileUtil.concatPath(sLocalPath, "Test38.java"));
-            bugIf(pJavancss.getNcss() != 1);
-        } catch(Error eCTRLZ) {
-            bugIf(true, "0x0actrl-Z");
-        }
-        // Nr. 46
-        // semicolons not allowed by JLS, but not counted anyway.
-        try {
-            pJavancss = new Javancss(FileUtil.concatPath(sLocalPath, "Test39.java"));
-            bugIf(pJavancss.getNcss() != 5);
-        } catch(Error eEmptyStatements) {
-            bugIf(true, "Empty statments.");
-        }
-        // Nr. 47
-        // ;; in java.sql.Connection
-        try {
-            pJavancss = new Javancss(FileUtil.concatPath(sLocalPath, "Test32.java"));
-            bugIf( pJavancss.getNcss() != 26
-                   , "Test32.java: ncss should be 26 but is: " + pJavancss.getNcss() );
-        } catch(Error eJavaSQLConnection) {
-            bugIf(true, "java.sql.Connection double semicolon");
-        }
-
-        testCCN(sLocalPath);
-
-        // javancss parsed a file which it shouldn't
-        pJavancss = new Javancss(FileUtil.concatPath(sLocalPath, "Test42.java"));
-        bugIf(pJavancss.getLastErrorMessage() == null,
-              "Test42 should be parsed *and* result in an exception.");
-        // file containing just ;
-        pJavancss = new Javancss(FileUtil.concatPath(sLocalPath, "Test43.java"));
-        bugIf(pJavancss.getNcss() != 0);
-        // Test if javancss continues after running across a parse error
-        // Test42,java has an errror, so use two other file and this and
-        // take a look if it finishes with right result.
-        pJavancss = new Javancss(FileUtil.concatPath(sLocalPath, "Test1.java"));
-        int ncss57 = pJavancss.getNcss();
-        pJavancss = new Javancss(FileUtil.concatPath(sLocalPath, "Test2.java"));
-        ncss57 += pJavancss.getNcss();
-        Vector vFiles = new Vector();
-        vFiles.addElement(FileUtil.concatPath(sLocalPath, "Test1.java"));
-        vFiles.addElement(FileUtil.concatPath(sLocalPath, "Test42.java"));
-        vFiles.addElement(FileUtil.concatPath(sLocalPath, "Test2.java"));
-        pJavancss = new Javancss(vFiles);
-        bugIf(pJavancss.getNcss() != ncss57, "ncss57: " + ncss57 +
-              " pJavancss.getNcss(): " + pJavancss.getNcss());
-
-        // Bug reported by .. .
-        // Test48.java should be parsed.
-        pJavancss = new Javancss(FileUtil.concatPath(sLocalPath, "Test48.java"));
-        bugIf( pJavancss.getNcss() <= 0
-               , "Parsing file Test48.java failed!" );
-
-        pJavancss = new Javancss( FileUtil.concatPath(sLocalPath, "Test49.java") );
-        bugIf( pJavancss.getNcss() != 3
-               , "Parsing file Test49.java failed!" );
-        pJavancss = new Javancss( FileUtil.concatPath(sLocalPath, "Test50.java") );
-        bugIf( pJavancss.getNcss() <= 0
-               , "Parsing file Test50.java failed!" );
-
-        pJavancss = new Javancss( FileUtil.concatPath(sLocalPath, "Test51.java") );
-        bugIf( pJavancss.getNcss() != 8
-               , "Parsing file Test51.java failed!" );
-
-        pJavancss = new Javancss( FileUtil.concatPath(sLocalPath, "Test52.java") );
-        int test52ncss = pJavancss.getNcss();
-        bugIf( test52ncss != 12
-               , "Parsing file Test52.java failed. Ncss is " + test52ncss + " and not 12." );
-
-        pJavancss = new Javancss( FileUtil.concatPath(sLocalPath, "Test53.java") );
-        int test53ncss = pJavancss.getNcss();
-        bugIf( test53ncss != 4
-               , "Parsing file Test53.java failed. Ncss is " + test53ncss + " and not 4." );
-
-        _doNcssTest( 54, 9 );
-        _doNcssTest( 55, 5 );
-        _doNcssTest( 56 );
-        _doNcssTest( 57 );
+            _checkInnerClasses();
+    
+            // Nr. 1
+            pJavancss = new Javancss(FileUtil.concatPath(sLocalPath, "Test1.java"));
+            int ncss1 = pJavancss.getNcss();
+            bugIf(ncss1 != 318, "Ncss: " + ncss1);
+    
+            // Nr. 2
+            pJavancss = new Javancss(FileUtil.concatPath(sLocalPath, "Test2.java"));
+            bugIf(pJavancss.getNcss() != 8);
+            // Nr. 3
+            pJavancss = new Javancss(FileUtil.concatPath(sLocalPath, "Test3.java"));
+            bugIf(pJavancss.getNcss() != 69);
+            // Nr. 4
+            pJavancss = new Javancss(FileUtil.concatPath(sLocalPath, "Test4.java"));
+            bugIf(pJavancss.getNcss() != 11);
+            // Nr. 5
+            pJavancss = new Javancss(FileUtil.concatPath(sLocalPath, "Test5.java"));
+            bugIf(pJavancss.getNcss() != 16);
+            // Nr. 6
+            pJavancss = new Javancss(FileUtil.concatPath(sLocalPath, "Test6.java"));
+            int ncss6 = pJavancss.getNcss();
+            bugIf(ncss6 != 565, "Ncss: " + ncss6);
+            bugIf(pJavancss.getLOC() != 1254, "LOC: " + pJavancss.getLOC());
+            // Nr. 8
+            pJavancss = new Javancss(FileUtil.concatPath(sLocalPath, "Test7.java"));
+            bugIf(pJavancss.getNcss() != 30, "Ncss: " + pJavancss.getNcss());
+            // Nr. 9
+            Javancss pJavancss8 = new Javancss(FileUtil.concatPath(sLocalPath, "Test8.java"));
+            bugIf(pJavancss.getNcss() != pJavancss8.getNcss());
+            // Nr. 10
+            pJavancss = new Javancss(FileUtil.concatPath(sLocalPath, "Test9.java"));
+            bugIf(ncss1 != pJavancss.getLOC(), "LOC: " + pJavancss.getLOC());
+            // Nr. 11
+            pJavancss = new Javancss(FileUtil.concatPath(sLocalPath, "Test10.java"));
+            bugIf(pJavancss.getLOC() != ncss6, "LOC: " + pJavancss.getLOC());
+            bugIf(pJavancss.getLOC() != pJavancss.getNcss(), "NCSS: " + pJavancss.getNcss());
+            pJavancss = new Javancss(FileUtil.concatPath(sLocalPath, "Test11.java"));
+            bugIf(pJavancss.getLOC() != pJavancss.getNcss(), "NCSS: " + pJavancss.getNcss() +
+                  ", LOC: " + pJavancss.getLOC());
+            pJavancss = new Javancss(FileUtil.concatPath(sLocalPath, "Test12.java"));
+            bugIf(pJavancss.getLOC() != pJavancss.getNcss(), "NCSS: " + pJavancss.getNcss() +
+                  ", LOC: " + pJavancss.getLOC());
+            Vector vFunctions = pJavancss.getFunctionMetrics();
+            String sFirstFunction = (String)((Vector)vFunctions.elementAt(0)).elementAt(FCT_NAME);
+            bugIf( sFirstFunction == null );
+            /*System.out.println( sFirstFunction );*/
+            bugIf(!sFirstFunction.equals("Test12.readFile(URL)"), sFirstFunction);
+            pJavancss = new Javancss(FileUtil.concatPath(sLocalPath, "Test13.java"));
+            bugIf(pJavancss.getLOC() != pJavancss.getNcss(), "NCSS: " + pJavancss.getNcss() +
+                  ", LOC: " + pJavancss.getLOC());
+            pJavancss = new Javancss(FileUtil.concatPath(sLocalPath, "Test14.java"));
+            bugIf(pJavancss.getLOC() != pJavancss.getNcss(), "NCSS: " + pJavancss.getNcss() +
+                  ", LOC: " + pJavancss.getLOC());
+            pJavancss = new Javancss(FileUtil.concatPath(sLocalPath, "Test15.java"));
+            bugIf(pJavancss.getLOC() != pJavancss.getNcss(), "NCSS: " + pJavancss.getNcss() +
+                  ", LOC: " + pJavancss.getLOC());
+            pJavancss = new Javancss(FileUtil.concatPath(sLocalPath, "Test16.java"));
+            bugIf(pJavancss.getNcss() != 4);
+            pJavancss = new Javancss(FileUtil.concatPath(sLocalPath, "Test17.java"));
+            bugIf(pJavancss.getLOC() != pJavancss.getNcss(), "NCSS: " + pJavancss.getNcss() +
+                  ", LOC: " + pJavancss.getLOC());
+            pJavancss = new Javancss(FileUtil.concatPath(sLocalPath, "Test18.java"));
+            bugIf(pJavancss.getLOC() != pJavancss.getNcss(), "NCSS: " + pJavancss.getNcss() +
+                  ", LOC: " + pJavancss.getLOC());
+            // Nr. 22
+            pJavancss = new Javancss(FileUtil.concatPath(sLocalPath, "Test19.java"));
+            vFunctions = pJavancss.getFunctionMetrics();
+            sFirstFunction = (String)((Vector)vFunctions.elementAt(0)).elementAt(FCT_NAME);
+            bugIf(!sFirstFunction.equals("test.Test19.foo(String[],Controller)"), sFirstFunction);
+            sFirstFunction = (String)((Vector)vFunctions.elementAt(3)).elementAt(FCT_NAME);
+            bugIf(!sFirstFunction.equals("test.Test19.main(String[])"));
+            // Nr. 24
+            pJavancss = new Javancss(FileUtil.concatPath(sLocalPath, "Test20.java"));
+            bugIf(pJavancss.getNcss() != 46, "NCSS: " + pJavancss.getNcss());
+            // Nr. 25
+            pJavancss = new Javancss(FileUtil.concatPath(sLocalPath, "Test21.java"));
+            bugIf(pJavancss.getNcss() != 67, "NCSS: " + pJavancss.getNcss());
+            // Nr. 26
+            pJavancss = new Javancss(FileUtil.concatPath(sLocalPath, "Test22.java"));
+            bugIf(pJavancss.getNcss() != 283, "NCSS: " + pJavancss.getNcss());
+            // Nr. 27
+            pJavancss = new Javancss(FileUtil.concatPath(sLocalPath, "Test23.java"));
+            bugIf(pJavancss.getNcss() != 10, "NCSS: " + pJavancss.getNcss());
+            vFunctions = pJavancss.getFunctionMetrics();
+            bugIf(vFunctions.size() != 7);
+            bugIf(new Javancss(FileUtil.concatPath(sLocalPath, "Test24.java")).
+                getFunctionMetrics().size() != vFunctions.size());
+            // Nr. 30
+            pJavancss = new Javancss(FileUtil.concatPath(sLocalPath, "Test25.java"));
+            bugIf(pJavancss.getNcss() != 12);
+            bugIf(pJavancss.getFunctionMetrics().size() != 9);
+            // Nr. 32
+            pJavancss = new Javancss(FileUtil.concatPath(sLocalPath, "Test26.java"));
+            bugIf(pJavancss.getNcss() != 47, "NCSS: " + pJavancss.getNcss());
+            // Nr. 33
+            pJavancss = new Javancss(FileUtil.concatPath(sLocalPath, "Test27.java"));
+            bugIf(pJavancss.getNcss() != 4, "NCSS: " + pJavancss.getNcss());
+            // Nr. 34
+            pJavancss = new Javancss(FileUtil.concatPath(sLocalPath, "Test28.java"));
+            bugIf(pJavancss.getNcss() != 465, "NCSS: " + pJavancss.getNcss());
+            // Nr. 35
+            String sTogether;
+            String sTest11 = "";
+            String sTest12 = "";
+            try {
+                sTest11 = FileUtil.readFile(FileUtil.concatPath(sLocalPath, "Test11.java"));
+                sTest12 = FileUtil.readFile(FileUtil.concatPath(sLocalPath, "Test12.java"));
+                bugIf(false);
+            } catch(Exception e) {
+                bugIf(true);
+            }
+            sTogether = sTest11 + sTest12;
+            pJavancss = new Javancss(new StringBufferInputStream(sTogether));
+            vFunctions = pJavancss.getFunctionMetrics();
+            Util.debug("JavancssTest._doIt().vFunctions: " + vFunctions);
+            sFirstFunction = (String)((Vector)vFunctions.elementAt(0)).elementAt(FCT_NAME);
+            bugIf(!sFirstFunction.equals("ccl.util.Test11.atoi(String)"));
+            String sSomeFunction = (String)((Vector)vFunctions.elementAt(32)).elementAt(FCT_NAME);
+            bugIf(!sSomeFunction.equals("Test12.readFile(URL)"), "Function: " + sSomeFunction);
+            Vector vPackages = pJavancss.getPackageMetrics();
+            bugIf(vPackages.size() != 2);
+            String[] asArg = new String[3];
+            asArg[0] = FileUtil.concatPath(sLocalPath, "Test11.java");
+            asArg[1] = asArg[0];
+            asArg[2] = FileUtil.concatPath(sLocalPath, "Test12.java");
+            int ncss38 = pJavancss.getNcss();
+            
+            // turn stdout off
+            PrintStream psStdout = System.out;
+            System.setOut(new PrintStream(new ByteArrayOutputStream()));
+            
+            pJavancss = new Javancss(asArg, "$Header: /home/clemens/src/java/javancss/src/javancss/test/RCS/JavancssTest.java,v 1.34 2006/10/06 11:46:43 clemens Exp clemens $");
+            
+            // turn stdout on
+            System.setOut(psStdout);
+            
+            vPackages = pJavancss.getPackageMetrics();
+            bugIf(vPackages.size() != 2);
+            bugIf(ncss38 == pJavancss.getNcss());
+            // Nr. 41
+            pJavancss = new Javancss(FileUtil.concatPath(sLocalPath, "Test29.java"));
+            bugIf(pJavancss.getNcss() != 1, "NCSS: " + pJavancss.getNcss());
+            // Nr. 42
+            // missing lf in last line/<EOF> not in single line
+            try 
+            {
+                pJavancss = new Javancss( FileUtil.concatPath( sLocalPath
+                                                               , "Test35.java" ) );
+                bugIf( pJavancss.getNcss() != 1 );
+            } catch(Exception eEOF) {
+                bugIf( true, "}<EOF>" );
+            }
+            try {
+                pJavancss = new Javancss( FileUtil.concatPath( sLocalPath, "Test36.java" ) );
+                bugIf( pJavancss.getNcss() != 1 );
+            } catch(Error eEOF) {
+                bugIf( true, "//<EOF>" );
+            }
+            try {
+                pJavancss = new Javancss(FileUtil.concatPath(sLocalPath, "Test37.java"));
+                bugIf(pJavancss.getNcss() != 1);
+            } catch(Error eCTRLZ) {
+                bugIf(true, "//ctrl-Z");
+            }
+            try {
+                pJavancss = new Javancss(FileUtil.concatPath(sLocalPath, "Test38.java"));
+                bugIf(pJavancss.getNcss() != 1);
+            } catch(Error eCTRLZ) {
+                bugIf(true, "0x0actrl-Z");
+            }
+            // Nr. 46
+            // semicolons not allowed by JLS, but not counted anyway.
+            try {
+                pJavancss = new Javancss(FileUtil.concatPath(sLocalPath, "Test39.java"));
+                bugIf(pJavancss.getNcss() != 5);
+            } catch(Error eEmptyStatements) {
+                bugIf(true, "Empty statments.");
+            }
+            // Nr. 47
+            // ;; in java.sql.Connection
+            try {
+                pJavancss = new Javancss(FileUtil.concatPath(sLocalPath, "Test32.java"));
+                bugIf( pJavancss.getNcss() != 26
+                       , "Test32.java: ncss should be 26 but is: " + pJavancss.getNcss() );
+            } catch(Error eJavaSQLConnection) {
+                bugIf(true, "java.sql.Connection double semicolon");
+            }
+    
+            testCCN(sLocalPath);
+    
+            // javancss parsed a file which it shouldn't
+            pJavancss = new Javancss(FileUtil.concatPath(sLocalPath, "Test42.java"));
+            bugIf(pJavancss.getLastErrorMessage() == null,
+                  "Test42 should be parsed *and* result in an exception.");
+            // file containing just ;
+            pJavancss = new Javancss(FileUtil.concatPath(sLocalPath, "Test43.java"));
+            bugIf(pJavancss.getNcss() != 0);
+            // Test if javancss continues after running across a parse error
+            // Test42,java has an errror, so use two other file and this and
+            // take a look if it finishes with right result.
+            pJavancss = new Javancss(FileUtil.concatPath(sLocalPath, "Test1.java"));
+            int ncss57 = pJavancss.getNcss();
+            pJavancss = new Javancss(FileUtil.concatPath(sLocalPath, "Test2.java"));
+            ncss57 += pJavancss.getNcss();
+            Vector vFiles = new Vector();
+            vFiles.addElement(FileUtil.concatPath(sLocalPath, "Test1.java"));
+            vFiles.addElement(FileUtil.concatPath(sLocalPath, "Test42.java"));
+            vFiles.addElement(FileUtil.concatPath(sLocalPath, "Test2.java"));
+            pJavancss = new Javancss(vFiles);
+            bugIf(pJavancss.getNcss() != ncss57, "ncss57: " + ncss57 +
+                  " pJavancss.getNcss(): " + pJavancss.getNcss());
+    
+            // Bug reported by .. .
+            // Test48.java should be parsed.
+            pJavancss = new Javancss(FileUtil.concatPath(sLocalPath, "Test48.java"));
+            bugIf( pJavancss.getNcss() <= 0
+                   , "Parsing file Test48.java failed!" );
+    
+            pJavancss = new Javancss( FileUtil.concatPath(sLocalPath, "Test49.java") );
+            bugIf( pJavancss.getNcss() != 3
+                   , "Parsing file Test49.java failed!" );
+            pJavancss = new Javancss( FileUtil.concatPath(sLocalPath, "Test50.java") );
+            bugIf( pJavancss.getNcss() <= 0
+                   , "Parsing file Test50.java failed!" );
+    
+            pJavancss = new Javancss( FileUtil.concatPath(sLocalPath, "Test51.java") );
+            bugIf( pJavancss.getNcss() != 8
+                   , "Parsing file Test51.java failed!" );
+    
+            pJavancss = new Javancss( FileUtil.concatPath(sLocalPath, "Test52.java") );
+            int test52ncss = pJavancss.getNcss();
+            bugIf( test52ncss != 12
+                   , "Parsing file Test52.java failed. Ncss is " + test52ncss + " and not 12." );
+    
+            pJavancss = new Javancss( FileUtil.concatPath(sLocalPath, "Test53.java") );
+            int test53ncss = pJavancss.getNcss();
+            bugIf( test53ncss != 4
+                   , "Parsing file Test53.java failed. Ncss is " + test53ncss + " and not 4." );
+    
+            _doNcssTest( 54, 9 );
+            _doNcssTest( 55, 5 );
+            _doNcssTest( 56 );
+            _doNcssTest( 57 );
 
         }
 
@@ -624,19 +624,19 @@ public class JavancssTest extends    Test
     }
 
     private void _doJvdcsTest(int testFileNumber, int expectedJvdcsResult) {
-                Javancss pJavancss;
-                pJavancss = new Javancss( FileUtil.concatPath( _sTestDir
-                                                               , "Test" + testFileNumber + ".java"    ) );
-                Vector vObjectMetrics = pJavancss.getObjectMetrics();
-                Vector vClassMetrics = (Vector)vObjectMetrics.elementAt( 0 );
-                int jvdcs      = ((Integer)vClassMetrics.elementAt(OBJ_JVDCS)).intValue();
-                /*int jvdc = pJavancss.getJvdc();*/
-                bugIf( jvdcs != expectedJvdcsResult
-                   , "Parsing file Test" + testFileNumber + ".java failed. Jvdc is "
-                     + jvdcs 
-                     + " and not " + expectedJvdcsResult + "."
-                       );
-        }
+        Javancss pJavancss;
+        pJavancss = new Javancss( FileUtil.concatPath( _sTestDir
+                                                       , "Test" + testFileNumber + ".java"    ) );
+        Vector vObjectMetrics = pJavancss.getObjectMetrics();
+        Vector vClassMetrics = (Vector)vObjectMetrics.elementAt( 0 );
+        int jvdcs      = ((Integer)vClassMetrics.elementAt(OBJ_JVDCS)).intValue();
+        /*int jvdc = pJavancss.getJvdc();*/
+        bugIf( jvdcs != expectedJvdcsResult
+           , "Parsing file Test" + testFileNumber + ".java failed. Jvdc is "
+             + jvdcs 
+             + " and not " + expectedJvdcsResult + "."
+               );
+    }
 
     /**
      * Tests the cyclomatic complexity number measurement.
@@ -690,20 +690,30 @@ public class JavancssTest extends    Test
         _exitSubTest();
     }
 
-        private void assertCCN(Vector vFunctions, int methodIndex, int expectedCCN) {
-                int ccn;
-                ccn = getCCN( vFunctions, methodIndex );
-                Assert( ccn == expectedCCN
-                        , "Expected ccn was " + expectedCCN + " but the result is: " + ccn );                
-        }
+    private void assertCCN(Vector vFunctions, int methodIndex, int expectedCCN) {
+        int ccn;
+        ccn = getCCN( vFunctions, methodIndex );
+        Assert( ccn == expectedCCN
+                , "Expected ccn was " + expectedCCN + " but the result is: " + ccn );                
+    }
 
-        private int getCCN(Vector vFunctions, int methodIndex) {
-                return ((Integer)((Vector)vFunctions.elementAt(methodIndex)).elementAt(FCT_CCN)).intValue();
-        }
+    private int getCCN(Vector vFunctions, int methodIndex) {
+        return ((Integer)((Vector)vFunctions.elementAt(methodIndex)).elementAt(FCT_CCN)).intValue();
+    }
 
-        private Javancss measureTestFile(String sLocalPath, int testFileId) {
-                return new Javancss(FileUtil.concatPath(sLocalPath, "Test" + testFileId + ".java"));
-        }
+    private Javancss measureTestFile(String sLocalPath, int testFileId) {
+        return new Javancss(FileUtil.concatPath(sLocalPath, "Test" + testFileId + ".java"));
+    }
+
+    public static void main( String[] asArg_ ) 
+    {
+        JavancssTest pTest = new JavancssTest();
+        pTest.setTestDir( "test" );
+        pTest.setVerbose( true );
+        pTest.setTiming ( true );
+        pTest.run();
+        pTest.printResult();
+    }
 
     public void setTestDir( String sTestDir_ ) {
         _sTestDir = sTestDir_;
