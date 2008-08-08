@@ -27,11 +27,13 @@ import java.io.BufferedOutputStream;
 import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.PrintStream;
-import java.io.StringBufferInputStream;
+import java.io.Reader;
 import java.awt.event.*;
 import javancss.test.JavancssTest;
 
@@ -125,13 +127,12 @@ public class Javancss implements Exitable,
         // take user.dir property in account
         sSourceFileName_ = FileUtil.normalizeFileName( sSourceFileName_ );
 
-        DataInputStream disSource = null;
+        Reader reader = null;
 
         // opens the file
         try 
         {
-            disSource = new DataInputStream
-                   (new FileInputStream(sSourceFileName_));
+            reader = newReader(sSourceFileName_);
         }
         catch(IOException pIOException) 
         {
@@ -151,8 +152,8 @@ public class Javancss implements Exitable,
 
         String sTempErrorMessage = _sErrorMessage;
         try {
-            // the same method but with a DataInputSream
-            _measureSource(disSource);
+            // the same method but with a Reader
+            _measureSource(reader);
         } catch(ParseException pParseException) {
             if (sTempErrorMessage == null) {
                 sTempErrorMessage = "";
@@ -178,14 +179,14 @@ public class Javancss implements Exitable,
         }
     }
 
-    private void _measureSource(DataInputStream disSource_)
+    private void _measureSource(Reader reader)
         throws IOException,
                ParseException,
                TokenMgrError
     {
         try {
             // create a parser object
-            _pJavaParser = new JavaParser(disSource_);
+            _pJavaParser = new JavaParser(reader);
             // execute the parser
             _pJavaParser.CompilationUnit();
             Util.debug
@@ -292,7 +293,7 @@ public class Javancss implements Exitable,
      * If arguments were provided, they are used, otherwise
      * the input stream is used.
      */
-    private void _measureRoot(InputStream pInputStream_)
+    private void _measureRoot(Reader reader)
         throws IOException,
                ParseException,
                TokenMgrError
@@ -301,8 +302,7 @@ public class Javancss implements Exitable,
         
         // either there are argument files, or stdin is used
         if (_vJavaSourceFiles.size() == 0) {
-            DataInputStream disJava = new java.io.DataInputStream(pInputStream_);
-            _measureSource(disJava);
+            _measureSource(reader);
         } else {
             // the collection of files get measured
             _measureFiles(_vJavaSourceFiles);
@@ -359,7 +359,7 @@ public class Javancss implements Exitable,
     public Javancss(Vector vJavaSourceFiles_) {
         _vJavaSourceFiles = vJavaSourceFiles_;
         try {
-            _measureRoot(System.in);
+            _measureRoot(newReader(System.in));
         } catch(Exception e) {
         } catch(TokenMgrError pError) {
         }
@@ -371,7 +371,7 @@ public class Javancss implements Exitable,
         _vJavaSourceFiles = new Vector();
         _vJavaSourceFiles.addElement(sJavaSourceFile_);
         try {
-            _measureRoot(System.in);
+            _measureRoot(newReader(System.in));
         } catch(Exception e) {
             Util.debug( "Javancss.<init>(String).e: " + e );
         } catch(TokenMgrError pError) {
@@ -445,9 +445,9 @@ public class Javancss implements Exitable,
         _vJavaSourceFiles.addElement(sJavaSourceFile_);
     }
 
-    public Javancss(StringBufferInputStream pStringBufferInputStream_) {
+    public Javancss(Reader reader) {
         try {
-            _measureRoot(pStringBufferInputStream_);
+            _measureRoot(reader);
         } catch(Exception e) {
         } catch(TokenMgrError pError) {
         }
@@ -586,7 +586,7 @@ public class Javancss implements Exitable,
             pJavancssFrame.setVisible(true);
 
             try {
-                _measureRoot(System.in);
+                _measureRoot(newReader(System.in));
             } catch(Throwable pThrowable) {
                 // shouldn't we print something here?
             }
@@ -601,7 +601,7 @@ public class Javancss implements Exitable,
         // this initiates the measurement
         try
         {
-            _measureRoot( System.in );
+            _measureRoot( newReader( System.in ) );
         }
         catch(Throwable pThrowable) 
         {
@@ -771,5 +771,17 @@ public class Javancss implements Exitable,
         }
 
         return new AsciiFormatter( this );
+    }
+
+    private Reader newReader(InputStream stream)
+    {
+        // TODO: encoding configuration support, instead of platform encoding
+        return new InputStreamReader(stream);
+    }
+
+    private Reader newReader(String file) throws FileNotFoundException
+    {
+        // TODO: encoding configuration support, instead of platform encoding
+        return newReader(new FileInputStream(file));
     }
 }

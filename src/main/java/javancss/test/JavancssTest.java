@@ -23,7 +23,7 @@ package javancss.test;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-import java.io.StringBufferInputStream;
+import java.io.StringReader;
 import java.util.Enumeration;
 import java.util.Vector;
 //import java.util.*;
@@ -360,7 +360,7 @@ public class JavancssTest extends    Test
                 bugIf(true);
             }
             sTogether = sTest11 + sTest12;
-            pJavancss = new Javancss(new StringBufferInputStream(sTogether));
+            pJavancss = new Javancss(new StringReader(sTogether));
             vFunctions = pJavancss.getFunctionMetrics();
             Util.debug("JavancssTest._doIt().vFunctions: " + vFunctions);
             sFirstFunction = (String)((Vector)vFunctions.elementAt(0)).elementAt(FCT_NAME);
