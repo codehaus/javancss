@@ -108,16 +108,25 @@
           <encoding>${project.build.sourceEncoding}</encoding><!-- not needed for 2.1 -->
         </configuration>
       </plugin>
-      <!-- plugin>
+      <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-assembly-plugin</artifactId>
         <version>2.1</version>
         <configuration>
           <descriptors>
-            <descriptor>src/main/assembly/full.xml</descriptor>
+            <descriptor>src/main/assembly/bin.xml</descriptor>
           </descriptors>
         </configuration>
-      </plugin-->
+        <executions>
+          <execution>
+            <id>make-assembly</id>
+            <phase>package</phase>
+            <goals>
+              <goal>attached</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-jar-plugin</artifactId>
@@ -161,7 +170,7 @@
         <artifactId>maven-site-plugin</artifactId>
         <version>2.0-beta-7</version>
       </plugin>
-      <plugin>
+      <!-- plugin> removed since this Main class does System.exit(0)
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>exec-maven-plugin</artifactId>
         <version>1.1</version>
@@ -179,7 +188,7 @@
             </goals>
           </execution>
         </executions>
-      </plugin>
+      </plugin-->
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>javacc-maven-plugin</artifactId>
