@@ -23,7 +23,6 @@ package javancss;
 
 import ccl.util.*;
 import java.util.*;
-import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -96,13 +95,10 @@ public class Javancss implements Exitable,
      */
     private String _sJavaSourceFileName = null;
 
-    private DataInputStream createInputStream( String sSourceFileName_ )
+    private Reader createSourceReader( String sSourceFileName_ )
     {
-        DataInputStream disSource = null;
-
         try {
-            disSource = new DataInputStream
-                   (new FileInputStream(sSourceFileName_));
+            return newReader(sSourceFileName_);
         } catch(IOException pIOException) {
             if ( Util.isEmpty( _sErrorMessage ) )
             {
@@ -117,8 +113,6 @@ public class Javancss implements Exitable,
 
             return null;
         }
-
-        return disSource;
     }
 
     private void _measureSource(String sSourceFileName_)
@@ -398,9 +392,8 @@ public class Javancss implements Exitable,
 
             return true;
         }
-        DataInputStream disSource = createInputStream
-               ( _sJavaSourceFileName );
-        if ( disSource == null ) {
+        Reader reader = createSourceReader( _sJavaSourceFileName );
+        if ( reader == null ) {
             Util.debug( "Javancss.parseImports().NO_DIS" );
 
             return true;
@@ -408,7 +401,7 @@ public class Javancss implements Exitable,
 
         try {
             Util.debug( "Javancss.parseImports().START_PARSING" );
-            _pJavaParser = new JavaParser(disSource);
+            _pJavaParser = new JavaParser(reader);
             _pJavaParser.ImportUnit();
             _vImports = _pJavaParser.getImports();
             _aoPackage = _pJavaParser.getPackageObjects();
@@ -786,7 +779,6 @@ public class Javancss implements Exitable,
 
     private Reader newReader(String file) throws FileNotFoundException
     {
-        // TODO: encoding configuration support, instead of platform encoding
         return newReader(new FileInputStream(file));
     }
 }
