@@ -24,9 +24,9 @@ package javancss;
 import ccl.util.Util;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
-import java.util.Enumeration;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Locale;
-import java.util.Vector;
 
 /**
  * Generates ascii output of Java metrics.
@@ -197,7 +197,7 @@ public class AsciiFormatter implements Formatter
 
     public String printPackageNcss() 
     {
-        Vector vPackageMetrics = _javancss.getPackageMetrics();
+        List vPackageMetrics = _javancss.getPackageMetrics();
 
         int packages = vPackageMetrics.size();
 
@@ -212,11 +212,9 @@ public class AsciiFormatter implements Formatter
         int functionsSum = 0;
         int javadocsSum  = 0;
         int ncssSum      = 0;
-        for( Enumeration ePackages = vPackageMetrics.elements()
-             ; ePackages.hasMoreElements()
-             ; )
+        for( Iterator ePackages = vPackageMetrics.iterator(); ePackages.hasNext(); )
         {
-            PackageMetric pPackageMetric = (PackageMetric)ePackages.nextElement();
+            PackageMetric pPackageMetric = (PackageMetric)ePackages.next();
 
             classesSum   += pPackageMetric.classes;
             functionsSum += pPackageMetric.functions;
@@ -285,7 +283,7 @@ public class AsciiFormatter implements Formatter
     }
 
     public String printObjectNcss() {
-        Vector vObjectMetrics = _javancss.getObjectMetrics();
+        List vObjectMetrics = _javancss.getObjectMetrics();
 
         String sRetVal = _formatListHeader( vObjectMetrics.size()
                                             , new String[] { "NCSS"
@@ -297,16 +295,14 @@ public class AsciiFormatter implements Formatter
         long lClassesSum  = 0;
         long lObjectSum   = 0;
         long lJVDCSum     = 0;
-        for( Enumeration eClasses = vObjectMetrics.elements()
-             ; eClasses.hasMoreElements()
-             ; )
+        for( Iterator eClasses = vObjectMetrics.iterator(); eClasses.hasNext(); )
         {
-            Vector vClassMetrics = (Vector)eClasses.nextElement();
-            String sClass = (String)vClassMetrics.elementAt(OBJ_NAME);
-            int objectNcss = ((Integer)vClassMetrics.elementAt(OBJ_NCSS)).intValue();
-            int functions  = ((Integer)vClassMetrics.elementAt(OBJ_FCTS)).intValue();
-            int classes    = ((Integer)vClassMetrics.elementAt(OBJ_CLSSS)).intValue();
-            int jvdcs      = ((Integer)vClassMetrics.elementAt(OBJ_JVDCS)).intValue();
+            List vClassMetrics = (List)eClasses.next();
+            String sClass = (String)vClassMetrics.get(OBJ_NAME);
+            int objectNcss = ((Integer)vClassMetrics.get(OBJ_NCSS)).intValue();
+            int functions  = ((Integer)vClassMetrics.get(OBJ_FCTS)).intValue();
+            int classes    = ((Integer)vClassMetrics.get(OBJ_CLSSS)).intValue();
+            int jvdcs      = ((Integer)vClassMetrics.get(OBJ_JVDCS)).intValue();
             lObjectSum   += (long)objectNcss;
             lFunctionSum += (long)functions;
             lClassesSum  += (long)classes;
@@ -361,7 +357,7 @@ public class AsciiFormatter implements Formatter
     {
         StringBuffer sRetVal = new StringBuffer(80000);
 
-        Vector vFunctionMetrics = _javancss.getFunctionMetrics();
+        List vFunctionMetrics = _javancss.getFunctionMetrics();
 
         sRetVal.append( _formatListHeader( vFunctionMetrics.size()
                                            , new String[] { "NCSS"
@@ -372,16 +368,14 @@ public class AsciiFormatter implements Formatter
         long lFunctionSum = 0;
         long lCCNSum      = 0;
         long lJVDCSum     = 0;
-        for( Enumeration eFunctions = vFunctionMetrics.elements()
-             ; eFunctions.hasMoreElements()
-             ; )
+        for( Iterator eFunctions = vFunctionMetrics.iterator(); eFunctions.hasNext(); )
         {
-            Vector vSingleFunctionMetrics = (Vector)eFunctions.nextElement();
+            List vSingleFunctionMetrics = (List)eFunctions.next();
             String sFunction = null;
-            sFunction = (String)vSingleFunctionMetrics.elementAt(FCT_NAME);
-            int functionNcss = ((Integer)vSingleFunctionMetrics.elementAt(FCT_NCSS)).intValue();
-            int functionCCN  = ((Integer)vSingleFunctionMetrics.elementAt(FCT_CCN )).intValue();
-            int functionJVDC = ((Integer)vSingleFunctionMetrics.elementAt(FCT_JVDC)).intValue();
+            sFunction = (String)vSingleFunctionMetrics.get(FCT_NAME);
+            int functionNcss = ((Integer)vSingleFunctionMetrics.get(FCT_NCSS)).intValue();
+            int functionCCN  = ((Integer)vSingleFunctionMetrics.get(FCT_CCN )).intValue();
+            int functionJVDC = ((Integer)vSingleFunctionMetrics.get(FCT_JVDC)).intValue();
             lFunctionSum += (long)functionNcss;
             lCCNSum      += (long)functionCCN;
             lJVDCSum     += (long)functionJVDC; 
