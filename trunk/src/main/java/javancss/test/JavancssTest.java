@@ -24,6 +24,7 @@ package javancss.test;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.io.StringReader;
+import java.io.UnsupportedEncodingException;
 import java.util.Enumeration;
 import java.util.Vector;
 //import java.util.*;
@@ -620,6 +621,8 @@ public class JavancssTest extends    Test
         _doNcssTest( 131, 6 );
         _doNcssTest( 132, 12 );
         _doNcssTest( 134, 4 );
+
+        _doNcssEncodingTest();
     }
 
     private void _doJvdcsTest(int testFileNumber, int expectedJvdcsResult) {
@@ -716,5 +719,16 @@ public class JavancssTest extends    Test
 
     public void setTestDir( String sTestDir_ ) {
         _sTestDir = sTestDir_;
+    }
+
+    private void _doNcssEncodingTest() throws UnsupportedEncodingException
+    {
+        String[] args = new String[] { "-encoding", "UTF-16", FileUtil.concatPath( _sTestDir, "TestEncoding.java" ) }; 
+        Javancss pJavancss = new Javancss( args, "test" );
+        int expectedNcss = 11;
+        int ncss = pJavancss.getNcss();
+
+        bugIf( ncss != expectedNcss,
+               "Parsing file TestEncoding.java failed. Ncss is " + ncss + " and not " + expectedNcss + "." );
     }
 }

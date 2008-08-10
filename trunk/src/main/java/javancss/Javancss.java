@@ -71,6 +71,7 @@ public class Javancss implements Exitable,
         "out=s,o,Output file name. By default output goes to standard out.\n"+
         "recursive=b,o,Recurse to subdirs.\n" +
         "check=b,o,Triggers a javancss self test.\n" +
+        "encoding=s,o,Encoding used while reading source files (default: platform encoding).\n" +
         "\n" +
         "[Colors]\n" +
         "UseSystemColors=true\n";
@@ -89,6 +90,7 @@ public class Javancss implements Exitable,
     private Hashtable _htPackages = null;
     private Hashtable _htProcessedAtFiles = new Hashtable();
     private Object[] _aoPackage = null;
+    private String encoding = null;
 
     /**
      * Just used for parseImports.
@@ -514,6 +516,8 @@ public class Javancss implements Exitable,
         }
         Hashtable htOptions = _pInit.getOptions();
 
+        setEncoding( (String) htOptions.get( "encoding" ) );
+
         if ( htOptions.get( "check" ) != null ) {
             JavancssTest pTest = new JavancssTest();
             pTest.setTestDir( FileUtil.concatPath( _pInit.getApplicationPath()
@@ -771,14 +775,23 @@ public class Javancss implements Exitable,
         return new AsciiFormatter( this );
     }
 
-    private Reader newReader(InputStream stream)
+    public String getEncoding()
     {
-        // TODO: encoding configuration support, instead of platform encoding
-        return new InputStreamReader(stream);
+        return encoding;
     }
 
-    private Reader newReader(String file) throws FileNotFoundException
+    public void setEncoding( String encoding )
     {
-        return newReader(new FileInputStream(file));
+        this.encoding = encoding;
+    }
+
+    private Reader newReader( InputStream stream ) throws UnsupportedEncodingException
+    {
+        return ( encoding == null ) ? new InputStreamReader( stream ) : new InputStreamReader( stream, encoding );
+    }
+
+    private Reader newReader( String file ) throws FileNotFoundException, UnsupportedEncodingException
+    {
+        return newReader( new FileInputStream( file ) );
     }
 }
