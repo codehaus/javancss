@@ -685,8 +685,8 @@ public class Javancss implements Exitable,
             pw.close();
         } else
         {
-            // standard out is used
-            //pw.flush();
+            // stdout is used: don't close but ensure everything is flushed
+            pw.flush();
         }
         pw = null;
     }
