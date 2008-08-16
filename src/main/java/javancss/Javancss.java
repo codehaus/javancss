@@ -21,8 +21,8 @@ Boston, MA 02111-1307, USA.  */
 
 package javancss;
 
-import ccl.util.*;
-import java.util.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -35,7 +35,15 @@ import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.io.Reader;
 import java.io.UnsupportedEncodingException;
-import java.awt.event.*;
+import java.util.Enumeration;
+import java.util.Hashtable;
+import java.util.Vector;
+
+import ccl.util.Exitable;
+import ccl.util.FileUtil;
+import ccl.util.Init;
+import ccl.util.Util;
+
 import javancss.test.JavancssTest;
 
 /**
