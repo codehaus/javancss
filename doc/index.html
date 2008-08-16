@@ -46,7 +46,7 @@ manager) can be used for this purpose.
 comes bundled with an Ant task written by Steve Jernigan.
 The JavaNCSS Ant Task is documented on a <a href="JavancssAntTask.html">separate page</a>.
 
-<P>You can always find the newest version of this page at: <A HREF="http://www.kclee.de/clemens/java/javancss/">http://www.kclee.de/clemens/java/javancss/</A>
+<P>You can always find the newest version of this page at: <A HREF="http://www.kclee.de/clemens/java/javancss/">http://www.kclee.de/clemens/java/javancss/</A>.
 <H2>
 Table of Contents</H2>
 
@@ -526,12 +526,16 @@ manner. Now it's too late to label someone's name on it :).-->
 <BR>&nbsp;
 <H2>
 <A NAME="development"></A>Development</H2>
-JavaNCSS has been moved to Codehaus for a shared source code repository. There is also a <a href="http://jira.codehaus.org/secure/IssueNavigator.jspa?reset=true&mode=hide&pid=11817&resolution=-1&sorter/field=updated&sorter/order=DESC">bug tracking</a> tool.<p>
+JavaNCSS has been moved to Codehaus for a <a href="http://fisheye.codehaus.org/browse/javancss/trunk/">shared source code repository</a>.
+There is also a <a href="http://jira.codehaus.org/browse/JAVANCSS">bug tracking</a> tool.<p>
 
-To check out the latest development source code (and compile and run the regression test suite) type the following in your shell:<pre>svn co http://svn.codehaus.org/javancss javancss
-cd javancss/trunk
-ant javacc javac check</pre>
-However, JavaNCSS will soon move from Ant to using Maven for the build process (and release process).
+JavaNCSS can actually be built using Ant or Maven.
+
+To check out the latest development source code (and compile and run the regression test suite) type the following in your shell:
+<pre>svn co http://svn.codehaus.org/javancss/trunk javancss
+cd javancss
+ant all <i>or</i> mvn package</pre>
+
 <BR>&nbsp;
 <H2>
 <A NAME="release"></A>Release History</H2>
