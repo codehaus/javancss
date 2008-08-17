@@ -94,7 +94,7 @@ public class Javancss implements Exitable,
     
     private boolean _bExit = false;
 
-    private List/*<String>*/ _vJavaSourceFiles = new ArrayList();
+    private List/*<File>*/ _vJavaSourceFiles = new ArrayList();
     private String encoding = null;
 
     private String _sErrorMessage = null;
@@ -113,13 +113,13 @@ public class Javancss implements Exitable,
     /**
      * Just used for parseImports.
      */
-    private String _sJavaSourceFileName = null;
+    private File _sJavaSourceFile = null;
 
-    private Reader createSourceReader( String sSourceFileName_ )
+    private Reader createSourceReader( File sSourceFile_ )
     {
         try
         {
-            return newReader( sSourceFileName_ );
+            return newReader( sSourceFile_ );
         }
         catch ( IOException pIOException )
         {
@@ -131,24 +131,21 @@ public class Javancss implements Exitable,
             {
                 _sErrorMessage += "\n";
             }
-            _sErrorMessage += "File not found: " + sSourceFileName_;
+            _sErrorMessage += "File not found: " + sSourceFile_.getAbsolutePath();
             _thrwError = pIOException;
 
             return null;
         }
     }
 
-    private void _measureSource( String sSourceFileName_ ) throws IOException, ParseException, TokenMgrError
+    private void _measureSource( File sSourceFile_ ) throws IOException, ParseException, TokenMgrError
     {
-        // take user.dir property in account
-        sSourceFileName_ = FileUtil.normalizeFileName( sSourceFileName_ );
-
         Reader reader = null;
 
         // opens the file
         try
         {
-            reader = newReader( sSourceFileName_ );
+            reader = newReader( sSourceFile_ );
         }
         catch ( IOException pIOException ) 
         {
@@ -160,21 +157,25 @@ public class Javancss implements Exitable,
             {
                 _sErrorMessage += "\n";
             }
-            _sErrorMessage += "File not found: " + sSourceFileName_;
+            _sErrorMessage += "File not found: " + sSourceFile_.getAbsolutePath();
             _thrwError = pIOException;
 
             throw pIOException;
         }
 
         String sTempErrorMessage = _sErrorMessage;
-        try {
+        try
+        {
             // the same method but with a Reader
-            _measureSource(reader);
-        } catch(ParseException pParseException) {
-            if (sTempErrorMessage == null) {
+            _measureSource( reader );
+        }
+        catch ( ParseException pParseException )
+        {
+            if ( sTempErrorMessage == null )
+            {
                 sTempErrorMessage = "";
             }
-            sTempErrorMessage += "ParseException in " + sSourceFileName_ + 
+            sTempErrorMessage += "ParseException in " + sSourceFile_.getAbsolutePath() + 
                    "\nLast useful checkpoint: \"" + _pJavaParser.getLastFunction() + "\"\n";
             sTempErrorMessage += pParseException.getMessage() + "\n";
             
@@ -182,11 +183,14 @@ public class Javancss implements Exitable,
             _thrwError = pParseException;
             
             throw pParseException;
-        } catch(TokenMgrError pTokenMgrError) {
-            if (sTempErrorMessage == null) {
+        }
+        catch ( TokenMgrError pTokenMgrError )
+        {
+            if ( sTempErrorMessage == null )
+            {
                 sTempErrorMessage = "";
             }
-            sTempErrorMessage += "TokenMgrError in " + sSourceFileName_ + 
+            sTempErrorMessage += "TokenMgrError in " + sSourceFile_.getAbsolutePath() + 
                    "\n" + pTokenMgrError.getMessage() + "\n";
             _sErrorMessage = sTempErrorMessage;
             _thrwError = pTokenMgrError;
@@ -195,14 +199,12 @@ public class Javancss implements Exitable,
         }
     }
 
-    private void _measureSource(Reader reader)
-        throws IOException,
-               ParseException,
-               TokenMgrError
+    private void _measureSource( Reader reader ) throws IOException, ParseException, TokenMgrError
     {
-        try {
+        try
+        {
             // create a parser object
-            _pJavaParser = new JavaParser(reader);
+            _pJavaParser = new JavaParser( reader );
             // execute the parser
             _pJavaParser.CompilationUnit();
             Util.debug
@@ -251,20 +253,18 @@ public class Javancss implements Exitable,
         }
     }
 
-    private void _measureFiles(List vJavaSourceFiles_)
-        throws IOException,
-               ParseException,
-               TokenMgrError
+    private void _measureFiles( List/*<File>*/ vJavaSourceFiles_ ) throws IOException, ParseException, TokenMgrError
     {
         // for each file
-        for(Iterator e = vJavaSourceFiles_.iterator(); e.hasNext(); ) 
+        for ( Iterator e = vJavaSourceFiles_.iterator(); e.hasNext(); )
         {
-            String sJavaFileName = (String)e.next();
+            File file = (File) e.next();
 
-            try 
+            try
             {
-                _measureSource( sJavaFileName );
-            } catch( Throwable pThrowable ) 
+                _measureSource( file );
+            }
+            catch ( Throwable pThrowable )
             {
                 // hmm, do nothing? Use getLastError() or so to check for details.
             }
@@ -336,16 +336,20 @@ public class Javancss implements Exitable,
         return getFormatter().printJavaNcss();
     }
 
-    public Javancss(List vJavaSourceFiles_) {
+    public Javancss( List/*<File>*/ vJavaSourceFiles_ )
+    {
         _vJavaSourceFiles = vJavaSourceFiles_;
         try {
             _measureRoot(newReader(System.in));
         } catch(Exception e) {
+            e.printStackTrace();
         } catch(TokenMgrError pError) {
+            pError.printStackTrace();
         }
     }
 
-    public Javancss(String sJavaSourceFile_) {
+    public Javancss( File sJavaSourceFile_ )
+    {
         Util.debug( "Javancss.<init>(String).sJavaSourceFile_: " + sJavaSourceFile_ );
         _sErrorMessage = null;
         _vJavaSourceFiles = new ArrayList();
@@ -354,8 +358,10 @@ public class Javancss implements Exitable,
             _measureRoot(newReader(System.in));
         } catch(Exception e) {
             Util.debug( "Javancss.<init>(String).e: " + e );
+            e.printStackTrace();
         } catch(TokenMgrError pError) {
             Util.debug( "Javancss.<init>(String).pError: " + pError );
+            pError.printStackTrace();
         }
     }
 
@@ -371,12 +377,12 @@ public class Javancss implements Exitable,
     }
 
     public boolean parseImports() {
-        if ( Util.isEmpty( _sJavaSourceFileName ) ) {
+        if ( _sJavaSourceFile == null ) {
             Util.debug( "Javancss.parseImports().NO_FILE" );
 
             return true;
         }
-        Reader reader = createSourceReader( _sJavaSourceFileName );
+        Reader reader = createSourceReader( _sJavaSourceFile );
         if ( reader == null ) {
             Util.debug( "Javancss.parseImports().NO_DIS" );
 
@@ -418,10 +424,10 @@ public class Javancss implements Exitable,
         return false;
     }
 
-    public void setSourceFile( String sJavaSourceFile_ ) {
-        _sJavaSourceFileName = sJavaSourceFile_;
+    public void setSourceFile( File javaSourceFile_ ) {
+        _sJavaSourceFile = javaSourceFile_;
         _vJavaSourceFiles = new ArrayList();
-        _vJavaSourceFiles.add(sJavaSourceFile_);
+        _vJavaSourceFiles.add(javaSourceFile_);
     }
 
     public Javancss(Reader reader) {
@@ -435,9 +441,9 @@ public class Javancss implements Exitable,
     /**
      * recursively adds *.java files
      * @param dir the base directory to search
-     * @param v the list of filenames to add found filenames to
+     * @param v the list of file to add found files to
      */
-    private static void _addJavaFiles( File dir, List v/*<String>*/ )
+    private static void _addJavaFiles( File dir, List v/*<File>*/ )
     {
         File[] files = dir.listFiles();
         if( files == null || files.length == 0 )
@@ -457,13 +463,13 @@ public class Javancss implements Exitable,
             {
                 if( newFile.getName().endsWith( ".java" ) )
                 {
-                    v.add( newFile.getAbsolutePath() );
+                    v.add( newFile );
                 }
             }
         }
     }
 
-    private List/*<String>*/ findFiles( List/*<String>*/ filenames, boolean recursive ) throws IOException
+    private List/*<File>*/ findFiles( List/*<String>*/ filenames, boolean recursive ) throws IOException
     {
         if ( Util.isDebug() )
         {
@@ -476,7 +482,7 @@ public class Javancss implements Exitable,
         }
 
         Set _processedAtFiles = new HashSet();
-        List newFilenames = new ArrayList();
+        List newFiles = new ArrayList();
         for ( Iterator iter = filenames.iterator(); iter.hasNext(); )
         {
             String filename = (String)iter.next();
@@ -502,7 +508,10 @@ public class Javancss implements Exitable,
                             throw pIOException;
                         }
                         List vTheseJavaSourceFiles = Util.stringToLines( sJavaSourceFileNames );
-                        newFilenames.addAll( vTheseJavaSourceFiles );
+                        for ( Iterator iterator = vTheseJavaSourceFiles.iterator(); iterator.hasNext(); )
+                        {
+                            newFiles.add( new File( (String)iterator.next() ) );
+                        }
                     }
                 }
             }
@@ -512,21 +521,21 @@ public class Javancss implements Exitable,
                 File file = new File( filename );
                 if ( file.isDirectory() ) 
                 {
-                    _addJavaFiles( file, newFilenames );
+                    _addJavaFiles( file, newFiles );
                 }
                 else
                 {
-                    newFilenames.add( filename );
+                    newFiles.add( file );
                 }
             }
         }
 
         if ( Util.isDebug() )
         {
-            Util.debug( "resolved filenames: " + Util.toString( newFilenames ) );
+            Util.debug( "resolved filenames: " + Util.toString( newFiles ) );
         }
 
-        return newFilenames;
+        return newFiles;
     }
 
     private Init _pInit = null;
@@ -549,8 +558,7 @@ public class Javancss implements Exitable,
 
         if ( htOptions.get( "check" ) != null ) {
             JavancssTest pTest = new JavancssTest();
-            pTest.setTestDir( FileUtil.concatPath( _pInit.getApplicationPath()
-                                                   , "test" )                 );
+            pTest.setTestDir( new File( _pInit.getApplicationPath(), "test" ) );
             pTest.setVerbose( true );
             pTest.setTiming ( true );
             pTest.run();
@@ -780,8 +788,8 @@ public class Javancss implements Exitable,
         return ( encoding == null ) ? new InputStreamReader( stream ) : new InputStreamReader( stream, encoding );
     }
 
-    private Reader newReader( String filename ) throws FileNotFoundException, UnsupportedEncodingException
+    private Reader newReader( File file ) throws FileNotFoundException, UnsupportedEncodingException
     {
-        return newReader( new FileInputStream( filename ) );
+        return newReader( new FileInputStream( file ) );
     }
 }
