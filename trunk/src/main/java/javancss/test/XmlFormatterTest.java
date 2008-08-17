@@ -24,7 +24,7 @@ public class XmlFormatterTest extends Test {
     private void _checkParsing()
         throws Exception
     {
-        Javancss pJavancss = new Javancss( FileUtil.concatPath( _sTestDir, "Test57.java" ) );
+        Javancss pJavancss = new Javancss( new File( testDir, "Test57.java" ) );
         pJavancss.setXML( true );
 
         String sXML = XmlFormatter.printStart()
@@ -34,16 +34,10 @@ public class XmlFormatterTest extends Test {
                + pJavancss.printJavaNcss()
                + XmlFormatter.printEnd();
 
-        String sXSLTFile = FileUtil.concatPath( _sTestDir
-                                                , ".."
-                                                  + File.separator  
-                                                  + "xslt"
-                                                  + File.separator
-                                                + "xmltest.xsl" );
+        File xsltFile = new File( testDir, ".." + File.separator + "xslt" + File.separator + "xmltest.xsl" );
         try
         {
-            String sText = XMLUtil.getXML( sXML
-                                           , new File( sXSLTFile ) );
+            String sText = XMLUtil.getXML( sXML, xsltFile );
             Assert( sText.equals( "79" ), sText );
         }
         catch( NoClassDefFoundError error )
@@ -51,7 +45,7 @@ public class XmlFormatterTest extends Test {
             Util.print( "skipped: 'xalan.jar' and or 'xerces.jar' library missing." );
         }
 
-        pJavancss = new Javancss( FileUtil.concatPath( _sTestDir, "Test117.java" ) );
+        pJavancss = new Javancss( new File( testDir, "Test117.java" ) );
         pJavancss.setXML( true );
 
         sXML = XmlFormatter.printStart()
@@ -62,7 +56,7 @@ public class XmlFormatterTest extends Test {
                + XmlFormatter.printEnd();
         Assert( Util.isEmpty( sXML ) == false );
 
-        pJavancss = new Javancss( FileUtil.concatPath( _sTestDir, "Test118.java" ) );
+        pJavancss = new Javancss( new File( testDir, "Test118.java" ) );
         pJavancss.setXML( true );
 
         sXML = XmlFormatter.printStart()
@@ -80,7 +74,7 @@ public class XmlFormatterTest extends Test {
     private void _checkXML2Text()
         throws Exception
     {
-        Javancss pJavancss = new Javancss( FileUtil.concatPath( _sTestDir, "Test32.java" ) );
+        Javancss pJavancss = new Javancss( new File( testDir, "Test32.java" ) );
         pJavancss.setXML( true );
 
         String sXML = XmlFormatter.printStart()
@@ -90,19 +84,12 @@ public class XmlFormatterTest extends Test {
                + pJavancss.printJavaNcss()
                + XmlFormatter.printEnd();
 
-        String sXSLTFile = FileUtil.concatPath( _sTestDir
-                                                , ".."
-                                                  + File.separator  
-                                                  + "xslt"
-                                                  + File.separator  
-                                                + "javancss2text.xsl" );
+        File xsltFile = new File( testDir, ".." + File.separator + "xslt" + File.separator + "javancss2text.xsl" );
         try 
         {
-            String sText = XMLUtil.getXML( sXML
-                                           , new File( sXSLTFile ) );
+            String sText = XMLUtil.getXML( sXML, xsltFile );
             FileUtil.writeFile( "/tmp/t", sText );
-            String sCompare = FileUtil.readFile( FileUtil.concatPath( _sTestDir
-                                                                      , "Output32.txt" ) );
+            String sCompare = FileUtil.readFile( new File( testDir, "Output32.txt" ).getAbsolutePath() );
             Assert( sText.equals( sCompare ), sText );
         } 
         catch( NoClassDefFoundError error )
@@ -134,16 +121,16 @@ public class XmlFormatterTest extends Test {
     public static void main( String[] asArg_ ) 
     {
         XmlFormatterTest pTest = new XmlFormatterTest();
-        pTest.setTestDir( "test" );
+        pTest.setTestDir( new File( "test" ) );
         pTest.setVerbose( true );
         pTest.setTiming ( true );
         pTest.run();
         pTest.printResult();
     }
 
-    private String _sTestDir = null;
+    private File testDir = null;
 
-    public void setTestDir( String sTestDir_ ) {
-        _sTestDir = sTestDir_;
+    public void setTestDir( File testDir_ ) {
+        testDir = testDir_;
     }
 }
