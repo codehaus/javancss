@@ -35,10 +35,13 @@ options {
 
 PARSER_BEGIN(JavaParser)
 
-package javancss;
+package javancss.parser;
+
+import java.util.*;
 
 import ccl.util.Util;
-import java.util.*;
+
+import javancss.PackageMetric;
 
 /**
  * Java source code parser based on a grammar compiled by
@@ -274,11 +277,11 @@ TOKEN_MGR_DECLS :
 {
     // added by SMS
 
-    static int  _iSingleComments = 0;
-    static int  _iMultiComments = 0;
-    static int  _iFormalComments = 0;
+    public static int  _iSingleComments = 0;
+    public static int  _iMultiComments = 0;
+    public static int  _iFormalComments = 0;
 
-    static int  _iMultiCommentsLast = 0;
+    public static int  _iMultiCommentsLast = 0;
 }
 
 /* WHITE SPACE */

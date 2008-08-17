@@ -47,6 +47,10 @@ import ccl.util.FileUtil;
 import ccl.util.Init;
 import ccl.util.Util;
 
+import javancss.parser.JavaParser;
+import javancss.parser.JavaParserTokenManager;
+import javancss.parser.ParseException;
+import javancss.parser.TokenMgrError;
 import javancss.test.JavancssTest;
 
 /**
