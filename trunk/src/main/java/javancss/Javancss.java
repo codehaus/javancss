@@ -35,12 +35,12 @@ import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.io.Reader;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Vector;
 
 import ccl.util.Exitable;
 import ccl.util.FileUtil;
@@ -91,11 +91,11 @@ public class Javancss implements Exitable,
     private int _ncss = 0;
     private int _loc = 0;
     private JavaParser _pJavaParser = null;
-    private List _vJavaSourceFiles = new Vector();
+    private List _vJavaSourceFiles = new ArrayList();
     private String _sErrorMessage = null;
     private Throwable _thrwError = null;
-    private List _vFunctionMetrics = new Vector();
-    private List _vObjectMetrics = new Vector();
+    private List _vFunctionMetrics = new ArrayList();
+    private List _vObjectMetrics = new ArrayList();
     private List _vPackageMetrics = null;
     private List _vImports = null;
     private Map _htPackages = null;
@@ -315,7 +315,7 @@ public class Javancss implements Exitable,
             _measureFiles(_vJavaSourceFiles);
         }
         
-        _vPackageMetrics = new Vector();
+        _vPackageMetrics = new ArrayList();
         for(Iterator ePackages = _htPackages.keySet().iterator(); ePackages.hasNext(); )
         {
             String sPackage = (String)ePackages.next();
@@ -373,7 +373,7 @@ public class Javancss implements Exitable,
     public Javancss(String sJavaSourceFile_) {
         Util.debug( "Javancss.<init>(String).sJavaSourceFile_: " + sJavaSourceFile_ );
         _sErrorMessage = null;
-        _vJavaSourceFiles = new Vector();
+        _vJavaSourceFiles = new ArrayList();
         _vJavaSourceFiles.add(sJavaSourceFile_);
         try {
             _measureRoot(newReader(System.in));
@@ -445,7 +445,7 @@ public class Javancss implements Exitable,
 
     public void setSourceFile( String sJavaSourceFile_ ) {
         _sJavaSourceFileName = sJavaSourceFile_;
-        _vJavaSourceFiles = new Vector();
+        _vJavaSourceFiles = new ArrayList();
         _vJavaSourceFiles.add(sJavaSourceFile_);
     }
 
@@ -552,7 +552,7 @@ public class Javancss implements Exitable,
                 _vJavaSourceFiles.add( "." );
             }
            
-            List newFiles = new Vector();
+            List newFiles = new ArrayList();
             Iterator iter = _vJavaSourceFiles.iterator();
             while( iter.hasNext() ) 
             {

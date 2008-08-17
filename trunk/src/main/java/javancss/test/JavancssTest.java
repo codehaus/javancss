@@ -25,9 +25,9 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.io.StringReader;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Vector;
 
 import ccl.util.FileUtil;
 import ccl.util.Test;
@@ -119,7 +119,7 @@ public class JavancssTest extends    Test
         // same test with more files
         //
 
-        List vArgs = new Vector();
+        List vArgs = new ArrayList();
         vArgs.add( FileUtil.concatPath( _sTestDir
                                                , "Test20.java" ) );
         vArgs.add( FileUtil.concatPath( _sTestDir
@@ -176,7 +176,7 @@ public class JavancssTest extends    Test
                                      , String sPackage
                                      , int javadocLines )
     {
-        List vArgs = new Vector();
+        List vArgs = new ArrayList();
         for( int i = 0; i < aTestFile.length; i++ )
         {
             int next = aTestFile[ i ];
@@ -453,7 +453,7 @@ public class JavancssTest extends    Test
             int ncss57 = pJavancss.getNcss();
             pJavancss = new Javancss(FileUtil.concatPath(sLocalPath, "Test2.java"));
             ncss57 += pJavancss.getNcss();
-            List vFiles = new Vector();
+            List vFiles = new ArrayList();
             vFiles.add(FileUtil.concatPath(sLocalPath, "Test1.java"));
             vFiles.add(FileUtil.concatPath(sLocalPath, "Test42.java"));
             vFiles.add(FileUtil.concatPath(sLocalPath, "Test2.java"));
