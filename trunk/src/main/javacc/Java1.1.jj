@@ -111,7 +111,7 @@ public class JavaParser
     private Vector _vClasses = new Vector();
     private Vector _vImports = new Vector();
     private Object[] _aoPackage = null;
-    private Hashtable _htPackage = new Hashtable();
+    private Map _htPackage = new Hashtable();
     private PackageMetric _pPackageMetric;
 
     private Token _tmpToken = null;
@@ -157,7 +157,7 @@ public class JavaParser
     /**
      * @return The empty package consists of the name ".".
      */
-    public Hashtable getPackage() {
+    public Map getPackage() {
         return _htPackage;
     }
     
