@@ -21,13 +21,6 @@ Boston, MA 02111-1307, USA.  */
 
 package javancss;
 
-import ccl.swing.AboutDialog;
-import ccl.swing.AnimationPanel;
-import ccl.swing.AutoGridBagLayout;
-import ccl.swing.MainJFrame;
-import ccl.swing.SwingUtil;
-import ccl.util.*;
-
 import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
@@ -36,6 +29,15 @@ import java.io.*;
 
 import javax.swing.*;
 import javax.swing.border.*;
+
+import ccl.swing.AboutDialog;
+import ccl.swing.AnimationPanel;
+import ccl.swing.AutoGridBagLayout;
+import ccl.swing.MainJFrame;
+import ccl.swing.SwingUtil;
+import ccl.util.FileUtil;
+import ccl.util.Init;
+import ccl.util.Util;
 
 /**
  * Main class used to start JavaNCSS in GUI mode from other
