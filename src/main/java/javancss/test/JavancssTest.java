@@ -25,9 +25,9 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.io.StringReader;
 import java.io.UnsupportedEncodingException;
-import java.util.Enumeration;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Vector;
-//import java.util.*;
 
 import ccl.util.FileUtil;
 import ccl.util.Test;
@@ -91,9 +91,9 @@ public class JavancssTest extends    Test
         Javancss pJavancss = new Javancss( FileUtil.concatPath( _sTestDir
                                                                 , "Test20.java" ) );
         
-        Vector vObjectMetrics = pJavancss.getObjectMetrics();
-        Vector vClassMetrics  = (Vector)vObjectMetrics.elementAt( 0 );
-        int jvdcs = ((Integer)vClassMetrics.elementAt(OBJ_JVDCS)).intValue();
+        List vObjectMetrics = pJavancss.getObjectMetrics();
+        List vClassMetrics  = (Vector)vObjectMetrics.get( 0 );
+        int jvdcs = ((Integer)vClassMetrics.get(OBJ_JVDCS)).intValue();
         Assert( jvdcs == 7
                 , "Expected 7 Javadocs in in file Test20.java but got " + jvdcs + "!" );
     }
@@ -194,13 +194,13 @@ public class JavancssTest extends    Test
                                      , String sPackage
                                      , int javadocLines )
     {
-        Vector vPackageMetrics = pJavancss.getPackageMetrics();
+        List vPackageMetrics = pJavancss.getPackageMetrics();
         Assert( vPackageMetrics.size() >= 1 );
         PackageMetric pmPackage = null;
-        Enumeration ePackageMetrics = vPackageMetrics.elements();
-        while( ePackageMetrics.hasMoreElements() )
+        Iterator ePackageMetrics = vPackageMetrics.iterator();
+        while( ePackageMetrics.hasNext() )
         {
-            PackageMetric pmNext = (PackageMetric)ePackageMetrics.nextElement();
+            PackageMetric pmNext = (PackageMetric)ePackageMetrics.next();
             if ( pmNext.name.equals( sPackage ) )
             {
                 pmPackage = pmNext;
@@ -291,8 +291,8 @@ public class JavancssTest extends    Test
             pJavancss = new Javancss(FileUtil.concatPath(sLocalPath, "Test12.java"));
             bugIf(pJavancss.getLOC() != pJavancss.getNcss(), "NCSS: " + pJavancss.getNcss() +
                   ", LOC: " + pJavancss.getLOC());
-            Vector vFunctions = pJavancss.getFunctionMetrics();
-            String sFirstFunction = (String)((Vector)vFunctions.elementAt(0)).elementAt(FCT_NAME);
+            List vFunctions = pJavancss.getFunctionMetrics();
+            String sFirstFunction = (String)((Vector)vFunctions.get(0)).elementAt(FCT_NAME);
             bugIf( sFirstFunction == null );
             /*System.out.println( sFirstFunction );*/
             bugIf(!sFirstFunction.equals("Test12.readFile(URL)"), sFirstFunction);
@@ -316,9 +316,9 @@ public class JavancssTest extends    Test
             // Nr. 22
             pJavancss = new Javancss(FileUtil.concatPath(sLocalPath, "Test19.java"));
             vFunctions = pJavancss.getFunctionMetrics();
-            sFirstFunction = (String)((Vector)vFunctions.elementAt(0)).elementAt(FCT_NAME);
+            sFirstFunction = (String)((Vector)vFunctions.get(0)).elementAt(FCT_NAME);
             bugIf(!sFirstFunction.equals("test.Test19.foo(String[],Controller)"), sFirstFunction);
-            sFirstFunction = (String)((Vector)vFunctions.elementAt(3)).elementAt(FCT_NAME);
+            sFirstFunction = (String)((Vector)vFunctions.get(3)).elementAt(FCT_NAME);
             bugIf(!sFirstFunction.equals("test.Test19.main(String[])"));
             // Nr. 24
             pJavancss = new Javancss(FileUtil.concatPath(sLocalPath, "Test20.java"));
@@ -364,11 +364,11 @@ public class JavancssTest extends    Test
             pJavancss = new Javancss(new StringReader(sTogether));
             vFunctions = pJavancss.getFunctionMetrics();
             Util.debug("JavancssTest._doIt().vFunctions: " + vFunctions);
-            sFirstFunction = (String)((Vector)vFunctions.elementAt(0)).elementAt(FCT_NAME);
+            sFirstFunction = (String)((Vector)vFunctions.get(0)).elementAt(FCT_NAME);
             bugIf(!sFirstFunction.equals("ccl.util.Test11.atoi(String)"));
-            String sSomeFunction = (String)((Vector)vFunctions.elementAt(32)).elementAt(FCT_NAME);
+            String sSomeFunction = (String)((Vector)vFunctions.get(32)).elementAt(FCT_NAME);
             bugIf(!sSomeFunction.equals("Test12.readFile(URL)"), "Function: " + sSomeFunction);
-            Vector vPackages = pJavancss.getPackageMetrics();
+            List vPackages = pJavancss.getPackageMetrics();
             bugIf(vPackages.size() != 2);
             String[] asArg = new String[3];
             asArg[0] = FileUtil.concatPath(sLocalPath, "Test11.java");
@@ -629,9 +629,9 @@ public class JavancssTest extends    Test
         Javancss pJavancss;
         pJavancss = new Javancss( FileUtil.concatPath( _sTestDir
                                                        , "Test" + testFileNumber + ".java"    ) );
-        Vector vObjectMetrics = pJavancss.getObjectMetrics();
-        Vector vClassMetrics = (Vector)vObjectMetrics.elementAt( 0 );
-        int jvdcs      = ((Integer)vClassMetrics.elementAt(OBJ_JVDCS)).intValue();
+        List vObjectMetrics = pJavancss.getObjectMetrics();
+        List vClassMetrics = (Vector)vObjectMetrics.get( 0 );
+        int jvdcs      = ((Integer)vClassMetrics.get(OBJ_JVDCS)).intValue();
         /*int jvdc = pJavancss.getJvdc();*/
         bugIf( jvdcs != expectedJvdcsResult
            , "Parsing file Test" + testFileNumber + ".java failed. Jvdc is "
@@ -649,9 +649,9 @@ public class JavancssTest extends    Test
 
         // CCN for return and throw
         Javancss pJavancss  = measureTestFile( sLocalPath, 40 );
-        Vector   vFunctions = pJavancss.getFunctionMetrics();
+        List   vFunctions = pJavancss.getFunctionMetrics();
         bugIf(vFunctions.size() != 1);
-        int ccn = ((Integer)((Vector)vFunctions.elementAt(0)).elementAt(FCT_CCN)).intValue();
+        int ccn = ((Integer)((Vector)vFunctions.get(0)).elementAt(FCT_CCN)).intValue();
         bugIf(ccn != 3, "CCN in constructor of Test40 should be 3, it is: " + ccn);
 
         pJavancss = measureTestFile( sLocalPath, 41 );
@@ -692,15 +692,15 @@ public class JavancssTest extends    Test
         _exitSubTest();
     }
 
-    private void assertCCN(Vector vFunctions, int methodIndex, int expectedCCN) {
+    private void assertCCN(List vFunctions, int methodIndex, int expectedCCN) {
         int ccn;
         ccn = getCCN( vFunctions, methodIndex );
         Assert( ccn == expectedCCN
                 , "Expected ccn was " + expectedCCN + " but the result is: " + ccn );                
     }
 
-    private int getCCN(Vector vFunctions, int methodIndex) {
-        return ((Integer)((Vector)vFunctions.elementAt(methodIndex)).elementAt(FCT_CCN)).intValue();
+    private int getCCN(List vFunctions, int methodIndex) {
+        return ((Integer)((Vector)vFunctions.get(methodIndex)).elementAt(FCT_CCN)).intValue();
     }
 
     private Javancss measureTestFile(String sLocalPath, int testFileId) {

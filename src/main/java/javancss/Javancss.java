@@ -38,6 +38,8 @@ import java.io.UnsupportedEncodingException;
 import java.util.Collections;
 import java.util.Enumeration;
 import java.util.Hashtable;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Vector;
 
 import ccl.util.Exitable;
@@ -89,13 +91,13 @@ public class Javancss implements Exitable,
     private int _ncss = 0;
     private int _loc = 0;
     private JavaParser _pJavaParser = null;
-    private Vector _vJavaSourceFiles = new Vector();
+    private List _vJavaSourceFiles = new Vector();
     private String _sErrorMessage = null;
     private Throwable _thrwError = null;
-    private Vector _vFunctionMetrics = new Vector();
-    private Vector _vObjectMetrics = new Vector();
-    private Vector _vPackageMetrics = null;
-    private Vector _vImports = null;
+    private List _vFunctionMetrics = new Vector();
+    private List _vObjectMetrics = new Vector();
+    private List _vPackageMetrics = null;
+    private List _vImports = null;
     private Hashtable _htPackages = null;
     private Hashtable _htProcessedAtFiles = new Hashtable();
     private Object[] _aoPackage = null;
@@ -242,15 +244,15 @@ public class Javancss implements Exitable,
         }
     }
 
-    private void _measureFiles(Vector vJavaSourceFiles_)
+    private void _measureFiles(List vJavaSourceFiles_)
         throws IOException,
                ParseException,
                TokenMgrError
     {
         // for each file
-        for(Enumeration e = vJavaSourceFiles_.elements(); e.hasMoreElements(); ) 
+        for(Iterator e = vJavaSourceFiles_.iterator(); e.hasNext(); ) 
         {
-            String sJavaFileName = (String)e.nextElement();
+            String sJavaFileName = (String)e.next();
 
             // if the file specifies other files...
             if (sJavaFileName.charAt(0) == '@') 
@@ -320,12 +322,12 @@ public class Javancss implements Exitable,
             String sPackage = (String)ePackages.nextElement();
             PackageMetric pckmNext = (PackageMetric)_htPackages.
                    get(sPackage);
-            _vPackageMetrics.addElement(pckmNext);
+            _vPackageMetrics.add(pckmNext);
         }
         Collections.sort(_vPackageMetrics);
     }
 
-    public Vector getImports() {
+    public List getImports() {
         return _vImports;
     }
 
@@ -341,7 +343,7 @@ public class Javancss implements Exitable,
     /**
      * The same as getFunctionMetrics?!
      */
-    public Vector getFunctions() {
+    public List getFunctions() {
         return _vFunctionMetrics;
     }
 
@@ -374,7 +376,7 @@ public class Javancss implements Exitable,
         Util.debug( "Javancss.<init>(String).sJavaSourceFile_: " + sJavaSourceFile_ );
         _sErrorMessage = null;
         _vJavaSourceFiles = new Vector();
-        _vJavaSourceFiles.addElement(sJavaSourceFile_);
+        _vJavaSourceFiles.add(sJavaSourceFile_);
         try {
             _measureRoot(newReader(System.in));
         } catch(Exception e) {
@@ -446,7 +448,7 @@ public class Javancss implements Exitable,
     public void setSourceFile( String sJavaSourceFile_ ) {
         _sJavaSourceFileName = sJavaSourceFile_;
         _vJavaSourceFiles = new Vector();
-        _vJavaSourceFiles.addElement(sJavaSourceFile_);
+        _vJavaSourceFiles.add(sJavaSourceFile_);
     }
 
     public Javancss(Reader reader) {
@@ -487,7 +489,7 @@ public class Javancss implements Exitable,
         }
     }
 
-    private void _removeDirs( Vector vDirs )
+    private void _removeDirs( List vDirs )
     {
         if ( Util.isDebug() )
         {
@@ -497,11 +499,11 @@ public class Javancss implements Exitable,
         // when removing elements.
         for( int i = vDirs.size() - 1; i >= 0; i-- )
         {
-            String sFile = FileUtil.normalizeFileName( (String)vDirs.elementAt( i ) );
+            String sFile = FileUtil.normalizeFileName( (String)vDirs.get( i ) );
             Util.debug( this, "_removeDirs(..).sFile: " + sFile );
             if( FileUtil.existsDir( sFile ) )
             {
-                vDirs.removeElementAt( i );
+                vDirs.remove( i );
                 Util.debug( this, "_removeDirs(..).removed: " + sFile );
             }
         }
@@ -549,14 +551,14 @@ public class Javancss implements Exitable,
             // If no files then add current directory!
             if ( _vJavaSourceFiles.size() == 0 )
             {
-                _vJavaSourceFiles.addElement( "." );
+                _vJavaSourceFiles.add( "." );
             }
            
             Vector newFiles = new Vector();
-            Enumeration iter = _vJavaSourceFiles.elements();
-            while( iter.hasMoreElements() ) 
+            Iterator iter = _vJavaSourceFiles.iterator();
+            while( iter.hasNext() ) 
             {
-                String fileName = FileUtil.normalizeFileName( (String)iter.nextElement() );
+                String fileName = FileUtil.normalizeFileName( (String)iter.next() );
                 File   file = new File( fileName );
                 if( file.isDirectory() ) 
                 {
@@ -728,11 +730,11 @@ public class Javancss implements Exitable,
     }
     //
 
-    public Vector getFunctionMetrics() {
+    public List getFunctionMetrics() {
         return(_vFunctionMetrics);
     }
 
-    public Vector getObjectMetrics() {
+    public List getObjectMetrics() {
         return(_vObjectMetrics);
     }
 
@@ -740,7 +742,7 @@ public class Javancss implements Exitable,
      * Returns list of packages in the form
      * PackageMetric objects.
      */
-    public Vector getPackageMetrics() {
+    public List getPackageMetrics() {
         return(_vPackageMetrics);
     }
 
