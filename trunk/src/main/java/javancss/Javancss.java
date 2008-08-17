@@ -36,10 +36,10 @@ import java.io.PrintWriter;
 import java.io.Reader;
 import java.io.UnsupportedEncodingException;
 import java.util.Collections;
-import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Vector;
 
 import ccl.util.Exitable;
@@ -98,8 +98,8 @@ public class Javancss implements Exitable,
     private List _vObjectMetrics = new Vector();
     private List _vPackageMetrics = null;
     private List _vImports = null;
-    private Hashtable _htPackages = null;
-    private Hashtable _htProcessedAtFiles = new Hashtable();
+    private Map _htPackages = null;
+    private Map _htProcessedAtFiles = new Hashtable();
     private Object[] _aoPackage = null;
     private String encoding = null;
 
@@ -205,12 +205,12 @@ public class Javancss implements Exitable,
             // add new data to global vector
             _vFunctionMetrics.addAll(_pJavaParser.getFunction());
             _vObjectMetrics.addAll(_pJavaParser.getObject());
-            Hashtable htNewPackages = _pJavaParser.getPackage();
+            Map htNewPackages = _pJavaParser.getPackage();
             /*Vector vNewPackages = new Vector();*/
-            for(Enumeration ePackages = htNewPackages.keys();
-                ePackages.hasMoreElements(); )
+            for(Iterator ePackages = htNewPackages.keySet().iterator();
+                ePackages.hasNext(); )
             {
-                String sPackage = (String)ePackages.nextElement();
+                String sPackage = (String)ePackages.next();
                 PackageMetric pckmNext = (PackageMetric)htNewPackages.
                        get(sPackage);
                 pckmNext.name = sPackage;
@@ -316,10 +316,10 @@ public class Javancss implements Exitable,
         }
         
         _vPackageMetrics = new Vector();
-        for(Enumeration ePackages = _htPackages.keys();
-            ePackages.hasMoreElements(); )
+        for(Iterator ePackages = _htPackages.keySet().iterator();
+            ePackages.hasNext(); )
         {
-            String sPackage = (String)ePackages.nextElement();
+            String sPackage = (String)ePackages.next();
             PackageMetric pckmNext = (PackageMetric)_htPackages.
                    get(sPackage);
             _vPackageMetrics.add(pckmNext);
@@ -523,7 +523,7 @@ public class Javancss implements Exitable,
         if (_bExit) {
             return;
         }
-        Hashtable htOptions = _pInit.getOptions();
+        Map htOptions = _pInit.getOptions();
 
         setEncoding( (String) htOptions.get( "encoding" ) );
 
