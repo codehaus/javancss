@@ -38,9 +38,11 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import ccl.util.Exitable;
 import ccl.util.FileUtil;
@@ -103,7 +105,7 @@ public class Javancss implements Exitable,
     private List _vPackageMetrics = null;
     private List _vImports = null;
     private Map _htPackages = null;
-    private Map _htProcessedAtFiles = new HashMap();
+    private Set _processedAtFiles = new HashSet();
     private Object[] _aoPackage = null;
     private String encoding = null;
 
@@ -259,32 +261,30 @@ public class Javancss implements Exitable,
             String sJavaFileName = (String)e.next();
 
             // if the file specifies other files...
-            if (sJavaFileName.charAt(0) == '@') 
+            if (sJavaFileName.startsWith( "@" )) 
             {
                 if (sJavaFileName.length() > 1) 
                 {
                     String sFileName = sJavaFileName.substring(1);
                     sFileName = FileUtil.normalizeFileName( sFileName );
-                    if (_htProcessedAtFiles.get(sFileName) != null) 
+                    if (_processedAtFiles.add(sFileName)) 
                     {
-                        continue;
+                        String sJavaSourceFileNames = null;
+                        try 
+                        {
+                            sJavaSourceFileNames = FileUtil.readFile(sFileName);
+                        }
+                        catch(IOException pIOException) 
+                        {
+                            _sErrorMessage = "File Read Error: " + sFileName;
+                            _thrwError = pIOException;
+                            
+                            throw pIOException;
+                        }
+                        List vTheseJavaSourceFiles =
+                               Util.stringToLines(sJavaSourceFileNames);
+                        _measureFiles(vTheseJavaSourceFiles);
                     }
-                    _htProcessedAtFiles.put( sFileName, Util.getConstantObject() );
-                    String sJavaSourceFileNames = null;
-                    try 
-                    {
-                        sJavaSourceFileNames = FileUtil.readFile(sFileName);
-                    }
-                    catch(IOException pIOException) 
-                    {
-                        _sErrorMessage = "File Read Error: " + sFileName;
-                        _thrwError = pIOException;
-                        
-                        throw pIOException;
-                    }
-                    List vTheseJavaSourceFiles =
-                           Util.stringToLines(sJavaSourceFileNames);
-                    _measureFiles(vTheseJavaSourceFiles);
                 }
             } 
             else 
