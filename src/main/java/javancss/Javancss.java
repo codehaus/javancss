@@ -105,7 +105,6 @@ public class Javancss implements Exitable,
     private List _vPackageMetrics = null;
     private List _vImports = null;
     private Map _htPackages = null;
-    private Set _processedAtFiles = new HashSet();
     private Object[] _aoPackage = null;
     private String encoding = null;
 
@@ -260,42 +259,12 @@ public class Javancss implements Exitable,
         {
             String sJavaFileName = (String)e.next();
 
-            // if the file specifies other files...
-            if (sJavaFileName.startsWith( "@" )) 
+            try 
             {
-                if (sJavaFileName.length() > 1) 
-                {
-                    String sFileName = sJavaFileName.substring(1);
-                    sFileName = FileUtil.normalizeFileName( sFileName );
-                    if (_processedAtFiles.add(sFileName)) 
-                    {
-                        String sJavaSourceFileNames = null;
-                        try 
-                        {
-                            sJavaSourceFileNames = FileUtil.readFile(sFileName);
-                        }
-                        catch(IOException pIOException) 
-                        {
-                            _sErrorMessage = "File Read Error: " + sFileName;
-                            _thrwError = pIOException;
-                            
-                            throw pIOException;
-                        }
-                        List vTheseJavaSourceFiles =
-                               Util.stringToLines(sJavaSourceFileNames);
-                        _measureFiles(vTheseJavaSourceFiles);
-                    }
-                }
-            } 
-            else 
+                _measureSource( sJavaFileName );
+            } catch( Throwable pThrowable ) 
             {
-                try 
-                {
-                    _measureSource( sJavaFileName );
-                } catch( Throwable pThrowable ) 
-                {
-                    // hmm, do nothing? Use getLastError() or so to check for details.
-                }
+                // hmm, do nothing? Use getLastError() or so to check for details.
             }
         }
     }
@@ -492,24 +461,70 @@ public class Javancss implements Exitable,
         }
     }
 
-    private static void _removeDirs( List/*<String>*/ vDirs )
+    private List/*<String>*/ findFiles( List/*<String>*/ filenames, boolean recursive ) throws IOException
     {
         if ( Util.isDebug() )
         {
-            Util.debug( "_removeDirs(..).vDirs: " + Util.toString( vDirs ) );
+            Util.debug( "filenames: " + Util.toString( filenames ) );
         }
-        // Do it in reverse order, or we will have a problem 
-        // when removing elements.
-        for( int i = vDirs.size() - 1; i >= 0; i-- )
+        if ( recursive && ( filenames.size() == 0 ) )
         {
-            String sFile = FileUtil.normalizeFileName( (String)vDirs.get( i ) );
-            Util.debug( "_removeDirs(..).sFile: " + sFile );
-            if( FileUtil.existsDir( sFile ) )
+            // If no files then add current directory!
+            filenames.add( "." );
+        }
+
+        Set _processedAtFiles = new HashSet();
+        List newFilenames = new ArrayList();
+        for ( Iterator iter = filenames.iterator(); iter.hasNext(); )
+        {
+            String filename = (String)iter.next();
+
+            // if the file specifies other files...
+            if ( filename.startsWith( "@" ) )
             {
-                vDirs.remove( i );
-                Util.debug( "_removeDirs(..).removed: " + sFile );
+                filename = filename.substring( 1 );
+                if ( filename.length() > 1 )
+                {
+                    filename = FileUtil.normalizeFileName( filename );
+                    if ( _processedAtFiles.add( filename ) )
+                    {
+                        String sJavaSourceFileNames = null;
+                        try
+                        {
+                            sJavaSourceFileNames = FileUtil.readFile( filename );
+                        }
+                        catch( IOException pIOException ) 
+                        {
+                            _sErrorMessage = "File Read Error: " + filename;
+                            _thrwError = pIOException;
+                            throw pIOException;
+                        }
+                        List vTheseJavaSourceFiles = Util.stringToLines( sJavaSourceFileNames );
+                        newFilenames.addAll( vTheseJavaSourceFiles );
+                    }
+                }
+            }
+            else
+            {
+                filename = FileUtil.normalizeFileName( filename );
+                File file = new File( filename );
+                if ( file.isDirectory() ) 
+                {
+                    _addJavaFiles( file, newFilenames );
+                }
+                else
+                {
+                    newFilenames.add( filename );
+                }
             }
         }
+
+        if ( Util.isDebug() )
+        {
+            Util.debug( "resolved filenames: " + Util.toString( newFilenames ) );
+        }
+
+        return newFilenames;
     }
 
     private Init _pInit = null;
@@ -521,7 +536,7 @@ public class Javancss implements Exitable,
      * of other programs.
      * @throws UnsupportedEncodingException 
      */
-    public Javancss(String[] asArgs_, String sRcsHeader_) throws UnsupportedEncodingException {
+    public Javancss(String[] asArgs_, String sRcsHeader_) throws IOException {
         _pInit = new Init(this, asArgs_, sRcsHeader_, S_INIT__FILE_CONTENT);
         if (_bExit) {
             return;
@@ -543,38 +558,7 @@ public class Javancss implements Exitable,
         }
 
         // the arguments (the files) to be processed
-        _vJavaSourceFiles = _pInit.getArguments();
-
-        if ( Util.isDebug() )
-        {
-            Util.debug( "_vJavaSourceFiles: " + Util.toString( _vJavaSourceFiles ) );
-        }
-        if ( htOptions.get( "recursive" ) != null )
-        {
-            // If no files then add current directory!
-            if ( _vJavaSourceFiles.size() == 0 )
-            {
-                _vJavaSourceFiles.add( "." );
-            }
-           
-            Iterator iter = _vJavaSourceFiles.iterator();
-            while( iter.hasNext() ) 
-            {
-                String fileName = FileUtil.normalizeFileName( (String)iter.next() );
-                File   file = new File( fileName );
-                if( file.isDirectory() ) 
-                {
-                    _addJavaFiles( file, _vJavaSourceFiles );
-                }
-            }
-           
-            _removeDirs( _vJavaSourceFiles );
-        }
-
-        if ( Util.isDebug() )
-        {
-            Util.debug( "_vJavaSourceFiles: " + Util.toString( _vJavaSourceFiles ) );
-        }
+        _vJavaSourceFiles = findFiles( _pInit.getArguments(), htOptions.get( "recursive" ) != null );
 
         if ( htOptions.get( "gui" ) != null ) 
         {
@@ -794,8 +778,8 @@ public class Javancss implements Exitable,
         return ( encoding == null ) ? new InputStreamReader( stream ) : new InputStreamReader( stream, encoding );
     }
 
-    private Reader newReader( String file ) throws FileNotFoundException, UnsupportedEncodingException
+    private Reader newReader( String filename ) throws FileNotFoundException, UnsupportedEncodingException
     {
-        return newReader( new FileInputStream( file ) );
+        return newReader( new FileInputStream( filename ) );
     }
 }
