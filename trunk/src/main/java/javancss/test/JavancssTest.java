@@ -22,9 +22,9 @@ Boston, MA 02111-1307, USA.  */
 package javancss.test;
 
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.PrintStream;
 import java.io.StringReader;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -721,7 +721,7 @@ public class JavancssTest extends    Test
         _sTestDir = sTestDir_;
     }
 
-    private void _doNcssEncodingTest() throws UnsupportedEncodingException
+    private void _doNcssEncodingTest() throws IOException
     {
         String[] args = new String[] { "-encoding", "UTF-16", FileUtil.concatPath( _sTestDir, "TestEncoding.java" ) }; 
         Javancss pJavancss = new Javancss( args, "test" );

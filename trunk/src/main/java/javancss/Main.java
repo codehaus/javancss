@@ -21,7 +21,7 @@ Boston, MA 02111-1307, USA.  */
 
 package javancss;
 
-import java.io.UnsupportedEncodingException;
+import java.io.IOException;
 import java.util.Locale;
 
 /**
@@ -35,7 +35,7 @@ import java.util.Locale;
 public class Main {
     public static final String S_RCS_HEADER = "$Header: /home/clemens/src/java/javancss/src/javancss/RCS/Main.java,v 29.50 2006/10/06 11:46:24 clemens Exp clemens $";
 
-    public static void main(String[] asArgs) throws UnsupportedEncodingException {
+    public static void main(String[] asArgs) throws IOException {
         Locale.setDefault( Locale.US );
 
         Javancss pJavancss = new Javancss(asArgs, S_RCS_HEADER);
