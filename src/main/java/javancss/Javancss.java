@@ -36,7 +36,7 @@ import java.io.PrintWriter;
 import java.io.Reader;
 import java.io.UnsupportedEncodingException;
 import java.util.Collections;
-import java.util.Hashtable;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -99,7 +99,7 @@ public class Javancss implements Exitable,
     private List _vPackageMetrics = null;
     private List _vImports = null;
     private Map _htPackages = null;
-    private Map _htProcessedAtFiles = new Hashtable();
+    private Map _htProcessedAtFiles = new HashMap();
     private Object[] _aoPackage = null;
     private String encoding = null;
 
@@ -305,7 +305,7 @@ public class Javancss implements Exitable,
                ParseException,
                TokenMgrError
     {
-        _htPackages = new Hashtable();
+        _htPackages = new HashMap();
         
         // either there are argument files, or stdin is used
         if (_vJavaSourceFiles.size() == 0) {
@@ -316,12 +316,10 @@ public class Javancss implements Exitable,
         }
         
         _vPackageMetrics = new Vector();
-        for(Iterator ePackages = _htPackages.keySet().iterator();
-            ePackages.hasNext(); )
+        for(Iterator ePackages = _htPackages.keySet().iterator(); ePackages.hasNext(); )
         {
             String sPackage = (String)ePackages.next();
-            PackageMetric pckmNext = (PackageMetric)_htPackages.
-                   get(sPackage);
+            PackageMetric pckmNext = (PackageMetric)_htPackages.get(sPackage);
             _vPackageMetrics.add(pckmNext);
         }
         Collections.sort(_vPackageMetrics);
