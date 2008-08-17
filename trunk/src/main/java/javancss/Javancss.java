@@ -200,10 +200,8 @@ public class Javancss implements Exitable,
             _ncss += _pJavaParser.getNcss();       // increment the ncss
             _loc  += _pJavaParser.getLOC();        // and loc
             // add new data to global vector
-            _vFunctionMetrics = Util.concat(_vFunctionMetrics,
-                                            _pJavaParser.getFunction());
-            _vObjectMetrics = Util.concat(_vObjectMetrics,
-                                          _pJavaParser.getObject());
+            _vFunctionMetrics.addAll(_pJavaParser.getFunction());
+            _vObjectMetrics.addAll(_pJavaParser.getObject());
             Hashtable htNewPackages = _pJavaParser.getPackage();
             /*Vector vNewPackages = new Vector();*/
             for(Enumeration ePackages = htNewPackages.keys();
