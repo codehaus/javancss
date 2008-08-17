@@ -1,10 +1,12 @@
 package javancss.test;
 
+import java.io.File;
+
 import ccl.util.FileUtil;
 import ccl.util.Test;
 import ccl.util.Util;
 import ccl.xml.XMLUtil;
-import java.io.File;
+
 import javancss.Javancss;
 import javancss.XmlFormatter;
 

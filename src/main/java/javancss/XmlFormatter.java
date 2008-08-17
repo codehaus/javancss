@@ -21,13 +21,14 @@ Boston, MA 02111-1307, USA.  */
 
 package javancss;
 
-import ccl.util.Util;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.Calendar;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
+
+import ccl.util.Util;
 
 /**
  * Generates XML output of Java metrics.
