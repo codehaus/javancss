@@ -27,7 +27,7 @@ package javancss;
  * @author  Chr. Clemens Lee <clemens@kclee.com>
  * @version $Id$
  */
-public class PackageMetric 
+public class PackageMetric implements Comparable
 {
     public String name    = ".";
     public int classes    = 0;
@@ -72,8 +72,13 @@ public class PackageMetric
         singleLn   += pPackageMetric_.singleLn;
         multiLn    += pPackageMetric_.multiLn;
     }
-    
+
     public String toString() {
         return name;
+    }
+
+    public int compareTo( Object o )
+    {
+        return name.compareTo( ((PackageMetric)o).name );
     }
 }

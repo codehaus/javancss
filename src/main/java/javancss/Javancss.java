@@ -35,6 +35,7 @@ import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.io.Reader;
 import java.io.UnsupportedEncodingException;
+import java.util.Collections;
 import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.Vector;
@@ -321,7 +322,7 @@ public class Javancss implements Exitable,
                    get(sPackage);
             _vPackageMetrics.addElement(pckmNext);
         }
-        _vPackageMetrics = Util.sort(_vPackageMetrics);
+        Collections.sort(_vPackageMetrics);
     }
 
     public Vector getImports() {
