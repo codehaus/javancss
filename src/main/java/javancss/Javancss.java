@@ -69,8 +69,7 @@ import javancss.test.JavancssTest;
 public class Javancss implements Exitable,
                                  JavancssConstants
 {
-    static final int LEN_NR = 3;
-    static final String S_INIT__FILE_CONTENT =
+    private static final String S_INIT__FILE_CONTENT =
         "[Init]\n" +
         "Author=Chr. Clemens Lee\n" +
         "\n" +
@@ -94,19 +93,22 @@ public class Javancss implements Exitable,
         "UseSystemColors=true\n";
     
     private boolean _bExit = false;
-    private int _ncss = 0;
-    private int _loc = 0;
-    private JavaParser _pJavaParser = null;
-    private List _vJavaSourceFiles = new ArrayList();
+
+    private List/*<String>*/ _vJavaSourceFiles = new ArrayList();
+    private String encoding = null;
+
     private String _sErrorMessage = null;
     private Throwable _thrwError = null;
+
+    private JavaParser _pJavaParser = null;
+    private int _ncss = 0;
+    private int _loc = 0;
     private List _vFunctionMetrics = new ArrayList();
     private List _vObjectMetrics = new ArrayList();
     private List _vPackageMetrics = null;
     private List _vImports = null;
     private Map _htPackages = null;
     private Object[] _aoPackage = null;
-    private String encoding = null;
 
     /**
      * Just used for parseImports.
@@ -115,9 +117,12 @@ public class Javancss implements Exitable,
 
     private Reader createSourceReader( String sSourceFileName_ )
     {
-        try {
-            return newReader(sSourceFileName_);
-        } catch(IOException pIOException) {
+        try
+        {
+            return newReader( sSourceFileName_ );
+        }
+        catch ( IOException pIOException )
+        {
             if ( Util.isEmpty( _sErrorMessage ) )
             {
                 _sErrorMessage = "";
@@ -133,10 +138,7 @@ public class Javancss implements Exitable,
         }
     }
 
-    private void _measureSource(String sSourceFileName_)
-        throws IOException,
-               ParseException,
-               TokenMgrError
+    private void _measureSource( String sSourceFileName_ ) throws IOException, ParseException, TokenMgrError
     {
         // take user.dir property in account
         sSourceFileName_ = FileUtil.normalizeFileName( sSourceFileName_ );
@@ -144,11 +146,11 @@ public class Javancss implements Exitable,
         Reader reader = null;
 
         // opens the file
-        try 
+        try
         {
-            reader = newReader(sSourceFileName_);
+            reader = newReader( sSourceFileName_ );
         }
-        catch(IOException pIOException) 
+        catch ( IOException pIOException ) 
         {
             if ( Util.isEmpty( _sErrorMessage ) )
             {
