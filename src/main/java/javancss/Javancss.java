@@ -461,21 +461,22 @@ public class Javancss implements Exitable,
         }
     }
 
-    private void _addJavaFiles( File file, List v )
+    /**
+     * recursively adds *.java files
+     * @param dir the base directory to search
+     * @param v the list of filenames to add found filenames to
+     */
+    private static void _addJavaFiles( File dir, List v/*<String>*/ )
     {
-        String sFile = FileUtil.normalizeFileName( file.getPath() );
-        String[] files = new File( sFile ).list();
-        if( files == null 
-            || files.length == 0 )
+        File[] files = dir.listFiles();
+        if( files == null || files.length == 0 )
         {
             return;
         }
            
         for( int i = 0; i < files.length; i++ )
         {
-            String newFileName = FileUtil.concatPath( sFile
-                                                      , files[ i ] );
-            File newFile = new File( newFileName );
+            File newFile = files[i];
             if( newFile.isDirectory() )
             {
                 //Recurse!!!
@@ -483,7 +484,7 @@ public class Javancss implements Exitable,
             }
             else
             {
-                if( newFile.getAbsolutePath().endsWith( ".java" ) )
+                if( newFile.getName().endsWith( ".java" ) )
                 {
                     v.add( newFile.getAbsolutePath() );
                 }
@@ -491,22 +492,22 @@ public class Javancss implements Exitable,
         }
     }
 
-    private void _removeDirs( List vDirs )
+    private static void _removeDirs( List/*<String>*/ vDirs )
     {
         if ( Util.isDebug() )
         {
-            Util.debug( this, "_removeDirs(..).vDirs: " + Util.toString( vDirs ) );
+            Util.debug( "_removeDirs(..).vDirs: " + Util.toString( vDirs ) );
         }
         // Do it in reverse order, or we will have a problem 
         // when removing elements.
         for( int i = vDirs.size() - 1; i >= 0; i-- )
         {
             String sFile = FileUtil.normalizeFileName( (String)vDirs.get( i ) );
-            Util.debug( this, "_removeDirs(..).sFile: " + sFile );
+            Util.debug( "_removeDirs(..).sFile: " + sFile );
             if( FileUtil.existsDir( sFile ) )
             {
                 vDirs.remove( i );
-                Util.debug( this, "_removeDirs(..).removed: " + sFile );
+                Util.debug( "_removeDirs(..).removed: " + sFile );
             }
         }
     }
@@ -556,7 +557,6 @@ public class Javancss implements Exitable,
                 _vJavaSourceFiles.add( "." );
             }
            
-            List newFiles = new ArrayList();
             Iterator iter = _vJavaSourceFiles.iterator();
             while( iter.hasNext() ) 
             {
@@ -564,14 +564,7 @@ public class Javancss implements Exitable,
                 File   file = new File( fileName );
                 if( file.isDirectory() ) 
                 {
-                    _addJavaFiles( file, newFiles );
-                }
-            }
-            if( newFiles.size() != 0 )
-            {
-                for( int i = 0; i < newFiles.size(); i++ )
-                {
-                    _vJavaSourceFiles.add( newFiles.get( i ) );
+                    _addJavaFiles( file, _vJavaSourceFiles );
                 }
             }
            
