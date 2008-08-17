@@ -206,7 +206,7 @@ public class Javancss implements Exitable,
             _vFunctionMetrics.addAll(_pJavaParser.getFunction());
             _vObjectMetrics.addAll(_pJavaParser.getObject());
             Map htNewPackages = _pJavaParser.getPackage();
-            /*Vector vNewPackages = new Vector();*/
+            /*List vNewPackages = new Vector();*/
             for(Iterator ePackages = htNewPackages.keySet().iterator();
                 ePackages.hasNext(); )
             {
@@ -278,7 +278,7 @@ public class Javancss implements Exitable,
                         
                         throw pIOException;
                     }
-                    Vector vTheseJavaSourceFiles =
+                    List vTheseJavaSourceFiles =
                            Util.stringToLines(sJavaSourceFileNames);
                     _measureFiles(vTheseJavaSourceFiles);
                 }
@@ -361,7 +361,7 @@ public class Javancss implements Exitable,
         return getFormatter().printJavaNcss();
     }
 
-    public Javancss(Vector vJavaSourceFiles_) {
+    public Javancss(List vJavaSourceFiles_) {
         _vJavaSourceFiles = vJavaSourceFiles_;
         try {
             _measureRoot(newReader(System.in));
@@ -457,7 +457,7 @@ public class Javancss implements Exitable,
         }
     }
 
-    private void _addJavaFiles( File file, Vector v )
+    private void _addJavaFiles( File file, List v )
     {
         String sFile = FileUtil.normalizeFileName( file.getPath() );
         String[] files = new File( sFile ).list();
@@ -481,7 +481,7 @@ public class Javancss implements Exitable,
             {
                 if( newFile.getAbsolutePath().endsWith( ".java" ) )
                 {
-                    v.addElement( newFile.getAbsolutePath() );
+                    v.add( newFile.getAbsolutePath() );
                 }
             }
         }
@@ -552,7 +552,7 @@ public class Javancss implements Exitable,
                 _vJavaSourceFiles.add( "." );
             }
            
-            Vector newFiles = new Vector();
+            List newFiles = new Vector();
             Iterator iter = _vJavaSourceFiles.iterator();
             while( iter.hasNext() ) 
             {
@@ -567,7 +567,7 @@ public class Javancss implements Exitable,
             {
                 for( int i = 0; i < newFiles.size(); i++ )
                 {
-                    _vJavaSourceFiles.add( newFiles.elementAt( i ) );
+                    _vJavaSourceFiles.add( newFiles.get( i ) );
                 }
             }
            
