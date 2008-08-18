@@ -101,11 +101,11 @@ public class JavancssTest extends    Test
         // same test with more files
         //
 
-        List vArgs = new ArrayList();
-        vArgs.add( new File( testDir, "Test20.java" ) );
-        vArgs.add( new File( testDir, "Test21.java" ) );
-        vArgs.add( new File( testDir, "Test28.java" ) );
-        _checkJavadocLines( vArgs, "jacob", 0 );
+        List files = new ArrayList();
+        files.add( new File( testDir, "Test20.java" ) );
+        files.add( new File( testDir, "Test21.java" ) );
+        files.add( new File( testDir, "Test28.java" ) );
+        _checkJavadocLines( files, "jacob", 0 );
 
         _checkJavadocLines( 68, ".", 6 );
         _checkJavadocLines( 69, ".", 4 );
@@ -136,14 +136,14 @@ public class JavancssTest extends    Test
 
     private void _checkJavadocLines( int[] aTestFile, String sPackage, int javadocLines )
     {
-        List vArgs = new ArrayList();
+        List files = new ArrayList();
         for( int i = 0; i < aTestFile.length; i++ )
         {
             int next = aTestFile[ i ];
-            vArgs.add( new File( testDir, "Test" + next + ".java" ) );
+            files.add( new File( testDir, "Test" + next + ".java" ) );
         }
 
-        _checkJavadocLines( vArgs, sPackage, javadocLines );
+        _checkJavadocLines( files, sPackage, javadocLines );
     }
 
     private void _checkJavadocLines( Javancss pJavancss, String sPackage, int javadocLines )
