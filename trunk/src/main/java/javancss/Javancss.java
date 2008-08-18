@@ -205,50 +205,58 @@ public class Javancss implements Exitable,
         {
             // create a parser object
             _pJavaParser = new JavaParser( reader );
+
             // execute the parser
             _pJavaParser.CompilationUnit();
-            Util.debug
-                   ( "Javancss._measureSource(DataInputStream).SUCCESSFULLY_PARSED" );
-            _ncss += _pJavaParser.getNcss();       // increment the ncss
-            _loc  += _pJavaParser.getLOC();        // and loc
+            Util.debug( "Javancss._measureSource(DataInputStream).SUCCESSFULLY_PARSED" );
+
+            _ncss += _pJavaParser.getNcss(); // increment the ncss
+            _loc += _pJavaParser.getLOC(); // and loc
             // add new data to global vector
-            _vFunctionMetrics.addAll(_pJavaParser.getFunction());
-            _vObjectMetrics.addAll(_pJavaParser.getObject());
+            _vFunctionMetrics.addAll( _pJavaParser.getFunction() );
+            _vObjectMetrics.addAll( _pJavaParser.getObject() );
             Map htNewPackages = _pJavaParser.getPackage();
-            /*List vNewPackages = new Vector();*/
-            for(Iterator ePackages = htNewPackages.keySet().iterator();
-                ePackages.hasNext(); )
+
+            /* List vNewPackages = new Vector(); */
+            for ( Iterator ePackages = htNewPackages.keySet().iterator(); ePackages.hasNext(); )
             {
-                String sPackage = (String)ePackages.next();
-                PackageMetric pckmNext = (PackageMetric)htNewPackages.
-                       get(sPackage);
+                String sPackage = (String) ePackages.next();
+
+                PackageMetric pckmNext = (PackageMetric) htNewPackages.get( sPackage );
                 pckmNext.name = sPackage;
-                PackageMetric pckmPrevious =
-                       (PackageMetric)_htPackages.get
-                       (sPackage);
-                pckmNext.add(pckmPrevious);
-                _htPackages.put(sPackage, pckmNext);
+
+                PackageMetric pckmPrevious = (PackageMetric) _htPackages.get( sPackage );
+                pckmNext.add( pckmPrevious );
+
+                _htPackages.put( sPackage, pckmNext );
             }
-        } catch(ParseException pParseException) {
-            if (_sErrorMessage == null) {
+        }
+        catch ( ParseException pParseException )
+        {
+            if ( _sErrorMessage == null )
+            {
                 _sErrorMessage = "";
             }
             _sErrorMessage += "ParseException in STDIN";
-            if (_pJavaParser != null) {
+            if ( _pJavaParser != null )
+            {
                 _sErrorMessage += "\nLast useful checkpoint: \"" + _pJavaParser.getLastFunction() + "\"\n";
             }
             _sErrorMessage += pParseException.getMessage() + "\n";
             _thrwError = pParseException;
-            
+
             throw pParseException;
-        } catch(TokenMgrError pTokenMgrError) {
-            if (_sErrorMessage == null) {
+        }
+        catch ( TokenMgrError pTokenMgrError )
+        {
+            if ( _sErrorMessage == null )
+            {
                 _sErrorMessage = "";
             }
             _sErrorMessage += "TokenMgrError in STDIN\n";
             _sErrorMessage += pTokenMgrError.getMessage() + "\n";
             _thrwError = pTokenMgrError;
-            
+
             throw pTokenMgrError;
         }
     }
@@ -275,29 +283,30 @@ public class Javancss implements Exitable,
      * If arguments were provided, they are used, otherwise
      * the input stream is used.
      */
-    private void _measureRoot(Reader reader)
-        throws IOException,
-               ParseException,
-               TokenMgrError
+    private void _measureRoot( Reader reader ) throws IOException, ParseException, TokenMgrError
     {
         _htPackages = new HashMap();
-        
+
         // either there are argument files, or stdin is used
-        if (_vJavaSourceFiles.size() == 0) {
-            _measureSource(reader);
-        } else {
-            // the collection of files get measured
-            _measureFiles(_vJavaSourceFiles);
-        }
-        
-        _vPackageMetrics = new ArrayList();
-        for(Iterator ePackages = _htPackages.keySet().iterator(); ePackages.hasNext(); )
+        if ( _vJavaSourceFiles.size() == 0 )
         {
-            String sPackage = (String)ePackages.next();
-            PackageMetric pckmNext = (PackageMetric)_htPackages.get(sPackage);
-            _vPackageMetrics.add(pckmNext);
+            _measureSource( reader );
         }
-        Collections.sort(_vPackageMetrics);
+        else
+        {
+            // the collection of files get measured
+            _measureFiles( _vJavaSourceFiles );
+        }
+
+        _vPackageMetrics = new ArrayList();
+        for ( Iterator ePackages = _htPackages.keySet().iterator(); ePackages.hasNext(); )
+        {
+            String sPackage = (String) ePackages.next();
+
+            PackageMetric pckmNext = (PackageMetric) _htPackages.get( sPackage );
+            _vPackageMetrics.add( pckmNext );
+        }
+        Collections.sort( _vPackageMetrics );
     }
 
     public List getImports() {
@@ -545,7 +554,6 @@ public class Javancss implements Exitable,
      * javancss.Main.
      * Other constructors might be helpful to use Javancss out
      * of other programs.
-     * @throws UnsupportedEncodingException 
      */
     public Javancss(String[] asArgs_, String sRcsHeader_) throws IOException {
         _pInit = new Init(this, asArgs_, sRcsHeader_, S_INIT__FILE_CONTENT);
