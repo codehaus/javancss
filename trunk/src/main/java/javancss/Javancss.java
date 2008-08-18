@@ -105,9 +105,9 @@ public class Javancss implements Exitable,
     private int _loc = 0;
     private List _vFunctionMetrics = new ArrayList();
     private List _vObjectMetrics = new ArrayList();
-    private List _vPackageMetrics = null;
+    private List/*<PackageMetric>*/ _vPackageMetrics = null;
     private List _vImports = null;
-    private Map _htPackages = null;
+    private Map/*<String,PackageMetric>*/ _htPackages = null;
     private Object[] _aoPackage = null;
 
     /**
