@@ -393,12 +393,11 @@ public class XmlFormatter implements Formatter
         long lJVDCSum     = 0;
         for( Iterator eFunctions = vFunctionMetrics.iterator(); eFunctions.hasNext(); )
         {
-            List vSingleFunctionMetrics = (List)eFunctions.next();
-            String sFunction = null;
-            sFunction = (String)vSingleFunctionMetrics.get(FCT_NAME);
-            int functionNcss = ((Integer)vSingleFunctionMetrics.get(FCT_NCSS)).intValue();
-            int functionCCN  = ((Integer)vSingleFunctionMetrics.get(FCT_CCN )).intValue();
-            int functionJVDC = ((Integer)vSingleFunctionMetrics.get(FCT_JVDC)).intValue();
+            FunctionMetric functionMetric = (FunctionMetric)eFunctions.next();
+            String sFunction = functionMetric.name;
+            int functionNcss = functionMetric.ncss;
+            int functionCCN  = functionMetric.ccn;
+            int functionJVDC = functionMetric.javadocs;
 
             // added by SMS
             //int functionJVDCL        = ((Integer)vSingleFunctionMetrics.elementAt(FCT_JVDC_LINES)).intValue();
