@@ -41,6 +41,7 @@ import java.util.*;
 
 import ccl.util.Util;
 
+import javancss.FunctionMetric;
 import javancss.PackageMetric;
 
 /**
@@ -105,7 +106,7 @@ public class JavaParser
      * should instead put your copyright notice).
      */ 
     private int    _javadocs   = 0;              // global javadocs
-    private Vector _vFunctions = new Vector();   // holds the statistics for each method
+    private Vector/*<FunctionMetric>*/ _vFunctions = new Vector();   // holds the statistics for each method
 
     /** 
      * Metrics for each class/interface are stored in this
@@ -146,7 +147,7 @@ public class JavaParser
       return _topLevelClasses;
       }*/
     
-    public Vector getFunction() {
+    public Vector/*<FunctionMetric>*/ getFunction() {
         return _vFunctions;
     }
     
@@ -1497,20 +1498,19 @@ void MethodDeclaration() :
              _ncss++;
              Util.debug( "MethodDeclaration()._ncss++" );
       
-             Vector vFunctionMetrics = new Vector();
-             vFunctionMetrics.addElement(new String(_sPackage + _sClass +
-                                                    _sFunction));
-             vFunctionMetrics.addElement(new Integer(_ncss - oldNcss));
-             vFunctionMetrics.addElement(new Integer(_cyc));
-             vFunctionMetrics.addElement( new Integer(jvdc) );
+             FunctionMetric functionMetrics = new FunctionMetric();
+             functionMetrics.name = _sPackage + _sClass + _sFunction;
+             functionMetrics.ncss = _ncss - oldNcss;
+             functionMetrics.ccn = _cyc;
+             functionMetrics.javadocs = jvdc;
 
-             //* added by SMS
-             vFunctionMetrics.addElement( new Integer( 0 ) );//jvdcLines));
-             vFunctionMetrics.addElement( new Integer( 0 ) );//JavaParserTokenManager._iSingleComments - oldSingle));
-             vFunctionMetrics.addElement( new Integer( 0 ) );//JavaParserTokenManager._iMultiComments - oldMulti));
-             // */
+             // added by SMS
+             functionMetrics.javadocsLn = 0; //jvdcLines;
+             functionMetrics.singleLn = 0; //JavaParserTokenManager._iSingleComments - oldSingle;
+             functionMetrics.multiLn = 0; //JavaParserTokenManager._iMultiComments - oldMulti;
+             //
 
-             _vFunctions.addElement(vFunctionMetrics);
+             _vFunctions.addElement(functionMetrics);
              _sFunction = sOldFunction;
              _functions = oldFunctions + 1;
              _cyc = oldcyc;
@@ -1669,19 +1669,19 @@ void ConstructorDeclaration() :
                 _ncss++;
                 Util.debug( "_ncss++" );
 
-                Vector vFunctionMetrics = new Vector();
-                vFunctionMetrics.addElement(new String(_sFunction));
-                vFunctionMetrics.addElement(new Integer(_ncss - oldNcss));
-                vFunctionMetrics.addElement(new Integer(_cyc));
-                vFunctionMetrics.addElement( new Integer(jvdc) );
+                FunctionMetric functionMetrics = new FunctionMetric();
+                functionMetrics.name = _sFunction;
+                functionMetrics.ncss = _ncss - oldNcss;
+                functionMetrics.ccn = _cyc;
+                functionMetrics.javadocs = jvdc;
 
                 // added by SMS
-                vFunctionMetrics.addElement( new Integer(jvdcLines));        
-                vFunctionMetrics.addElement( new Integer(JavaParserTokenManager._iSingleComments - oldSingle));
-                vFunctionMetrics.addElement( new Integer(JavaParserTokenManager._iMultiComments - oldMulti));
+                functionMetrics.javadocsLn = jvdcLines;        
+                functionMetrics.singleLn = JavaParserTokenManager._iSingleComments - oldSingle;
+                functionMetrics.multiLn = JavaParserTokenManager._iMultiComments - oldMulti;
                 //
         
-                _vFunctions.addElement(vFunctionMetrics);
+                _vFunctions.addElement(functionMetrics);
                 _sFunction = sOldFunction;
                 _functions = oldFunctions + 1;
                 _cyc = oldcyc;

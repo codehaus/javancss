@@ -34,6 +34,7 @@ import ccl.util.FileUtil;
 import ccl.util.Test;
 import ccl.util.Util;
 
+import javancss.FunctionMetric;
 import javancss.Javancss;
 import javancss.JavancssConstants;
 import javancss.PackageMetric;
@@ -244,8 +245,8 @@ public class JavancssTest extends    Test
             pJavancss = new Javancss( new File( testDir, "Test12.java" ) );
             bugIf( pJavancss.getLOC() != pJavancss.getNcss(), "NCSS: " + pJavancss.getNcss() + ", LOC: "
                             + pJavancss.getLOC() );
-            List vFunctions = pJavancss.getFunctionMetrics();
-            String sFirstFunction = (String) ( (List) vFunctions.get( 0 ) ).get( FCT_NAME );
+            List/*<FunctionMetric>*/ vFunctions = pJavancss.getFunctionMetrics();
+            String sFirstFunction = ( (FunctionMetric) vFunctions.get( 0 ) ).name;
             bugIf( sFirstFunction == null );
             /* System.out.println( sFirstFunction ); */
             bugIf( !sFirstFunction.equals( "Test12.readFile(URL)" ), sFirstFunction );
@@ -269,9 +270,9 @@ public class JavancssTest extends    Test
             // Nr. 22
             pJavancss = new Javancss( new File( testDir, "Test19.java" ) );
             vFunctions = pJavancss.getFunctionMetrics();
-            sFirstFunction = (String) ( (List) vFunctions.get( 0 ) ).get( FCT_NAME );
+            sFirstFunction = ( (FunctionMetric) vFunctions.get( 0 ) ).name;
             bugIf( !sFirstFunction.equals( "test.Test19.foo(String[],Controller)" ), sFirstFunction );
-            sFirstFunction = (String) ( (List) vFunctions.get( 3 ) ).get( FCT_NAME );
+            sFirstFunction = ( (FunctionMetric) vFunctions.get( 3 ) ).name;
             bugIf( !sFirstFunction.equals( "test.Test19.main(String[])" ) );
             // Nr. 24
             pJavancss = new Javancss( new File( testDir, "Test20.java" ) );
@@ -318,9 +319,9 @@ public class JavancssTest extends    Test
             pJavancss = new Javancss( new StringReader( sTogether ) );
             vFunctions = pJavancss.getFunctionMetrics();
             Util.debug( "JavancssTest._doIt().vFunctions: " + vFunctions );
-            sFirstFunction = (String) ( (List) vFunctions.get( 0 ) ).get( FCT_NAME );
+            sFirstFunction = ( (FunctionMetric) vFunctions.get( 0 ) ).name;
             bugIf( !sFirstFunction.equals( "ccl.util.Test11.atoi(String)" ) );
-            String sSomeFunction = (String) ( (List) vFunctions.get( 32 ) ).get( FCT_NAME );
+            String sSomeFunction = ( (FunctionMetric) vFunctions.get( 32 ) ).name;
             bugIf( !sSomeFunction.equals( "Test12.readFile(URL)" ), "Function: " + sSomeFunction );
             List vPackages = pJavancss.getPackageMetrics();
             bugIf( vPackages.size() != 2 );
@@ -603,9 +604,9 @@ public class JavancssTest extends    Test
 
         // CCN for return and throw
         Javancss pJavancss = measureTestFile( localPath, 40 );
-        List vFunctions = pJavancss.getFunctionMetrics();
+        List/*<FunctionMetric>*/ vFunctions = pJavancss.getFunctionMetrics();
         bugIf( vFunctions.size() != 1 );
-        int ccn = ( (Integer) ( (List) vFunctions.get( 0 ) ).get( FCT_CCN ) ).intValue();
+        int ccn = ( (FunctionMetric) vFunctions.get( 0 ) ).ccn;
         bugIf( ccn != 3, "CCN in constructor of Test40 should be 3, it is: " + ccn );
 
         pJavancss = measureTestFile( localPath, 41 );
@@ -653,9 +654,9 @@ public class JavancssTest extends    Test
         Assert( ccn == expectedCCN, "Expected ccn was " + expectedCCN + " but the result is: " + ccn );
     }
 
-    private int getCCN( List vFunctions, int methodIndex )
+    private int getCCN( List/*<FunctionMetric>*/ vFunctions, int methodIndex )
     {
-        return ( (Integer) ( (List) vFunctions.get( methodIndex ) ).get( FCT_CCN ) ).intValue();
+        return ( (FunctionMetric) vFunctions.get( methodIndex ) ).ccn;
     }
 
     private Javancss measureTestFile( File localPath, int testFileId )

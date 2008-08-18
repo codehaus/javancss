@@ -22,24 +22,43 @@ Boston, MA 02111-1307, USA.  */
 package javancss;
 
 /**
- * Contains a couple of constants used to fill and access data
- * structures containing Java metric data.
+ * Basic data class to store all metrics attached to a function.
  *
- * @author    Chr. Clemens Lee <clemens@kclee.com>
- * $Id$
+ * @author  Hervé Boutemy
+ * @version $Id$
  */
-public interface JavancssConstants
+public class FunctionMetric implements Comparable
 {
-  static final int OBJ_NAME  = 0;
-  static final int OBJ_NCSS  = 1;
-  static final int OBJ_FCTS  = 2;
-  static final int OBJ_CLSSS = 3;
-  //static final int OBJ_JVDCS = 4;
-  //static final int OBJ_JVDCS = 5;
-  static final int OBJ_JVDCS = 6;
+    public String name = ".";
+    public int ncss = 0;
+    public int ccn = 0;
+    public int javadocs = 0;
+    public int javadocsLn = 0;
+    public int singleLn = 0;
+    public int multiLn = 0;
 
-  // added by SMS
-  static final int OBJ_JVDC_LINES   = 7;
-  static final int OBJ_SINGLE_LINES = 8;
-  static final int OBJ_MULTI_LINES  = 9;
+    public FunctionMetric() 
+    {
+        super();
+    }
+    
+    public void clear()
+    {
+        name = ".";
+        ncss = 0;
+        ccn = 0;
+        javadocs = 0;
+        javadocsLn = 0;
+        singleLn = 0;
+        multiLn = 0;
+    }
+
+    public String toString() {
+        return name;
+    }
+
+    public int compareTo( Object o )
+    {
+        return name.compareTo( ((FunctionMetric)o).name );
+    }
 }
