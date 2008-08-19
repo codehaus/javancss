@@ -36,7 +36,6 @@ import ccl.util.Util;
 
 import javancss.FunctionMetric;
 import javancss.Javancss;
-import javancss.JavancssConstants;
 import javancss.ObjectMetric;
 import javancss.PackageMetric;
 
@@ -47,7 +46,6 @@ import javancss.PackageMetric;
  *   3. 9. 1996
  */
 public class JavancssTest extends    Test 
-                          implements JavancssConstants 
 {
     private File testDir = null;
 
