@@ -702,7 +702,7 @@ void PackageDeclaration() :
       _aoPackage[ 4 ] = new Integer( getToken( 0 ).endColumn );
       _ncss++;
       Util.debug( "_ncss++" );
-      _sPackage = (new String(_sName)) + ".";
+      _sPackage = _sName + ".";
   }
 }
 
@@ -885,7 +885,7 @@ void UnmodifiedClassDeclaration() :
                 if (!_sClass.equals("")) {
                         _sClass += ".";
                 }
-                _sClass += new String(getToken(2).image);
+                _sClass += getToken(2).image;
                 _classLevel ++;
         }
         Modifiers()
@@ -1175,7 +1175,7 @@ void UnmodifiedInterfaceDeclaration() :
                 if (!_sClass.equals("")) {
                         _sClass += ".";
                 }
-                _sClass += new String(getToken(2).image);
+                _sClass += getToken(2).image;
                 _classLevel ++;
         }
   "interface" Identifier() [TypeParameters()] [ "extends" NameList() ]
@@ -1523,7 +1523,7 @@ void MethodDeclarator() :
 {}
 {
         {
-                _sFunction = "." + new String(getToken(1).image);
+                _sFunction = "." + getToken(1).image;
         }
   Identifier() FormalParameters()
         {
@@ -1728,7 +1728,7 @@ void Type() :
  |
    PrimitiveType()
           {
-                  _sName = (new String(getToken(0).image));
+                  _sName = getToken(0).image;
           }
 }
 /*
@@ -1736,7 +1736,7 @@ ccl 2008-01-24
 {
   ( PrimitiveType()
           {
-                  _sName = (new String(getToken(0).image));
+                  _sName = getToken(0).image;
           }
     | Name() 
     [TypeArguments() ["." Identifier()] ]
@@ -1793,13 +1793,13 @@ void Name() :
 {
     ("enum"|Identifier()) //<IDENTIFIER> // no Identifier() because of assert type for field declaration
         {
-                _sName = new String(getToken(0).image);
+                _sName = getToken(0).image;
                 _tmpResultToken = getToken( 0 );
                 Util.debug( "Name._tmpResultToken: " + _tmpResultToken );
         }
     ( LOOKAHEAD(2) "." ("enum"|Identifier())
         {
-                _sName += "." + (new String(getToken(0).image));
+                _sName += "." + getToken(0).image;
         }
   )*
 }
@@ -2705,7 +2705,7 @@ void EnumDeclaration(int modifiers):
                 if (!_sClass.equals("")) {
                         _sClass += ".";
                 }
-                _sClass += new String(getToken(0).image);
+                _sClass += getToken(0).image;
                 _classLevel ++;
          }
   [ ImplementsList(false) ]
@@ -2815,7 +2815,7 @@ void ClassOrInterfaceType():
 {
   <IDENTIFIER>
 {
-                _sName = new String(getToken(0).image);
+                _sName = getToken(0).image;
                 if ( _tmpResultToken == null )
                 {
                   _tmpResultToken = getToken( 0 );
@@ -2825,7 +2825,7 @@ void ClassOrInterfaceType():
 [ LOOKAHEAD(4) TypeArguments() ]
   ( LOOKAHEAD(2) "." <IDENTIFIER>
         {
-                _sName += "." + (new String(getToken(0).image));
+                _sName += "." + getToken(0).image;
         }
  [ LOOKAHEAD(2) TypeArguments() ] )*
 }
