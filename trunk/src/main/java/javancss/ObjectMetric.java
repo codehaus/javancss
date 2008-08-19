@@ -27,17 +27,11 @@ package javancss;
  * @author  Hervé Boutemy
  * @version $Id$
  */
-public class ObjectMetric implements Comparable
+public class ObjectMetric  extends Metric
 {
-    public String name = ".";
-    public int ncss = 0;
     public int ccn = 0;
     public int functions = 0;
     public int classes = 0;
-    public int javadocs = 0;
-    public int javadocsLn = 0;
-    public int singleLn = 0;
-    public int multiLn = 0;
 
     public ObjectMetric() 
     {
@@ -46,23 +40,9 @@ public class ObjectMetric implements Comparable
     
     public void clear()
     {
-        name = ".";
-        ncss = 0;
+        super.clear();
         ccn = 0;
         functions = 0;
         classes = 0;
-        javadocs = 0;
-        javadocsLn = 0;
-        singleLn = 0;
-        multiLn = 0;
-    }
-
-    public String toString() {
-        return name;
-    }
-
-    public int compareTo( Object o )
-    {
-        return name.compareTo( ((ObjectMetric)o).name );
     }
 }
