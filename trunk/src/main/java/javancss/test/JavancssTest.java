@@ -37,6 +37,7 @@ import ccl.util.Util;
 import javancss.FunctionMetric;
 import javancss.Javancss;
 import javancss.JavancssConstants;
+import javancss.ObjectMetric;
 import javancss.PackageMetric;
 
 /**
@@ -77,9 +78,9 @@ public class JavancssTest extends    Test
     {
         Javancss pJavancss = new Javancss( new File( testDir, "Test20.java" ) );
         
-        List vObjectMetrics = pJavancss.getObjectMetrics();
-        List vClassMetrics  = (List)vObjectMetrics.get( 0 );
-        int jvdcs = ((Integer)vClassMetrics.get(OBJ_JVDCS)).intValue();
+        List/*<ObjectMetric>*/ vObjectMetrics = pJavancss.getObjectMetrics();
+        ObjectMetric classMetric  = (ObjectMetric)vObjectMetrics.get( 0 );
+        int jvdcs = classMetric.javadocs;
         Assert( jvdcs == 7
                 , "Expected 7 Javadocs in in file Test20.java but got " + jvdcs + "!" );
     }
@@ -587,9 +588,9 @@ public class JavancssTest extends    Test
     {
         Javancss pJavancss;
         pJavancss = new Javancss( new File( testDir, "Test" + testFileNumber + ".java" ) );
-        List vObjectMetrics = pJavancss.getObjectMetrics();
-        List vClassMetrics = (List) vObjectMetrics.get( 0 );
-        int jvdcs = ( (Integer) vClassMetrics.get( OBJ_JVDCS ) ).intValue();
+        List/*<ObjectMetric>*/ vObjectMetrics = pJavancss.getObjectMetrics();
+        ObjectMetric classMetric = (ObjectMetric) vObjectMetrics.get( 0 );
+        int jvdcs = classMetric.javadocs;
         /* int jvdc = pJavancss.getJvdc(); */
         bugIf( jvdcs != expectedJvdcsResult, "Parsing file Test" + testFileNumber + ".java failed. Jvdc is " + jvdcs
                         + " and not " + expectedJvdcsResult + "." );

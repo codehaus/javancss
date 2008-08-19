@@ -30,16 +30,4 @@ package javancss;
  */
 public interface JavancssConstants
 {
-  static final int OBJ_NAME  = 0;
-  static final int OBJ_NCSS  = 1;
-  static final int OBJ_FCTS  = 2;
-  static final int OBJ_CLSSS = 3;
-  //static final int OBJ_JVDCS = 4;
-  //static final int OBJ_JVDCS = 5;
-  static final int OBJ_JVDCS = 6;
-
-  // added by SMS
-  static final int OBJ_JVDC_LINES   = 7;
-  static final int OBJ_SINGLE_LINES = 8;
-  static final int OBJ_MULTI_LINES  = 9;
 }
