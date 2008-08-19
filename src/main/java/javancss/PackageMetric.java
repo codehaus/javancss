@@ -27,18 +27,10 @@ package javancss;
  * @author  Chr. Clemens Lee <clemens@kclee.com>
  * @version $Id$
  */
-public class PackageMetric implements Comparable
+public class PackageMetric extends Metric
 {
-    public String name    = ".";
     public int classes    = 0;
     public int functions  = 0;
-    public int ncss       = 0;
-
-    // added by SMS
-    public int javadocs   = 0;
-    public int javadocsLn = 0;
-    public int singleLn   = 0;
-    public int multiLn    = 0;
 
     public PackageMetric() 
     {
@@ -47,16 +39,9 @@ public class PackageMetric implements Comparable
     
     public void clear()
     {
-        name      = ".";
+        super.clear();
         classes   = 0;
         functions = 0;
-        ncss      = 0;
-
-        // added by SMS
-        javadocs   = 0;
-        javadocsLn = 0;
-        singleLn   = 0;
-        multiLn    = 0;
     }
 
     public void add(PackageMetric pPackageMetric_) {
@@ -71,14 +56,5 @@ public class PackageMetric implements Comparable
         javadocsLn += pPackageMetric_.javadocsLn;
         singleLn   += pPackageMetric_.singleLn;
         multiLn    += pPackageMetric_.multiLn;
-    }
-
-    public String toString() {
-        return name;
-    }
-
-    public int compareTo( Object o )
-    {
-        return name.compareTo( ((PackageMetric)o).name );
     }
 }

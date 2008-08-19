@@ -22,23 +22,41 @@ Boston, MA 02111-1307, USA.  */
 package javancss;
 
 /**
- * Basic data class to store all metrics attached to a function.
+ * Base data class to store all metrics common to packages, objects and functions.
  *
  * @author  Hervé Boutemy
  * @version $Id$
  */
-public class FunctionMetric  extends Metric
+public class Metric implements Comparable
 {
-    public int ccn = 0;
+    public String name = ".";
+    public int ncss = 0;
+    public int javadocs = 0;
+    public int javadocsLn = 0;
+    public int singleLn = 0;
+    public int multiLn = 0;
 
-    public FunctionMetric() 
+    public Metric() 
     {
         super();
     }
     
     public void clear()
     {
-        super.clear();
-        ccn = 0;
+        name = ".";
+        ncss = 0;
+        javadocs = 0;
+        javadocsLn = 0;
+        singleLn = 0;
+        multiLn = 0;
+    }
+
+    public String toString() {
+        return name;
+    }
+
+    public int compareTo( Object o )
+    {
+        return name.compareTo( ((Metric)o).name );
     }
 }
