@@ -107,14 +107,14 @@ public class JavaParser
      * should instead put your copyright notice).
      */ 
     private int    _javadocs   = 0;              // global javadocs
-    private Vector/*<FunctionMetric>*/ _vFunctions = new Vector();   // holds the statistics for each method
+    private List/*<FunctionMetric>*/ _vFunctions = new ArrayList();   // holds the statistics for each method
 
     /** 
      * Metrics for each class/interface are stored in this
      * vector.
      */
-    private Vector/*<ObjectMetric>*/ _vClasses = new Vector();
-    private Vector _vImports = new Vector();
+    private List/*<ObjectMetric>*/ _vClasses = new ArrayList();
+    private List _vImports = new ArrayList();
     private Object[] _aoPackage = null;
     private Map/*<String,PackageMetric>*/ _htPackage = new HashMap();
     private PackageMetric _pPackageMetric;
@@ -148,15 +148,16 @@ public class JavaParser
       return _topLevelClasses;
       }*/
     
-    public Vector/*<FunctionMetric>*/ getFunction() {
+    public List/*<FunctionMetric>*/ getFunction() {
         return _vFunctions;
     }
     
     /**
      * @return Top level classes in sorted order
      */
-    public Vector/*<ObjectMetric>*/ getObject() {
-        return(Util.sort(_vClasses));
+    public List/*<ObjectMetric>*/ getObject() {
+        Collections.sort(_vClasses);
+        return _vClasses;
     }
     
     /**
@@ -166,7 +167,7 @@ public class JavaParser
         return _htPackage;
     }
     
-    public Vector getImports() {
+    public List getImports() {
         return _vImports;
     }
 
@@ -731,7 +732,7 @@ void ImportDeclaration() :
   {
       aoImport[ 3 ] = new Integer( getToken( 0 ).endLine );
       aoImport[ 4 ] = new Integer( getToken( 0 ).endColumn );
-      _vImports.addElement( aoImport );
+      _vImports.add( aoImport );
       _ncss++; 
       Util.debug( "_ncss++" );
   }
@@ -859,7 +860,7 @@ void ClassDeclaration() :
                  tmpToken = tmpToken.specialToken;
              }
              */
-             metric = (ObjectMetric)_vClasses.lastElement();
+             metric = (ObjectMetric)_vClasses.get( _vClasses.size() - 1);
              metric.javadocs = _javadocs;
 
              // added by SMS
@@ -903,10 +904,10 @@ void UnmodifiedClassDeclaration() :
                         metric.functions = _functions - oldFunctions;
                         metric.classes = _classes - oldClasses;
                         Token lastToken = getToken( 0 );
-                        //metric.addElement( new Integer( lastToken.endLine ) );
-                        //metric.addElement( new Integer( lastToken.endColumn ) );
-                        //metric.addElement( new Integer( _javadocs ) );
-                        _vClasses.addElement( metric );
+                        //metric.add( new Integer( lastToken.endLine ) );
+                        //metric.add( new Integer( lastToken.endColumn ) );
+                        //metric.add( new Integer( _javadocs ) );
+                        _vClasses.add( metric );
                         _pPackageMetric.functions += _functions - oldFunctions;
                         _pPackageMetric.classes++;
 
@@ -1099,7 +1100,7 @@ void InterfaceDeclaration() :
                  }
                  tmpToken = tmpToken.specialToken;
                  }*/
-             metric = (ObjectMetric)_vClasses.lastElement();
+             metric = (ObjectMetric)_vClasses.get( _vClasses.size() - 1 );
              metric.javadocs = _javadocs;
 
              // added by SMS
@@ -1192,9 +1193,9 @@ void UnmodifiedInterfaceDeclaration() :
                         metric.ncss = _ncss - oldNcss;
                         metric.functions = _functions - oldFunctions;
                         metric.classes = _classes - oldClasses;
-                        //metric.addElement( Util.getConstantObject() );
-                        //metric.addElement( Util.getConstantObject() );
-                        _vClasses.addElement( metric );
+                        //metric.add( Util.getConstantObject() );
+                        //metric.add( Util.getConstantObject() );
+                        _vClasses.add( metric );
                         _pPackageMetric.functions += _functions - oldFunctions;
                         _pPackageMetric.classes++;
 
@@ -1511,7 +1512,7 @@ void MethodDeclaration() :
              functionMetrics.multiLn = 0; //JavaParserTokenManager._iMultiComments - oldMulti;
              //
 
-             _vFunctions.addElement(functionMetrics);
+             _vFunctions.add(functionMetrics);
              _sFunction = sOldFunction;
              _functions = oldFunctions + 1;
              _cyc = oldcyc;
@@ -1682,7 +1683,7 @@ void ConstructorDeclaration() :
                 functionMetrics.multiLn = JavaParserTokenManager._iMultiComments - oldMulti;
                 //
         
-                _vFunctions.addElement(functionMetrics);
+                _vFunctions.add(functionMetrics);
                 _sFunction = sOldFunction;
                 _functions = oldFunctions + 1;
                 _cyc = oldcyc;
@@ -2725,8 +2726,8 @@ void EnumDeclaration(int modifiers):
                  metric.functions = _functions - oldFunctions;
                  metric.classes = _classes - oldClasses;
                  Token lastToken = getToken( 0 );
-                 //metric.addElement( new Integer( lastToken.endLine ) );
-                 //metric.addElement( new Integer( lastToken.endColumn ) );
+                 //metric.add( new Integer( lastToken.endLine ) );
+                 //metric.add( new Integer( lastToken.endColumn ) );
                  metric.javadocs = _javadocs;
 
                  // Chris Povirk
@@ -2734,7 +2735,7 @@ void EnumDeclaration(int modifiers):
                  metric.singleLn = JavaParserTokenManager._iSingleComments - oldSingle;
                  metric.multiLn = JavaParserTokenManager._iMultiComments - oldMulti;
 
-                 _vClasses.addElement(metric);
+                 _vClasses.add(metric);
                  _pPackageMetric.functions += _functions - oldFunctions;
                  _pPackageMetric.classes++;
                  
