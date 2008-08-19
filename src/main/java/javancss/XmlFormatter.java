@@ -37,7 +37,6 @@ import ccl.util.Util;
  * @version   $Id$
  */
 public class XmlFormatter implements Formatter
-                                     , JavancssConstants
 {
     private Javancss _javancss = null;
 

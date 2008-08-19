@@ -66,8 +66,7 @@ import javancss.test.JavancssTest;
  *            , and Guillermo Rodriguez <guille@sms.nl>.
  * @version   $Id$
  */
-public class Javancss implements Exitable,
-                                 JavancssConstants
+public class Javancss implements Exitable
 {
     private static final String S_INIT__FILE_CONTENT =
         "[Init]\n" +

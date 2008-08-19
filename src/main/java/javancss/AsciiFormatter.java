@@ -37,7 +37,6 @@ import ccl.util.Util;
  * @version   $Id$
  */
 public class AsciiFormatter implements Formatter
-                                       , JavancssConstants
 {
     static final int LEN_NR = 3;
     private static final String NL = System.getProperty("line.separator");
