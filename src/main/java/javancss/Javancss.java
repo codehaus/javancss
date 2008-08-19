@@ -746,7 +746,7 @@ public class Javancss implements Exitable
         if (_sErrorMessage == null) {
             return null;
         }
-        return(new String(_sErrorMessage));
+        return _sErrorMessage;
     }
 
     public Throwable getLastError() {
