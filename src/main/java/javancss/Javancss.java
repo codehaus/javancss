@@ -102,7 +102,7 @@ public class Javancss implements Exitable
     private JavaParser _pJavaParser = null;
     private int _ncss = 0;
     private int _loc = 0;
-    private List _vFunctionMetrics = new ArrayList();
+    private List/*<FunctionMetric>*/ _vFunctionMetrics = new ArrayList();
     private List/*<ObjectMetric>*/ _vObjectMetrics = new ArrayList();
     private List/*<PackageMetric>*/ _vPackageMetrics = null;
     private List _vImports = null;
@@ -324,7 +324,7 @@ public class Javancss implements Exitable
     /**
      * The same as getFunctionMetrics?!
      */
-    public List getFunctions() {
+    public List/*<FunctionMetric>*/ getFunctions() {
         return _vFunctionMetrics;
     }
 
