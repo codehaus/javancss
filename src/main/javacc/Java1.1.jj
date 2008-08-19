@@ -42,6 +42,7 @@ import java.util.*;
 import ccl.util.Util;
 
 import javancss.FunctionMetric;
+import javancss.ObjectMetric;
 import javancss.PackageMetric;
 
 /**
@@ -112,7 +113,7 @@ public class JavaParser
      * Metrics for each class/interface are stored in this
      * vector.
      */
-    private Vector _vClasses = new Vector();
+    private Vector/*<ObjectMetric>*/ _vClasses = new Vector();
     private Vector _vImports = new Vector();
     private Object[] _aoPackage = null;
     private Map _htPackage = new HashMap();
@@ -154,7 +155,7 @@ public class JavaParser
     /**
      * @return Top level classes in sorted order
      */
-    public Vector getObject() {
+    public Vector/*<ObjectMetric>*/ getObject() {
         return(Util.sort(_vClasses));
     }
     
@@ -771,7 +772,7 @@ void ClassDeclaration() :
 {
     Token tmpToken = null;
     _javadocs = 0;
-    Vector vMetric = null;
+    ObjectMetric metric = null;
 
     // added by SMS
     int oldSingle = 0;
@@ -858,13 +859,13 @@ void ClassDeclaration() :
                  tmpToken = tmpToken.specialToken;
              }
              */
-             vMetric = (Vector)_vClasses.lastElement();
-             vMetric.addElement( new Integer( _javadocs ) );
+             metric = (ObjectMetric)_vClasses.lastElement();
+             metric.javadocs = _javadocs;
 
              // added by SMS
-             vMetric.addElement( new Integer(_jvdcLines));
-             vMetric.addElement( new Integer(JavaParserTokenManager._iSingleComments - oldSingle));
-             vMetric.addElement( new Integer(JavaParserTokenManager._iMultiComments - oldMulti));
+             metric.javadocsLn = _jvdcLines;
+             metric.singleLn = JavaParserTokenManager._iSingleComments - oldSingle;
+             metric.multiLn = JavaParserTokenManager._iMultiComments - oldMulti;
              //
 
             // added by SMS
@@ -896,16 +897,16 @@ void UnmodifiedClassDeclaration() :
                 _classLevel--;
                 if (_classLevel == 0) {
                         //_topLevelClasses++;
-                        Vector vMetrics = new Vector();
-                        vMetrics.addElement(new String(_sPackage + _sClass));
-                        vMetrics.addElement(new Integer(_ncss - oldNcss));
-                        vMetrics.addElement(new Integer(_functions - oldFunctions));
-                        vMetrics.addElement(new Integer(_classes - oldClasses));
+                        ObjectMetric metric = new ObjectMetric();
+                        metric.name = _sPackage + _sClass;
+                        metric.ncss = _ncss - oldNcss;
+                        metric.functions = _functions - oldFunctions;
+                        metric.classes = _classes - oldClasses;
                         Token lastToken = getToken( 0 );
-                        vMetrics.addElement( new Integer( lastToken.endLine ) );
-                        vMetrics.addElement( new Integer( lastToken.endColumn ) );
-                        //vMetrics.addElement( new Integer( _javadocs ) );
-                        _vClasses.addElement(vMetrics);
+                        //metric.addElement( new Integer( lastToken.endLine ) );
+                        //metric.addElement( new Integer( lastToken.endColumn ) );
+                        //metric.addElement( new Integer( _javadocs ) );
+                        _vClasses.addElement( metric );
                         _pPackageMetric.functions += _functions - oldFunctions;
                         _pPackageMetric.classes++;
 
@@ -1027,7 +1028,7 @@ void InterfaceDeclaration() :
         Token tmpToken = null;
         _javadocs = 0;
         //boolean bClassComment = false;
-        Vector vMetric = null;
+        ObjectMetric metric = null;
 
         // added by SMS
         int oldSingle;
@@ -1098,13 +1099,13 @@ void InterfaceDeclaration() :
                  }
                  tmpToken = tmpToken.specialToken;
                  }*/
-             vMetric = (Vector)_vClasses.lastElement();
-             vMetric.addElement( new Integer( _javadocs ) );
+             metric = (ObjectMetric)_vClasses.lastElement();
+             metric.javadocs = _javadocs;
 
              // added by SMS
-             vMetric.addElement( new Integer(_jvdcLines));
-             vMetric.addElement( new Integer(JavaParserTokenManager._iSingleComments - oldSingle));
-             vMetric.addElement( new Integer(JavaParserTokenManager._iMultiComments - oldMulti));
+             metric.javadocsLn = _jvdcLines;
+             metric.singleLn = JavaParserTokenManager._iSingleComments - oldSingle;
+             metric.multiLn = JavaParserTokenManager._iMultiComments - oldMulti;
              //
 
             // added by SMS
@@ -1186,14 +1187,14 @@ void UnmodifiedInterfaceDeclaration() :
                 if (_classLevel == 0) 
                 {
                         //_topLevelClasses++;
-                        Vector vMetrics = new Vector();
-                        vMetrics.addElement(new String(_sPackage + _sClass));
-                        vMetrics.addElement(new Integer(_ncss - oldNcss));
-                        vMetrics.addElement(new Integer(_functions - oldFunctions));
-                        vMetrics.addElement(new Integer(_classes - oldClasses));
-                        vMetrics.addElement( Util.getConstantObject() );
-                        vMetrics.addElement( Util.getConstantObject() );
-                        _vClasses.addElement(vMetrics);
+                        ObjectMetric metric = new ObjectMetric();
+                        metric.name = _sPackage + _sClass;
+                        metric.ncss = _ncss - oldNcss;
+                        metric.functions = _functions - oldFunctions;
+                        metric.classes = _classes - oldClasses;
+                        //metric.addElement( Util.getConstantObject() );
+                        //metric.addElement( Util.getConstantObject() );
+                        _vClasses.addElement( metric );
                         _pPackageMetric.functions += _functions - oldFunctions;
                         _pPackageMetric.classes++;
 
@@ -2718,22 +2719,22 @@ void EnumDeclaration(int modifiers):
              _classLevel--;
              if (_classLevel == 0) {
                  //_topLevelClasses++;
-                 Vector vMetrics = new Vector();
-                 vMetrics.addElement(new String(_sPackage + _sClass));
-                 vMetrics.addElement(new Integer(_ncss - oldNcss));
-                 vMetrics.addElement(new Integer(_functions - oldFunctions));
-                 vMetrics.addElement(new Integer(_classes - oldClasses));
+                 ObjectMetric metric = new ObjectMetric();
+                 metric.name = _sPackage + _sClass;
+                 metric.ncss = _ncss - oldNcss;
+                 metric.functions = _functions - oldFunctions;
+                 metric.classes = _classes - oldClasses;
                  Token lastToken = getToken( 0 );
-                 vMetrics.addElement( new Integer( lastToken.endLine ) );
-                 vMetrics.addElement( new Integer( lastToken.endColumn ) );
-                 vMetrics.addElement( new Integer( _javadocs ) );
+                 //metric.addElement( new Integer( lastToken.endLine ) );
+                 //metric.addElement( new Integer( lastToken.endColumn ) );
+                 metric.javadocs = _javadocs;
 
                  // Chris Povirk
-                 vMetrics.addElement( new Integer(_jvdcLines));
-                 vMetrics.addElement( new Integer(JavaParserTokenManager._iSingleComments - oldSingle));
-                 vMetrics.addElement( new Integer(JavaParserTokenManager._iMultiComments - oldMulti));
+                 metric.javadocsLn = _jvdcLines;
+                 metric.singleLn = JavaParserTokenManager._iSingleComments - oldSingle;
+                 metric.multiLn = JavaParserTokenManager._iMultiComments - oldMulti;
 
-                 _vClasses.addElement(vMetrics);
+                 _vClasses.addElement(metric);
                  _pPackageMetric.functions += _functions - oldFunctions;
                  _pPackageMetric.classes++;
                  

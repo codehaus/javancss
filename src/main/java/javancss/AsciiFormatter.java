@@ -284,7 +284,7 @@ public class AsciiFormatter implements Formatter
     }
 
     public String printObjectNcss() {
-        List vObjectMetrics = _javancss.getObjectMetrics();
+        List/*<ObjectMetric>*/ vObjectMetrics = _javancss.getObjectMetrics();
 
         String sRetVal = _formatListHeader( vObjectMetrics.size()
                                             , new String[] { "NCSS"
@@ -298,12 +298,12 @@ public class AsciiFormatter implements Formatter
         long lJVDCSum     = 0;
         for( Iterator eClasses = vObjectMetrics.iterator(); eClasses.hasNext(); )
         {
-            List vClassMetrics = (List)eClasses.next();
-            String sClass = (String)vClassMetrics.get(OBJ_NAME);
-            int objectNcss = ((Integer)vClassMetrics.get(OBJ_NCSS)).intValue();
-            int functions  = ((Integer)vClassMetrics.get(OBJ_FCTS)).intValue();
-            int classes    = ((Integer)vClassMetrics.get(OBJ_CLSSS)).intValue();
-            int jvdcs      = ((Integer)vClassMetrics.get(OBJ_JVDCS)).intValue();
+            ObjectMetric classMetric = (ObjectMetric)eClasses.next();
+            String sClass = classMetric.name;
+            int objectNcss = classMetric.ncss;
+            int functions  = classMetric.functions;
+            int classes    = classMetric.classes;
+            int jvdcs      = classMetric.javadocs;
             lObjectSum   += (long)objectNcss;
             lFunctionSum += (long)functions;
             lClassesSum  += (long)classes;
