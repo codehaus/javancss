@@ -42,13 +42,14 @@ consists of 569'830 ncss).
 files for counting, <a href="http://www.kclee.de/clemens/jacob/">Jacob</a> (a Java class browser and project
 manager) can be used for this purpose.
 
-<p>JavaNCSS can also be used out of an Ant build.xml script as it
+<p>JavaNCSS can also be used out of an Ant <code>build.xml</code> script as it
 comes bundled with an Ant task written by Steve Jernigan.
 The JavaNCSS Ant Task is documented on a <a href="JavancssAntTask.html">separate page</a>.
 
-<P>You can always find the newest version of this page at: <A HREF="http://www.kclee.de/clemens/java/javancss/">http://www.kclee.de/clemens/java/javancss/</A>.
-<H2>
-Table of Contents</H2>
+<P>You can always find the newest version of this page at: <A HREF="http://javancss.codehaus.org/">http://javancss.codehaus.org/</A>.
+
+
+<H2>Table of Contents</H2>
 
 <UL>
 <LI>
@@ -69,7 +70,7 @@ Table of Contents</H2>
 <A HREF="#specification">Specification</A></LI>
 
 <LI>
-<A HREF="#development">Development</A></LI>
+<A HREF="development.html">Development</A></LI>
 
 <LI>
 <A HREF="#release">Release History</A></LI>
@@ -523,19 +524,6 @@ cited papers in computer science. Sometimes you just must be the first
 to point out some basic shit and you are history. It seems just like a
 wonder that nobody was able to package Lines of Code in a more scientific
 manner. Now it's too late to label someone's name on it :).-->
-<BR>&nbsp;
-<H2>
-<A NAME="development"></A>Development</H2>
-JavaNCSS has been moved to Codehaus for a <a href="http://fisheye.codehaus.org/browse/javancss/trunk/">shared source code repository</a>.
-There is also a <a href="http://jira.codehaus.org/browse/JAVANCSS">bug tracking</a> tool.<p>
-
-JavaNCSS can actually be built using Ant or Maven.
-
-To check out the latest development source code (and compile and run the regression test suite) type the following in your shell:
-<pre>svn co http://svn.codehaus.org/javancss/trunk javancss
-cd javancss
-ant all <i>or</i> mvn package</pre>
-
 <BR>&nbsp;
 <H2>
 <A NAME="release"></A>Release History</H2>
