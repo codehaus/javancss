@@ -30,6 +30,7 @@ package javancss;
 public class Metric implements Comparable
 {
     public String name = ".";
+    /** Non Commenting Source Statements (NCSS). */
     public int ncss = 0;
     public int javadocs = 0;
     public int javadocsLn = 0;
