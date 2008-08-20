@@ -261,6 +261,7 @@
                 <copy todir="target/site">
                   <fileset dir="doc"/>
                 </copy>
+                <copy file="doc/index.html" todir="target/site" overwrite="true"/>
               </tasks>
             </configuration>
             <goals>
