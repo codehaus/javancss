@@ -16,6 +16,7 @@
 
     <menu name="General Information">
       <item name="Home" href="/index.html"/>
+      <item name="TODO" href="/todo.html"/>
     </menu>
 
     ${reports}
