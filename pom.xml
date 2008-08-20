@@ -260,7 +260,7 @@
               <tasks>
                 <copy todir="target/site">
                   <fileset dir="doc"/>
-                </copy>copy>
+                </copy>
               </tasks>
             </configuration>
             <goals>
