@@ -236,6 +236,7 @@
         <version>1.2</version>
         <executions>
           <execution>
+            <id>test</id>
             <phase>test</phase>
             <configuration>
               <tasks>
@@ -246,6 +247,20 @@
                 <taskdef name="javancss" classname="javancss.JavancssAntTask" classpathref="task.classpath"/>
                 <javancss srcdir="src/main/java" includes="**/*.java" generateReport="yes"
                           abortOnFail="true" classMetrics="false" functionMetrics="false"/>
+              </tasks>
+            </configuration>
+            <goals>
+              <goal>run</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>site</id>
+            <phase>pre-site</phase>
+            <configuration>
+              <tasks>
+                <copy todir="target/site">
+                  <fileset dir="doc"/>
+                </copy>copy>
               </tasks>
             </configuration>
             <goals>
