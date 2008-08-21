@@ -47,7 +47,7 @@ public class AsciiFormatter implements Formatter
     private int      _length = 0;
     private int      _nr     = 0;
 
-    private static NumberFormat _pNumberFormat = null;
+    private NumberFormat _pNumberFormat = null;
 
     private String _formatListHeader( int lines, String[] header )
     {
@@ -70,8 +70,6 @@ public class AsciiFormatter implements Formatter
 
         return sRetVal.toString();
     }
-
-    StringBuffer _line = new StringBuffer();
 
     private String _formatListLine( String name, int[] value )
     {

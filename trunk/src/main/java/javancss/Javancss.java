@@ -217,9 +217,9 @@ public class Javancss implements Exitable
             Map htNewPackages = _pJavaParser.getPackage();
 
             /* List vNewPackages = new Vector(); */
-            for ( Iterator ePackages = htNewPackages.keySet().iterator(); ePackages.hasNext(); )
+            for ( Iterator ePackages = htNewPackages.entrySet().iterator(); ePackages.hasNext(); )
             {
-                String sPackage = (String) ePackages.next();
+                String sPackage = (String) ( (Map.Entry) ePackages.next() ).getKey();
 
                 PackageMetric pckmNext = (PackageMetric) htNewPackages.get( sPackage );
                 pckmNext.name = sPackage;
@@ -693,7 +693,6 @@ public class Javancss implements Exitable
             // stdout is used: don't close but ensure everything is flushed
             pw.flush();
         }
-        pw = null;
     }
 
     public int getNcss() {
