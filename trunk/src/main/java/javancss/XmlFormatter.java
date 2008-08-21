@@ -192,7 +192,7 @@ public class XmlFormatter implements Formatter
 
     public String printPackageNcss() 
     {
-        String sRetVal = "  <packages>\n";
+        StringBuffer sbRetVal = new StringBuffer( "  <packages>\n" );
         List vPackageMetrics = _javancss.getPackageMetrics();
 
         int packages = vPackageMetrics.size();
@@ -218,7 +218,7 @@ public class XmlFormatter implements Formatter
             singleLnSum += pPackageMetric.singleLn;
             multiLnSum += pPackageMetric.multiLn;
             //
-            sRetVal += 
+            sbRetVal.append( 
                    "    <package>\n" +
                    "      <name>" + pPackageMetric.name + "</name>\n" + 
                    "      <classes>" + pPackageMetric.classes + "</classes>\n" +
@@ -228,10 +228,10 @@ public class XmlFormatter implements Formatter
                    "      <javadoc_lines>" + pPackageMetric.javadocsLn + "</javadoc_lines>\n" +
                    "      <single_comment_lines>" + pPackageMetric.singleLn + "</single_comment_lines>\n" + 
                    "      <multi_comment_lines>" + pPackageMetric.multiLn + "</multi_comment_lines>\n" +
-                   "    </package>\n";
+                   "    </package>\n" );
         }
 
-        sRetVal +=
+        sbRetVal.append(
                "    <total>\n" +
                "      <classes>" + classesSum + "</classes>\n" +
                "      <functions>" + functionsSum + "</functions>\n" +
@@ -240,20 +240,20 @@ public class XmlFormatter implements Formatter
                "      <javadoc_lines>" + javadocLnSum + "</javadoc_lines>\n" +
                "      <single_comment_lines>" + singleLnSum + "</single_comment_lines>\n" + 
                "      <multi_comment_lines>" + multiLnSum + "</multi_comment_lines>\n" +
-               "    </total>\n";
+               "    </total>\n" );
 
-        sRetVal += _formatPackageMatrix( packages
+        sbRetVal.append( _formatPackageMatrix( packages
                                          , classesSum
                                          , functionsSum
                                          , ncssSum 
                                          , javadocSum                                // added by SMS
                                          , javadocLnSum                                // added by SMS
                                          , singleLnSum                                // added by SMS
-                                         , multiLnSum                );                // added by SMS
+                                         , multiLnSum               ) );                // added by SMS
 
-        sRetVal += "  </packages>\n";
+        sbRetVal.append( "  </packages>\n" );
 
-        return sRetVal;
+        return sbRetVal.toString();
     }
 
     private String _formatObjectResume( int objects
@@ -291,7 +291,7 @@ public class XmlFormatter implements Formatter
     }
 
     public String printObjectNcss() {
-        String sRetVal = "  <objects>\n";
+        StringBuffer sbRetVal = new StringBuffer( "  <objects>\n" );
 
         List/*<ObjectMetric>*/ vObjectMetrics = _javancss.getObjectMetrics();
 
@@ -317,7 +317,7 @@ public class XmlFormatter implements Formatter
             lFunctionSum += (long)functions;
             lClassesSum  += (long)classes;
             lJVDCSum     += (long)jvdcs;
-            sRetVal += 
+            sbRetVal.append( 
                 "    <object>\n" +
                 "      <name>"      + sClass     + "</name>\n"      +
                 "      <ncss>"      + objectNcss + "</ncss>\n"      +
@@ -327,10 +327,10 @@ public class XmlFormatter implements Formatter
                 //"      <javadocs_lines>" + jvdcsl + "</javadocs_lines>\n" +
                 //"      <single_comment_lines>" + singlel + "</single_comment_lines>\n" + 
                 //"      <implementation_comment_lines>" + multil + "</implementation_comment_lines>\n" +
-                "    </object>\n";
+                "    </object>\n" );
         }
 
-        sRetVal += _formatObjectResume( vObjectMetrics.size()
+        sbRetVal.append( _formatObjectResume( vObjectMetrics.size()
                                         , lObjectSum
                                         , lFunctionSum
                                         , lClassesSum
@@ -338,11 +338,11 @@ public class XmlFormatter implements Formatter
                                         , _javancss.getJdcl()
                                         , _javancss.getSl()
                                         , _javancss.getMl()
-                                        );
+                                        ) );
 
-        sRetVal += "  </objects>\n";
+        sbRetVal.append( "  </objects>\n" );
         
-        return sRetVal;
+        return sbRetVal.toString();
     }
 
     private String _formatFunctionResume( int functions
@@ -353,8 +353,6 @@ public class XmlFormatter implements Formatter
                                           , long lSLSum
                                           , long lMLSum                )
     {
-        StringBuffer sRetVal = new StringBuffer();
-
         double fAverageNcss = _divide( lFunctionSum, functions );
         double fAverageCCN  = _divide( lCCNSum     , functions );
         double fAverageJVDC = _divide( lJVDCSum    , functions );
@@ -366,7 +364,7 @@ public class XmlFormatter implements Formatter
         //
 
         //NumberFormat _pNumberFormat = new DecimalFormat("#,##0.00");
-        sRetVal.append("    <function_averages>\n" +
+        String sRetVal = "    <function_averages>\n" +
                        "      <ncss>" + _pNumberFormat.format( fAverageNcss ) + "</ncss>\n" + 
                        "      <ccn>"  + _pNumberFormat.format( fAverageCCN  ) + "</ccn>\n"  + 
                        "      <javadocs>" + _pNumberFormat.format( fAverageJVDC ) + "</javadocs>\n" +
@@ -374,9 +372,9 @@ public class XmlFormatter implements Formatter
                        //"      <single_comment_lines>" + _pNumberFormat.format( fAverageSL ) + "</single_comment_lines>\n" + 
                        //"      <implementation_comment_lines>" + _pNumberFormat.format( fAverageML ) + "</implementation_comment_lines>\n" +
                        "    </function_averages>\n" +
-                       "    <ncss>" + _pNumberFormat.format( _javancss.getNcss() ) + "</ncss>\n" );
+                       "    <ncss>" + _pNumberFormat.format( _javancss.getNcss() ) + "</ncss>\n";
 
-        return sRetVal.toString();
+        return sRetVal;
     }
 
     public String printFunctionNcss() 

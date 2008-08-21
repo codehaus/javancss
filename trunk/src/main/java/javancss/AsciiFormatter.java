@@ -41,7 +41,7 @@ public class AsciiFormatter implements Formatter
     private static final int LEN_NR = 3;
     private static final String NL = System.getProperty( "line.separator" );
 
-    private Javancss _javancss = null;
+    private final Javancss _javancss;
 
     private String[] _header = null;
     private int      _length = 0;
@@ -121,66 +121,42 @@ public class AsciiFormatter implements Formatter
         ((DecimalFormat)_pNumberFormat).applyPattern( "###0.00" );
         int maxItemLength = _pNumberFormat.format(ncssSum).length();
         maxItemLength = Math.max(9, maxItemLength);
-        String sRetVal = Util.paddWithSpace( "Packages"
-                                             , maxItemLength ) 
-            + ' '
-            + Util.paddWithSpace("Classes", maxItemLength) 
-            + ' '
-            + Util.paddWithSpace("Functions", maxItemLength) 
-            + ' '
-            + Util.paddWithSpace("NCSS", maxItemLength) 
-            + ' '
-            + Util.paddWithSpace("Javadocs", maxItemLength) 
-            + " | per" + NL;
+        String sRetVal =
+            Util.paddWithSpace( "Packages" , maxItemLength ) + ' '
+            + Util.paddWithSpace("Classes", maxItemLength) + ' '
+            + Util.paddWithSpace("Functions", maxItemLength) + ' '
+            + Util.paddWithSpace("NCSS", maxItemLength) + ' '
+            + Util.paddWithSpace("Javadocs", maxItemLength)
+            + " | per" + NL
 
-        sRetVal += Util.multiplyChar( '-', (maxItemLength + 1)*6 + 1 )
-            + NL
-            + Util.paddWithSpace(_pNumberFormat.format
-                                      (packages), maxItemLength) + ' ' +
-               Util.paddWithSpace(_pNumberFormat.format
-                                  (classesSum), maxItemLength) + ' ' +
-               Util.paddWithSpace(_pNumberFormat.format
-                                  (functionsSum), maxItemLength) + ' ' +
-               Util.paddWithSpace(_pNumberFormat.format
-                                  (ncssSum), maxItemLength) + ' ' +
-               Util.paddWithSpace(_pNumberFormat.format
-                                  (javadocsSum), maxItemLength) + " | Project" + NL;
+            + Util.multiplyChar( '-', (maxItemLength + 1)*6 + 1 ) + NL
+            + Util.paddWithSpace(_pNumberFormat.format(packages), maxItemLength) + ' '
+            + Util.paddWithSpace(_pNumberFormat.format(classesSum), maxItemLength) + ' '
+            + Util.paddWithSpace(_pNumberFormat.format(functionsSum), maxItemLength) + ' '
+            + Util.paddWithSpace(_pNumberFormat.format(ncssSum), maxItemLength) + ' '
+            + Util.paddWithSpace(_pNumberFormat.format(javadocsSum), maxItemLength)
+            + " | Project" + NL
 
+            + Util.multiplyChar( ' ', maxItemLength + 1 ) 
+            + Util.paddWithSpace( _pNumberFormat.format( _divide( classesSum, packages ) ), maxItemLength ) + ' '
+            + Util.paddWithSpace( _pNumberFormat.format( _divide( functionsSum, packages ) ), maxItemLength ) + ' '
+            + Util.paddWithSpace( _pNumberFormat.format( _divide( ncssSum, packages ) ), maxItemLength ) + ' '
+            + Util.paddWithSpace( _pNumberFormat.format( _divide( javadocsSum, packages ) ), maxItemLength )
+            + " | Package" + NL
 
-        sRetVal += Util.multiplyChar( ' ', maxItemLength + 1 ) 
-            + Util.paddWithSpace( _pNumberFormat.format( _divide( classesSum, packages ) )
-                                  , maxItemLength )
-            + ' '
-            + Util.paddWithSpace( _pNumberFormat.format( _divide( functionsSum, packages ) )
-                                  , maxItemLength )
-            + ' '
-            + Util.paddWithSpace( _pNumberFormat.format( _divide( ncssSum, packages ) )
-                                  , maxItemLength )
-            + ' '
-            + Util.paddWithSpace( _pNumberFormat.format( _divide( javadocsSum, packages ) )
-                                  , maxItemLength )
-            + " | Package" + NL;
-
-        sRetVal += Util.multiplyChar( ' ', (maxItemLength + 1)*2 ) 
-            + Util.paddWithSpace( _pNumberFormat.format( _divide( functionsSum, classesSum ) )
-                                  , maxItemLength ) 
-            + ' '
-            + Util.paddWithSpace( _pNumberFormat.format( _divide( ncssSum, classesSum ) )
-                                  , maxItemLength )
-            + ' '
-            + Util.paddWithSpace( _pNumberFormat.format( _divide( javadocsSum, classesSum ) )
-                                  , maxItemLength ) 
-            + " | Class" + NL;
+            + Util.multiplyChar( ' ', (maxItemLength + 1)*2 ) 
+            + Util.paddWithSpace( _pNumberFormat.format( _divide( functionsSum, classesSum ) ), maxItemLength ) + ' '
+            + Util.paddWithSpace( _pNumberFormat.format( _divide( ncssSum, classesSum ) ), maxItemLength ) + ' '
+            + Util.paddWithSpace( _pNumberFormat.format( _divide( javadocsSum, classesSum ) ), maxItemLength )
+            + " | Class" + NL
         
-        sRetVal += Util.multiplyChar( ' ', (maxItemLength + 1)*3 )
-               + Util.paddWithSpace( _pNumberFormat.format( _divide( ncssSum, functionsSum ) )
-                                     , maxItemLength )
-               + ' '
-               + Util.paddWithSpace( _pNumberFormat.format( _divide( javadocsSum, functionsSum ) )
-                                  , maxItemLength )
-               + " | Function" + NL;
+            + Util.multiplyChar( ' ', (maxItemLength + 1)*3 )
+            + Util.paddWithSpace( _pNumberFormat.format( _divide( ncssSum, functionsSum ) ), maxItemLength ) + ' '
+            + Util.paddWithSpace( _pNumberFormat.format( _divide( javadocsSum, functionsSum ) ), maxItemLength )
+            + " | Function" + NL;
+
         ((DecimalFormat)_pNumberFormat).applyPattern( "#,##0.00" );
-        
+
         return sRetVal;
     }
 
@@ -200,12 +176,12 @@ public class AsciiFormatter implements Formatter
 
         int packages = vPackageMetrics.size();
 
-        String sRetVal = _formatListHeader( packages
+        StringBuffer sbRetVal = new StringBuffer( _formatListHeader( packages
                                             , new String[] {   "  Classes"
                                                              , "Functions"
                                                              , "     NCSS"
                                                              , " Javadocs"
-                                                             , "Package" } );
+                                                             , "Package" } ) );
 
         int classesSum   = 0;
         int functionsSum = 0;
@@ -219,37 +195,33 @@ public class AsciiFormatter implements Formatter
             functionsSum += pPackageMetric.functions;
             ncssSum      += pPackageMetric.ncss;
             javadocsSum  += pPackageMetric.javadocs;
-            sRetVal += _formatListLine( pPackageMetric.name
+            sbRetVal.append( _formatListLine( pPackageMetric.name
                                         , new int[] { pPackageMetric.classes
                                                       , pPackageMetric.functions
                                                       , pPackageMetric.ncss
                                                       , pPackageMetric.javadocs
-                                        } );
+                                        } ) );
         }
 
         int packagesLength = Util.itoa( packages ).length();
         int spaces = Math.max( packagesLength, LEN_NR ) + 1;
-        sRetVal += Util.multiplyChar
-               (' ', spaces ) +
-               "--------- --------- --------- ---------" + NL;
+        sbRetVal.append( Util.multiplyChar(' ', spaces ) +
+               "--------- --------- --------- ---------" + NL );
 
-        sRetVal += Util.multiplyChar(' ', spaces ) 
-            + Util.paddWithSpace( classesSum, 9 )
-            + ' '
-            + Util.paddWithSpace( functionsSum, 9 )
-            + ' '
-            + Util.paddWithSpace( ncssSum, 9 )
-            + ' '
+        sbRetVal.append( Util.multiplyChar(' ', spaces ) 
+            + Util.paddWithSpace( classesSum, 9 ) + ' '
+            + Util.paddWithSpace( functionsSum, 9 ) + ' '
+            + Util.paddWithSpace( ncssSum, 9 ) + ' '
             + Util.paddWithSpace( javadocsSum, 9 )
-            + " Total" + NL + NL;
+            + " Total" + NL + NL );
 
-        sRetVal += _formatPackageMatrix( packages
+        sbRetVal.append( _formatPackageMatrix( packages
                                          , classesSum
                                          , functionsSum
                                          , javadocsSum
-                                         , ncssSum      );
+                                         , ncssSum      ) );
 
-        return sRetVal;
+        return sbRetVal.toString();
     }
 
     private String _formatObjectResume( int objects
@@ -262,21 +234,16 @@ public class AsciiFormatter implements Formatter
         double fAverageFuncs    = _divide( lFunctionSum, objects );
         double fAverageClasses  = _divide( lClassesSum , objects );
         double fAverageJavadocs = _divide( lJVDCSum    , objects );
-        String sRetVal = "Average Object NCSS:             " +
-               Util.paddWithSpace(_pNumberFormat.format
-                                  (fAverageNcss),     9) + NL;
-        sRetVal += "Average Object Functions:        " +
-               Util.paddWithSpace(_pNumberFormat.format
-                                  (fAverageFuncs),    9) + NL;
-        sRetVal += "Average Object Inner Classes:    " +
-               Util.paddWithSpace(_pNumberFormat.format
-                                  (fAverageClasses),  9) + NL;
-        sRetVal += "Average Object Javadoc Comments: " +
-               Util.paddWithSpace(_pNumberFormat.format
-                                  (fAverageJavadocs), 9) + NL;
-        sRetVal += "Program NCSS:                    " +
-               Util.paddWithSpace(_pNumberFormat.format
-                                  (_javancss.getNcss()), 9) + NL;
+        String sRetVal = "Average Object NCSS:             "
+            + Util.paddWithSpace(_pNumberFormat.format(fAverageNcss),     9) + NL
+            + "Average Object Functions:        "
+            + Util.paddWithSpace(_pNumberFormat.format(fAverageFuncs),    9) + NL
+            + "Average Object Inner Classes:    "
+            + Util.paddWithSpace(_pNumberFormat.format(fAverageClasses),  9) + NL
+            + "Average Object Javadoc Comments: "
+            + Util.paddWithSpace(_pNumberFormat.format(fAverageJavadocs), 9) + NL
+            + "Program NCSS:                    "
+            + Util.paddWithSpace(_pNumberFormat.format(_javancss.getNcss()), 9) + NL;
         
         return sRetVal;
     }
@@ -284,12 +251,12 @@ public class AsciiFormatter implements Formatter
     public String printObjectNcss() {
         List/*<ObjectMetric>*/ vObjectMetrics = _javancss.getObjectMetrics();
 
-        String sRetVal = _formatListHeader( vObjectMetrics.size()
+        StringBuffer sbRetVal = new StringBuffer( _formatListHeader( vObjectMetrics.size()
                                             , new String[] { "NCSS"
                                                              , "Functions"
                                                              , "Classes"
                                                              , "Javadocs"
-                                                             , "Class"     } );
+                                                             , "Class"     } ) );
         long lFunctionSum = 0;
         long lClassesSum  = 0;
         long lObjectSum   = 0;
@@ -306,20 +273,20 @@ public class AsciiFormatter implements Formatter
             lFunctionSum += (long)functions;
             lClassesSum  += (long)classes;
             lJVDCSum     += (long)jvdcs;
-            sRetVal += _formatListLine( sClass
+            sbRetVal.append( _formatListLine( sClass
                                         , new int[] { objectNcss
                                                       , functions
                                                       , classes
-                                                      , jvdcs     } );
+                                                      , jvdcs     } ) );
         }
 
-        sRetVal += _formatObjectResume( vObjectMetrics.size()
+        sbRetVal.append( _formatObjectResume( vObjectMetrics.size()
                                         , lObjectSum
                                         , lFunctionSum
                                         , lClassesSum
-                                        , lJVDCSum            );
+                                        , lJVDCSum            ) );
         
-        return sRetVal;
+        return sbRetVal.toString();
     }
 
     private String _formatFunctionResume( int functions
@@ -327,29 +294,20 @@ public class AsciiFormatter implements Formatter
                                           , long lCCNSum
                                           , long lJVDCSum     )
     {
-        StringBuffer sRetVal = new StringBuffer();
-
         double fAverageNcss = _divide( lFunctionSum, functions );
         double fAverageCCN  = _divide( lCCNSum     , functions );
         double fAverageJVDC = _divide( lJVDCSum    , functions );
-        sRetVal.append("Average Function NCSS: ").append
-               (Util.paddWithSpace(_pNumberFormat.format
-                                   (fAverageNcss), 10)).
-               append(NL);
-        sRetVal.append("Average Function CCN:  ").append
-               (Util.paddWithSpace(_pNumberFormat.format
-                                   (fAverageCCN),  10)).
-               append(NL);
-        sRetVal.append("Average Function JVDC: ").append
-               (Util.paddWithSpace(_pNumberFormat.format
-                                   (fAverageJVDC), 10)).
-               append(NL);
-        sRetVal.append("Program NCSS:          ").append
-               (Util.paddWithSpace(_pNumberFormat.format
-                                   (_javancss.getNcss()), 10)).
-               append(NL);
 
-        return sRetVal.toString();
+        String sRetVal = "Average Function NCSS: "
+            + Util.paddWithSpace(_pNumberFormat.format(fAverageNcss), 10) + NL
+            + "Average Function CCN:  "
+            + Util.paddWithSpace(_pNumberFormat.format(fAverageCCN),  10) + NL
+            + "Average Function JVDC: "
+            + Util.paddWithSpace(_pNumberFormat.format(fAverageJVDC), 10) + NL
+            + "Program NCSS:          "
+            + Util.paddWithSpace(_pNumberFormat.format(_javancss.getNcss()), 10) + NL;
+
+        return sRetVal;
     }
 
     public String printFunctionNcss() 
