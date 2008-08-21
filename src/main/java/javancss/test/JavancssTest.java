@@ -310,7 +310,7 @@ public class JavancssTest extends    Test
                 sTest11 = FileUtil.readFile( new File( testDir, "Test11.java" ).getAbsolutePath() );
                 sTest12 = FileUtil.readFile( new File( testDir, "Test12.java" ).getAbsolutePath() );
             }
-            catch ( Exception e )
+            catch ( IOException e )
             {
                 bugIf( true );
             }

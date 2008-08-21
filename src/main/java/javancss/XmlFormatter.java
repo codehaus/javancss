@@ -60,7 +60,7 @@ public class XmlFormatter implements Formatter
         return dRetVal;
     }
 
-    private static NumberFormat _pNumberFormat = null;
+    private NumberFormat _pNumberFormat = null;
 
     private String _formatPackageMatrix( int packages
                                          , int classesSum

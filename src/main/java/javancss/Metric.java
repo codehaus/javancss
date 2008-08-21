@@ -60,4 +60,14 @@ public abstract class Metric implements Comparable
     {
         return name.compareTo( ((Metric)o).name );
     }
+
+    public boolean equals( Object o )
+    {
+        return compareTo( o ) == 0;
+    }
+
+    public int hashCode()
+    {
+        return name.hashCode();
+    }
 }
