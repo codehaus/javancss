@@ -38,9 +38,8 @@ import ccl.util.Util;
  */
 public class AsciiFormatter implements Formatter
 {
-    static final int LEN_NR = 3;
-    private static final String NL = System.getProperty("line.separator");
-    /*private static final String NL = "\r\n";*/
+    private static final int LEN_NR = 3;
+    private static final String NL = System.getProperty( "line.separator" );
 
     private Javancss _javancss = null;
 
@@ -48,7 +47,7 @@ public class AsciiFormatter implements Formatter
     private int      _length = 0;
     private int      _nr     = 0;
 
-    static NumberFormat _pNumberFormat = null;
+    private static NumberFormat _pNumberFormat = null;
 
     private String _formatListHeader( int lines, String[] header )
     {
@@ -65,7 +64,7 @@ public class AsciiFormatter implements Formatter
         sRetVal.append( "Nr." );
         for( int nr = 0; nr < header.length; nr++ )
         {
-            sRetVal.append( " " ).append( header[ nr ] );
+            sRetVal.append( ' ' ).append( header[ nr ] );
         }
         sRetVal.append( NL );
 
@@ -82,11 +81,11 @@ public class AsciiFormatter implements Formatter
         sLine.append( Util.paddWithSpace( _nr, _length ) );
         for( int index = 0; index < _header.length - 1; index++ )
         {
-            sLine.append( " " );
+            sLine.append( ' ' );
             sLine.append( Util.paddWithSpace( value[ index ]
                                               , _header[ index ].length() ) );
         }
-        sLine.append( " " );
+        sLine.append( ' ' );
         sLine.append( name );
         sLine.append( NL );
 
@@ -124,26 +123,26 @@ public class AsciiFormatter implements Formatter
         maxItemLength = Math.max(9, maxItemLength);
         String sRetVal = Util.paddWithSpace( "Packages"
                                              , maxItemLength ) 
-            + " " 
+            + ' '
             + Util.paddWithSpace("Classes", maxItemLength) 
-            + " " 
+            + ' '
             + Util.paddWithSpace("Functions", maxItemLength) 
-            + " " 
+            + ' '
             + Util.paddWithSpace("NCSS", maxItemLength) 
-            + " " 
+            + ' '
             + Util.paddWithSpace("Javadocs", maxItemLength) 
             + " | per" + NL;
 
         sRetVal += Util.multiplyChar( '-', (maxItemLength + 1)*6 + 1 )
             + NL
             + Util.paddWithSpace(_pNumberFormat.format
-                                      (packages), maxItemLength) + " " +
+                                      (packages), maxItemLength) + ' ' +
                Util.paddWithSpace(_pNumberFormat.format
-                                  (classesSum), maxItemLength) + " " +
+                                  (classesSum), maxItemLength) + ' ' +
                Util.paddWithSpace(_pNumberFormat.format
-                                  (functionsSum), maxItemLength) + " " +
+                                  (functionsSum), maxItemLength) + ' ' +
                Util.paddWithSpace(_pNumberFormat.format
-                                  (ncssSum), maxItemLength) + " " +
+                                  (ncssSum), maxItemLength) + ' ' +
                Util.paddWithSpace(_pNumberFormat.format
                                   (javadocsSum), maxItemLength) + " | Project" + NL;
 
@@ -151,13 +150,13 @@ public class AsciiFormatter implements Formatter
         sRetVal += Util.multiplyChar( ' ', maxItemLength + 1 ) 
             + Util.paddWithSpace( _pNumberFormat.format( _divide( classesSum, packages ) )
                                   , maxItemLength )
-            + " "
+            + ' '
             + Util.paddWithSpace( _pNumberFormat.format( _divide( functionsSum, packages ) )
                                   , maxItemLength )
-            + " " 
+            + ' '
             + Util.paddWithSpace( _pNumberFormat.format( _divide( ncssSum, packages ) )
                                   , maxItemLength )
-            + " " 
+            + ' '
             + Util.paddWithSpace( _pNumberFormat.format( _divide( javadocsSum, packages ) )
                                   , maxItemLength )
             + " | Package" + NL;
@@ -165,10 +164,10 @@ public class AsciiFormatter implements Formatter
         sRetVal += Util.multiplyChar( ' ', (maxItemLength + 1)*2 ) 
             + Util.paddWithSpace( _pNumberFormat.format( _divide( functionsSum, classesSum ) )
                                   , maxItemLength ) 
-            + " " 
+            + ' '
             + Util.paddWithSpace( _pNumberFormat.format( _divide( ncssSum, classesSum ) )
                                   , maxItemLength )
-            + " " 
+            + ' '
             + Util.paddWithSpace( _pNumberFormat.format( _divide( javadocsSum, classesSum ) )
                                   , maxItemLength ) 
             + " | Class" + NL;
@@ -176,7 +175,7 @@ public class AsciiFormatter implements Formatter
         sRetVal += Util.multiplyChar( ' ', (maxItemLength + 1)*3 )
                + Util.paddWithSpace( _pNumberFormat.format( _divide( ncssSum, functionsSum ) )
                                      , maxItemLength )
-               + " "
+               + ' '
                + Util.paddWithSpace( _pNumberFormat.format( _divide( javadocsSum, functionsSum ) )
                                   , maxItemLength )
                + " | Function" + NL;
@@ -236,11 +235,11 @@ public class AsciiFormatter implements Formatter
 
         sRetVal += Util.multiplyChar(' ', spaces ) 
             + Util.paddWithSpace( classesSum, 9 )
-            + " "
+            + ' '
             + Util.paddWithSpace( functionsSum, 9 )
-            + " "
+            + ' '
             + Util.paddWithSpace( ncssSum, 9 )
-            + " "
+            + ' '
             + Util.paddWithSpace( javadocsSum, 9 )
             + " Total" + NL + NL;
 
