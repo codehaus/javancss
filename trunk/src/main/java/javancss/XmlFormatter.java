@@ -38,7 +38,7 @@ import ccl.util.Util;
  */
 public class XmlFormatter implements Formatter
 {
-    private Javancss _javancss = null;
+    private final Javancss _javancss;
 
     private double _divide( int divident, int divisor )
     {
@@ -60,7 +60,7 @@ public class XmlFormatter implements Formatter
         return dRetVal;
     }
 
-    static NumberFormat _pNumberFormat = null;
+    private static NumberFormat _pNumberFormat = null;
 
     private String _formatPackageMatrix( int packages
                                          , int classesSum
