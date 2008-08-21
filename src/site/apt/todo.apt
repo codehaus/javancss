@@ -17,7 +17,7 @@ JavaNCSS TODO list
     * cons: remove "javancss -check" option
 
 
-  * avoid Object[] aoImport?
+  * avoid <<<Object[] aoImport>>>?
 
     * create an Import class, both for imports and package?
 
@@ -31,7 +31,7 @@ Done
 
   * use File instead of String
 
-  * create Metric classes instead of Vector<String, Integer, ...>
+  * create Metric classes instead of <<<Vector\<String, Integer, ...\>>>>
 
   * use Collection API instead of Vector and Hashtable
  
