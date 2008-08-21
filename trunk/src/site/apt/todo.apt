@@ -11,7 +11,7 @@ JavaNCSS TODO list
   * use JUnit?
 
     * pros: well known by many developers, IDE integration,
-    {{{http://maven.apache.org/plugins/maven-surefire-report-plugin/}Maven reporting integration},
+    {{{http://maven.apache.org/plugins/maven-surefire-report-plugin/}Maven reporting integration}},
     with {{{http://mojo.codehaus.org/cobertura-maven-plugin/}code coverage too}}
 
     * cons: remove "javancss -check" option
