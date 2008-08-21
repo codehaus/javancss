@@ -255,7 +255,7 @@
           </execution>
           <execution>
             <id>site</id>
-            <phase>pre-site</phase>
+            <phase>site</phase>
             <configuration>
               <tasks>
                 <copy todir="target/site">
