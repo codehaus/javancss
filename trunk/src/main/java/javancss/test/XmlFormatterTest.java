@@ -17,7 +17,7 @@ import javancss.XmlFormatter;
  * @version $Id$
  * @author  Chr. Clemens Lee
  */
-public class XmlFormatterTest extends Test {
+public class XmlFormatterTest extends AbstractTest {
     /**
      * Is it at least possible to properly parse generated xml code?
      */
@@ -120,17 +120,6 @@ public class XmlFormatterTest extends Test {
 
     public static void main( String[] asArg_ ) 
     {
-        XmlFormatterTest pTest = new XmlFormatterTest();
-        pTest.setTestDir( new File( "test" ) );
-        pTest.setVerbose( true );
-        pTest.setTiming ( true );
-        pTest.run();
-        pTest.printResult();
-    }
-
-    private File testDir = null;
-
-    public void setTestDir( File testDir_ ) {
-        testDir = testDir_;
+        new XmlFormatterTest().main();
     }
 }
