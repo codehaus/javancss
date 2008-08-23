@@ -564,13 +564,7 @@ public class Javancss implements Exitable
         setEncoding( (String) htOptions.get( "encoding" ) );
 
         if ( htOptions.get( "check" ) != null ) {
-            JavancssTest pTest = new JavancssTest();
-            pTest.setTestDir( new File( _pInit.getApplicationPath(), "test" ) );
-            pTest.setVerbose( true );
-            pTest.setTiming ( true );
-            pTest.run();
-            pTest.printResult();
-
+            new JavancssTest().main( new File( _pInit.getApplicationPath() ) );
             return;
         }
 

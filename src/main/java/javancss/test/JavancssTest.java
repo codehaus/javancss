@@ -45,10 +45,8 @@ import javancss.PackageMetric;
  *   $Id$
  *   3. 9. 1996
  */
-public class JavancssTest extends    Test 
+public class JavancssTest extends AbstractTest 
 {
-    private File testDir = null;
-
     private void _doNcssTest( int testNumber, int expectedNcss )
     {
         Javancss pJavancss = new Javancss( new File( testDir, "Test" + testNumber + ".java" ) );
@@ -665,17 +663,7 @@ public class JavancssTest extends    Test
 
     public static void main( String[] asArg_ )
     {
-        JavancssTest pTest = new JavancssTest();
-        pTest.setTestDir( new File( "test" ) );
-        pTest.setVerbose( true );
-        pTest.setTiming( true );
-        pTest.run();
-        pTest.printResult();
-    }
-
-    public void setTestDir( File testDir_ )
-    {
-        testDir = testDir_;
+        new JavancssTest().main();
     }
 
     private void _doNcssEncodingTest() throws IOException
