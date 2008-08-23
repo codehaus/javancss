@@ -24,7 +24,7 @@ public class XmlFormatterTest extends AbstractTest {
     private void _checkParsing()
         throws Exception
     {
-        Javancss pJavancss = new Javancss( new File( testDir, "Test57.java" ) );
+        Javancss pJavancss = new Javancss( getTestFile( 57 ) );
         pJavancss.setXML( true );
 
         String sXML = XmlFormatter.printStart()
@@ -34,7 +34,7 @@ public class XmlFormatterTest extends AbstractTest {
                + pJavancss.printJavaNcss()
                + XmlFormatter.printEnd();
 
-        File xsltFile = new File( testDir, ".." + File.separator + "xslt" + File.separator + "xmltest.xsl" );
+        File xsltFile = new File( getTestDir(), ".." + File.separator + "xslt" + File.separator + "xmltest.xsl" );
         try
         {
             String sText = XMLUtil.getXML( sXML, xsltFile );
@@ -45,7 +45,7 @@ public class XmlFormatterTest extends AbstractTest {
             Util.print( "skipped: 'xalan.jar' and or 'xerces.jar' library missing." );
         }
 
-        pJavancss = new Javancss( new File( testDir, "Test117.java" ) );
+        pJavancss = new Javancss( getTestFile( 117 ) );
         pJavancss.setXML( true );
 
         sXML = XmlFormatter.printStart()
@@ -56,7 +56,7 @@ public class XmlFormatterTest extends AbstractTest {
                + XmlFormatter.printEnd();
         Assert( Util.isEmpty( sXML ) == false );
 
-        pJavancss = new Javancss( new File( testDir, "Test118.java" ) );
+        pJavancss = new Javancss( getTestFile( 118 ) );
         pJavancss.setXML( true );
 
         sXML = XmlFormatter.printStart()
@@ -74,7 +74,7 @@ public class XmlFormatterTest extends AbstractTest {
     private void _checkXML2Text()
         throws Exception
     {
-        Javancss pJavancss = new Javancss( new File( testDir, "Test32.java" ) );
+        Javancss pJavancss = new Javancss( getTestFile( 32 ) );
         pJavancss.setXML( true );
 
         String sXML = XmlFormatter.printStart()
@@ -84,12 +84,12 @@ public class XmlFormatterTest extends AbstractTest {
                + pJavancss.printJavaNcss()
                + XmlFormatter.printEnd();
 
-        File xsltFile = new File( testDir, ".." + File.separator + "xslt" + File.separator + "javancss2text.xsl" );
+        File xsltFile = new File( getTestDir(), ".." + File.separator + "xslt" + File.separator + "javancss2text.xsl" );
         try 
         {
             String sText = XMLUtil.getXML( sXML, xsltFile );
             FileUtil.writeFile( "/tmp/t", sText );
-            String sCompare = FileUtil.readFile( new File( testDir, "Output32.txt" ).getAbsolutePath() );
+            String sCompare = FileUtil.readFile( getTestFile( "Output32.txt" ).getAbsolutePath() );
             Assert( sText.equals( sCompare ), sText );
         } 
         catch( NoClassDefFoundError error )

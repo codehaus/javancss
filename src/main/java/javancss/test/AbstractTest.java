@@ -33,11 +33,26 @@ import ccl.util.Test;
  */
 public abstract class AbstractTest extends Test
 {
-    protected File testDir = null;
+    private File testDir = null;
 
     public void setTestDir( File testDir_ )
     {
         testDir = testDir_;
+    }
+
+    public File getTestDir()
+    {
+        return testDir;
+    }
+
+    protected File getTestFile( String filename )
+    {
+        return new File( testDir, filename );
+    }
+
+    protected File getTestFile( int testFileId )
+    {
+        return getTestFile( "Test" + testFileId + ".java" );
     }
 
     protected AbstractTest()
