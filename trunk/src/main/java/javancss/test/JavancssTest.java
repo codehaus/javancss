@@ -560,56 +560,31 @@ public class JavancssTest extends AbstractTest
         Javancss pJavancss = measureTestFile( 40 );
         List/*<FunctionMetric>*/ vFunctions = pJavancss.getFunctionMetrics();
         bugIf( vFunctions.size() != 1 );
-        int ccn = ( (FunctionMetric) vFunctions.get( 0 ) ).ccn;
-        bugIf( ccn != 3, "CCN in constructor of Test40 should be 3, it is: " + ccn );
+        assertCCN( vFunctions, 0, 3 );
 
         pJavancss = measureTestFile( 41 );
         vFunctions = pJavancss.getFunctionMetrics();
-        ccn = getCCN( vFunctions, 0 );
-        bugIf( ccn != 3, "CCN in constructor of Test41 should be 3, it is: " + ccn );
-        ccn = getCCN( vFunctions, 1 );
-        bugIf( ccn != 1, "CCN in method of Test41 should be 1, it is: " + ccn );
-        ccn = getCCN( vFunctions, 2 );
-        bugIf( ccn != 3, "CCN in method of Test41 should be 3, it is: " + ccn );
-        ccn = getCCN( vFunctions, 3 );
-        bugIf( ccn != 3, "CCN in method of Test41 should be 3, it is: " + ccn );
-        ccn = getCCN( vFunctions, 4 );
-        bugIf( ccn != 1, "CCN in method of Test41 should be 1, it is: " + ccn );
+        assertCCN( vFunctions, 0, 3 );
+        assertCCN( vFunctions, 1, 1 );
+        assertCCN( vFunctions, 2, 3 );
+        assertCCN( vFunctions, 3, 3 );
+        assertCCN( vFunctions, 4, 1 );
 
         pJavancss = measureTestFile( 72 );
         vFunctions = pJavancss.getFunctionMetrics();
-        int expectedCCN = 4;
-        int methodIndex = 0;
-        assertCCN( vFunctions, methodIndex, expectedCCN );
-
-        expectedCCN = 4 + 1;
-        methodIndex = 1;
-        assertCCN( vFunctions, methodIndex, expectedCCN );
-
-        expectedCCN = 4;
-        methodIndex = methodIndex + 1;
-        assertCCN( vFunctions, methodIndex, expectedCCN );
-
-        expectedCCN = 4;
-        methodIndex = methodIndex + 1;
-        assertCCN( vFunctions, methodIndex, expectedCCN );
-
-        expectedCCN = 2;
-        methodIndex = methodIndex + 1;
-        assertCCN( vFunctions, methodIndex, expectedCCN );
+        assertCCN( vFunctions, 0, 4 );
+        assertCCN( vFunctions, 1, 5 );
+        assertCCN( vFunctions, 2, 4 );
+        assertCCN( vFunctions, 3, 4 );
+        assertCCN( vFunctions, 4, 2 );
 
         _exitSubTest();
     }
 
     private void assertCCN( List vFunctions, int methodIndex, int expectedCCN )
     {
-        int ccn = getCCN( vFunctions, methodIndex );
+        int ccn = ( (FunctionMetric) vFunctions.get( methodIndex ) ).ccn;
         Assert( ccn == expectedCCN, "Expected ccn was " + expectedCCN + " but the result is: " + ccn );
-    }
-
-    private int getCCN( List/*<FunctionMetric>*/ vFunctions, int methodIndex )
-    {
-        return ( (FunctionMetric) vFunctions.get( methodIndex ) ).ccn;
     }
 
     public static void main( String[] asArg_ )
