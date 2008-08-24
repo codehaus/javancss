@@ -3,7 +3,6 @@ package javancss.test;
 import java.io.File;
 
 import ccl.util.FileUtil;
-import ccl.util.Test;
 import ccl.util.Util;
 import ccl.xml.XMLUtil;
 
@@ -101,28 +100,8 @@ public class XmlFormatterTest extends AbstractTest {
         super();
     }
 
-    public XmlFormatterTest( Test pTest_ ) 
-    {
-        super( pTest_ );
-    }
-
     private File getXslFile( String filename )
     {
         return new File( getTestDir(), ".." + File.separator + "xslt" + File.separator + filename );
-    }
-
-    /**
-     * Test code goes here.
-     */
-    protected void _doIt()
-        throws Exception
-    {
-        testParsing ();
-        testXML2Text();
-    }
-
-    public static void main( String[] asArg_ ) 
-    {
-        new XmlFormatterTest().main();
     }
 }
