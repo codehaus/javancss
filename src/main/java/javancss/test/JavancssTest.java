@@ -123,7 +123,7 @@ public class JavancssTest extends AbstractTest
      */
     public void testJavadocLines()
     {
-        _enterSubTest( "javadocs lines" );
+        _enterSubTest( "javadoc lines" );
 
         _checkJavadocLines( 28, "jacob", 0 );
         
@@ -179,16 +179,6 @@ public class JavancssTest extends AbstractTest
                 , "pmJacob.javadocsLn: " + pmPackage + ": " + pmPackage.javadocsLn );
     }
 
-    /**
-     * This method tries to reproduce a bug reported by
-     * Chris Williamson. He reported problems with code
-     * like this: F150MemoryMap f150Map = (F150MemoryMap) F150.super.memMap;
-     */
-    public void testInnerClasses()
-    {
-        _checkNcss( 70, 4 );
-    }
-
     public JavancssTest() {
         super();
     }
@@ -208,8 +198,6 @@ public class JavancssTest extends AbstractTest
 
         testJavadocLines();
         
-        testInnerClasses();
-
         testJavadocs();
 
         testCCN();
@@ -361,6 +349,13 @@ public class JavancssTest extends AbstractTest
         // zero methods one class javadoc comment, there should be no exception
         // because of divide by zero
         _checkNcss( 69, 1 );
+
+        /*
+         * This method tries to reproduce a bug reported by
+         * Chris Williamson. He reported problems with code
+         * like this: F150MemoryMap f150Map = (F150MemoryMap) F150.super.memMap;
+         */
+        _checkNcss( 70, 4 );
 
         // test for strictfp interface and static inner interface
         _checkNcss( 73, 1 );
