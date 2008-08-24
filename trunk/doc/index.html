@@ -46,7 +46,8 @@ manager) can be used for this purpose.
 comes bundled with an Ant task written by Steve Jernigan.
 The JavaNCSS Ant Task is documented on a <a href="JavancssAntTask.html">separate page</a>.
 
-<P>You can always find the newest version of this page at: <A HREF="http://javancss.codehaus.org/">http://javancss.codehaus.org/</A>.
+<P>You can always find the newest version of this page at: <A HREF="http://javancss.codehaus.org/">http://javancss.codehaus.org/</A>
+(new home since August 2008, previous one was <A HREF="http://www.kclee.de/clemens/java/javancss/">http://www.kclee.de/clemens/java/javancss/</A>).
 
 
 <H2>Table of Contents</H2>
@@ -373,7 +374,7 @@ Specification but include all kinds of declarations too.
 <TR>
 <TD>Package declaration</TD>
 
-<TD>package java.lang;</TD>
+<TD><code>package java.lang;</code></TD>
 
 <TD></TD>
 </TR>
@@ -381,7 +382,7 @@ Specification but include all kinds of declarations too.
 <TR>
 <TD>Import declaration</TD>
 
-<TD>import java.awt.*;</TD>
+<TD><code>import java.awt.*;</code></TD>
 
 <TD></TD>
 </TR>
@@ -389,8 +390,8 @@ Specification but include all kinds of declarations too.
 <TR NOSAVE>
 <TD VALIGN=TOP NOSAVE>Class declaration</TD>
 
-<TD>- public class Foo {&nbsp;
-<BR>- public class Foo extends Bla {</TD>
+<TD>- <code>public class Foo {</code>
+<BR>- <code>public class Foo extends Bla {</code></TD>
 
 <TD></TD>
 </TR>
@@ -398,7 +399,7 @@ Specification but include all kinds of declarations too.
 <TR NOSAVE>
 <TD VALIGN=TOP NOSAVE>Interface declaration</TD>
 
-<TD>public interface Able&nbsp; {</TD>
+<TD><code>public interface Able {</code></TD>
 
 <TD></TD>
 </TR>
@@ -406,8 +407,8 @@ Specification but include all kinds of declarations too.
 <TR NOSAVE>
 <TD VALIGN=TOP NOSAVE>Field declaration</TD>
 
-<TD VALIGN=TOP NOSAVE>- int a;&nbsp;
-<BR>- int a, b, c = 5, d = 6;</TD>
+<TD VALIGN=TOP NOSAVE>- <code>int a;</code>
+<BR>- <code>int a, b, c = 5, d = 6;</code></TD>
 
 <TD>No matter how many fields get actually declared through a comma separated
 list, and no matter if&nbsp; these fields get actually initialized, only
@@ -418,8 +419,8 @@ not four or even six (let me know if there is good reason to count it differentl
 <TR NOSAVE>
 <TD VALIGN=TOP NOSAVE>Method declaration</TD>
 
-<TD>- public void cry();&nbsp;
-<BR>- public void gib() throws DeadException {</TD>
+<TD>- <code>public void cry();</code>
+<BR>- <code>public void gib() throws DeadException {</code></TD>
 
 <TD></TD>
 </TR>
@@ -427,7 +428,7 @@ not four or even six (let me know if there is good reason to count it differentl
 <TR NOSAVE>
 <TD>Constructor declaration</TD>
 
-<TD VALIGN=TOP NOSAVE>public Foo() {</TD>
+<TD VALIGN=TOP NOSAVE><code>public Foo() {</code></TD>
 
 <TD></TD>
 </TR>
@@ -435,8 +436,8 @@ not four or even six (let me know if there is good reason to count it differentl
 <TR NOSAVE>
 <TD VALIGN=TOP NOSAVE>Constructor invocation</TD>
 
-<TD>- this();&nbsp;
-<BR>- super();</TD>
+<TD>- <code>this();</code>
+<BR>- <code>super();</code></TD>
 
 <TD></TD>
 </TR>
@@ -444,12 +445,12 @@ not four or even six (let me know if there is good reason to count it differentl
 <TR NOSAVE>
 <TD VALIGN=TOP NOSAVE>Statement</TD>
 
-<TD>- i = 0;&nbsp;
-<BR>- if (ok)&nbsp;
-<BR>- if (exit) {&nbsp;
-<BR>- if (3 == 4);&nbsp;
-<BR>- if (4 == 4) { ; }&nbsp;
-<BR>- } else {</TD>
+<TD>- <code>i = 0;</code>
+<BR>- <code>if (ok)</code>
+<BR>- <code>if (exit) {</code>
+<BR>- <code>if (3 == 4);</code>
+<BR>- <code>if (4 == 4) { ; }</code>
+<BR>- <code>} else {</code></TD>
 
 <TD VALIGN=TOP NOSAVE>expression, if, else, while, do, for, switch, break,
 continue, return, throw, synchronized, catch, finally</TD>
@@ -458,7 +459,7 @@ continue, return, throw, synchronized, catch, finally</TD>
 <TR>
 <TD>Label</TD>
 
-<TD>fine :</TD>
+<TD><code>fine :</code></TD>
 
 <TD>normal, case, default</TD>
 </TR>
