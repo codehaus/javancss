@@ -22,6 +22,7 @@ Boston, MA 02111-1307, USA.  */
 package javancss.test;
 
 import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.io.StringReader;
@@ -193,125 +194,25 @@ public class JavancssTest extends AbstractTest
         throws Exception
     {
         Util.debug( this, "_doIt().testDir: " + getTestDir() );
-        Javancss pJavancss = null;
+
+        testNcss();
+
+        testNcssAndMore();
 
         testJavadocLines();
-            
+        
         testInnerClasses();
 
-        final int ncss1 = 318;
-        _checkNcss( 1 , ncss1 );
-
-        final int ncss6 = 565;
-        _checkNcssAndLoc( 6, ncss6, 1254 );
-
-        // Nr. 10
-        pJavancss = measureTestFile( 9 );
-        bugIf( ncss1 != pJavancss.getLOC(), "LOC: " + pJavancss.getLOC() );
-
-        _checkNcssAndLoc( 10, ncss6 );
-        _checkNcssAndLoc( 11 );
-
-        pJavancss = _checkNcssAndLoc( 12 );
-        List/*<FunctionMetric>*/ vFunctions = pJavancss.getFunctionMetrics();
-        String sFirstFunction = ( (FunctionMetric) vFunctions.get( 0 ) ).name;
-        bugIf( sFirstFunction == null );
-        /* System.out.println( sFirstFunction ); */
-        bugIf( !sFirstFunction.equals( "Test12.readFile(URL)" ), sFirstFunction );
-
-        // Nr. 22
-        pJavancss = measureTestFile( 19 );
-        vFunctions = pJavancss.getFunctionMetrics();
-        sFirstFunction = ( (FunctionMetric) vFunctions.get( 0 ) ).name;
-        bugIf( !sFirstFunction.equals( "test.Test19.foo(String[],Controller)" ), sFirstFunction );
-        sFirstFunction = ( (FunctionMetric) vFunctions.get( 3 ) ).name;
-        bugIf( !sFirstFunction.equals( "test.Test19.main(String[])" ) );
-
-        pJavancss = _checkNcss( 23, 10 );
-        vFunctions = pJavancss.getFunctionMetrics();
-        bugIf( vFunctions.size() != 7 );
-        bugIf( new Javancss( getTestFile( 24 ) ).getFunctionMetrics().size() != vFunctions.size() );
-
-        // Nr. 30
-        pJavancss = _checkNcss( 25, 12 );
-        bugIf( pJavancss.getFunctionMetrics().size() != 9 );
-
-        // Nr. 35
-        String sTogether;
-        String sTest11 = "";
-        String sTest12 = "";
-        try
-        {
-            sTest11 = FileUtil.readFile( getTestFile( 11 ).getAbsolutePath() );
-            sTest12 = FileUtil.readFile( getTestFile( 12 ).getAbsolutePath() );
-        }
-        catch ( IOException e )
-        {
-            bugIf( true );
-        }
-        sTogether = sTest11 + sTest12;
-        pJavancss = new Javancss( new StringReader( sTogether ) );
-        vFunctions = pJavancss.getFunctionMetrics();
-        Util.debug( "JavancssTest._doIt().vFunctions: " + vFunctions );
-        sFirstFunction = ( (FunctionMetric) vFunctions.get( 0 ) ).name;
-        bugIf( !sFirstFunction.equals( "ccl.util.Test11.atoi(String)" ) );
-        String sSomeFunction = ( (FunctionMetric) vFunctions.get( 32 ) ).name;
-        bugIf( !sSomeFunction.equals( "Test12.readFile(URL)" ), "Function: " + sSomeFunction );
-        List vPackages = pJavancss.getPackageMetrics();
-        bugIf( vPackages.size() != 2 );
-        String[] asArg = new String[3];
-        asArg[0] = getTestFile( 11 ).getAbsolutePath();
-        asArg[1] = asArg[0];
-        asArg[2] = getTestFile( 12 ).getAbsolutePath();
-        int ncss38 = pJavancss.getNcss();
-        
-        // turn stdout off
-        PrintStream psStdout = System.out;
-        System.setOut( new PrintStream( new ByteArrayOutputStream() ) );
-        
-        pJavancss = new Javancss(asArg, "$Header: /home/clemens/src/java/javancss/src/javancss/test/RCS/JavancssTest.java,v 1.34 2006/10/06 11:46:43 clemens Exp clemens $");
-        
-        // turn stdout on
-        System.setOut( psStdout );
-
-        vPackages = pJavancss.getPackageMetrics();
-        bugIf( vPackages.size() != 2 );
-        bugIf( ncss38 == pJavancss.getNcss() );
+        testJavadocs();
 
         testCCN();
 
-        pJavancss = measureTestFile( 56 );
-        String sOutput56 = pJavancss.printPackageNcss();
-        sOutput56 += "\n";
-        sOutput56 += pJavancss.printObjectNcss();
-        sOutput56 += "\n";
-        sOutput56 += pJavancss.printFunctionNcss();
-        sOutput56 = Util.replace( sOutput56, "\r\n", "\n" );
-        String sCompare56 = FileUtil.readFile( getTestFile( "Output56.txt" ).getAbsolutePath() );
-        Assert( sOutput56.equals( sCompare56 ), "File test/Output56.txt and javancss output differs:\n" + sOutput56 );
+        testNcssEncoding();
 
         XmlFormatterTest xmlTest = new XmlFormatterTest( this );
         xmlTest.setTestDir( getTestDir() );
         xmlTest.run();
         setTests( xmlTest );
-
-        // check that javadocs are counted correctly
-        // after patches for additional comment counting
-        pJavancss = measureTestFile( 32 );
-        String sOutput32 = pJavancss.printPackageNcss();
-        sOutput32 += "\n";
-        sOutput32 += pJavancss.printObjectNcss();
-        sOutput32 += "\n";
-        sOutput32 += pJavancss.printFunctionNcss();
-        sOutput32 = Util.replace( sOutput32, "\r\n", "\n" );
-        String sCompare32 = FileUtil.readFile( getTestFile( "Output32.txt" ).getAbsolutePath() );
-        Assert( sOutput32.equals( sCompare32 ), "File test/Output32.txt and javancss output differs:\n" + sOutput32 );
-
-        testJavadocs();
-
-        testNcss();
-
-        testNcssEncoding();
     }
 
     public void testNcss()
@@ -404,7 +305,7 @@ public class JavancssTest extends AbstractTest
         _checkNcss( 43, 0 );
 
         // Test if javancss continues after running across a parse error
-        // Test42,java has an errror, so use two other file and this and
+        // Test42,java has an error, so use two other file and this and
         // take a look if it finishes with right result.
         pJavancss = measureTestFile( 1 );
         int ncss57 = pJavancss.getNcss();
@@ -524,6 +425,112 @@ public class JavancssTest extends AbstractTest
         _checkNcss( 131, 6 );
         _checkNcss( 132, 12 );
         _checkNcss( 134, 4 );
+    }
+
+    public void testNcssAndMore() throws IOException
+    {
+        Javancss pJavancss = null;
+
+        final int ncss1 = 318;
+        _checkNcss( 1 , ncss1 );
+
+        final int ncss6 = 565;
+        _checkNcssAndLoc( 6, ncss6, 1254 );
+
+        // Nr. 10
+        pJavancss = measureTestFile( 9 );
+        bugIf( ncss1 != pJavancss.getLOC(), "LOC: " + pJavancss.getLOC() );
+
+        _checkNcssAndLoc( 10, ncss6 );
+        _checkNcssAndLoc( 11 );
+
+        pJavancss = _checkNcssAndLoc( 12 );
+        List/*<FunctionMetric>*/ vFunctions = pJavancss.getFunctionMetrics();
+        String sFirstFunction = ( (FunctionMetric) vFunctions.get( 0 ) ).name;
+        bugIf( sFirstFunction == null );
+        /* System.out.println( sFirstFunction ); */
+        bugIf( !sFirstFunction.equals( "Test12.readFile(URL)" ), sFirstFunction );
+
+        // Nr. 22
+        pJavancss = measureTestFile( 19 );
+        vFunctions = pJavancss.getFunctionMetrics();
+        sFirstFunction = ( (FunctionMetric) vFunctions.get( 0 ) ).name;
+        bugIf( !sFirstFunction.equals( "test.Test19.foo(String[],Controller)" ), sFirstFunction );
+        sFirstFunction = ( (FunctionMetric) vFunctions.get( 3 ) ).name;
+        bugIf( !sFirstFunction.equals( "test.Test19.main(String[])" ) );
+
+        pJavancss = _checkNcss( 23, 10 );
+        vFunctions = pJavancss.getFunctionMetrics();
+        bugIf( vFunctions.size() != 7 );
+        bugIf( new Javancss( getTestFile( 24 ) ).getFunctionMetrics().size() != vFunctions.size() );
+
+        // Nr. 30
+        pJavancss = _checkNcss( 25, 12 );
+        bugIf( pJavancss.getFunctionMetrics().size() != 9 );
+
+        // Nr. 35
+        String sTogether;
+        String sTest11 = "";
+        String sTest12 = "";
+        try
+        {
+            sTest11 = FileUtil.readFile( getTestFile( 11 ).getAbsolutePath() );
+            sTest12 = FileUtil.readFile( getTestFile( 12 ).getAbsolutePath() );
+        }
+        catch ( IOException e )
+        {
+            bugIf( true );
+        }
+        sTogether = sTest11 + sTest12;
+        pJavancss = new Javancss( new StringReader( sTogether ) );
+        vFunctions = pJavancss.getFunctionMetrics();
+        Util.debug( "JavancssTest._doIt().vFunctions: " + vFunctions );
+        sFirstFunction = ( (FunctionMetric) vFunctions.get( 0 ) ).name;
+        bugIf( !sFirstFunction.equals( "ccl.util.Test11.atoi(String)" ) );
+        String sSomeFunction = ( (FunctionMetric) vFunctions.get( 32 ) ).name;
+        bugIf( !sSomeFunction.equals( "Test12.readFile(URL)" ), "Function: " + sSomeFunction );
+        List vPackages = pJavancss.getPackageMetrics();
+        bugIf( vPackages.size() != 2 );
+        String[] asArg = new String[3];
+        asArg[0] = getTestFile( 11 ).getAbsolutePath();
+        asArg[1] = asArg[0];
+        asArg[2] = getTestFile( 12 ).getAbsolutePath();
+        int ncss38 = pJavancss.getNcss();
+        
+        // turn stdout off
+        PrintStream psStdout = System.out;
+        System.setOut( new PrintStream( new ByteArrayOutputStream() ) );
+        
+        pJavancss = new Javancss(asArg, "$Header: /home/clemens/src/java/javancss/src/javancss/test/RCS/JavancssTest.java,v 1.34 2006/10/06 11:46:43 clemens Exp clemens $");
+        
+        // turn stdout on
+        System.setOut( psStdout );
+
+        vPackages = pJavancss.getPackageMetrics();
+        bugIf( vPackages.size() != 2 );
+        bugIf( ncss38 == pJavancss.getNcss() );
+
+        pJavancss = measureTestFile( 56 );
+        String sOutput56 = pJavancss.printPackageNcss();
+        sOutput56 += "\n";
+        sOutput56 += pJavancss.printObjectNcss();
+        sOutput56 += "\n";
+        sOutput56 += pJavancss.printFunctionNcss();
+        sOutput56 = Util.replace( sOutput56, "\r\n", "\n" );
+        String sCompare56 = FileUtil.readFile( getTestFile( "Output56.txt" ).getAbsolutePath() );
+        Assert( sOutput56.equals( sCompare56 ), "File test/Output56.txt and javancss output differs:\n" + sOutput56 );
+
+        // check that javadocs are counted correctly
+        // after patches for additional comment counting
+        pJavancss = measureTestFile( 32 );
+        String sOutput32 = pJavancss.printPackageNcss();
+        sOutput32 += "\n";
+        sOutput32 += pJavancss.printObjectNcss();
+        sOutput32 += "\n";
+        sOutput32 += pJavancss.printFunctionNcss();
+        sOutput32 = Util.replace( sOutput32, "\r\n", "\n" );
+        String sCompare32 = FileUtil.readFile( getTestFile( "Output32.txt" ).getAbsolutePath() );
+        Assert( sOutput32.equals( sCompare32 ), "File test/Output32.txt and javancss output differs:\n" + sOutput32 );
     }
 
     private void _checkJvdcs( int testFileNumber, int expectedJvdcsResult )
