@@ -22,7 +22,6 @@ Boston, MA 02111-1307, USA.  */
 package javancss.test;
 
 import java.io.ByteArrayOutputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.io.StringReader;
@@ -491,21 +490,13 @@ public class JavancssTest extends AbstractTest
         bugIf( !sSomeFunction.equals( "Test12.readFile(URL)" ), "Function: " + sSomeFunction );
         List vPackages = pJavancss.getPackageMetrics();
         bugIf( vPackages.size() != 2 );
+        int ncss38 = pJavancss.getNcss();
+        
         String[] asArg = new String[3];
         asArg[0] = getTestFile( 11 ).getAbsolutePath();
         asArg[1] = asArg[0];
         asArg[2] = getTestFile( 12 ).getAbsolutePath();
-        int ncss38 = pJavancss.getNcss();
-        
-        // turn stdout off
-        PrintStream psStdout = System.out;
-        System.setOut( new PrintStream( new ByteArrayOutputStream() ) );
-        
-        pJavancss = new Javancss(asArg, "$Header: /home/clemens/src/java/javancss/src/javancss/test/RCS/JavancssTest.java,v 1.34 2006/10/06 11:46:43 clemens Exp clemens $");
-        
-        // turn stdout on
-        System.setOut( psStdout );
-
+        pJavancss = measureWithArgs( asArg );
         vPackages = pJavancss.getPackageMetrics();
         bugIf( vPackages.size() != 2 );
         bugIf( ncss38 == pJavancss.getNcss() );
@@ -587,10 +578,28 @@ public class JavancssTest extends AbstractTest
         new JavancssTest().main();
     }
 
+    private Javancss measureWithArgs( String[] args ) throws IOException
+    {
+        // turn stdout off
+        PrintStream psStdout = System.out;
+        
+        try
+        {
+            System.setOut( new PrintStream( new ByteArrayOutputStream() ) );
+            return new Javancss(args, "$Header: /home/clemens/src/java/javancss/src/javancss/test/RCS/JavancssTest.java,v 1.34 2006/10/06 11:46:43 clemens Exp clemens $");
+        }
+        finally
+        {
+            // turn stdout back on
+            System.setOut( psStdout );
+        }
+    }
+
     public void testNcssEncoding() throws IOException
     {
         String[] args = new String[] { "-encoding", "UTF-16", getTestFile( "TestEncoding.java" ).getAbsolutePath() };
-        Javancss pJavancss = new Javancss( args, "test" );
+        Javancss pJavancss = measureWithArgs( args );
+
         int expectedNcss = 11;
         int ncss = pJavancss.getNcss();
 
