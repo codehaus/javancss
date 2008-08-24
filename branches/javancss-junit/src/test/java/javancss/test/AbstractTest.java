@@ -23,7 +23,7 @@ package javancss.test;
 
 import java.io.File;
 
-import ccl.util.Test;
+import junit.framework.TestCase;
 
 /**
  * Base JavaNCSS unit-tests class.
@@ -31,9 +31,9 @@ import ccl.util.Test;
  * @author  Hervé Boutemy
  * @version $Id$
  */
-public abstract class AbstractTest extends Test
+public abstract class AbstractTest extends TestCase
 {
-    private File testDir = null;
+    private File testDir = new File( "target/test-classes/test" );
 
     public void setTestDir( File testDir_ )
     {
@@ -47,7 +47,9 @@ public abstract class AbstractTest extends Test
 
     protected File getTestFile( String filename )
     {
-        return new File( testDir, filename );
+        File file = new File( testDir, filename );
+        assertTrue( "file not found: " + file.getAbsolutePath(), file.exists() );
+        return file;
     }
 
     protected File getTestFile( int testFileId )
@@ -59,23 +61,24 @@ public abstract class AbstractTest extends Test
     {
         super();
     }
-    
-    protected AbstractTest( Test pTest_ )
+
+    protected void bugIf( boolean condition )
     {
-        super( pTest_ );
+        assertFalse( condition );
     }
 
-    public void main() 
+    protected void bugIf( boolean condition, String message )
     {
-        main( new File( "." ) );
+        assertFalse( message, condition );
     }
 
-    public void main( File baseDir ) 
+    protected void Assert( boolean condition )
     {
-        setTestDir( new File( baseDir, "test" ) );
-        setVerbose( true );
-        setTiming ( true );
-        run();
-        printResult();
+        assertTrue( condition );
+    }
+
+    protected void Assert( boolean condition, String message )
+    {
+        assertTrue( message, condition );
     }
 }

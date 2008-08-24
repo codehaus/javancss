@@ -53,7 +53,6 @@ import javancss.parser.JavaParser;
 import javancss.parser.JavaParserTokenManager;
 import javancss.parser.ParseException;
 import javancss.parser.TokenMgrError;
-import javancss.test.JavancssTest;
 
 /**
  * While the Java parser class might be the heart of JavaNCSS,
@@ -85,7 +84,6 @@ public class Javancss implements Exitable
         "xml=b,o,Output in xml format.\n" +
         "out=s,o,Output file name. By default output goes to standard out.\n"+
         "recursive=b,o,Recurse to subdirs.\n" +
-        "check=b,o,Triggers a javancss self test.\n" +
         "encoding=s,o,Encoding used while reading source files (default: platform encoding).\n" +
         "\n" +
         "[Colors]\n" +
@@ -562,11 +560,6 @@ public class Javancss implements Exitable
         Map htOptions = _pInit.getOptions();
 
         setEncoding( (String) htOptions.get( "encoding" ) );
-
-        if ( htOptions.get( "check" ) != null ) {
-            new JavancssTest().main( new File( _pInit.getApplicationPath() ) );
-            return;
-        }
 
         // the arguments (the files) to be processed
         _vJavaSourceFiles = findFiles( _pInit.getArguments(), htOptions.get( "recursive" ) != null );

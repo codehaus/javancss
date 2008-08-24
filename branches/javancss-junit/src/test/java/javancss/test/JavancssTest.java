@@ -30,7 +30,6 @@ import java.util.Iterator;
 import java.util.List;
 
 import ccl.util.FileUtil;
-import ccl.util.Test;
 import ccl.util.Util;
 
 import javancss.FunctionMetric;
@@ -101,14 +100,10 @@ public class JavancssTest extends AbstractTest
      */
     public void testJavadocs()
     {
-        _enterSubTest( "javadocs" );
-
         _checkJvdcs( 20, 7 );
         _checkJvdcs( 68, 2 );
         _checkJvdcs( 121, 2 );
         _checkJvdcs( 122, 1 );
-
-        _exitSubTest();
     }
 
     /**
@@ -123,8 +118,6 @@ public class JavancssTest extends AbstractTest
      */
     public void testJavadocLines()
     {
-        _enterSubTest( "javadoc lines" );
-
         _checkJavadocLines( 28, "jacob", 0 );
         
         //
@@ -136,8 +129,6 @@ public class JavancssTest extends AbstractTest
         _checkJavadocLines( 69, ".", 4 );
         _checkJavadocLines( new int[] { 68, 69 }, ".", 10 );
         _checkJavadocLines( 65, "idebughc.testsuite", 14 );
-
-        _exitSubTest();
     }
 
     private void _checkJavadocLines( int testFile, String sPackage, int javadocLines )
@@ -183,37 +174,8 @@ public class JavancssTest extends AbstractTest
         super();
     }
 
-    public JavancssTest(Test pTest_) {
-        super(pTest_);
-    }
-
-    protected void _doIt() 
-        throws Exception
-    {
-        Util.debug( this, "_doIt().testDir: " + getTestDir() );
-
-        testNcss();
-
-        testNcssAndMore();
-
-        testJavadocLines();
-        
-        testJavadocs();
-
-        testCCN();
-
-        testEncoding();
-
-        XmlFormatterTest xmlTest = new XmlFormatterTest( this );
-        xmlTest.setTestDir( getTestDir() );
-        xmlTest.run();
-        setTests( xmlTest );
-    }
-
     public void testNcss()
     {
-        _enterSubTest( "ncss" );
-
         Javancss pJavancss = null;
 
         _checkNcss( 2, 8 );
@@ -429,14 +391,10 @@ public class JavancssTest extends AbstractTest
         _checkNcss( 131, 6 );
         _checkNcss( 132, 12 );
         _checkNcss( 134, 4 );
-
-        _exitSubTest();
     }
 
     public void testNcssAndMore() throws IOException
     {
-        _enterSubTest( "ncss and more..." );
-
         Javancss pJavancss = null;
 
         final int ncss1 = 318;
@@ -531,8 +489,6 @@ public class JavancssTest extends AbstractTest
         sOutput32 = Util.replace( sOutput32, "\r\n", "\n" );
         String sCompare32 = FileUtil.readFile( getTestFile( "Output32.txt" ).getAbsolutePath() );
         Assert( sOutput32.equals( sCompare32 ), "File test/Output32.txt and javancss output differs:\n" + sOutput32 );
-
-        _exitSubTest();
     }
 
     private void _checkJvdcs( int testFileNumber, int expectedJvdcsResult )
@@ -551,8 +507,6 @@ public class JavancssTest extends AbstractTest
      */
     public void testCCN()
     {
-        _enterSubTest( "ccn" );
-
         // CCN for return and throw
         Javancss pJavancss = measureTestFile( 40 );
         List/*<FunctionMetric>*/ vFunctions = pJavancss.getFunctionMetrics();
@@ -574,19 +528,12 @@ public class JavancssTest extends AbstractTest
         assertCCN( vFunctions, 2, 4 );
         assertCCN( vFunctions, 3, 4 );
         assertCCN( vFunctions, 4, 2 );
-
-        _exitSubTest();
     }
 
     private void assertCCN( List vFunctions, int methodIndex, int expectedCCN )
     {
         int ccn = ( (FunctionMetric) vFunctions.get( methodIndex ) ).ccn;
         Assert( ccn == expectedCCN, "Expected ccn was " + expectedCCN + " but the result is: " + ccn );
-    }
-
-    public static void main( String[] asArg_ )
-    {
-        new JavancssTest().main();
     }
 
     private Javancss measureWithArgs( String[] args ) throws IOException
@@ -608,8 +555,6 @@ public class JavancssTest extends AbstractTest
 
     public void testEncoding() throws IOException
     {
-        _enterSubTest( "encoding" );
-
         String[] args = new String[] { "-encoding", "UTF-16", getTestFile( "TestEncoding.java" ).getAbsolutePath() };
         Javancss pJavancss = measureWithArgs( args );
 
@@ -618,7 +563,5 @@ public class JavancssTest extends AbstractTest
 
         bugIf( ncss != expectedNcss,
                "Parsing file TestEncoding.java failed. Ncss is " + ncss + " and not " + expectedNcss + "." );
-
-        _exitSubTest();
     }
 }
