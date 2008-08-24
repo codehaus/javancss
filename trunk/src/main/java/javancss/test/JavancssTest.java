@@ -63,6 +63,30 @@ public class JavancssTest extends AbstractTest
         bugIf( ncss == 0, "Parsing file Test" + testNumber + ".java failed. Ncss is 0" );
     }
 
+    private Javancss _doNcssAndLocTest( int testNumber, int expectedNcss, int expectedLoc )
+    {
+        Javancss pJavancss = _doNcssTest( testNumber, expectedNcss );
+        int loc = pJavancss.getLOC();
+        bugIf( loc != expectedLoc, "Parsing file Test" + testNumber + ".java failed. LOC is "
+                 + loc  + " and not " + expectedLoc + "." );
+        return pJavancss;
+    }
+
+    private Javancss _doNcssAndLocTest( int testNumber, int expectedNcssAndLoc )
+    {
+        return _doNcssAndLocTest( testNumber, expectedNcssAndLoc, expectedNcssAndLoc );
+    }
+
+    private Javancss _doNcssAndLocTest( int testNumber )
+    {
+        Javancss pJavancss = new Javancss( getTestFile( testNumber ) );
+        int ncss = pJavancss.getNcss();
+        int loc = pJavancss.getLOC();
+        bugIf( ncss != loc, "Parsing file Test" + testNumber + ".java failed. Ncss is "
+                 + ncss  + ", LOC is " + loc + ": should be equal." );
+        return pJavancss;
+    }
+
     /**
      * There has been a bug introduced for version 16.34 which
      * counts Javadoc comments (**) for fields as well as for
@@ -210,8 +234,7 @@ public class JavancssTest extends AbstractTest
             _doNcssTest( 5, 16 );
 
             final int ncss6 = 565;
-            pJavancss = _doNcssTest( 6, ncss6 );
-            bugIf( pJavancss.getLOC() != 1254, "LOC: " + pJavancss.getLOC() );
+            _doNcssAndLocTest( 6, ncss6, 1254 );
 
             _doNcssTest( 7, 30 );
             _doNcssTest( 8, 30 );
@@ -219,38 +242,25 @@ public class JavancssTest extends AbstractTest
             // Nr. 10
             pJavancss = new Javancss( getTestFile( 9 ) );
             bugIf( ncss1 != pJavancss.getLOC(), "LOC: " + pJavancss.getLOC() );
-            // Nr. 11
-            pJavancss = new Javancss( getTestFile( 10 ) );
-            bugIf( pJavancss.getLOC() != ncss6, "LOC: " + pJavancss.getLOC() );
-            bugIf( pJavancss.getLOC() != pJavancss.getNcss(), "NCSS: " + pJavancss.getNcss() );
-            pJavancss = new Javancss( getTestFile( 11 ) );
-            bugIf( pJavancss.getLOC() != pJavancss.getNcss(), "NCSS: " + pJavancss.getNcss() + ", LOC: "
-                            + pJavancss.getLOC() );
-            pJavancss = new Javancss( getTestFile( 12 ) );
-            bugIf( pJavancss.getLOC() != pJavancss.getNcss(), "NCSS: " + pJavancss.getNcss() + ", LOC: "
-                            + pJavancss.getLOC() );
+
+            _doNcssAndLocTest( 10, ncss6 );
+            _doNcssAndLocTest( 11 );
+
+            pJavancss = _doNcssAndLocTest( 12 );
             List/*<FunctionMetric>*/ vFunctions = pJavancss.getFunctionMetrics();
             String sFirstFunction = ( (FunctionMetric) vFunctions.get( 0 ) ).name;
             bugIf( sFirstFunction == null );
             /* System.out.println( sFirstFunction ); */
             bugIf( !sFirstFunction.equals( "Test12.readFile(URL)" ), sFirstFunction );
-            pJavancss = new Javancss( getTestFile( 13 ) );
-            bugIf( pJavancss.getLOC() != pJavancss.getNcss(), "NCSS: " + pJavancss.getNcss() + ", LOC: "
-                            + pJavancss.getLOC() );
-            pJavancss = new Javancss( getTestFile( 14 ) );
-            bugIf( pJavancss.getLOC() != pJavancss.getNcss(), "NCSS: " + pJavancss.getNcss() + ", LOC: "
-                            + pJavancss.getLOC() );
-            pJavancss = new Javancss( getTestFile( 15 ) );
-            bugIf( pJavancss.getLOC() != pJavancss.getNcss(), "NCSS: " + pJavancss.getNcss() + ", LOC: "
-                            + pJavancss.getLOC() );
-            pJavancss = new Javancss( getTestFile( 16 ) );
-            bugIf( pJavancss.getNcss() != 4 );
-            pJavancss = new Javancss( getTestFile( 17 ) );
-            bugIf( pJavancss.getLOC() != pJavancss.getNcss(), "NCSS: " + pJavancss.getNcss() + ", LOC: "
-                            + pJavancss.getLOC() );
-            pJavancss = new Javancss( getTestFile( 18 ) );
-            bugIf( pJavancss.getLOC() != pJavancss.getNcss(), "NCSS: " + pJavancss.getNcss() + ", LOC: "
-                            + pJavancss.getLOC() );
+
+            _doNcssAndLocTest( 13 );
+            _doNcssAndLocTest( 14 );
+            _doNcssAndLocTest( 15 );
+
+            _doNcssTest( 16, 4 );
+            _doNcssAndLocTest( 17 );
+            _doNcssAndLocTest( 18 );
+
             // Nr. 22
             pJavancss = new Javancss( getTestFile( 19 ) );
             vFunctions = pJavancss.getFunctionMetrics();
