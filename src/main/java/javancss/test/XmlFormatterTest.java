@@ -21,7 +21,7 @@ public class XmlFormatterTest extends AbstractTest {
     /**
      * Is it at least possible to properly parse generated xml code?
      */
-    private void _checkParsing()
+    public void testParsing()
         throws Exception
     {
         Javancss pJavancss = new Javancss( getTestFile( 57 ) );
@@ -70,7 +70,7 @@ public class XmlFormatterTest extends AbstractTest {
     /**
      * Is the transformed XML output identical to the standard ASCI output?
      */
-    private void _checkXML2Text()
+    public void testXML2Text()
         throws Exception
     {
         Javancss pJavancss = new Javancss( getTestFile( 32 ) );
@@ -117,8 +117,8 @@ public class XmlFormatterTest extends AbstractTest {
     protected void _doIt()
         throws Exception
     {
-        _checkParsing ();
-        _checkXML2Text();
+        testParsing ();
+        testXML2Text();
     }
 
     public static void main( String[] asArg_ ) 
