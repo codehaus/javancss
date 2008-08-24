@@ -22,7 +22,6 @@ Boston, MA 02111-1307, USA.  */
 package javancss.test;
 
 import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.io.StringReader;
@@ -123,17 +122,12 @@ public class JavancssTest extends AbstractTest
      */
     public void testJavadocLines()
     {
-        _checkJavadocLines( getTestFile( 28 ), "jacob", 0 );
+        _checkJavadocLines( 28, "jacob", 0 );
         
         //
         // same test with more files
         //
-
-        List files = new ArrayList();
-        files.add( getTestFile( 20 ) );
-        files.add( getTestFile( 21 ) );
-        files.add( getTestFile( 28 ) );
-        _checkJavadocLines( files, "jacob", 0 );
+        _checkJavadocLines( new int[] { 20, 21, 28 }, "jacob", 0 );
 
         _checkJavadocLines( 68, ".", 6 );
         _checkJavadocLines( 69, ".", 4 );
@@ -141,25 +135,11 @@ public class JavancssTest extends AbstractTest
         _checkJavadocLines( 65, "idebughc.testsuite", 14 );
     }
 
-    private void _checkJavadocLines( List/*<File>*/ vJavaSources, String sPackage, int javadocLines )
-    {
-        Javancss pJavancss = new Javancss( vJavaSources );
-
-        _checkJavadocLines( pJavancss, sPackage, javadocLines );
-    }
-
-    private void _checkJavadocLines( File javaSource, String sPackage, int javadocLines )
-    {
-        Javancss pJavancss = new Javancss( javaSource );
-        
-        _checkJavadocLines( pJavancss, sPackage, javadocLines );
-    }
-
     private void _checkJavadocLines( int testFile, String sPackage, int javadocLines )
     {
-        File sourceFile = getTestFile( testFile );
+        Javancss pJavancss = measureTestFile( testFile );
 
-        _checkJavadocLines( sourceFile, sPackage, javadocLines );
+        _checkJavadocLines( pJavancss, sPackage, javadocLines );
     }
 
     private void _checkJavadocLines( int[] aTestFile, String sPackage, int javadocLines )
@@ -171,7 +151,8 @@ public class JavancssTest extends AbstractTest
             files.add( getTestFile( next ) );
         }
 
-        _checkJavadocLines( files, sPackage, javadocLines );
+        Javancss pJavancss = new Javancss( files );
+        _checkJavadocLines( pJavancss, sPackage, javadocLines );
     }
 
     private void _checkJavadocLines( Javancss pJavancss, String sPackage, int javadocLines )
@@ -190,10 +171,7 @@ public class JavancssTest extends AbstractTest
         }
         Assert( pmPackage != null );
         Assert( pmPackage.javadocsLn == javadocLines
-                , "pmJacob.javadocsLn: " 
-                  + pmPackage
-                  + ": " 
-                  + pmPackage.javadocsLn );
+                , "pmJacob.javadocsLn: " + pmPackage + ": " + pmPackage.javadocsLn );
     }
 
     /**
