@@ -1,0 +1,36 @@
+<assembly>
+  <id></id>
+  <formats>
+    <format>zip</format>
+  </formats>
+
+  <fileSets>
+
+    <fileSet>
+      <includes>
+        <include>build.xml</include>
+        <include>COPYING</include>
+        <include>javancss.dtd</include>
+        <include>pom.xml</include>
+        <include>README.TXT</include>
+        <include>bin/</include>
+        <include>doc/</include>
+        <include>icons/</include>
+        <include>lib/</include>
+        <include>src/</include>
+        <include>test/</include>
+        <include>xslt/</include>
+      </includes>
+    </fileSet>
+
+  </fileSets>
+
+  <files>
+    <file>
+      <source>target/javancss-${project.version}.jar</source>
+      <outputDirectory>lib</outputDirectory>
+      <destName>javancss.jar</destName>
+    </file>
+  </files>
+
+</assembly>
