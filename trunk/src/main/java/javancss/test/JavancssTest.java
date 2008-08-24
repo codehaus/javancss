@@ -201,16 +201,9 @@ public class JavancssTest extends AbstractTest
 
         final int ncss1 = 318;
         _checkNcss( 1 , ncss1 );
-        _checkNcss( 2, 8 );
-        _checkNcss( 3, 69 );
-        _checkNcss( 4, 11 );
-        _checkNcss( 5, 16 );
 
         final int ncss6 = 565;
         _checkNcssAndLoc( 6, ncss6, 1254 );
-
-        _checkNcss( 7, 30 );
-        _checkNcss( 8, 30 );
 
         // Nr. 10
         pJavancss = measureTestFile( 9 );
@@ -226,14 +219,6 @@ public class JavancssTest extends AbstractTest
         /* System.out.println( sFirstFunction ); */
         bugIf( !sFirstFunction.equals( "Test12.readFile(URL)" ), sFirstFunction );
 
-        _checkNcssAndLoc( 13 );
-        _checkNcssAndLoc( 14 );
-        _checkNcssAndLoc( 15 );
-
-        _checkNcss( 16, 4 );
-        _checkNcssAndLoc( 17 );
-        _checkNcssAndLoc( 18 );
-
         // Nr. 22
         pJavancss = measureTestFile( 19 );
         vFunctions = pJavancss.getFunctionMetrics();
@@ -241,10 +226,6 @@ public class JavancssTest extends AbstractTest
         bugIf( !sFirstFunction.equals( "test.Test19.foo(String[],Controller)" ), sFirstFunction );
         sFirstFunction = ( (FunctionMetric) vFunctions.get( 3 ) ).name;
         bugIf( !sFirstFunction.equals( "test.Test19.main(String[])" ) );
-
-        _checkNcss( 20, 46 );
-        _checkNcss( 21, 67 );
-        _checkNcss( 22, 283 );
 
         pJavancss = _checkNcss( 23, 10 );
         vFunctions = pJavancss.getFunctionMetrics();
@@ -254,10 +235,6 @@ public class JavancssTest extends AbstractTest
         // Nr. 30
         pJavancss = _checkNcss( 25, 12 );
         bugIf( pJavancss.getFunctionMetrics().size() != 9 );
-
-        _checkNcss( 26, 47 );
-        _checkNcss( 27, 4 );
-        _checkNcss( 28, 465 );
 
         // Nr. 35
         String sTogether;
@@ -301,7 +278,67 @@ public class JavancssTest extends AbstractTest
         bugIf( vPackages.size() != 2 );
         bugIf( ncss38 == pJavancss.getNcss() );
 
-        // Nr. 41
+        testCCN();
+
+        pJavancss = measureTestFile( 56 );
+        String sOutput56 = pJavancss.printPackageNcss();
+        sOutput56 += "\n";
+        sOutput56 += pJavancss.printObjectNcss();
+        sOutput56 += "\n";
+        sOutput56 += pJavancss.printFunctionNcss();
+        sOutput56 = Util.replace( sOutput56, "\r\n", "\n" );
+        String sCompare56 = FileUtil.readFile( getTestFile( "Output56.txt" ).getAbsolutePath() );
+        Assert( sOutput56.equals( sCompare56 ), "File test/Output56.txt and javancss output differs:\n" + sOutput56 );
+
+        XmlFormatterTest xmlTest = new XmlFormatterTest( this );
+        xmlTest.setTestDir( getTestDir() );
+        xmlTest.run();
+        setTests( xmlTest );
+
+        // check that javadocs are counted correctly
+        // after patches for additional comment counting
+        pJavancss = measureTestFile( 32 );
+        String sOutput32 = pJavancss.printPackageNcss();
+        sOutput32 += "\n";
+        sOutput32 += pJavancss.printObjectNcss();
+        sOutput32 += "\n";
+        sOutput32 += pJavancss.printFunctionNcss();
+        sOutput32 = Util.replace( sOutput32, "\r\n", "\n" );
+        String sCompare32 = FileUtil.readFile( getTestFile( "Output32.txt" ).getAbsolutePath() );
+        Assert( sOutput32.equals( sCompare32 ), "File test/Output32.txt and javancss output differs:\n" + sOutput32 );
+
+        testJavadocs();
+
+        testNcss();
+
+        testNcssEncoding();
+    }
+
+    public void testNcss()
+    {
+        Javancss pJavancss = null;
+
+        _checkNcss( 2, 8 );
+        _checkNcss( 3, 69 );
+        _checkNcss( 4, 11 );
+        _checkNcss( 5, 16 );
+        _checkNcss( 7, 30 );
+        _checkNcss( 8, 30 );
+
+        _checkNcssAndLoc( 13 );
+        _checkNcssAndLoc( 14 );
+        _checkNcssAndLoc( 15 );
+
+        _checkNcss( 16, 4 );
+        _checkNcssAndLoc( 17 );
+        _checkNcssAndLoc( 18 );
+
+        _checkNcss( 20, 46 );
+        _checkNcss( 21, 67 );
+        _checkNcss( 22, 283 );
+        _checkNcss( 26, 47 );
+        _checkNcss( 27, 4 );
+        _checkNcss( 28, 465 );
         _checkNcss( 29, 1 );
 
         // Nr. 42
@@ -359,8 +396,6 @@ public class JavancssTest extends AbstractTest
             bugIf( true, "java.sql.Connection double semicolon" );
         }
 
-        testCCN();
-
         // javancss parsed a file which it shouldn't
         pJavancss = measureTestFile( 42 );
         bugIf( pJavancss.getLastErrorMessage() == null, "Test42 should be parsed *and* result in an exception." );
@@ -399,22 +434,6 @@ public class JavancssTest extends AbstractTest
         _checkNcss( 55, 5 );
         _checkNcss( 56 );
         _checkNcss( 57 );
-
-        pJavancss = measureTestFile( 56 );
-        String sOutput56 = pJavancss.printPackageNcss();
-        sOutput56 += "\n";
-        sOutput56 += pJavancss.printObjectNcss();
-        sOutput56 += "\n";
-        sOutput56 += pJavancss.printFunctionNcss();
-        sOutput56 = Util.replace( sOutput56, "\r\n", "\n" );
-        String sCompare56 = FileUtil.readFile( getTestFile( "Output56.txt" ).getAbsolutePath() );
-        Assert( sOutput56.equals( sCompare56 ), "File test/Output56.txt and javancss output differs:\n" + sOutput56 );
-
-        XmlFormatterTest xmlTest = new XmlFormatterTest( this );
-        xmlTest.setTestDir( getTestDir() );
-        xmlTest.run();
-        setTests( xmlTest );
-
         _checkNcss( 58, 37 );
         _checkNcss( 59, 122 );
         _checkNcss( 60, 35 );
@@ -426,22 +445,8 @@ public class JavancssTest extends AbstractTest
         _checkNcss( 66, 3 );
         _checkNcss( 67, 31 );
 
-        // check that javadocs are counted correctly
-        // after patches for additional comment counting
-        pJavancss = measureTestFile( 32 );
-        String sOutput32 = pJavancss.printPackageNcss();
-        sOutput32 += "\n";
-        sOutput32 += pJavancss.printObjectNcss();
-        sOutput32 += "\n";
-        sOutput32 += pJavancss.printFunctionNcss();
-        sOutput32 = Util.replace( sOutput32, "\r\n", "\n" );
-        String sCompare32 = FileUtil.readFile( getTestFile( "Output32.txt" ).getAbsolutePath() );
-        Assert( sOutput32.equals( sCompare32 ), "File test/Output32.txt and javancss output differs:\n" + sOutput32 );
-
         // more comment counting
         _checkNcss( 68, 3 );
-
-        testJavadocs();
 
         // zero methods one class javadoc comment, there should be no exception
         // because of divide by zero
@@ -519,8 +524,6 @@ public class JavancssTest extends AbstractTest
         _checkNcss( 131, 6 );
         _checkNcss( 132, 12 );
         _checkNcss( 134, 4 );
-
-        testNcssEncoding();
     }
 
     private void _checkJvdcs( int testFileNumber, int expectedJvdcsResult )
