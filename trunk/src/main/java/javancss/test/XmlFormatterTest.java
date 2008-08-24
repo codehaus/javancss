@@ -34,10 +34,9 @@ public class XmlFormatterTest extends AbstractTest {
                + pJavancss.printJavaNcss()
                + XmlFormatter.printEnd();
 
-        File xsltFile = new File( getTestDir(), ".." + File.separator + "xslt" + File.separator + "xmltest.xsl" );
         try
         {
-            String sText = XMLUtil.getXML( sXML, xsltFile );
+            String sText = XMLUtil.getXML( sXML, getXslFile( "xmltest.xsl" ) );
             Assert( sText.equals( "79" ), sText );
         }
         catch( NoClassDefFoundError error )
@@ -84,10 +83,9 @@ public class XmlFormatterTest extends AbstractTest {
                + pJavancss.printJavaNcss()
                + XmlFormatter.printEnd();
 
-        File xsltFile = new File( getTestDir(), ".." + File.separator + "xslt" + File.separator + "javancss2text.xsl" );
         try 
         {
-            String sText = XMLUtil.getXML( sXML, xsltFile );
+            String sText = XMLUtil.getXML( sXML, getXslFile( "javancss2text.xsl" ) );
             FileUtil.writeFile( "/tmp/t", sText );
             String sCompare = FileUtil.readFile( getTestFile( "Output32.txt" ).getAbsolutePath() );
             Assert( sText.equals( sCompare ), sText );
@@ -106,6 +104,11 @@ public class XmlFormatterTest extends AbstractTest {
     public XmlFormatterTest( Test pTest_ ) 
     {
         super( pTest_ );
+    }
+
+    private File getXslFile( String filename )
+    {
+        return new File( getTestDir(), ".." + File.separator + "xslt" + File.separator + filename );
     }
 
     /**
