@@ -47,12 +47,13 @@ import javancss.PackageMetric;
  */
 public class JavancssTest extends AbstractTest 
 {
-    private void _doNcssTest( int testNumber, int expectedNcss )
+    private Javancss _doNcssTest( int testNumber, int expectedNcss )
     {
         Javancss pJavancss = new Javancss( getTestFile( testNumber ) );
         int ncss = pJavancss.getNcss();
         bugIf( ncss != expectedNcss, "Parsing file Test" + testNumber + ".java failed. Ncss is "
                  + ncss  + " and not " + expectedNcss + "." );
+        return pJavancss;
     }
 
     private void _doNcssTest( int testNumber )
@@ -201,34 +202,20 @@ public class JavancssTest extends AbstractTest
                 
             _checkInnerClasses();
     
-            // Nr. 1
-            pJavancss = new Javancss( getTestFile( 1 ) );
-            int ncss1 = pJavancss.getNcss();
-            bugIf( ncss1 != 318, "Ncss: " + ncss1 );
-    
-            // Nr. 2
-            pJavancss = new Javancss( getTestFile( 2 ) );
-            bugIf( pJavancss.getNcss() != 8 );
-            // Nr. 3
-            pJavancss = new Javancss( getTestFile( 3 ) );
-            bugIf( pJavancss.getNcss() != 69 );
-            // Nr. 4
-            pJavancss = new Javancss( getTestFile( 4 ) );
-            bugIf( pJavancss.getNcss() != 11 );
-            // Nr. 5
-            pJavancss = new Javancss( getTestFile( 5 ) );
-            bugIf( pJavancss.getNcss() != 16 );
-            // Nr. 6
-            pJavancss = new Javancss( getTestFile( 6 ) );
-            int ncss6 = pJavancss.getNcss();
-            bugIf( ncss6 != 565, "Ncss: " + ncss6 );
+            final int ncss1 = 318;
+            _doNcssTest( 1 , ncss1 );
+            _doNcssTest( 2, 8 );
+            _doNcssTest( 3, 69 );
+            _doNcssTest( 4, 11 );
+            _doNcssTest( 5, 16 );
+
+            final int ncss6 = 565;
+            pJavancss = _doNcssTest( 6, ncss6 );
             bugIf( pJavancss.getLOC() != 1254, "LOC: " + pJavancss.getLOC() );
-            // Nr. 8
-            pJavancss = new Javancss( getTestFile( 7 ) );
-            bugIf( pJavancss.getNcss() != 30, "Ncss: " + pJavancss.getNcss() );
-            // Nr. 9
-            Javancss pJavancss8 = new Javancss( getTestFile( 8 ) );
-            bugIf( pJavancss.getNcss() != pJavancss8.getNcss() );
+
+            _doNcssTest( 7, 30 );
+            _doNcssTest( 8, 30 );
+
             // Nr. 10
             pJavancss = new Javancss( getTestFile( 9 ) );
             bugIf( ncss1 != pJavancss.getLOC(), "LOC: " + pJavancss.getLOC() );
@@ -271,34 +258,24 @@ public class JavancssTest extends AbstractTest
             bugIf( !sFirstFunction.equals( "test.Test19.foo(String[],Controller)" ), sFirstFunction );
             sFirstFunction = ( (FunctionMetric) vFunctions.get( 3 ) ).name;
             bugIf( !sFirstFunction.equals( "test.Test19.main(String[])" ) );
-            // Nr. 24
-            pJavancss = new Javancss( getTestFile( 20 ) );
-            bugIf( pJavancss.getNcss() != 46, "NCSS: " + pJavancss.getNcss() );
-            // Nr. 25
-            pJavancss = new Javancss( getTestFile( 21 ) );
-            bugIf( pJavancss.getNcss() != 67, "NCSS: " + pJavancss.getNcss() );
-            // Nr. 26
-            pJavancss = new Javancss( getTestFile( 22 ) );
-            bugIf( pJavancss.getNcss() != 283, "NCSS: " + pJavancss.getNcss() );
-            // Nr. 27
-            pJavancss = new Javancss( getTestFile( 23 ) );
-            bugIf( pJavancss.getNcss() != 10, "NCSS: " + pJavancss.getNcss() );
+
+            _doNcssTest( 20, 46 );
+            _doNcssTest( 21, 67 );
+            _doNcssTest( 22, 283 );
+
+            pJavancss = _doNcssTest( 23, 10 );
             vFunctions = pJavancss.getFunctionMetrics();
             bugIf( vFunctions.size() != 7 );
             bugIf( new Javancss( getTestFile( 24 ) ).getFunctionMetrics().size() != vFunctions.size() );
+
             // Nr. 30
-            pJavancss = new Javancss( getTestFile( 25 ) );
-            bugIf( pJavancss.getNcss() != 12 );
+            pJavancss = _doNcssTest( 25, 12 );
             bugIf( pJavancss.getFunctionMetrics().size() != 9 );
-            // Nr. 32
-            pJavancss = new Javancss( getTestFile( 26 ) );
-            bugIf( pJavancss.getNcss() != 47, "NCSS: " + pJavancss.getNcss() );
-            // Nr. 33
-            pJavancss = new Javancss( getTestFile( 27 ) );
-            bugIf( pJavancss.getNcss() != 4, "NCSS: " + pJavancss.getNcss() );
-            // Nr. 34
-            pJavancss = new Javancss( getTestFile( 28 ) );
-            bugIf( pJavancss.getNcss() != 465, "NCSS: " + pJavancss.getNcss() );
+
+            _doNcssTest( 26, 47 );
+            _doNcssTest( 27, 4 );
+            _doNcssTest( 28, 465 );
+
             // Nr. 35
             String sTogether;
             String sTest11 = "";
@@ -340,15 +317,15 @@ public class JavancssTest extends AbstractTest
             vPackages = pJavancss.getPackageMetrics();
             bugIf( vPackages.size() != 2 );
             bugIf( ncss38 == pJavancss.getNcss() );
+
             // Nr. 41
-            pJavancss = new Javancss( getTestFile( 29 ) );
-            bugIf( pJavancss.getNcss() != 1, "NCSS: " + pJavancss.getNcss() );
+            _doNcssTest( 29, 1 );
+
             // Nr. 42
             // missing lf in last line/<EOF> not in single line
             try
             {
-                pJavancss = new Javancss( getTestFile( 35 ) );
-                bugIf( pJavancss.getNcss() != 1 );
+                _doNcssTest( 35, 1 );
             }
             catch ( Exception eEOF )
             {
@@ -356,8 +333,7 @@ public class JavancssTest extends AbstractTest
             }
             try
             {
-                pJavancss = new Javancss( getTestFile( 36 ) );
-                bugIf( pJavancss.getNcss() != 1 );
+                _doNcssTest( 36, 1 );
             }
             catch ( Error eEOF )
             {
@@ -365,8 +341,7 @@ public class JavancssTest extends AbstractTest
             }
             try
             {
-                pJavancss = new Javancss( getTestFile( 37 ) );
-                bugIf( pJavancss.getNcss() != 1 );
+                _doNcssTest( 37, 1 );
             }
             catch ( Error eCTRLZ )
             {
@@ -374,8 +349,7 @@ public class JavancssTest extends AbstractTest
             }
             try
             {
-                pJavancss = new Javancss( getTestFile( 38 ) );
-                bugIf( pJavancss.getNcss() != 1 );
+                _doNcssTest( 38, 1 );
             }
             catch ( Error eCTRLZ )
             {
@@ -385,8 +359,7 @@ public class JavancssTest extends AbstractTest
             // semicolons not allowed by JLS, but not counted anyway.
             try
             {
-                pJavancss = new Javancss( getTestFile( 39 ) );
-                bugIf( pJavancss.getNcss() != 5 );
+                _doNcssTest( 39, 5 );
             }
             catch ( Error eEmptyStatements )
             {
@@ -396,8 +369,7 @@ public class JavancssTest extends AbstractTest
             // ;; in java.sql.Connection
             try
             {
-                pJavancss = new Javancss( getTestFile( 32 ) );
-                bugIf( pJavancss.getNcss() != 26, "Test32.java: ncss should be 26 but is: " + pJavancss.getNcss() );
+                _doNcssTest( 32, 26 );
             }
             catch ( Error eJavaSQLConnection )
             {
@@ -409,9 +381,10 @@ public class JavancssTest extends AbstractTest
             // javancss parsed a file which it shouldn't
             pJavancss = new Javancss( getTestFile( 42 ) );
             bugIf( pJavancss.getLastErrorMessage() == null, "Test42 should be parsed *and* result in an exception." );
+
             // file containing just ;
-            pJavancss = new Javancss( getTestFile( 43 ) );
-            bugIf( pJavancss.getNcss() != 0 );
+            _doNcssTest( 43, 0 );
+
             // Test if javancss continues after running across a parse error
             // Test42,java has an errror, so use two other file and this and
             // take a look if it finishes with right result.
@@ -431,22 +404,14 @@ public class JavancssTest extends AbstractTest
             pJavancss = new Javancss( getTestFile( 48 ) );
             bugIf( pJavancss.getNcss() <= 0, "Parsing file Test48.java failed!" );
 
-            pJavancss = new Javancss( getTestFile( 49 ) );
-            bugIf( pJavancss.getNcss() != 3, "Parsing file Test49.java failed!" );
+            _doNcssTest( 49, 3 );
+
             pJavancss = new Javancss( getTestFile( 50 ) );
             bugIf( pJavancss.getNcss() <= 0, "Parsing file Test50.java failed!" );
 
-            pJavancss = new Javancss( getTestFile( 51 ) );
-            bugIf( pJavancss.getNcss() != 8, "Parsing file Test51.java failed!" );
-
-            pJavancss = new Javancss( getTestFile( 52 ) );
-            int test52ncss = pJavancss.getNcss();
-            bugIf( test52ncss != 12, "Parsing file Test52.java failed. Ncss is " + test52ncss + " and not 12." );
-
-            pJavancss = new Javancss( getTestFile( 53 ) );
-            int test53ncss = pJavancss.getNcss();
-            bugIf( test53ncss != 4, "Parsing file Test53.java failed. Ncss is " + test53ncss + " and not 4." );
-
+            _doNcssTest( 51, 8 );
+            _doNcssTest( 52, 12 );
+            _doNcssTest( 53, 4 );
             _doNcssTest( 54, 9 );
             _doNcssTest( 55, 5 );
             _doNcssTest( 56 );
