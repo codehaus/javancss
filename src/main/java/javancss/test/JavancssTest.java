@@ -47,9 +47,14 @@ import javancss.PackageMetric;
  */
 public class JavancssTest extends AbstractTest 
 {
+    private Javancss measureTestFile( int testFileId )
+    {
+        return new Javancss( getTestFile( testFileId ) );
+    }
+
     private Javancss _checkNcss( int testNumber, int expectedNcss )
     {
-        Javancss pJavancss = new Javancss( getTestFile( testNumber ) );
+        Javancss pJavancss = measureTestFile( testNumber );
         int ncss = pJavancss.getNcss();
         bugIf( ncss != expectedNcss, "Parsing file Test" + testNumber + ".java failed. Ncss is "
                  + ncss  + " and not " + expectedNcss + "." );
@@ -58,7 +63,7 @@ public class JavancssTest extends AbstractTest
 
     private void _checkNcss( int testNumber )
     {
-        Javancss pJavancss = new Javancss( getTestFile( testNumber ) );
+        Javancss pJavancss = measureTestFile( testNumber );
         int ncss = pJavancss.getNcss();
         bugIf( ncss == 0, "Parsing file Test" + testNumber + ".java failed. Ncss is 0" );
     }
@@ -79,7 +84,7 @@ public class JavancssTest extends AbstractTest
 
     private Javancss _checkNcssAndLoc( int testNumber )
     {
-        Javancss pJavancss = new Javancss( getTestFile( testNumber ) );
+        Javancss pJavancss = measureTestFile( testNumber );
         int ncss = pJavancss.getNcss();
         int loc = pJavancss.getLOC();
         bugIf( ncss != loc, "Parsing file Test" + testNumber + ".java failed. Ncss is "
@@ -97,7 +102,7 @@ public class JavancssTest extends AbstractTest
      */
     public void testJavadocs()
     {
-        Javancss pJavancss = new Javancss( getTestFile( 20 ) );
+        Javancss pJavancss = measureTestFile( 20 );
         
         List/*<ObjectMetric>*/ vObjectMetrics = pJavancss.getObjectMetrics();
         ObjectMetric classMetric  = (ObjectMetric)vObjectMetrics.get( 0 );
@@ -240,7 +245,7 @@ public class JavancssTest extends AbstractTest
             _checkNcss( 8, 30 );
 
             // Nr. 10
-            pJavancss = new Javancss( getTestFile( 9 ) );
+            pJavancss = measureTestFile( 9 );
             bugIf( ncss1 != pJavancss.getLOC(), "LOC: " + pJavancss.getLOC() );
 
             _checkNcssAndLoc( 10, ncss6 );
@@ -262,7 +267,7 @@ public class JavancssTest extends AbstractTest
             _checkNcssAndLoc( 18 );
 
             // Nr. 22
-            pJavancss = new Javancss( getTestFile( 19 ) );
+            pJavancss = measureTestFile( 19 );
             vFunctions = pJavancss.getFunctionMetrics();
             sFirstFunction = ( (FunctionMetric) vFunctions.get( 0 ) ).name;
             bugIf( !sFirstFunction.equals( "test.Test19.foo(String[],Controller)" ), sFirstFunction );
@@ -389,7 +394,7 @@ public class JavancssTest extends AbstractTest
             testCCN();
 
             // javancss parsed a file which it shouldn't
-            pJavancss = new Javancss( getTestFile( 42 ) );
+            pJavancss = measureTestFile( 42 );
             bugIf( pJavancss.getLastErrorMessage() == null, "Test42 should be parsed *and* result in an exception." );
 
             // file containing just ;
@@ -398,9 +403,9 @@ public class JavancssTest extends AbstractTest
             // Test if javancss continues after running across a parse error
             // Test42,java has an errror, so use two other file and this and
             // take a look if it finishes with right result.
-            pJavancss = new Javancss( getTestFile( 1 ) );
+            pJavancss = measureTestFile( 1 );
             int ncss57 = pJavancss.getNcss();
-            pJavancss = new Javancss( getTestFile( 2 ) );
+            pJavancss = measureTestFile( 2 );
             ncss57 += pJavancss.getNcss();
             List vFiles = new ArrayList();
             vFiles.add( getTestFile( 1 ) );
@@ -411,12 +416,12 @@ public class JavancssTest extends AbstractTest
 
             // Bug reported by .. .
             // Test48.java should be parsed.
-            pJavancss = new Javancss( getTestFile( 48 ) );
+            pJavancss = measureTestFile( 48 );
             bugIf( pJavancss.getNcss() <= 0, "Parsing file Test48.java failed!" );
 
             _checkNcss( 49, 3 );
 
-            pJavancss = new Javancss( getTestFile( 50 ) );
+            pJavancss = measureTestFile( 50 );
             bugIf( pJavancss.getNcss() <= 0, "Parsing file Test50.java failed!" );
 
             _checkNcss( 51, 8 );
@@ -457,7 +462,7 @@ public class JavancssTest extends AbstractTest
 
         // check that javadocs are counted correctly
         // after patches for additional comment counting
-        pJavancss = new Javancss( getTestFile( 32 ) );
+        pJavancss = measureTestFile( 32 );
         String sOutput32 = pJavancss.printPackageNcss();
         sOutput32 += "\n";
         sOutput32 += pJavancss.printObjectNcss();
@@ -557,8 +562,7 @@ public class JavancssTest extends AbstractTest
 
     private void _checkJvdcs( int testFileNumber, int expectedJvdcsResult )
     {
-        Javancss pJavancss;
-        pJavancss = new Javancss( getTestFile( testFileNumber ) );
+        Javancss pJavancss = measureTestFile( testFileNumber );
         List/*<ObjectMetric>*/ vObjectMetrics = pJavancss.getObjectMetrics();
         ObjectMetric classMetric = (ObjectMetric) vObjectMetrics.get( 0 );
         int jvdcs = classMetric.javadocs;
@@ -621,19 +625,13 @@ public class JavancssTest extends AbstractTest
 
     private void assertCCN( List vFunctions, int methodIndex, int expectedCCN )
     {
-        int ccn;
-        ccn = getCCN( vFunctions, methodIndex );
+        int ccn = getCCN( vFunctions, methodIndex );
         Assert( ccn == expectedCCN, "Expected ccn was " + expectedCCN + " but the result is: " + ccn );
     }
 
     private int getCCN( List/*<FunctionMetric>*/ vFunctions, int methodIndex )
     {
         return ( (FunctionMetric) vFunctions.get( methodIndex ) ).ccn;
-    }
-
-    private Javancss measureTestFile( int testFileId )
-    {
-        return new Javancss( getTestFile( testFileId ) );
     }
 
     public static void main( String[] asArg_ )
