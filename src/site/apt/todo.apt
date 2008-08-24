@@ -16,6 +16,10 @@ JavaNCSS TODO list
 
     * cons: remove "javancss -check" option
 
+    Test available in svn {{{branches/javancss-junit}}}, with reports
+    {{{http://javancss.codehaus.org/junit/project-reports.html}here}} (compare with
+    {{{http://javancss.codehaus.org/project-reports.html}actual ones}}).
+
 
   * avoid <<<Object[] aoImport>>>?
 
@@ -29,9 +33,9 @@ JavaNCSS TODO list
 
 Done
 
-  * use File instead of String
+  * use <<<File>>>s instead of <<<String>>>s
 
   * create Metric classes instead of <<<Vector\<String, Integer, ...\>>>>
 
-  * use Collection API instead of Vector and Hashtable
+  * use Collection API instead of <<<Vector>>> and <<<Hashtable>>>
  
