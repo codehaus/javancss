@@ -101,13 +101,10 @@ public class JavancssTest extends AbstractTest
      */
     public void testJavadocs()
     {
-        Javancss pJavancss = measureTestFile( 20 );
-        
-        List/*<ObjectMetric>*/ vObjectMetrics = pJavancss.getObjectMetrics();
-        ObjectMetric classMetric  = (ObjectMetric)vObjectMetrics.get( 0 );
-        int jvdcs = classMetric.javadocs;
-        Assert( jvdcs == 7
-                , "Expected 7 Javadocs in in file Test20.java but got " + jvdcs + "!" );
+        _checkJvdcs( 20, 7 );
+        _checkJvdcs( 68, 2 );
+        _checkJvdcs( 121, 2 );
+        _checkJvdcs( 122, 1 );
     }
 
     /**
@@ -452,7 +449,6 @@ public class JavancssTest extends AbstractTest
 
         // more comment counting
         _checkNcss( 68, 3 );
-        _checkJvdcs( 68, 2 );
 
         testJavadocs();
 
@@ -521,8 +517,6 @@ public class JavancssTest extends AbstractTest
         _checkNcss( 119, 2 );
         _checkNcss( 120, 3 );
         _checkNcss( 121, 5 );
-        _checkJvdcs( 121, 2 );
-        _checkJvdcs( 122, 1 );
         _checkNcss( 123, 4 );
         _checkNcss( 124, 7 );
         _checkNcss( 125, 2 );
