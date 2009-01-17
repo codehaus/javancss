@@ -1,7 +1,7 @@
 /*
 Copyright (C) 2001 Chr. Clemens Lee <clemens@kclee.com>.
 
-This file is part of JavaNCSS 
+This file is part of JavaNCSS
 (http://www.kclee.com/clemens/java/javancss/).
 
 JavaNCSS is free software; you can redistribute it and/or modify it
@@ -135,19 +135,19 @@ public class AsciiFormatter implements Formatter
             + Util.paddWithSpace(_pNumberFormat.format(javadocsSum), maxItemLength)
             + " | Project" + NL
 
-            + Util.multiplyChar( ' ', maxItemLength + 1 ) 
+            + Util.multiplyChar( ' ', maxItemLength + 1 )
             + Util.paddWithSpace( _pNumberFormat.format( _divide( classesSum, packages ) ), maxItemLength ) + ' '
             + Util.paddWithSpace( _pNumberFormat.format( _divide( functionsSum, packages ) ), maxItemLength ) + ' '
             + Util.paddWithSpace( _pNumberFormat.format( _divide( ncssSum, packages ) ), maxItemLength ) + ' '
             + Util.paddWithSpace( _pNumberFormat.format( _divide( javadocsSum, packages ) ), maxItemLength )
             + " | Package" + NL
 
-            + Util.multiplyChar( ' ', (maxItemLength + 1)*2 ) 
+            + Util.multiplyChar( ' ', (maxItemLength + 1)*2 )
             + Util.paddWithSpace( _pNumberFormat.format( _divide( functionsSum, classesSum ) ), maxItemLength ) + ' '
             + Util.paddWithSpace( _pNumberFormat.format( _divide( ncssSum, classesSum ) ), maxItemLength ) + ' '
             + Util.paddWithSpace( _pNumberFormat.format( _divide( javadocsSum, classesSum ) ), maxItemLength )
             + " | Class" + NL
-        
+
             + Util.multiplyChar( ' ', (maxItemLength + 1)*3 )
             + Util.paddWithSpace( _pNumberFormat.format( _divide( ncssSum, functionsSum ) ), maxItemLength ) + ' '
             + Util.paddWithSpace( _pNumberFormat.format( _divide( javadocsSum, functionsSum ) ), maxItemLength )
@@ -168,7 +168,7 @@ public class AsciiFormatter implements Formatter
         ((DecimalFormat)_pNumberFormat).applyPattern( "#,##0.00" );
     }
 
-    public String printPackageNcss() 
+    public String printPackageNcss()
     {
         List vPackageMetrics = _javancss.getPackageMetrics();
 
@@ -206,7 +206,7 @@ public class AsciiFormatter implements Formatter
         sbRetVal.append( Util.multiplyChar(' ', spaces ) +
                "--------- --------- --------- ---------" + NL );
 
-        sbRetVal.append( Util.multiplyChar(' ', spaces ) 
+        sbRetVal.append( Util.multiplyChar(' ', spaces )
             + Util.paddWithSpace( classesSum, 9 ) + ' '
             + Util.paddWithSpace( functionsSum, 9 ) + ' '
             + Util.paddWithSpace( ncssSum, 9 ) + ' '
@@ -242,7 +242,7 @@ public class AsciiFormatter implements Formatter
             + Util.paddWithSpace(_pNumberFormat.format(fAverageJavadocs), 9) + NL
             + "Program NCSS:                    "
             + Util.paddWithSpace(_pNumberFormat.format(_javancss.getNcss()), 9) + NL;
-        
+
         return sRetVal;
     }
 
@@ -283,7 +283,7 @@ public class AsciiFormatter implements Formatter
                                         , lFunctionSum
                                         , lClassesSum
                                         , lJVDCSum            ) );
-        
+
         return sbRetVal.toString();
     }
 
@@ -308,7 +308,7 @@ public class AsciiFormatter implements Formatter
         return sRetVal;
     }
 
-    public String printFunctionNcss() 
+    public String printFunctionNcss()
     {
         StringBuffer sRetVal = new StringBuffer(80000);
 
@@ -333,7 +333,7 @@ public class AsciiFormatter implements Formatter
 
             lFunctionSum += (long)functionNcss;
             lCCNSum      += (long)functionCCN;
-            lJVDCSum     += (long)functionJVDC; 
+            lJVDCSum     += (long)functionJVDC;
             sRetVal.append( _formatListLine( sFunction
                                              , new int[] { functionNcss
                                                            , functionCCN

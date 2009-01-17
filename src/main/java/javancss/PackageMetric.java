@@ -1,7 +1,7 @@
 /*
 Copyright (C) 2000 Chr. Clemens Lee <clemens@kclee.com>.
 
-This file is part of JavaNCSS 
+This file is part of JavaNCSS
 (http://www.kclee.com/clemens/java/javancss/).
 
 JavaNCSS is free software; you can redistribute it and/or modify it
@@ -32,11 +32,11 @@ public class PackageMetric extends Metric
     public int classes    = 0;
     public int functions  = 0;
 
-    public PackageMetric() 
+    public PackageMetric()
     {
         super();
     }
-    
+
     public void clear()
     {
         super.clear();
