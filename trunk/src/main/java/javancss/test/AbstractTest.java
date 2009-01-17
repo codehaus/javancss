@@ -1,7 +1,7 @@
 /*
 Copyright (C) 2000 Chr. Clemens Lee <clemens@kclee.com>.
 
-This file is part of JavaNCSS 
+This file is part of JavaNCSS
 (http://www.kclee.com/clemens/java/javancss/).
 
 JavaNCSS is free software; you can redistribute it and/or modify it
@@ -59,18 +59,18 @@ public abstract class AbstractTest extends Test
     {
         super();
     }
-    
+
     protected AbstractTest( Test pTest_ )
     {
         super( pTest_ );
     }
 
-    public void main() 
+    public void main()
     {
         main( new File( "." ) );
     }
 
-    public void main( File baseDir ) 
+    public void main( File baseDir )
     {
         setTestDir( new File( baseDir, "test" ) );
         setVerbose( true );

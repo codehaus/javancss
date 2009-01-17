@@ -1,7 +1,7 @@
 /*
 Copyright (C) 2001 Chr. Clemens Lee <clemens@kclee.com>.
 
-This file is part of JavaNCSS 
+This file is part of JavaNCSS
 (http://www.kclee.com/clemens/java/javancss/).
 
 JavaNCSS is free software; you can redistribute it and/or modify it
@@ -25,7 +25,7 @@ package javancss;
  * Interface that each class generating output has to implement.
  * The two main implementations to generate ascii and xml output.<p/>
  *
- * A formatter implementation will be invoked by the Javancss 
+ * A formatter implementation will be invoked by the Javancss
  * class.
  *
  * @author  Chr. Clemens Lee <clemens@kclee.com>

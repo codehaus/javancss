@@ -1,7 +1,7 @@
 /*
 Copyright (C) 2000 Chr. Clemens Lee <clemens@kclee.com>.
 
-This file is part of JavaNCSS 
+This file is part of JavaNCSS
 (http://www.kclee.com/clemens/java/javancss/).
 
 JavaNCSS is free software; you can redistribute it and/or modify it
@@ -39,11 +39,11 @@ public class Main {
         Locale.setDefault( Locale.US );
 
         Javancss pJavancss = new Javancss(asArgs, S_RCS_HEADER);
-        
+
         if (pJavancss.getLastErrorMessage() != null) {
             System.exit(1);
         }
-        
+
         System.exit(0);
     }
 }

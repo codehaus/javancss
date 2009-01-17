@@ -1,7 +1,7 @@
 /*
 Copyright (C) 2000 Chr. Clemens Lee <clemens@kclee.com>.
 
-This file is part of JavaNCSS 
+This file is part of JavaNCSS
 (http://www.kclee.com/clemens/java/javancss/).
 
 JavaNCSS is free software; you can redistribute it and/or modify it
@@ -44,7 +44,7 @@ import javancss.PackageMetric;
  *   $Id$
  *   3. 9. 1996
  */
-public class JavancssTest extends AbstractTest 
+public class JavancssTest extends AbstractTest
 {
     private Javancss measureTestFile( int testFileId )
     {
@@ -126,7 +126,7 @@ public class JavancssTest extends AbstractTest
         _enterSubTest( "javadoc lines" );
 
         _checkJavadocLines( 28, "jacob", 0 );
-        
+
         //
         // same test with more files
         //
@@ -187,7 +187,7 @@ public class JavancssTest extends AbstractTest
         super(pTest_);
     }
 
-    protected void _doIt() 
+    protected void _doIt()
         throws Exception
     {
         Util.debug( this, "_doIt().testDir: " + getTestDir() );
@@ -197,7 +197,7 @@ public class JavancssTest extends AbstractTest
         testNcssAndMore();
 
         testJavadocLines();
-        
+
         testJavadocs();
 
         testCCN();
@@ -500,7 +500,7 @@ public class JavancssTest extends AbstractTest
         List vPackages = pJavancss.getPackageMetrics();
         bugIf( vPackages.size() != 2 );
         int ncss38 = pJavancss.getNcss();
-        
+
         String[] asArg = new String[3];
         asArg[0] = getTestFile( 11 ).getAbsolutePath();
         asArg[1] = asArg[0];
@@ -593,7 +593,7 @@ public class JavancssTest extends AbstractTest
     {
         // turn stdout off
         PrintStream psStdout = System.out;
-        
+
         try
         {
             System.setOut( new PrintStream( new ByteArrayOutputStream() ) );

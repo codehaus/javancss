@@ -83,25 +83,25 @@ public class XmlFormatterTest extends AbstractTest {
                + pJavancss.printJavaNcss()
                + XmlFormatter.printEnd();
 
-        try 
+        try
         {
             String sText = XMLUtil.getXML( sXML, getXslFile( "javancss2text.xsl" ) );
             FileUtil.writeFile( "/tmp/t", sText );
             String sCompare = FileUtil.readFile( getTestFile( "Output32.txt" ).getAbsolutePath() );
             Assert( sText.equals( sCompare ), sText );
-        } 
+        }
         catch( NoClassDefFoundError error )
         {
             Util.print( "skipped: 'xalan.jar' and or 'xerces.jar' library missing." );
         }
     }
 
-    public XmlFormatterTest() 
+    public XmlFormatterTest()
     {
         super();
     }
 
-    public XmlFormatterTest( Test pTest_ ) 
+    public XmlFormatterTest( Test pTest_ )
     {
         super( pTest_ );
     }
@@ -121,7 +121,7 @@ public class XmlFormatterTest extends AbstractTest {
         testXML2Text();
     }
 
-    public static void main( String[] asArg_ ) 
+    public static void main( String[] asArg_ )
     {
         new XmlFormatterTest().main();
     }

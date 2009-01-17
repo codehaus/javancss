@@ -1,7 +1,7 @@
 /*
 Copyright (C) 2000 Chr. Clemens Lee <clemens@kclee.com>.
 
-This file is part of JavaNCSS 
+This file is part of JavaNCSS
 (http://www.kclee.com/clemens/java/javancss/).
 
 JavaNCSS is free software; you can redistribute it and/or modify it
@@ -90,7 +90,7 @@ public class Javancss implements Exitable
         "\n" +
         "[Colors]\n" +
         "UseSystemColors=true\n";
-    
+
     private boolean _bExit = false;
 
     private List/*<File>*/ _vJavaSourceFiles = new ArrayList();
@@ -146,7 +146,7 @@ public class Javancss implements Exitable
         {
             reader = newReader( sSourceFile_ );
         }
-        catch ( IOException pIOException ) 
+        catch ( IOException pIOException )
         {
             if ( Util.isEmpty( _sErrorMessage ) )
             {
@@ -174,13 +174,13 @@ public class Javancss implements Exitable
             {
                 sTempErrorMessage = "";
             }
-            sTempErrorMessage += "ParseException in " + sSourceFile_.getAbsolutePath() + 
+            sTempErrorMessage += "ParseException in " + sSourceFile_.getAbsolutePath() +
                    "\nLast useful checkpoint: \"" + _pJavaParser.getLastFunction() + "\"\n";
             sTempErrorMessage += pParseException.getMessage() + "\n";
-            
+
             _sErrorMessage = sTempErrorMessage;
             _thrwError = pParseException;
-            
+
             throw pParseException;
         }
         catch ( TokenMgrError pTokenMgrError )
@@ -189,11 +189,11 @@ public class Javancss implements Exitable
             {
                 sTempErrorMessage = "";
             }
-            sTempErrorMessage += "TokenMgrError in " + sSourceFile_.getAbsolutePath() + 
+            sTempErrorMessage += "TokenMgrError in " + sSourceFile_.getAbsolutePath() +
                    "\n" + pTokenMgrError.getMessage() + "\n";
             _sErrorMessage = sTempErrorMessage;
             _thrwError = pTokenMgrError;
-            
+
             throw pTokenMgrError;
         }
     }
@@ -458,7 +458,7 @@ public class Javancss implements Exitable
         {
             return;
         }
-           
+
         for( int i = 0; i < files.length; i++ )
         {
             File newFile = files[i];
@@ -509,7 +509,7 @@ public class Javancss implements Exitable
                         {
                             sJavaSourceFileNames = FileUtil.readFile( filename );
                         }
-                        catch( IOException pIOException ) 
+                        catch( IOException pIOException )
                         {
                             _sErrorMessage = "File Read Error: " + filename;
                             _thrwError = pIOException;
@@ -527,7 +527,7 @@ public class Javancss implements Exitable
             {
                 filename = FileUtil.normalizeFileName( filename );
                 File file = new File( filename );
-                if ( file.isDirectory() ) 
+                if ( file.isDirectory() )
                 {
                     _addJavaFiles( file, newFiles );
                 }
@@ -571,7 +571,7 @@ public class Javancss implements Exitable
         // the arguments (the files) to be processed
         _vJavaSourceFiles = findFiles( _pInit.getArguments(), htOptions.get( "recursive" ) != null );
 
-        if ( htOptions.get( "gui" ) != null ) 
+        if ( htOptions.get( "gui" ) != null )
         {
             final JavancssFrame pJavancssFrame = new JavancssFrame(_pInit);
             /*final Thread pThread = Thread.currentThread();*/
@@ -602,13 +602,13 @@ public class Javancss implements Exitable
         {
             _measureRoot( newReader( System.in ) );
         }
-        catch(Throwable pThrowable) 
+        catch(Throwable pThrowable)
         {
         }
-        if ( getLastErrorMessage() != null ) 
+        if ( getLastErrorMessage() != null )
         {
             Util.printlnErr( getLastErrorMessage() + "\n" );
-            if ( getNcss() <= 0 ) 
+            if ( getNcss() <= 0 )
             {
                 return;
             }
@@ -620,14 +620,14 @@ public class Javancss implements Exitable
         OutputStream out = System.out;
         if (sOutputFile != null)
         {
-            try 
+            try
             {
                 out = new FileOutputStream( FileUtil.normalizeFileName( sOutputFile ) );
             } catch ( Exception exception ) {
-                Util.printlnErr( "Error opening output file '" 
-                                 + sOutputFile 
+                Util.printlnErr( "Error opening output file '"
+                                 + sOutputFile
                                  + "': " + exception.getMessage() );
-                
+
                 out = System.out;
                 sOutputFile = null;
             }
@@ -675,7 +675,7 @@ public class Javancss implements Exitable
             if ( !bNoNCSS )
             {
                 pw.print( printJavaNcss() );
-            }            
+            }
             pw.println( "</javancss>" );
         }
 
@@ -709,11 +709,11 @@ public class Javancss implements Exitable
     public int getJdcl() {
         return JavaParserTokenManager._iFormalComments;
     }
-    
+
     public int getSl() {
         return JavaParserTokenManager._iSingleComments;
     }
-    
+
     public int getMl() {
         return JavaParserTokenManager._iMultiComments;
     }
