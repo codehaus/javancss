@@ -87,7 +87,7 @@
    </target>
 
    <target name="jar" >
-     <jar destfile="lib/javancss.jar" basedir="classes">
+     <jar destfile="lib/javancss.jar" basedir="target/classes">
        <manifest>
          <attribute name="Main-Class" value="javancss.Main" />
          <attribute name="Class-Path" value="jhbasic.jar ccl.jar" />
