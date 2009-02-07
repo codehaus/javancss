@@ -6,7 +6,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>javancss</groupId>
   <artifactId>javancss</artifactId>
-  <version>30.0-SNAPSHOT</version>
+  <version>30.51</version>
   <packaging>jar</packaging>
 
   <name>JavaNCSS</name>
@@ -14,13 +14,13 @@
     JavaNCSS is a simple command line utility which measures two standard source code metrics for the Java programming
     language. The metrics are collected globally, for each class and/or for each function.
   </description>
-  <url>http://javancss.codehaus.org/</url>
+  <url>http://www.kclee.de/clemens/java/javancss/</url>
 
-  <inceptionYear>2000</inceptionYear>
+  <inceptionYear>1997</inceptionYear>
 
   <organization>
-    <name>Codehaus</name>
-    <url>http://codehaus.org</url>
+    <name>Chr. Clemens Lee and companions</name>
+    <url>http://www.kclee.de/clemens/java/javancss/index.html#credits</url>
   </organization>
 
   <licenses>
@@ -69,7 +69,7 @@
     <developer>
       <id>clemens</id>
       <name>Clemens Lee</name>
-      <email>clemens@codehaus.org</email>
+      <email>clemens@kclee.de</email>
       <timezone>+1</timezone>
     </developer>
     <developer>
