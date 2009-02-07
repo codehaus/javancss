@@ -46,32 +46,23 @@ manager) can be used for this purpose.
 comes bundled with an Ant task written by Steve Jernigan.
 The JavaNCSS Ant Task is documented on a <a href="JavancssAntTask.html">separate page</a>.
 
-<P>You can always find the newest version of this page at: <A HREF="http://javancss.codehaus.org/">http://javancss.codehaus.org/</A>
-(new home since August 2008, previous one was <A HREF="http://www.kclee.de/clemens/java/javancss/">http://www.kclee.de/clemens/java/javancss/</A>).
-
+<P>You can always find the newest version of this page at: <A HREF="http://www.kclee.de/clemens/java/javancss/">http://www.kclee.de/clemens/java/javancss/</A>
 
 <H2>Table of Contents</H2>
 
 <UL>
-<LI>
-<A HREF="#features">Features and Metrics' JavaNCSS Provides</A></LI>
+<LI><A HREF="#features">Features and Metrics' JavaNCSS Provides</A></LI>
 
-<LI>
-<A HREF="#system_requirements">System Requirements</A></LI>
+<LI><A HREF="#system_requirements">System Requirements</A></LI>
 
-<LI>
-<A HREF="#download">Downloading</A></LI>
+<LI><A HREF="#download">Downloading</A></LI>
 
-<LI>
-<A HREF="#usage">Usage</A>
-<ul><li><a href="#xslt">XSLT Stylesheets</a></li></ul>
-</LI>
+<LI><A HREF="#usage">Usage</A>
+<ul><li><a href="#xslt">XSLT Stylesheets</a></li></ul></LI>
 
-<LI>
-<A HREF="#specification">Specification</A></LI>
+<LI><A HREF="#specification">Specification</A></LI>
 
-<LI>
-<A HREF="development.html">Development</A></LI>
+<LI><A HREF="#development">Development</A></LI>
 
 <LI>
 <A HREF="#release">Release History</A></LI>
@@ -510,8 +501,18 @@ to point out some basic shit and you are history. It seems just like a
 wonder that nobody was able to package Lines of Code in a more scientific
 manner. Now it's too late to label someone's name on it :).-->
 <BR>&nbsp;
-<H2>
-<A NAME="release"></A>Release History</H2>
+<H2><A NAME="development"></A>Development</H2>
+JavaNCSS has been moved to Codehaus for a <a href="http://fisheye.codehaus.org/browse/javancss/trunk/">shared source code repository</a>.
+There is also a <a href="http://jira.codehaus.org/browse/JAVANCSS">bug tracking</a> tool.<p>
+
+JavaNCSS can actually be built using Ant or Maven.
+
+To check out the latest development source code (and compile and run the regression test suite) type the following in your shell:
+<pre>svn co http://svn.codehaus.org/javancss/trunk javancss
+cd javancss/trunk
+ant all<i> or </i>mvn package</pre>
+&nbsp;
+<H2><A NAME="release"></A>Release History</H2>
 
 <h3>Version 29.50</h3>
 Version 29.50 has been released on April 8, 2008<p>Fixed two Java 1.5 grammar parser bugs. Thanks to Don Kautz and Isabelle Guimiot!
@@ -746,7 +747,8 @@ JavaNCSS is free software distributed under the GNU General Public License.
 Copyright Chr. Clemens Lee.
 <H2>
 <A NAME="credits"></A>Credits</H2>
-<h3>Additional Authors</h3>
+<h3>Authors</h3>
+The currently active crew with permission to write into the source code repository can be found <a href="http://xircles.codehaus.org/projects/javancss/members">here</a> [2009-02-07].
 <ul>
 <li>Thanks to Metamata and Suntest for the JavaCC parser generator
 and especially the Java grammar on which JavaNCSS is based.</li>
@@ -780,6 +782,9 @@ HTML report of all metrics which exceed a certain limit
 [2003-05-11].</li>
 <li>Chris Povirk for a patch in the XML handling for enums [2006-06-12].</li>
 <li>David Chwalisz for enhancements to the ant build.xml script [2006-10-06].</li>
+<li>Simon Brandhof for opening and moving JavaNCSS to the Codhaus development infrastructure (and Jira for bug tracking) [2009-02-07]. This will open up development to better collaboration with other developers and possibly will lead to new talent contributing much needed updates.</li>
+<li>Herv&eacute; Boutemy for moving the whole project to Maven and cleaning up all kind of code areas (encoding etc.) [2009-02-07].</li>
+<li>Freddy Mallet for a draft version of a new Java parser, which will allow easier extension of JavaNCSS by traversing Java source code via the visitor pattern [2009-02-07]. Hopefully this might also lead to more people being able to fix grammar bugs or updating the grammar to Java language extensions.</li>
 </ul>
 
 <h3>Thanks To</h3>
@@ -823,6 +828,7 @@ HTML output style sheet [2004-08-08].</li>
 <li>Tom Mitchell for bug reports and test code in the Java 1.5 parser code [2006-06-12].</li>
 <li>Charles L, Anver Sotnikov, James Burton, Byron du Preez, Martin Lehofer, Darren M. Siegel, David Chwalisz for a bug reports and test code in the Java 1.5 parser code [2006-10-06].</li>
 <li>Don Kautz and Isabelle Guimiot for bug reports and test code for the Java 1.5 parser code [2008-04-08].</li>
+<li>Jean-Laurent de Morlhon for good morale when moving to Codehaus [2009-02-07]!</li>
 </ul>
 
 <H2>
