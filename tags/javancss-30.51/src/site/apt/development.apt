@@ -1,0 +1,14 @@
+ ----
+ JavaNCSS Development Details
+ -----
+ Hervé Boutemy
+ -----
+ August 2008
+ -----
+
+JavaNCSS Development Details
+
+  JavaNCSS has been moved on August 2008 to Codehaus for a {{{source-repository.html}shared source code repository}}.
+  There is also a {{{issue-tracking.html}bug tracking}} tool.
+
+  JavaNCSS can actually be built using Ant (<<<ant all>>>) or Maven (<<<mvn package>>>).
