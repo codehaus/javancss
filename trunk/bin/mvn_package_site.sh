@@ -6,20 +6,22 @@
 
 VERSION=$1
 
-mvn clean
 ant clean
-mvn package
-mvn site
+mvn clean package site
+
 cd target
 unzip -U javancss-$VERSION.zip
-chmod 755 javancss-$VERSION/bin/javancss
 cd ..
+
 ant jar
+
 cp lib/javancss.jar target/javancss-$VERSION/lib/javancss.jar
 chmod 644 target/javancss-$VERSION/lib/javancss.jar
-rm target/javancss-$VERSION.zip
+
 cd target
+rm javancss-$VERSION.zip
 zip -r javancss-$VERSION.zip javancss-$VERSION
 cd ..
+
 ls -la target/javancss-$VERSION.zip
 target/javancss-$VERSION/bin/javancss -version
