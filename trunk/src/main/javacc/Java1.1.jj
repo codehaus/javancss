@@ -68,7 +68,7 @@ import javancss.PackageMetric;
  *            Anonymous class count patch by Vesa Karvonnen, <vesa_karvonen@hotmail.com> 2002-10-30.
  * @version   2000-01-31 $Id$
  */
-public class JavaParser 
+public class JavaParser implements JavaParserInterface
 {
     {
         /*

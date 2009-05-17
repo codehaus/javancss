@@ -28,6 +28,7 @@
 options {
   JAVA_UNICODE_ESCAPE = true;
   STATIC = false;
+  JDK_VERSION = "1.5";
   //*
   DEBUG_PARSER = true;
   // */
