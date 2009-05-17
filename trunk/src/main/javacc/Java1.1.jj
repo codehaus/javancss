@@ -131,6 +131,14 @@ public class JavaParser implements JavaParserInterface
         return sPackage_.substring(0, sPackage_.length() - 1);
     }
     
+    public void parse() throws Exception {
+      CompilationUnit();
+    }
+
+    public void parseImportUnit() throws Exception {
+      ImportUnit();
+    }
+
     public int getNcss() {
         return _ncss;
     }
