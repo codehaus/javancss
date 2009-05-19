@@ -1270,6 +1270,7 @@ void InterfaceMemberDeclaration() :
   LOOKAHEAD( MethodDeclarationLookahead() )
   MethodDeclaration()
 |
+  modifiers = Modifiers()
   FieldDeclaration()
 }
 

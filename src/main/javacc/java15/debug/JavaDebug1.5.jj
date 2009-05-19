@@ -26,14 +26,14 @@ options {
   ERROR_REPORTING = false;
   STATIC = false;
   JDK_VERSION = "1.5";
-  /*
+  //*
   DEBUG_PARSER = true;
   // */
 }
 
-PARSER_BEGIN(JavaParser15)
+PARSER_BEGIN(JavaParser15Debug)
 
-package javancss.parser.java15;
+package javancss.parser.java15.debug;
 
 import java.io.*;
 
@@ -48,7 +48,7 @@ import javancss.PackageMetric;
  * Grammar to parse Java version 1.5
  * @author Sreenivasa Viswanadha - Simplified and enhanced for 1.5
  */
-public class JavaParser15 implements JavaParserInterface
+public class JavaParser15Debug implements JavaParserInterface
 {
     private boolean _bReturn         = false;
     private int     _ncss            = 0;     // general counter
@@ -256,7 +256,7 @@ public class JavaParser15 implements JavaParserInterface
      }
    }
 
-   public JavaParser15(String fileName)
+   public JavaParser15Debug(String fileName)
    {
       this(System.in);
       try { ReInit(new FileInputStream(new File(fileName))); }
@@ -264,23 +264,23 @@ public class JavaParser15 implements JavaParserInterface
    }
 
   public static void main(String args[]) {
-    JavaParser15 parser;
+    JavaParser15Debug parser;
     if (args.length == 0) {
       System.out.println("Java Parser Version 1.5:  Reading from standard input . . .");
-      parser = new JavaParser15(System.in);
+      parser = new JavaParser15Debug(System.in);
     } else if (args.length == 1) {
       System.out.println("Java Parser Version 1.5:  Reading from file " + args[0] + " . . .");
       try {
-        parser = new JavaParser15(new java.io.FileInputStream(args[0]));
+        parser = new JavaParser15Debug(new java.io.FileInputStream(args[0]));
       } catch (java.io.FileNotFoundException e) {
         System.out.println("Java Parser Version 1.5:  File " + args[0] + " not found.");
         return;
       }
     } else {
       System.out.println("Java Parser Version 1.5:  Usage is one of:");
-      System.out.println("         java javancss.parser.java15.JavaParser15 < inputfile");
+      System.out.println("         java javancss.parser.java15.debug.JavaParser15Debug < inputfile");
       System.out.println("OR");
-      System.out.println("         java javancss.parser.java15.JavaParser15 inputfile");
+      System.out.println("         java javancss.parser.java15.debug.JavaParser15Debug inputfile");
       return;
     }
     try {
@@ -294,7 +294,7 @@ public class JavaParser15 implements JavaParserInterface
 
 }
 
-PARSER_END(JavaParser15)
+PARSER_END(JavaParser15Debug)
 
 /* WHITE SPACE */
 
