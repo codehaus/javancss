@@ -1001,7 +1001,9 @@ void ClassBodyDeclaration() :
          (Annotation())*
   NestedClassDeclaration()
 |
-  LOOKAHEAD( ( "static" | "abstract" | "final" | "public" | "protected" | "private" | "strictfp" )* "interface" )
+  LOOKAHEAD( Modifiers() "interface" )
+  //LOOKAHEAD( ( "static" | "abstract" | "final" | "public" | "protected" | "private" | "strictfp" )* "interface" )
+  modifiers = Modifiers()
   NestedInterfaceDeclaration()
   |
    LOOKAHEAD( Modifiers() "enum" )
