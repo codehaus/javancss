@@ -49,13 +49,15 @@ import ccl.util.FileUtil;
 import ccl.util.Init;
 import ccl.util.Util;
 
-import javancss.parser.debug.JavaParserDebug;
-import javancss.parser.debug.JavaParserDebugTokenManager;
 import javancss.parser.JavaParser;
 import javancss.parser.JavaParserInterface;
 import javancss.parser.JavaParserTokenManager;
 import javancss.parser.ParseException;
 import javancss.parser.TokenMgrError;
+import javancss.parser.debug.JavaParserDebug;
+import javancss.parser.debug.JavaParserDebugTokenManager;
+import javancss.parser.java15.JavaParser15;
+import javancss.parser.java15.debug.JavaParser15Debug;
 import javancss.test.JavancssTest;
 
 /**
@@ -78,7 +80,7 @@ public class Javancss implements Exitable
         "[Help]\n"+
         "; Please do not edit the Help section\n"+
         "HelpUsage=@srcfiles.txt | *.java | <stdin>\n" +
-        "Options=ncss,package,object,function,all,gui,xml,out,recursive,check\n" +
+        "Options=ncss,package,object,function,all,gui,xml,out,recursive,check,encoding,grammar15\n" +
         "ncss=b,o,Counts the program NCSS (default).\n" +
         "package=b,o,Assembles a statistic on package level.\n" +
         "object=b,o,Counts the object NCSS.\n" +
@@ -90,6 +92,7 @@ public class Javancss implements Exitable
         "recursive=b,o,Recurse to subdirs.\n" +
         "check=b,o,Triggers a javancss self test.\n" +
         "encoding=s,o,Encoding used while reading source files (default: platform encoding).\n" +
+        "parser15=b,o,Use new experimental Java 1.5 parser.\n" +
         "\n" +
         "[Colors]\n" +
         "UseSystemColors=true\n";
@@ -103,7 +106,6 @@ public class Javancss implements Exitable
     private Throwable _thrwError = null;
 
     private JavaParserInterface _pJavaParser = null;
-    private JavaParserInterface _pJavaParserDebug = null;
     private int _ncss = 0;
     private int _loc = 0;
     private List/*<FunctionMetric>*/ _vFunctionMetrics = new ArrayList();
@@ -204,15 +206,33 @@ public class Javancss implements Exitable
 
     private void _measureSource( Reader reader ) throws IOException, Exception, Error
     {
-        try
-        {
-            // create a parser object
-      if ( Util.isDebug() == false ) 
+      Util.debug( "_measureSource(Reader).ENTER" );
+      //Util.debug( "_measureSource(Reader).parser15: -->" + (_pInit.getOptions().get( "parser15" ) + "<--" );
+      //Util.panicIf( _pInit == null );
+      //Util.panicIf( _pInit.getOptions() == null );
+      Util.debug( "_measureSource(Reader).ENTER2" );
+      try
       {
+        // create a parser object
+        if ( Util.isDebug() == false ) 
+        {
+          if ( _pInit == null || _pInit.getOptions() == null || _pInit.getOptions().get( "parser15" ) == null ) {
+            Util.debug( "creating JavaParser" );
             _pJavaParser = (JavaParserInterface)(new JavaParser( reader ));
-      } else {
-        _pJavaParser = (JavaParserInterface)(new JavaParserDebug( reader ));
-      }
+          } else {
+            Util.debug( "creating JavaParser15" );
+            _pJavaParser = (JavaParserInterface)(new JavaParser15( reader ));
+          }
+        } else {
+          if ( _pInit == null || _pInit.getOptions() == null || _pInit.getOptions().get( "parser15" ) == null ) {
+            Util.debug( "creating JavaParserDebug" );
+            Util.println( "creating JavaParserDebug" );
+            _pJavaParser = (JavaParserInterface)(new JavaParserDebug( reader ));
+          } else {
+            Util.debug( "creating JavaParser15Debug" );
+            _pJavaParser = (JavaParserInterface)(new JavaParser15Debug( reader ));
+          }
+        }
 
             // execute the parser
             _pJavaParser.parse();
