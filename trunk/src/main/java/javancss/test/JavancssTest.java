@@ -430,6 +430,7 @@ public class JavancssTest extends AbstractTest
         _checkNcss( 132, 12 );
         _checkNcss( 134, 4 );
         _checkNcss( 136, 2 );
+        _checkNcss( 138, 3 );
 
         _exitSubTest();
     }
