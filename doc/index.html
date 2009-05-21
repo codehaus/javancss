@@ -105,8 +105,8 @@ easy selection of input source files.</LI>
 
 <LI>XML output (optional).</LI>
 
-<li>XSLT stylesheets provided for further generation of HTML, 
-     and SVG reports and as a basis for your own custom 
+<li>XSLT stylesheets provided for further generation of HTML,
+     and SVG reports and as a basis for your own custom
      reports.</li>
 
 <li>Ant task (written by Steve Jernigan).</li>
@@ -128,7 +128,7 @@ easy selection of input source files.</LI>
 <h2><a name="requirements"></a>System Requirements</h2>
 	Java JDK >= 1.4.1
 <UL></UL>
-	
+
 
 <H2>
 <A NAME="download"></A>Downloading</H2>
@@ -177,7 +177,7 @@ or
 <p>
 For regression test of JavaNCSS use:
 <p>
-<tt><FONT COLOR="#FFFFFF">java javancss.test.JavancssTest</FONT></TT> 
+<tt><FONT COLOR="#FFFFFF">java javancss.test.JavancssTest</FONT></TT>
 <p>If no parameter is provided for JavaNCSS, standard
 input (stdin) is used as the input stream. Multiple java source files can
 be specified in the command line. If a '@' char is put in front of a file name, then not this file will be measured but its content will be interpreted as a list of Java source files that
@@ -189,7 +189,7 @@ are lucky. Windows doesn't do that.) Instead use something like <TT><FONT COLOR=
 source files that belong to a package with files that doesn't.
 <p> If no option
 is given, JavaNCSS only calculates the total non commenting source statements
-(NCSS) of the given input. 
+(NCSS) of the given input.
 <p>JavaNCSS can also be used conveniently via Ant. For details
 have a look at the <a href="JavancssAntTask.html">JavaNCSS Ant Task page</a>,
 especially at the example at the bottom of that page. You can
@@ -292,7 +292,7 @@ Prints out some basic information.</DD>
 <a name="xslt"></a><h3>XSLT Stylesheets</h3>
 
 JavaNCSS comes with some XSLT stylesheet (<tt>javancss-30.51/xslt/javancss2text.xsl</tt> and <tt>javancss-30.51/xslt/javancss2html.xsl</tt>). These stylesheets can be used to
-convert XML output from JavaNCSS to ASCII or HTML output. In case of 
+convert XML output from JavaNCSS to ASCII or HTML output. In case of
 the ASCII output this is of course
 quite boring and much slower as JavaNCSS creates the identical output
 by default anyway. But you can use this stylesheet (or any of the others
@@ -313,7 +313,7 @@ Have fun. If you create a useful new stylesheet for JavaNCSS,
 I would be happy to get a copy of it.
 
 <h4>SVG Output</h4>
-Yves Coene <i><a href="mailto:Yves.Coene@spacebel.be">&lt;Yves.Coene@spacebel.be&gt;</a></i> has donated some XSLT stylesheets which produce beautiful 
+Yves Coene <i><a href="mailto:Yves.Coene@spacebel.be">&lt;Yves.Coene@spacebel.be&gt;</a></i> has donated some XSLT stylesheets which produce beautiful
 SVG charts out of JavaNCSS's XML output.<p>
 
 Use e.g. batik as an SVG viewer and have a look at the example
@@ -519,7 +519,7 @@ Furthermore there are a few <a href="http://xircles.codehaus.org/projects/javanc
 
 <h3>Version 31.52</h3>
 
-Fixed bugs JAVANCSS-10 and JAVANCSS-4. Added options to see the parse tree in debug mode as well as a new experimental Java 1.5 grammar parser, also intended to use for debugging purposes.
+Fixed bugs <a href="http://jira.codehaus.org/browse/JAVANCSS-10">JAVANCSS-10</a> and <a href="http://jira.codehaus.org/browse/JAVANCSS-4">JAVANCSS-4</a>. Added options to see the parse tree in debug mode as well as a new experimental Java 1.5 grammar parser, also intended to use for debugging purposes.
 
 <h3>Version 30.51</h3>
 
@@ -567,10 +567,10 @@ Version 28.49 has been released on October 6, 2006<p>Various Java 1.5 grammar pa
    tags with names that are different for different elements.
 </li></ol><h4>Fixed Bugs</h4><ol><li>Javadocs per Function always had a wrong value in the XML
    output. Thanks to David Brandt for fixing this.
-</li><li>Vesa Karvonen found a rare bug in the XML output which 
+</li><li>Vesa Karvonen found a rare bug in the XML output which
    reveals itself only in conjunction with some exotic locales.
 </li></ol><H3><A NAME=20.40></A>Version 20.40</H3>
-         Version 20.40 has been released on July 5, 2002<p>Two new XSLT stylesheets, one of them to convert the JavaNCSS 
+         Version 20.40 has been released on July 5, 2002<p>Two new XSLT stylesheets, one of them to convert the JavaNCSS
 XML output to HTML.
 <h4>What's New</h4><ol><li>Terry Skelton donated an XSLT stylesheet to convert the XML
    output of JavaNCSS to HTML. The report is formatted to have
@@ -588,7 +588,7 @@ XML output to HTML.
    code and documentation of that task.
 </li></ol><H3><A NAME=18.38></A>Version 18.38</H3>
          Version 18.38 has been released on May 11, 2002<p>Fixed a rare parsing bug.
-<h4>Fixed Bugs</h4><ol><li>Could not parse accessing an element of the parent class of 
+<h4>Fixed Bugs</h4><ol><li>Could not parse accessing an element of the parent class of
    the outer class in an inner class, or in other words: could
    not parse this code:
 </li></ol><H3><A NAME=17.37></A>Version 17.37</H3>
@@ -608,27 +608,27 @@ XML output to HTML.
    last missing file and not for all of them.
 </li></ol><H3><A NAME=16.34></A>Version 16.34</H3>
          Version 16.34 has been released on April 7, 2002<p>Recursive feature, support of JDK 1.4 assert statements.
-<h4>What's New</h4><ol><li>Paako Hannu provided code to recursively parse all Java files 
+<h4>What's New</h4><ol><li>Paako Hannu provided code to recursively parse all Java files
    including those in subdirectories.
 </li><li>JavaNCSS supports now JDK 1.4 assert statements. At the same
    time methods or variables of name 'assert' are still parsed
    successfully, JavaNCSS is just not able to accept a field of
    type 'assert' anymore.
-</li><li>John Wilson provided code to use "\r\n" on Windows to end 
+</li><li>John Wilson provided code to use "\r\n" on Windows to end
    lines for JavaNCSS's ascii output. You might be able to turn
-   this behavior off by overwriting the line.separator system 
+   this behavior off by overwriting the line.separator system
    property when invoking the Java virtual machine.
 </li></ol><H3><A NAME=15.32></A>Version 15.32</H3>
          Version 15.32 has been released on November 21, 2001<p>New -out option.
 <h4>What's New</h4><ol><li>New option -out to specify output file. By default std out is
    used. Patch was supplied by Ted Leung.
-</li><li>An Ant task for JavaNCSS has been published by Steve Jernigan 
+</li><li>An Ant task for JavaNCSS has been published by Steve Jernigan
    at http://sourceforge.net/projects/javancss2ant/.
 </li><li>A basic Ant build.xml file gets distributed together with
    JavaNCSS. This file should be fine to compile the Java source
    files, but is not enough to create the jar file nor
    to compile the grammar with JavaCC.
-</li></ol><h4>Bugs Fixed</h4><ol><li>When relative files are given JavaNCSS will now take the 
+</li></ol><h4>Bugs Fixed</h4><ol><li>When relative files are given JavaNCSS will now take the
    user.dir property in account to locate a file.
 </li></ol><H3><A NAME=14.31></A>Version 14.31</H3>
          Version 14.31 has been released on June 16, 2001<p>Major XML format bug fix.
@@ -713,8 +713,8 @@ files much more convenient.
    presents the output in it's <a href="gui.html">own window</a> instead of &lt;stdout>.
 </li><li>You need swing in order to get this new feature working,
    though command line mode still works without it.
-</li><li>New Jacob feature: a file with absolute file names of all 
-   Java source files for the current project gets generated 
+</li><li>New Jacob feature: a file with absolute file names of all
+   Java source files for the current project gets generated
    when creating a new makefile. Its name is the project name
    plus '.srcfiles.txt' as postfix and will be located in
    the current project directory. This file can be further
@@ -723,29 +723,29 @@ files much more convenient.
    specifying an '@' char in front of its file name. Then
    JavaNCSS interprets each line of its contents as the name of
    a java source file that should be counted. This also works
-   recursively and normal source file names can be 
+   recursively and normal source file names can be
    intertwined with '@' files as well.
 </li><li>New Jacob feature: 'NoEmacs' flag for Jacob's
-   initialisation file and '-noemacs' startup option for use 
-   without an editor. This feature is planned solely for 
-   JavaNCSS users who don't want to use Jacob for programming 
+   initialisation file and '-noemacs' startup option for use
+   without an editor. This feature is planned solely for
+   JavaNCSS users who don't want to use Jacob for programming
    purposes.
 </li></ol><h4>Fixed Bugs</h4><ol><li>Methods of anonymous classes are now presented with its
    class information.
 </li></ol><H3><A NAME=2.4></A>Version 2.4</H3>
-         Version 2.4 has been released on January 24, 1998<p><h4>What's New</h4><ol><li>New '-package' option. 
+         Version 2.4 has been released on January 24, 1998<p><h4>What's New</h4><ol><li>New '-package' option.
 </li><li>When &lt;stdin> is used for input and a parse error occurs the
    last class and method successfully parsed is given together
-   with the error message. Note, that errors in package or 
-   import statements or not captured this way. 
-</li><li>More documentation about what is "exactly" measured. 
+   with the error message. Note, that errors in package or
+   import statements or not captured this way.
+</li><li>More documentation about what is "exactly" measured.
 </li><li>The grammar is now slightly more tolerant, but still not as
-   tolerant as Sun's javac compiler. I made javancss just as 
+   tolerant as Sun's javac compiler. I made javancss just as
    tolerant as necessary to parse Sun's original java.* source
-   files. 
-</li><li>Different options can be specified and all get executed, 
-   therefor only one run is needed for different output 
-   formats. 
+   files.
+</li><li>Different options can be specified and all get executed,
+   therefor only one run is needed for different output
+   formats.
 </li><li>New '-all' option is equivalent to '-package -object
    -function'.
 </li></ol><h4>Bugs Fixed</h4><ol><li>'default' keyword did increment the CCN counter, but it
@@ -770,10 +770,10 @@ but is distributed with JavaNCSS as well. This task has also some
 additional features such as checks of user defined thresholds
 on individual metrics.</li>
 <li>Pääkö for a patch for the -recursive feature [2002-03-16].</li>
-<li>John Wilson for a patch to use "\r\n" on Windows to end 
+<li>John Wilson for a patch to use "\r\n" on Windows to end
 lines for JavaNCSS's ascii output.</li>
 <li>Emilio Gongora and Guillermo Rodriguez for patches to count
-number of lines of comments. Applying these patches is not 
+number of lines of comments. Applying these patches is not
 finished yet and the only result you can see already is the
 the new Javadocs info for packages.</li>
 <li>Phillip Wells for working on Steve Jernigan's Ant task and
@@ -787,7 +787,7 @@ file [2002-06-08].</li>
 <li>Yves Coene (Yves.Coene at spacebel.be)
 donated XSLT stylesheets which generate beautiful
 SVG charts from the JavaNCSS XML output [2002-09-04].</li>
-<li>Rajesh Raheja  (Rajesh.Raheja at oracle.com) 
+<li>Rajesh Raheja  (Rajesh.Raheja at oracle.com)
 donated an XSLT stylesheet, which generates a simple
 HTML report of all metrics which exceed a certain limit
 [2003-05-11].</li>
@@ -814,16 +814,16 @@ an Ant task for JavaNCSS of his own. Unfortunately I never
 got around looking into it and adding it to JavaNCSS. Finally
 when I found the time I decided to go for Steve Jernigan's
 task, as that adds some new features to JavaNCSS and has
-detailed documentation. Thought Ted's task has a simpler 
-interface with its parameter names sticking nearer to the 
+detailed documentation. Thought Ted's task has a simpler
+interface with its parameter names sticking nearer to the
 original JavaNCSS options [2002-06-08].</li>
 <li><a href="mailto:david_brandt@us.ibm.com">David Brandt</a> fixed the wrong Javadocs per
 Function value for XML output [2002-07-21].</li>
-<li><a href="mailto:vesa_karvonen@hotmail.com">Vesa Karvonen</a> for feedback regarding the overloaded 
+<li><a href="mailto:vesa_karvonen@hotmail.com">Vesa Karvonen</a> for feedback regarding the overloaded
 'functions' element in the XML DTD, which has led to the
 conversion stylesheet 'javancss_no_functions_overloading.xsl'
 [2002-08-04].</li>
-<li>Again Vesa Karvonen for a bug report that revealed the incorrect production of 
+<li>Again Vesa Karvonen for a bug report that revealed the incorrect production of
 XML output in conjunction with some exotic locale setting [2002-09-03].</li>
 <li><a href="mailto:Brad.Kiewel@fiserv.com">Brad Kiewel</a> for
 patching the build.xml Ant file to add a manifest to the
@@ -872,7 +872,7 @@ control package dependencies."<p>
 
 While JavaNCSS simply lets you know how much source code
 you have to deal with (ncss metric), JDepend informs you
-about the package structure of your code and helps you 
+about the package structure of your code and helps you
 spotting weaknesses in your global code organization,
 e.g. identifying dependency cycles, creating a few independent
 packages on which most other package rely on, etc.<p>
@@ -881,9 +881,9 @@ You can use JDepend as a quantitative
 measurement tool as well.
 </li>
 
-<li><a href="http://proguard.sourceforge.net/">ProGuard</a> - 
+<li><a href="http://proguard.sourceforge.net/">ProGuard</a> -
 ProGuard is a class file shrinker and obfuscator
-by 
+by
 Eric Lafortune. It differs from
 other offerings in its simple and compact configuration, its speed,
 and its modest memory usage.<p>
