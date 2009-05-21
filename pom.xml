@@ -103,8 +103,8 @@
         <artifactId>maven-compiler-plugin</artifactId>
         <version>2.0.2</version>
         <configuration>
-          <source>1.5</source>
-          <target>1.5</target>
+          <source>1.4</source>
+          <target>1.4</target>
           <encoding>${project.build.sourceEncoding}</encoding><!-- not needed for 2.1 -->
         </configuration>
       </plugin>
@@ -202,7 +202,7 @@
               <goal>javacc</goal>
             </goals>
             <configuration>
-              <jdkVersion>1.5</jdkVersion>
+              <jdkVersion>1.4</jdkVersion>
             </configuration>
           </execution>
         </executions>
