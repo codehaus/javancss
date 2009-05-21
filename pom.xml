@@ -6,7 +6,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>javancss</groupId>
   <artifactId>javancss</artifactId>
-  <version>30.51</version>
+  <version>31.52-SNAPSHOT</version>
   <packaging>jar</packaging>
 
   <name>JavaNCSS</name>
