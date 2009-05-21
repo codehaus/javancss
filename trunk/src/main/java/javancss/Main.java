@@ -33,7 +33,7 @@ import java.util.Locale;
  * @version   $Id$
  */
 public class Main {
-    public static final String S_RCS_HEADER = "$Header: /home/clemens/src/java/javancss/src/javancss/RCS/Main.java,v 30.51 2009/02/07 22:10:00 clemens Exp clemens $";
+    public static final String S_RCS_HEADER = "$Header: /home/clemens/src/java/javancss/src/javancss/RCS/Main.java,v 31.52 2009/05/21 16:40:00 clemens Exp clemens $";
 
     public static void main(String[] asArgs) throws IOException {
         Locale.setDefault( Locale.US );
