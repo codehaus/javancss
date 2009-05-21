@@ -80,7 +80,7 @@ public class Javancss implements Exitable
         "[Help]\n"+
         "; Please do not edit the Help section\n"+
         "HelpUsage=@srcfiles.txt | *.java | <stdin>\n" +
-        "Options=ncss,package,object,function,all,gui,xml,out,recursive,check,encoding,grammar15\n" +
+        "Options=ncss,package,object,function,all,gui,xml,out,recursive,check,encoding,parser15\n" +
         "ncss=b,o,Counts the program NCSS (default).\n" +
         "package=b,o,Assembles a statistic on package level.\n" +
         "object=b,o,Counts the object NCSS.\n" +
