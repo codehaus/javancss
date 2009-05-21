@@ -3,7 +3,7 @@
  -----
  Hervé Boutemy
  -----
- August 2008
+ 2009-05-21
  -----
 
 JavaNCSS Development Details
@@ -12,3 +12,11 @@ JavaNCSS Development Details
   There is also a {{{issue-tracking.html}bug tracking}} tool.
 
   JavaNCSS can actually be built using Ant (<<<ant all>>>) or Maven (<<<mvn package>>>).
+
+  {{{http://javancss.codehaus.org/}JavaNCSS site on codehaus}} can be deployed at any time with <<<mvn site-deploy>>>.
+
+  JavaNCSS release is automated with {{{http://maven.apache.org/plugins/maven-release-plugin/}Maven release plugin}}:
+  {{{http://maven.apache.org/plugins/maven-release-plugin/examples/prepare-release.html}<<<mvn release:prepare>>>}} then
+  {{{http://maven.apache.org/plugins/maven-release-plugin/examples/perform-release.html}<<<mvn release:perform>>>}}.
+  Don't forget to {{{http://jira.codehaus.org/browse/JAVANCSS}mark the release done in Jira}} and declare the next
+  version: "Administer Project", "Manage versions".
