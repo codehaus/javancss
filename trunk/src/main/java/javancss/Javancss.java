@@ -214,7 +214,7 @@ public class Javancss implements Exitable
       try
       {
         // create a parser object
-        if ( Util.isDebug() == false ) 
+        if ( Util.isDebug() == false )
         {
           if ( _pInit == null || _pInit.getOptions() == null || _pInit.getOptions().get( "parser15" ) == null ) {
             Util.debug( "creating JavaParser" );
@@ -582,13 +582,20 @@ public class Javancss implements Exitable
     private Init _pInit = null;
 
     /**
+     * @deprecated use Javancss(String[]) instead, since the sRcsHeader_ parameter is not useful
+     */
+    public Javancss(String[] asArgs_, String sRcsHeader_) throws IOException {
+        this(asArgs_);
+    }
+
+    /**
      * This is the constructor used in the main routine in
      * javancss.Main.
      * Other constructors might be helpful to use Javancss out
      * of other programs.
      */
-    public Javancss(String[] asArgs_, String sRcsHeader_) throws IOException {
-        _pInit = new Init(this, asArgs_, sRcsHeader_, S_INIT__FILE_CONTENT);
+    public Javancss(String[] asArgs_) throws IOException {
+        _pInit = new Init(this, asArgs_, Main.S_RCS_HEADER, S_INIT__FILE_CONTENT);
         if (_bExit) {
             return;
         }

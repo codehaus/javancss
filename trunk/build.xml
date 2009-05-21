@@ -19,6 +19,7 @@
       <javac srcdir     ="src"
              destdir    ="${DESTINATION}"
              classpath  ="${CLASSPATH}"
+      	     encoding   ="ISO-8859-1"
              debug      ="on"
              deprecation="on"
              optimize   ="off"
@@ -61,7 +62,7 @@
    </target>
 
    <target name="taskdef">
-      <taskdef name="javancss" 
+      <taskdef name="javancss"
                classname="javancss.JavancssAntTask"
                classpath="${CLASSPATH}:lib/javancssanttask.jar"/>
   </target>
@@ -86,11 +87,18 @@
      </java>
    </target>
 
-   <target name="jar" >
+   <target name="jar" depends="javac">
+     <xmlproperty file="pom.xml" prefix="pom.xml" />
      <jar destfile="lib/javancss.jar" basedir="target/classes">
        <manifest>
          <attribute name="Main-Class" value="javancss.Main" />
          <attribute name="Class-Path" value="jhbasic.jar ccl.jar" />
+      	 <attribute name="Specification-Title" value="${pom.xml.project.name}" />
+       	 <attribute name="Specification-Version" value="${pom.xml.project.version}" />
+      	 <attribute name="Specification-Vendor" value="${pom.xml.project.organization.name}" />
+     	 <attribute name="Implementation-Title" value="${pom.xml.project.name}" />
+      	 <attribute name="Implementation-Version" value="${pom.xml.project.version}" />
+     	 <attribute name="Implementation-Vendor" value="${pom.xml.project.organization.name}" />
        </manifest>
      </jar>
    </target>
