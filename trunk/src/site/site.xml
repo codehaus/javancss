@@ -6,6 +6,8 @@
     <name>JavaNCSS</name>
     <href>http://www.kclee.de/clemens/java/javancss/</href>
   </bannerLeft>
+  <publishDate position="left" format="yyyy-MM-dd"/>
+  <version position="left" />
 
   <body>
     <links>
