@@ -204,6 +204,8 @@ public class JavancssTest extends AbstractTest
 
         testEncoding();
 
+        testVersion();
+
         XmlFormatterTest xmlTest = new XmlFormatterTest( this );
         xmlTest.setTestDir( getTestDir() );
         xmlTest.run();
@@ -599,7 +601,7 @@ public class JavancssTest extends AbstractTest
         try
         {
             System.setOut( new PrintStream( new ByteArrayOutputStream() ) );
-            return new Javancss(args, "$Header: /home/clemens/src/java/javancss/src/javancss/test/RCS/JavancssTest.java,v 1.34 2006/10/06 11:46:43 clemens Exp clemens $");
+            return new Javancss(args);
         }
         finally
         {
@@ -620,6 +622,16 @@ public class JavancssTest extends AbstractTest
 
         bugIf( ncss != expectedNcss,
                "Parsing file TestEncoding.java failed. Ncss is " + ncss + " and not " + expectedNcss + "." );
+
+        _exitSubTest();
+    }
+
+    public void testVersion() throws IOException
+    {
+        _enterSubTest( "version" );
+
+        String[] args = new String[] { "-version" };
+        Javancss pJavancss = measureWithArgs( args );
 
         _exitSubTest();
     }
