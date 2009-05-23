@@ -7,7 +7,7 @@
 
 <project name="javancss" default="javac" basedir=".">
 
-   <property name="DESTINATION" value="classes"/>
+   <property name="DESTINATION" value="target/classes"/>
    <property name="CLASSPATH"   value="${DESTINATION}:lib/ccl.jar:lib/jhbasic.jar:lib/javancss.jar"/>
    <!-- overwrite with e.g. ant -DJAVACC_HOME=/sbcimp/run/tp/sun/JavaCC/2.0/ javacc -->
    <property name="JAVACC_HOME" value="/usr/local/java/javacc"/>
@@ -64,12 +64,13 @@
    <target name="taskdef">
       <taskdef name="javancss"
                classname="javancss.JavancssAntTask"
-               classpath="${CLASSPATH}:lib/javancssanttask.jar"/>
+               classpath="${CLASSPATH}"/>
   </target>
 
    <target name="javancss" depends="taskdef">
       <javancss srcdir="src"
                 includes="**/*.java"
+      	        ccnPerFuncMax="100"
                 generateReport="yes"/>
    </target>
 
