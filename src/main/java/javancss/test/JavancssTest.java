@@ -206,6 +206,8 @@ public class JavancssTest extends AbstractTest
 
         testVersion();
 
+        testRecursive();
+
         XmlFormatterTest xmlTest = new XmlFormatterTest( this );
         xmlTest.setTestDir( getTestDir() );
         xmlTest.run();
@@ -631,6 +633,16 @@ public class JavancssTest extends AbstractTest
         _enterSubTest( "version" );
 
         String[] args = new String[] { "-version" };
+        Javancss pJavancss = measureWithArgs( args );
+
+        _exitSubTest();
+    }
+
+    public void testRecursive() throws IOException
+    {
+        _enterSubTest( "recursive" );
+
+        String[] args = new String[] { "-recursive", getTestFile( "../lib" ).getAbsolutePath()  };
         Javancss pJavancss = measureWithArgs( args );
 
         _exitSubTest();

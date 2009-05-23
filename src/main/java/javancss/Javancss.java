@@ -99,7 +99,7 @@ public class Javancss implements Exitable
 
     private boolean _bExit = false;
 
-    private List/*<File>*/ _vJavaSourceFiles = new ArrayList();
+    private List/*<File>*/ _vJavaSourceFiles = null;
     private String encoding = null;
 
     private String _sErrorMessage = null;
@@ -316,7 +316,7 @@ public class Javancss implements Exitable
         _htPackages = new HashMap();
 
         // either there are argument files, or stdin is used
-        if ( _vJavaSourceFiles.size() == 0 )
+        if ( _vJavaSourceFiles == null )
         {
             _measureSource( reader );
         }
@@ -516,10 +516,17 @@ public class Javancss implements Exitable
         {
             Util.debug( "filenames: " + Util.toString( filenames ) );
         }
-        if ( recursive && ( filenames.size() == 0 ) )
+        if ( filenames.size() == 0 )
         {
-            // If no files then add current directory!
-            filenames.add( "." );
+            if ( recursive )
+            {
+                // If no files then add current directory!
+                filenames.add( "." );
+            }
+            else
+            {
+                return null;
+            }
         }
 
         Set _processedAtFiles = new HashSet();
