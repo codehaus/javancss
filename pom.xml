@@ -271,7 +271,7 @@
                   <path refid="maven.compile.classpath"/>
                 </path>
                 <taskdef name="javancss" classname="javancss.JavancssAntTask" classpathref="task.classpath"/>
-                <javancss srcdir="src/main/java" includes="**/*.java" generateReport="yes"
+                <javancss srcdir="src/main/java" includes="**/*.java" generateReport="yes" ccnPerFuncMax="100"
                           abortOnFail="true" classMetrics="false" functionMetrics="false"/>
               </tasks>
             </configuration>
@@ -337,6 +337,11 @@
       <artifactId>jhbasic</artifactId>
       <version>29.50</version>
       <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>ant</groupId>
+      <artifactId>ant</artifactId>
+      <version>1.6.5</version>
       <optional>true</optional>
     </dependency>
   </dependencies>
