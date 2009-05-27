@@ -108,6 +108,12 @@ public class JavancssTest extends AbstractTest
         _checkJvdcs( 121, 2 );
         _checkJvdcs( 122, 1 );
 
+        //Added by REYNAUD Sebastien (LOGICA) for JAVANCSS-20
+        _checkJvdcs( 139 , 3 );
+        _checkJvdcs( 140 , 2 );
+        _checkJvdcs( 141 , 1 );
+        //
+
         _exitSubTest();
     }
 
@@ -435,6 +441,10 @@ public class JavancssTest extends AbstractTest
         _checkNcss( 134, 4 );
         _checkNcss( 136, 2 );
         _checkNcss( 138, 3 );
+
+        // JAVANCSS-12
+        pJavancss = measureTestFile( 142 );
+        bugIf( pJavancss.getNcss() <= 0, "Parsing file Test142.java failed!" );
 
         _exitSubTest();
     }

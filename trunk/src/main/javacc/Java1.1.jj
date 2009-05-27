@@ -1009,7 +1009,9 @@ void TypeDeclaration() :
 }
 {
   LOOKAHEAD( (Annotation())* ( "abstract" | "final" | "public" | "synchronized" | "strictfp" )* "class" )
-         (Annotation())*
+        
+	//(Annotation())*	//Removed by REYNAUD Sebastien (LOGICA)
+
   ClassDeclaration()
 |
   LOOKAHEAD( modifiers = Modifiers()
@@ -1020,7 +1022,9 @@ void TypeDeclaration() :
   EnumDeclaration(modifiers)
 |
          LOOKAHEAD( Modifiers() "interface" )
-         (Annotation())*
+         
+	//(Annotation())*	//Removed by REYNAUD Sebastien (LOGICA)
+
   InterfaceDeclaration()
    |
   modifiers = Modifiers()
@@ -1048,8 +1052,22 @@ void ClassDeclaration() :
     boolean bTemp = _bPublic;
     _bPublic      = false;
     //
+
+	//Added by REYNAUD Sebastien (LOGICA)
+	Token myToken = null;
+	//
 }
 {
+	//Added by REYNAUD Sebastien (LOGICA)
+	(
+	{myToken = getToken(1);}
+	Annotation()
+	{tmpToken = myToken;}
+	)?
+ 	
+	(Annotation())*
+	//
+
   ( "abstract"
   {
       if ( tmpToken == null ) {
@@ -1145,6 +1163,10 @@ void UnmodifiedClassDeclaration() :
         int oldNcss = _ncss;
         int oldFunctions = _functions;
         int oldClasses = _classes;
+
+		//Added by REYNAUD Sebastien (LOGICA)
+		int oldJavadocs = _javadocs;
+		//
 }
 {
         {
@@ -1183,6 +1205,22 @@ void UnmodifiedClassDeclaration() :
                         //_pPackageMetric.multiLn += JavaParserTokenManager._iMultiComments - oldMulti;
                         //
                 }
+			//Added by REYNAUD Sebastien (LOGICA)
+			else
+			{
+			ObjectMetric metric1 = new ObjectMetric();
+                  metric1.name = _sPackage + _sClass ;
+			metric1.ncss = _ncss - oldNcss;
+                  metric1.functions = _functions - oldFunctions;
+                  metric1.classes = _classes - oldClasses;
+                  Token lastToken = getToken( 0 );
+                  _vClasses.add( metric1 );
+                  _pPackageMetric.functions += _functions - oldFunctions;
+                  _pPackageMetric.classes++;
+			metric1.javadocs = _javadocs - oldJavadocs;
+			}
+			//
+
                 _functions = oldFunctions;
                 _classes = oldClasses + 1;
                 _sClass = sOldClass;
@@ -1205,15 +1243,38 @@ void NestedClassDeclaration() :
     _bPublic = false;
     boolean bPublic = false;
 
+	//Added by REYNAUD Sebastien (LOGICA)
+	Token myToken = null;
+	//
 }
 {
+	//Added by REYNAUD Sebastien (LOGICA)
+	(
+	{myToken = getToken(1);}
+	Annotation()
+	{tmpToken = myToken;}
+	)?
+ 	
+	(Annotation())*
+
+	{
+	if(tmpToken==null)
+	{
+		tmpToken = getToken( 1 );
+	}
+	}
+	//
+
   ( "static" | "abstract" | "final" 
   | "public" { bPublic = true; }        // added by SMS
   | "protected" { bPublic = true; }     // added by SMS
   | "private" | "strictfp" )*
   
+
   // added by SMS
-  {             tmpToken = getToken( 0 );
+  {            
+
+			//tmpToken = getToken( 0 );//Removed by REYNAUD Sebastien (LOGICA)
 
                 while( tmpToken.specialToken != null ) {
                     if ( tmpToken.specialToken.image.startsWith( "/**" ) ) {
@@ -1255,7 +1316,9 @@ void ClassBodyDeclaration() :
   Initializer()
 |
   LOOKAHEAD( (Annotation())* ( "static" | "abstract" | "final" | "public" | "protected" | "private" | "strictfp" )* "class" )
-         (Annotation())*
+         
+	//(Annotation())*	//Removed by REYNAUD Sebastien (LOGICA)
+
   NestedClassDeclaration()
 |
   LOOKAHEAD( Modifiers() "interface" )
@@ -1270,7 +1333,9 @@ void ClassBodyDeclaration() :
          //LOOKAHEAD( [ TypeParameters() ] <IDENTIFIER> "(" )
          LOOKAHEAD( (Annotation())* [ "public" | "protected" | "private" ] [ TypeParameters() ] Name() "(" )
          //{ System.out.println( "\n\nClassDeclaration\n" ); }
-         (Annotation())*
+         
+	//(Annotation())* //Removed by REYNAUD Sebastien (LOGICA)
+
   ConstructorDeclaration()
 |
   LOOKAHEAD( MethodDeclarationLookahead() )
@@ -1306,8 +1371,22 @@ void InterfaceDeclaration() :
         boolean bTemp = _bPublic;
         _bPublic = false;
         //
+
+	//Added by REYNAUD Sebastien (LOGICA)
+	Token myToken=null;
+	//
 }
 {
+	//Added by REYNAUD Sebastien (LOGICA)
+	(
+	{myToken = getToken(1);}
+	Annotation()
+	{tmpToken = myToken;}
+	)?
+
+	(Annotation())*
+	//
+
   ( "strictfp" | "abstract"
   {
       if ( tmpToken == null ) {
@@ -1391,15 +1470,38 @@ void NestedInterfaceDeclaration() :
     _bPublic = false;
     boolean bPublic = false;
 
+	//Added by REYNAUD Sebastien (LOGICA)
+	Token myToken=null;
+	//
+
 }
 {
+	//Added by REYNAUD Sebastien (LOGICA)
+	(	
+	{myToken = getToken(1);}
+	Annotation()
+	{tmpToken = myToken;}
+	)?
+
+	(Annotation())*
+	{
+	if(tmpToken==null)
+	{
+		tmpToken = getToken( 1 );
+	}
+	}
+	//
+
+
   ( "static" | "abstract" | "final" 
   | "public" { bPublic = true; }        // added by SMS
   | "protected" { bPublic = true; }     // added by SMS
   | "private" | "strictfp" )*
 
   // added by SMS
-  {             tmpToken = getToken( 0 );
+  {             
+
+			//tmpToken = getToken( 0 );	//Removed by REYNAUD Sebastien (LOGICA)
   
                 while( tmpToken.specialToken != null ) {
                     if ( tmpToken.specialToken.image.startsWith( "/**" ) ) {
@@ -1437,6 +1539,10 @@ void UnmodifiedInterfaceDeclaration() :
         int oldNcss = _ncss;
         int oldFunctions = _functions;
         int oldClasses = _classes;
+
+		//Added by REYNAUD Sebastien (LOGICA)
+		int oldJavadocs = _javadocs;
+		//
 }
 {
         {
@@ -1473,6 +1579,23 @@ void UnmodifiedInterfaceDeclaration() :
                         //_pPackageMetric.multiLn += JavaParserTokenManager._iMultiComments - oldMulti;
                         //
                 }
+			//Added by REYNAUD Sebastien (LOGICA)
+			else
+			{
+			ObjectMetric metric1 = new ObjectMetric();
+                  metric1.name = _sPackage + _sClass;
+			metric1.ncss = _ncss - oldNcss;
+                  metric1.functions = _functions - oldFunctions;
+                  metric1.classes = _classes - oldClasses;
+                  Token lastToken = getToken( 0 );
+                  _vClasses.add( metric1 );
+                  _pPackageMetric.functions += _functions - oldFunctions;
+                  _pPackageMetric.classes++;
+			//_pPackageMetric.javadocs += _javadocs;
+			metric1.javadocs = _javadocs - oldJavadocs;
+			}
+			//
+
                 _functions = oldFunctions;
                 _classes = oldClasses + 1;
                 _sClass = sOldClass;
@@ -1486,10 +1609,10 @@ void InterfaceMemberDeclaration() :
 {
   EmptyStatement()
 |
-  LOOKAHEAD( ( "static" | "abstract" | "final" | "public" | "protected" | "private" | "strictfp" )* "class" )
+  LOOKAHEAD( /* Added by REYNAUD Sebastien (LOGICA) */ (Annotation())* /**/ ( "static" | "abstract" | "final" | "public" | "protected" | "private" | "strictfp" )* "class" )
   NestedClassDeclaration()
 |
-  LOOKAHEAD( ( "static" | "abstract" | "final" | "public" | "protected" | "private" | "strictfp" )* "interface" )
+  LOOKAHEAD( /* Added by REYNAUD Sebastien (LOGICA) */ (Annotation())* /**/ ( "static" | "abstract" | "final" | "public" | "protected" | "private" | "strictfp" )* "interface" )
   NestedInterfaceDeclaration()
   |
   LOOKAHEAD( modifiers = Modifiers()
@@ -1591,6 +1714,11 @@ void MethodDeclaration() :
     int oldMulti;
     boolean bPublic = false;
     //
+
+	//Added by REYNAUD Sebastien (LOGICA)
+	Token myToken = null;
+	_tmpToken=null;
+	//
 }
 {
     {
@@ -1600,10 +1728,18 @@ void MethodDeclaration() :
     }
     }
     (
+	//Added by REYNAUD Sebastien (LOGICA)
+	{myToken = getToken(1);}
+	//
      Annotation()
   {
       if ( tmpToken == null ) {
-          tmpToken = getToken( 0 );
+
+          //tmpToken = getToken( 0 ); //Removed by REYNAUD Sebastien (LOGICA)
+
+		//Added by REYNAUD Sebastien (LOGICA)
+		tmpToken = myToken;
+		//
       }
   }     
      )*
@@ -1785,6 +1921,10 @@ void MethodDeclaration() :
              _functions = oldFunctions + 1;
              _cyc = oldcyc;
              _bReturn = bOldReturn;
+
+		//Added by REYNAUD Sebastien (LOGICA)
+		_tmpToken = null;
+		//
          }
 }
 
@@ -1838,8 +1978,29 @@ void ConstructorDeclaration() :
         int jvdcLines = 0;
         boolean bPublic = false;
         //
+
+	//Added by REYNAUD Sebastien (LOGICA)
+	Token myToken = null;
+	//
+
 }
 {
+
+//Added by REYNAUD Sebastien (LOGICA)
+	(
+	
+	{myToken = getToken(1);}
+	
+     	Annotation()
+  	{
+      	if ( tmpToken == null ) 
+		{
+			tmpToken = myToken;
+      	}
+  	}     
+  	)*
+//
+
   [ "public" { bPublic = true; }        // added by SMS
   {
       if ( tmpToken == null ) {
@@ -1956,6 +2117,10 @@ void ConstructorDeclaration() :
                 _functions = oldFunctions + 1;
                 _cyc = oldcyc;
                 _bReturn = bOldReturn;
+
+		//Added by REYNAUD Sebastien (LOGICA)
+		_tmpToken = null;
+		//
         }
 }
 
@@ -2396,6 +2561,11 @@ void AllocationExpression() :
         int oldFunctions = _functions;
         int oldClasses = _classes;
         String sName;
+
+	//Added by REYNAUD Sebastien (LOGICA)
+	int oldJavadocs = _javadocs;
+	int oldNcss = _ncss;
+	//
 }
 {
   LOOKAHEAD(2)
@@ -2415,11 +2585,28 @@ void AllocationExpression() :
                                  _sClass += ".";
                          }
                          /*_sClass += sName;*/
-                         _sClass += sName + "$" + _anonClassCount++;
+                         //_sClass += sName + "$" + _anonClassCount ;//Removed by REYNAUD Sebastien (LOGICA)
+
+				//Added by REYNAUD Sebastien (LOGICA)
+				_sClass += sName;
+				//
                          _classLevel ++;
                  }
                         ClassBody()
                         {
+
+				//Added by REYNAUD Sebastien (LOGICA)
+				ObjectMetric metric = new ObjectMetric();
+				metric.name = _sPackage + _sClass;
+				metric.ncss = _ncss - oldNcss;
+		            metric.functions = _functions - oldFunctions;
+            	      metric.classes = _classes - oldClasses;
+                  	Token lastToken = getToken( 0 );
+                  	_vClasses.add( metric );
+                  	_pPackageMetric.functions += _functions - oldFunctions;
+                  	_pPackageMetric.classes++;
+				metric.javadocs = _javadocs - oldJavadocs;
+				//
                                 _classLevel--;
                                 _functions = oldFunctions;
                                 _classes = oldClasses + 1;
