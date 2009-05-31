@@ -185,6 +185,12 @@ public class JavancssTest extends AbstractTest
                 , "pmJacob.javadocsLn: " + pmPackage + ": " + pmPackage.javadocsLn );
     }
 
+    private void _checkParse( int testFile )
+    {
+        Javancss pJavancss = measureTestFile( testFile );
+        bugIf( pJavancss.getNcss() <= 0, "Parsing file Test" + testFile + ".java failed!" );
+    }
+
     public JavancssTest() {
         super();
     }
@@ -327,13 +333,11 @@ public class JavancssTest extends AbstractTest
 
         // Bug reported by .. .
         // Test48.java should be parsed.
-        pJavancss = measureTestFile( 48 );
-        bugIf( pJavancss.getNcss() <= 0, "Parsing file Test48.java failed!" );
+        _checkParse( 48 );
 
         _checkNcss( 49, 3 );
 
-        pJavancss = measureTestFile( 50 );
-        bugIf( pJavancss.getNcss() <= 0, "Parsing file Test50.java failed!" );
+        _checkParse( 50 );
 
         _checkNcss( 51, 8 );
         _checkNcss( 52, 12 );
@@ -441,14 +445,8 @@ public class JavancssTest extends AbstractTest
         _checkNcss( 134, 4 );
         _checkNcss( 136, 2 );
         _checkNcss( 138, 3 );
-
-        // JAVANCSS-12
-        pJavancss = measureTestFile( 142 );
-        bugIf( pJavancss.getNcss() <= 0, "Parsing file Test142.java failed!" );
-
-        // JAVANCSS-12
-        pJavancss = measureTestFile( 143 );
-        bugIf( pJavancss.getNcss() <= 0, "Parsing file Test143.java failed!" );
+        _checkParse( 142 ); // JAVANCSS-12
+        _checkParse( 143 ); // JAVANCSS-9
 
         _exitSubTest();
     }
