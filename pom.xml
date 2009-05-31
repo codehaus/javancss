@@ -5,7 +5,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.codehaus.javancss</groupId>
   <artifactId>javancss</artifactId>
-  <version>32.53</version>
+  <version>33.54-SNAPSHOT</version>
   <packaging>jar</packaging>
 
   <name>JavaNCSS</name>
@@ -59,9 +59,9 @@
   </issueManagement>
 
   <scm>
-    <connection>scm:svn:http://svn.codehaus.org/javancss/tags/javancss-32.53</connection>
-    <developerConnection>scm:svn:https://svn.codehaus.org/javancss/tags/javancss-32.53</developerConnection>
-    <url>http://fisheye.codehaus.org/browse/javancss/tags/javancss-32.53</url>
+    <connection>scm:svn:http://svn.codehaus.org/javancss/trunk/</connection>
+    <developerConnection>scm:svn:https://svn.codehaus.org/javancss/trunk/</developerConnection>
+    <url>http://fisheye.codehaus.org/browse/javancss/trunk/</url>
   </scm>
 
   <developers>
