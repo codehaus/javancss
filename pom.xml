@@ -1,12 +1,11 @@
 <?xml version="1.0"?>
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.codehaus.javancss</groupId>
   <artifactId>javancss</artifactId>
-  <version>32.53-SNAPSHOT</version>
+  <version>32.53</version>
   <packaging>jar</packaging>
 
   <name>JavaNCSS</name>
@@ -60,9 +59,9 @@
   </issueManagement>
 
   <scm>
-    <connection>scm:svn:http://svn.codehaus.org/javancss/trunk/</connection>
-    <developerConnection>scm:svn:https://svn.codehaus.org/javancss/trunk/</developerConnection>
-    <url>http://fisheye.codehaus.org/browse/javancss/trunk/</url>
+    <connection>scm:svn:http://svn.codehaus.org/javancss/tags/javancss-32.53</connection>
+    <developerConnection>scm:svn:https://svn.codehaus.org/javancss/tags/javancss-32.53</developerConnection>
+    <url>http://fisheye.codehaus.org/browse/javancss/tags/javancss-32.53</url>
   </scm>
 
   <developers>
@@ -210,7 +209,7 @@
           <executable>java</executable>
           <arguments>
             <argument>-classpath</argument>
-            <classpath/>
+            <classpath />
             <argument>javancss.test.JavancssTest</argument>
           </arguments>
         </configuration>
@@ -279,12 +278,11 @@
             <configuration>
               <tasks>
                 <path id="task.classpath">
-                  <pathelement path="lib/javancssanttask.jar"/>
-                  <path refid="maven.compile.classpath"/>
+                  <pathelement path="lib/javancssanttask.jar" />
+                  <path refid="maven.compile.classpath" />
                 </path>
-                <taskdef name="javancss" classname="javancss.JavancssAntTask" classpathref="task.classpath"/>
-                <javancss srcdir="src/main/java" includes="**/*.java" generateReport="yes" ccnPerFuncMax="100"
-                          abortOnFail="true" classMetrics="false" functionMetrics="false"/>
+                <taskdef name="javancss" classname="javancss.JavancssAntTask" classpathref="task.classpath" />
+                <javancss srcdir="src/main/java" includes="**/*.java" generateReport="yes" ccnPerFuncMax="100" abortOnFail="true" classMetrics="false" functionMetrics="false" />
               </tasks>
             </configuration>
             <goals>
@@ -297,9 +295,9 @@
             <configuration>
               <tasks>
                 <copy todir="target/site">
-                  <fileset dir="doc"/>
+                  <fileset dir="doc" />
                 </copy>
-                <copy file="doc/index.html" todir="target/site" overwrite="true"/>
+                <copy file="doc/index.html" todir="target/site" overwrite="true" />
               </tasks>
             </configuration>
             <goals>
@@ -320,7 +318,7 @@
             </goals>
             <configuration>
               <rules>
-                <requirePluginVersions/>
+                <requirePluginVersions />
               </rules>
             </configuration>
           </execution>
