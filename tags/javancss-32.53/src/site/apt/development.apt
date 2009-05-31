@@ -1,0 +1,74 @@
+ ----
+ JavaNCSS Development Details
+ -----
+ Hervé Boutemy
+ -----
+ 2009-05-24
+ -----
+
+JavaNCSS Development Details
+
+  JavaNCSS has been moved on August 2008 to Codehaus for a {{{source-repository.html}shared source code repository}}.
+  There is also a {{{issue-tracking.html}bug tracking}} tool.
+
+  JavaNCSS can actually be built using Ant (<<<ant all>>>) or Maven (<<<mvn package>>>).
+
+  JavaNCSS site is built with Maven: <<<mvn site>>>.
+
+
+Guide for JavaNCSS Committers
+
+  To deploy JavaNCSS site or artifact (either SNAPSHOT or release), you'll need to have your Codehaus credentials
+  defined in <<<~/.m2/settings.xml>>> for <<<codehaus.org>>> server:
+
+----
+<settings>
+  <servers>
+    <server>
+      <id>codehaus.org</id>
+      <username>your username</username>
+      <password>your password</password>
+    </server>
+  </servers>
+</settings>
+----
+
+  Note that starting with Maven 2.1.0, password can be stored encrypted: see
+  {{{http://maven.apache.org/guides/mini/guide-encryption.html}the encryption guide}} on Maven site
+
+  JavaNCSS <<<pom.xml>>> is actually configured to deploy the site on
+  {{{http://javancss.codehaus.org/}javancss.codehaus.org}}: see <<<distributionManagement/site>>> section.
+  The site can be deployed at any time with <<<mvn site-deploy>>> command.
+  {{{http://www.kclee.de/clemens/java/javancss/}http://www.kclee.de/clemens/java/javancss/}} can only be deployed by
+  Clemens.
+
+  JavaNCSS SNAPSHOTs can be deployed on
+  {{{http://snapshots.repository.codehaus.org/org/codehaus/javancss/javancss/}Codehaus Snapshot repository}} with
+  <<<mvn deploy>>> command.
+
+  JavaNCSS release is automated with {{{http://maven.apache.org/plugins/maven-release-plugin/}Maven release plugin}}. It
+  has 3 steps:
+
+  [[]] run {{{http://maven.apache.org/plugins/maven-release-plugin/examples/prepare-release.html}<<<mvn release:prepare>>>}}
+    to prepare the release (including svn commits),
+
+  [[]] if everything is ok, run
+    {{{http://maven.apache.org/plugins/maven-release-plugin/examples/perform-release.html}<<<mvn release:perform>>>}}
+    to deploy the artifact and the site,
+
+  [[]] then update {{{http://jira.codehaus.org/browse/JAVANCSS}Jira}}: follow "Administer Project" then "Manage versions"
+    links to mark the release done and declare the next version.
+
+  []
+
+  The release is deployed on {{{http://repository.codehaus.org/org/codehaus/javancss/}Codehaus main repository}}, which
+  is sync'ed once a day on {{{http://repo1.maven.org/maven2/org/codehaus/javancss/}Maven Central repository}}. Note that
+  as soon as a release has been sync'ed to Maven Central repository, you can't change anything: any change on Codehaus
+  main repository will be ignored by Maven Central repository.
+
+
+External Resources
+
+  * {{{http://maven.apache.org/guides/mini/guide-releasing.html}Releasing guide}} on Maven site
+
+  * Sonatype's {{{http://www.sonatype.com/books/maven-book/reference/}Maven: The Definitive Guide}}
