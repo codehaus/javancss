@@ -2478,7 +2478,12 @@ void PrimaryPrefix() :
   Literal()
 |
 //    { System.out.println( "PrimaryPrefix: this" ); }
-  "this"
+  "this" 
+
+   //Added by REYNAUD Sebastien (LOGICA)
+   (".")? (Identifier())?
+   //
+
          //|
          //LOOKAHEAD( 2 )
          //"super" "(" Expression() ")"
@@ -2486,7 +2491,14 @@ void PrimaryPrefix() :
 |
   LOOKAHEAD(2)
 //  { System.out.println( "Before PrimaryPrefix super." ); }
-  "super" "." Identifier()
+
+  //"super" "." Identifier() //removed by REYNAUD Sebastien (LOGICA)
+
+
+//Added by REYNAUD Sebastien (LOGICA)
+"super" (".")? (Identifier())?
+//
+
 |
          //{ System.out.println( "\n\nBefore PrimaryPrefix (Expression)\n" ); }
   "(" Expression() ")"
