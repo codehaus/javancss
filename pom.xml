@@ -91,6 +91,15 @@
       <timezone>+1</timezone>
     </developer>
   </developers>
+  <contributors>
+    <contributor>
+      <name>Sébastien Reynaud</name>
+      <email>sebastien.reynaud@logica.com</email>
+      <organization>Logica</organization>
+      <organizationUrl>http://www.logica.com/</organizationUrl>
+      <timezone>+1</timezone>
+    </contributor>
+  </contributors>
 
   <properties>
     <project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
