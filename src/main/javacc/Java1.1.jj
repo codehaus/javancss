@@ -28,7 +28,7 @@
 options {
   JAVA_UNICODE_ESCAPE = true;
   STATIC = false;
-  /*
+  /* // DEBUG MODE
   DEBUG_PARSER = true;
   // */
 }
@@ -71,7 +71,7 @@ import javancss.PackageMetric;
 public class JavaParser implements JavaParserInterface
 {
     {
-        /*
+        /* // DEBUG MODE
         Util.setDebug( true );
         // */
     }
