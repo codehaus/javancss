@@ -130,8 +130,11 @@
           <execution>
             <id>make-assembly</id>
             <phase>package</phase>
+            <configuration>
+              <attach>false</attach><!-- ignore WARNING when this option is set: see MASSEMBLY-289 -->
+            </configuration>
             <goals>
-              <goal>attached</goal>
+              <goal>single</goal>
             </goals>
           </execution>
         </executions>
