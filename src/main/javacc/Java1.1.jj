@@ -822,8 +822,11 @@ TOKEN :
 | < XOR: "^" >
 | < REM: "%" >
 | < LSHIFT: "<<" >
-| < RSIGNEDSHIFT: ">>" >
-| < RUNSIGNEDSHIFT: ">>>" >
+
+// | < RSIGNEDSHIFT: ">>" > //Removed by REYNAUD Sebastien (LOGICA)
+
+// | < RUNSIGNEDSHIFT: ">>>" > //Removed by REYNAUD Sebastien (LOGICA)
+
 | < PLUSASSIGN: "+=" >
 | < MINUSASSIGN: "-=" >
 | < STARASSIGN: "*=" >
@@ -2357,7 +2360,13 @@ void RelationalExpression() :
 void ShiftExpression() :
 {}
 {
-  AdditiveExpression() ( ( "<<" | ">>" | ">>>" ) AdditiveExpression() )*
+
+//  AdditiveExpression() ( ( "<<" | ">>" | ">>>" ) AdditiveExpression() )* //Removed by REYNAUD Sebastien (LOGICA)
+
+//Added by REYNAUD Sebastien (LOGICA)
+  AdditiveExpression() ( LOOKAHEAD(3) ( "<<" | (">" ">") (">")? ) AdditiveExpression() )*
+//
+
 }
 
 void AdditiveExpression() :
@@ -3229,7 +3238,12 @@ void EnumDeclaration(int modifiers):
 void TypeParameters():
 {}
 {
-    "<" TypeParameter() ( "," TypeParameter() )* [">>>"|">>"|">"]// [LOOKAHEAD(2)">"] [LOOKAHEAD(2)">>"]
+//    "<" TypeParameter() ( "," TypeParameter() )* [">>>"|">>"|">"]// [LOOKAHEAD(2)">"] [LOOKAHEAD(2)">>"] //Removed by REYNAUD Sebastien (LOGICA)
+
+//Added by REYNAUD Sebastien (LOGICA)
+"<" TypeParameter() ( "," TypeParameter() )* ">"
+//
+
 }
 
 void ExtendsList(boolean isInterface):
@@ -3352,7 +3366,12 @@ void TypeBound():
 void TypeArguments():
 {}
 {
-    "<" TypeArgument() ( LOOKAHEAD(2) "," TypeArgument() )* [LOOKAHEAD(3)">"] [LOOKAHEAD(3)">>"] [LOOKAHEAD(3)">>>"]
+//    "<" TypeArgument() ( LOOKAHEAD(2) "," TypeArgument() )* [LOOKAHEAD(3)">"] [LOOKAHEAD(3)">>"] [LOOKAHEAD(3)">>>"] //Removed by REYNAUD Sebastien (LOGICA)
+
+//Added by REYNAUD Sebastien (LOGICA)
+	"<" TypeArgument() ( LOOKAHEAD(2) "," TypeArgument() )* ">"
+//
+
 }
 
 void TypeArgument():
