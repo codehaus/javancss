@@ -105,11 +105,11 @@ public class JavaParserDebug implements JavaParserInterface
      * import statement as it is often seen in source code
      * examples (at the beginning of your source files you
      * should instead put your copyright notice).
-     */ 
+     */
     private int    _javadocs   = 0;              // global javadocs
     private List/*<FunctionMetric>*/ _vFunctions = new ArrayList();   // holds the statistics for each method
 
-    /** 
+    /**
      * Metrics for each class/interface are stored in this
      * vector.
      */
@@ -122,15 +122,15 @@ public class JavaParserDebug implements JavaParserInterface
     private Token _tmpToken = null;
     /** Argh, too much of a state machine. */
     private Token _tmpResultToken = null;
-    
+
     private String _formatPackage(String sPackage_) {
         if (sPackage_.equals("")) {
             return ".";
         }
-        
+
         return sPackage_.substring(0, sPackage_.length() - 1);
     }
-    
+
     public void parse() throws Exception {
       CompilationUnit();
     }
@@ -142,7 +142,7 @@ public class JavaParserDebug implements JavaParserInterface
     public int getNcss() {
         return _ncss;
     }
-    
+
     public int getLOC() {
         return _loc;
     }
@@ -155,11 +155,11 @@ public class JavaParserDebug implements JavaParserInterface
     /*public int getTopLevelClasses() {
       return _topLevelClasses;
       }*/
-    
+
     public List/*<FunctionMetric>*/ getFunction() {
         return _vFunctions;
     }
-    
+
     /**
      * @return Top level classes in sorted order
      */
@@ -167,14 +167,14 @@ public class JavaParserDebug implements JavaParserInterface
         Collections.sort(_vClasses);
         return _vClasses;
     }
-    
+
     /**
      * @return The empty package consists of the name ".".
      */
     public Map/*<String,PackageMetric>*/ getPackage() {
         return _htPackage;
     }
-    
+
     public List getImports() {
         return _vImports;
     }
@@ -859,7 +859,7 @@ void CompilationUnit() :
     JavaParserDebugTokenManager._iSingleComments = 0;
     JavaParserDebugTokenManager._iMultiComments = 0;
     JavaParserDebugTokenManager._iFormalComments = 0;
-    
+
     JavaParserDebugTokenManager._iMultiCommentsLast = 0;
 
     _bPrivate = true;//false;
@@ -871,20 +871,20 @@ void CompilationUnit() :
         }
   [ LOOKAHEAD( ( Annotation() )* "package" ) PackageDeclaration() ]
   ( ImportDeclaration() )*
-  ( TypeDeclaration() 
+  ( TypeDeclaration()
     //{ System.out.println( "Token: " + getToken( 0 ) ); }
     )*
          {
              // Package classes and functions are set inside
              // class and interface bodies.
              _pPackageMetric.ncss = _ncss;
-             
+
              // added by SMS
              _pPackageMetric.javadocsLn = JavaParserDebugTokenManager._iFormalComments;
              _pPackageMetric.singleLn   = JavaParserDebugTokenManager._iSingleComments;
              _pPackageMetric.multiLn    = JavaParserDebugTokenManager._iMultiComments;
              //
-             
+
              _htPackage.put(_formatPackage(_sPackage),
                             _pPackageMetric);
          }
@@ -893,7 +893,7 @@ void CompilationUnit() :
       oldNcss = _ncss;
       _sPackage = "";
       _pPackageMetric = new PackageMetric();
-      
+
       // added by SMS
       oldFormal = JavaParserDebugTokenManager._iFormalComments;
       oldSingle = JavaParserDebugTokenManager._iSingleComments;
@@ -936,7 +936,7 @@ void ImportUnit() :
 {
   [ PackageDeclaration() ]
   ( ImportDeclaration() )*
-  ( "abstract" | "final" | "public" | "synchronized" | "strictfp" )* 
+  ( "abstract" | "final" | "public" | "synchronized" | "strictfp" )*
   ( "class" | "interface" )
 }
 
@@ -947,7 +947,7 @@ void PackageDeclaration() :
 }
 {
     (Annotation())*
-  "package" 
+  "package"
   {
       _anonClassCount = 1;
 
@@ -973,20 +973,20 @@ void PackageDeclaration() :
 }
 
 void ImportDeclaration() :
-{ 
+{
     int beginLine = 1;
     int beginColumn = 1;
     Object[] aoImport = null;
 }
 {
-  "import" 
+  "import"
   {
       Token pToken = getToken( 0 );
       beginLine = pToken.beginLine ;
       beginColumn = pToken.beginColumn;
   }
 [ "static" ]
-  Name() 
+  Name()
   {
       aoImport = new Object[ 5 ];
       aoImport[ 0 ] = _sName;
@@ -998,7 +998,7 @@ void ImportDeclaration() :
       aoImport[ 3 ] = new Integer( getToken( 0 ).endLine );
       aoImport[ 4 ] = new Integer( getToken( 0 ).endColumn );
       _vImports.add( aoImport );
-      _ncss++; 
+      _ncss++;
       Util.debug( "_ncss++" );
   }
 }
@@ -1009,20 +1009,20 @@ void TypeDeclaration() :
 }
 {
   LOOKAHEAD( (Annotation())* ( "abstract" | "final" | "public" | "synchronized" | "strictfp" )* "class" )
-        
+
 	//(Annotation())*	//Removed by REYNAUD Sebastien (LOGICA)
 
   ClassDeclaration()
 |
   LOOKAHEAD( modifiers = Modifiers()
                  "enum" <IDENTIFIER>
-             //EnumDeclaration(modifiers) 
+             //EnumDeclaration(modifiers)
              )
   modifiers = Modifiers()
   EnumDeclaration(modifiers)
 |
          LOOKAHEAD( Modifiers() "interface" )
-         
+
 	//(Annotation())*	//Removed by REYNAUD Sebastien (LOGICA)
 
   InterfaceDeclaration()
@@ -1064,7 +1064,7 @@ void ClassDeclaration() :
 	Annotation()
 	{tmpToken = myToken;}
 	)?
- 	
+
 	(Annotation())*
 	//
 
@@ -1073,32 +1073,32 @@ void ClassDeclaration() :
       if ( tmpToken == null ) {
           tmpToken = getToken( 0 );
       }
-  }     
+  }
  | "final"
   {
       if ( tmpToken == null ) {
           tmpToken = getToken( 0 );
       }
-  }     
+  }
  | "public"
   {
       _bPublic = true;         // added by SMS
       if ( tmpToken == null ) {
           tmpToken = getToken( 0 );
       }
-  }     
+  }
  | "synchronized"
   {
       if ( tmpToken == null ) {
           tmpToken = getToken( 0 );
       }
-  }     
+  }
  | "strictfp"
   {
       if ( tmpToken == null ) {
           tmpToken = getToken( 0 );
       }
-  }     
+  }
  )*
   {
       if ( tmpToken == null ) {
@@ -1107,7 +1107,7 @@ void ClassDeclaration() :
   }
 
   // added by SMS
-  {             
+  {
       while( tmpToken.specialToken != null ) {
           if ( tmpToken.specialToken.image.startsWith( "/**" ) ) {
               _javadocs++;
@@ -1123,12 +1123,12 @@ void ClassDeclaration() :
           }  else if ( tmpToken.specialToken.image.startsWith( "/*" ) ) {
               break;
           }
-          
+
           //System.out.println("\n"+tmpToken.specialToken.image);
-          
+
           tmpToken = tmpToken.specialToken;
       }
-      
+
       oldSingle = JavaParserDebugTokenManager._iSingleComments;
       oldMulti = JavaParserDebugTokenManager._iMultiComments;
   }
@@ -1177,7 +1177,7 @@ void UnmodifiedClassDeclaration() :
                 _classLevel ++;
         }
         Modifiers()
-  "class" Identifier() [TypeParameters()] [ "extends" Name() [TypeArguments()] ] [ "implements" NameList() ]
+  "class" Identifier() [TypeParameters()] [ "extends" Name() [TypeArguments()] /*Added by REYNAUD Sebastien (LOGICA)*/ ("." Name() [TypeArguments()] )* /**/ ] [ "implements" NameList() ]
   ClassBody()
         {
                 _ncss++;
@@ -1254,7 +1254,7 @@ void NestedClassDeclaration() :
 	Annotation()
 	{tmpToken = myToken;}
 	)?
- 	
+
 	(Annotation())*
 
 	{
@@ -1265,20 +1265,20 @@ void NestedClassDeclaration() :
 	}
 	//
 
-  ( "static" | "abstract" | "final" 
+  ( "static" | "abstract" | "final"
   | "public" { bPublic = true; }        // added by SMS
   | "protected" { bPublic = true; }     // added by SMS
   | "private" | "strictfp" )*
-  
+
 
   // added by SMS
-  {            
+  {
 
 			//tmpToken = getToken( 0 );//Removed by REYNAUD Sebastien (LOGICA)
 
                 while( tmpToken.specialToken != null ) {
                     if ( tmpToken.specialToken.image.startsWith( "/**" ) ) {
-                        _javadocs++; 
+                        _javadocs++;
                         Util.debug( "NestedClassDeclaration()._javadocs++" );
                         if ((_bPublic && bPublic) || _bPrivate) {
                             Util.debug( "_jvdc++" );
@@ -1293,10 +1293,10 @@ void NestedClassDeclaration() :
                     }
 
                     //System.out.println("\n"+tmpToken.specialToken.image);
-                    
+
                     tmpToken = tmpToken.specialToken;
                 }
-    } 
+    }
 
   UnmodifiedClassDeclaration()
   {
@@ -1316,7 +1316,7 @@ void ClassBodyDeclaration() :
   Initializer()
 |
   LOOKAHEAD( (Annotation())* ( "static" | "abstract" | "final" | "public" | "protected" | "private" | "strictfp" )* "class" )
-         
+
 	//(Annotation())*	//Removed by REYNAUD Sebastien (LOGICA)
 
   NestedClassDeclaration()
@@ -1333,7 +1333,7 @@ void ClassBodyDeclaration() :
          //LOOKAHEAD( [ TypeParameters() ] <IDENTIFIER> "(" )
          LOOKAHEAD( (Annotation())* [ "public" | "protected" | "private" ] [ TypeParameters() ] Name() "(" )
          //{ System.out.println( "\n\nClassDeclaration\n" ); }
-         
+
 	//(Annotation())* //Removed by REYNAUD Sebastien (LOGICA)
 
   ConstructorDeclaration()
@@ -1392,14 +1392,14 @@ void InterfaceDeclaration() :
       if ( tmpToken == null ) {
           tmpToken = getToken( 0 );
       }
-  }     
+  }
  | "public"
   {
       _bPublic = true;         // added by SMS
       if ( tmpToken == null ) {
           tmpToken = getToken( 0 );
       }
-  }     
+  }
  )*
   {
       if ( tmpToken == null ) {
@@ -1407,13 +1407,13 @@ void InterfaceDeclaration() :
       }
   }
 
-  
+
   // added by SMS
   // added by SMS
-  {             
+  {
                 while( tmpToken.specialToken != null ) {
                     if ( tmpToken.specialToken.image.startsWith( "/**" ) ) {
-                        _javadocs++; 
+                        _javadocs++;
                         Util.debug( "InterfaceDeclaration()._javadocs++" );
                         if (_bPublic || _bPrivate) {
                             Util.debug( "_jvdc++" );
@@ -1428,10 +1428,10 @@ void InterfaceDeclaration() :
                     }
 
                     //System.out.println("\n"+tmpToken.specialToken.image);
-                    
+
                     tmpToken = tmpToken.specialToken;
                 }
-                
+
                 oldSingle = JavaParserDebugTokenManager._iSingleComments;
                 oldMulti = JavaParserDebugTokenManager._iMultiComments;
     }
@@ -1477,7 +1477,7 @@ void NestedInterfaceDeclaration() :
 }
 {
 	//Added by REYNAUD Sebastien (LOGICA)
-	(	
+	(
 	{myToken = getToken(1);}
 	Annotation()
 	{tmpToken = myToken;}
@@ -1493,19 +1493,19 @@ void NestedInterfaceDeclaration() :
 	//
 
 
-  ( "static" | "abstract" | "final" 
+  ( "static" | "abstract" | "final"
   | "public" { bPublic = true; }        // added by SMS
   | "protected" { bPublic = true; }     // added by SMS
   | "private" | "strictfp" )*
 
   // added by SMS
-  {             
+  {
 
 			//tmpToken = getToken( 0 );	//Removed by REYNAUD Sebastien (LOGICA)
-  
+
                 while( tmpToken.specialToken != null ) {
                     if ( tmpToken.specialToken.image.startsWith( "/**" ) ) {
-                        _javadocs++; 
+                        _javadocs++;
                         if ((_bPublic && bPublic) || _bPrivate) {
                             Util.debug( "_jvdc++" );
                             _jvdc++;
@@ -1519,10 +1519,10 @@ void NestedInterfaceDeclaration() :
                     }
 
                     //System.out.println("\n"+tmpToken.specialToken.image);
-                    
+
                     tmpToken = tmpToken.specialToken;
                 }
-                
+
     }
 
   UnmodifiedInterfaceDeclaration()
@@ -1558,7 +1558,7 @@ void UnmodifiedInterfaceDeclaration() :
                 _ncss++;
                 Util.debug( "_ncss++" );
                 _classLevel--;
-                if (_classLevel == 0) 
+                if (_classLevel == 0)
                 {
                         //_topLevelClasses++;
                         ObjectMetric metric = new ObjectMetric();
@@ -1617,7 +1617,7 @@ void InterfaceMemberDeclaration() :
   |
   LOOKAHEAD( modifiers = Modifiers()
                  "enum" <IDENTIFIER>
-             //EnumDeclaration(modifiers) 
+             //EnumDeclaration(modifiers)
              )
    modifiers = Modifiers()
    EnumDeclaration(modifiers)
@@ -1639,15 +1639,15 @@ void FieldDeclaration() :
   ( "public" { bPublic = true; }        // added by SMS
   | "protected" { bPublic = true; }     // added by SMS
   | "private" | "static" | "final" | "transient" | "volatile" )*
-  
+
   // added by SMS
   {             tmpToken = getToken( 0 );
-  
-                while( tmpToken.specialToken != null ) 
+
+                while( tmpToken.specialToken != null )
                 {
-                    if ( tmpToken.specialToken.image.startsWith( "/**" ) ) 
+                    if ( tmpToken.specialToken.image.startsWith( "/**" ) )
                     {
-                        if ((bPublic && _bPublic) || _bPrivate) 
+                        if ((bPublic && _bPublic) || _bPrivate)
                         {
                             //_javadocs++;
                             Util.debug( "_jvdc++" );
@@ -1658,13 +1658,13 @@ void FieldDeclaration() :
                         JavaParserDebugTokenManager._iMultiComments -= JavaParserDebugTokenManager._iMultiCommentsLast;
                         break;
                     }
-                    else if ( tmpToken.specialToken.image.startsWith( "/*" ) ) 
+                    else if ( tmpToken.specialToken.image.startsWith( "/*" ) )
                     {
                         break;
                     }
 
                     //System.out.println("\n"+tmpToken.specialToken.image);
-                    
+
                     tmpToken = tmpToken.specialToken;
                 }
   }
@@ -1741,7 +1741,7 @@ void MethodDeclaration() :
 		tmpToken = myToken;
 		//
       }
-  }     
+  }
      )*
 
     // we want to count javadoc comments, so we need first token
@@ -1750,55 +1750,55 @@ void MethodDeclaration() :
       if ( tmpToken == null ) {
           tmpToken = getToken( 0 );
       }
-  }     
+  }
     | "protected" { bPublic = true; }        // added by SMS
   {
       if ( tmpToken == null ) {
           tmpToken = getToken( 0 );
       }
-  }     
-    | "private" 
+  }
+    | "private"
   {
       if ( tmpToken == null ) {
           tmpToken = getToken( 0 );
       }
-  }     
-| "static" 
+  }
+| "static"
   {
       if ( tmpToken == null ) {
           tmpToken = getToken( 0 );
       }
-  }     
-| "abstract" 
+  }
+| "abstract"
   {
       if ( tmpToken == null ) {
           tmpToken = getToken( 0 );
       }
-  }     
-| "final" 
+  }
+| "final"
   {
       if ( tmpToken == null ) {
           tmpToken = getToken( 0 );
       }
-  }     
-| "native" 
+  }
+| "native"
   {
       if ( tmpToken == null ) {
           tmpToken = getToken( 0 );
       }
-  }     
-| "synchronized" 
+  }
+| "synchronized"
   {
       if ( tmpToken == null ) {
           tmpToken = getToken( 0 );
       }
-  }     
-| "strictfp" 
+  }
+| "strictfp"
   {
       if ( tmpToken == null ) {
           tmpToken = getToken( 0 );
       }
-  }     
+  }
   )*
 
     ( Annotation() )*
@@ -1809,26 +1809,26 @@ void MethodDeclaration() :
       }
       }*/
 
-  
+
   [ TypeParameters() ]
-  
+
            {
                _tmpResultToken = null;
            }
   ResultType()
         {
-            if ( tmpToken == null ) 
+            if ( tmpToken == null )
             {
                 tmpToken = _tmpResultToken;
-                if ( tmpToken == null ) 
+                if ( tmpToken == null )
                 {
                     tmpToken = getToken( 0 );
                 }
                 Util.debug( "result type tmpToken: " + tmpToken );
             }
-        }     
+        }
   MethodDeclarator() [ "throws" NameList() ]
-        { 
+        {
                 _cyc = 1;
                 _bReturn = false;
         }
@@ -1840,14 +1840,14 @@ void MethodDeclaration() :
          //[ ";" ]
          {
   // added by SMS
-  {             
+  {
       Util.debug( "Token: " + String.valueOf( tmpToken.image ) );
-      while( tmpToken.specialToken != null ) 
+      while( tmpToken.specialToken != null )
       {
           Util.debug( "Token comment: " + String.valueOf( tmpToken.specialToken.image ) );
-          if ( tmpToken.specialToken.image.startsWith( "/**" ) ) 
+          if ( tmpToken.specialToken.image.startsWith( "/**" ) )
           {
-              _javadocs++; 
+              _javadocs++;
               Util.debug( "MethodDeclaration()._javadocs++" );
               jvdc++;
               if ((bPublic && _bPublic) || _bPrivate) {
@@ -1863,9 +1863,9 @@ void MethodDeclaration() :
               jvdcLines = 0;
               break;
           }
-          
+
           //System.out.println("\n"+tmpToken.specialToken.image);
-          
+
           tmpToken = tmpToken.specialToken;
       }
 
@@ -1874,7 +1874,7 @@ void MethodDeclaration() :
   }
 
 
-             // removed by ccl 
+             // removed by ccl
              /*
              while( tmpToken.specialToken != null ) {
                  if ( tmpToken.specialToken.image.startsWith( "/**" ) ) {
@@ -1889,21 +1889,21 @@ void MethodDeclaration() :
                while( tmpToken.specialToken != null ) {
                if ( tmpToken.specialToken.image.startsWith( "/**" ) ) {
                jvdc++;
-               _javadocs++; 
+               _javadocs++;
                _bJavadoc = true;
                }
-               
+
                tmpToken = tmpToken.specialToken;
                }
              */
-             
-             if (_bReturn) 
+
+             if (_bReturn)
              {
                  _cyc--;
              }
              _ncss++;
              Util.debug( "MethodDeclaration()._ncss++" );
-      
+
              FunctionMetric functionMetrics = new FunctionMetric();
              functionMetrics.name = _sPackage + _sClass + _sFunction;
              functionMetrics.ncss = _ncss - oldNcss;
@@ -1957,8 +1957,8 @@ void FormalParameters() :
 void FormalParameter() :
 {}
 {
-    //[ "final" ] 
-           Modifiers() 
+    //[ "final" ]
+           Modifiers()
     Type() [ "..." ] VariableDeclaratorId()
 }
 
@@ -1971,7 +1971,7 @@ void ConstructorDeclaration() :
         boolean bOldReturn = _bReturn;
         Token tmpToken = null;
         int jvdc = 0;
-    
+
         // added by SMS
         int oldSingle;
         int oldMulti;
@@ -1988,16 +1988,16 @@ void ConstructorDeclaration() :
 
 //Added by REYNAUD Sebastien (LOGICA)
 	(
-	
+
 	{myToken = getToken(1);}
-	
+
      	Annotation()
   	{
-      	if ( tmpToken == null ) 
+      	if ( tmpToken == null )
 		{
 			tmpToken = myToken;
       	}
-  	}     
+  	}
   	)*
 //
 
@@ -2006,19 +2006,19 @@ void ConstructorDeclaration() :
       if ( tmpToken == null ) {
           tmpToken = getToken( 0 );
       }
-  }     
+  }
  | "protected" { bPublic = true; }      // added by SMS
   {
       if ( tmpToken == null ) {
           tmpToken = getToken( 0 );
       }
-  }     
+  }
  | "private"
   {
       if ( tmpToken == null ) {
           tmpToken = getToken( 0 );
       }
-  }     
+  }
  ]
   [ TypeParameters() ]
   Identifier()
@@ -2045,12 +2045,12 @@ void ConstructorDeclaration() :
 //         [ LOOKAHEAD(2) ExplicitConstructorInvocation() ]
 //         { System.out.println( "\n\nBefore BlockStatement\n" ); }
 
-   
+
          // added by SMS
-  {             
+  {
                 while( tmpToken.specialToken != null ) {
                     if ( tmpToken.specialToken.image.startsWith( "/**" ) ) {
-                        _javadocs++; 
+                        _javadocs++;
                         jvdc++;
                         if ((bPublic && _bPublic) || _bPrivate) {
                             Util.debug( "_jvdc++" );
@@ -2067,10 +2067,10 @@ void ConstructorDeclaration() :
                     }
 
                     //System.out.println("\n"+tmpToken.specialToken.image);
-                    
+
                     tmpToken = tmpToken.specialToken;
                 }
-                
+
 
                 oldSingle = JavaParserDebugTokenManager._iSingleComments;
                 oldMulti = JavaParserDebugTokenManager._iMultiComments;
@@ -2107,11 +2107,11 @@ void ConstructorDeclaration() :
                 functionMetrics.javadocs = jvdc;
 
                 // added by SMS
-                functionMetrics.javadocsLn = jvdcLines;        
+                functionMetrics.javadocsLn = jvdcLines;
                 functionMetrics.singleLn = JavaParserDebugTokenManager._iSingleComments - oldSingle;
                 functionMetrics.multiLn = JavaParserDebugTokenManager._iMultiComments - oldMulti;
                 //
-        
+
                 _vFunctions.add(functionMetrics);
                 _sFunction = sOldFunction;
                 _functions = oldFunctions + 1;
@@ -2134,13 +2134,13 @@ void ExplicitConstructorInvocation() :
   "this" Arguments() ";"
          { _ncss++;       Util.debug( "_ncss++" );}
 |
-  [ LOOKAHEAD(PrimaryExpression() ".") PrimaryExpression()   
-  //{ System.out.println( "ExplicitConstructorInvocation before ." ); } 
-"." ] 
+  [ LOOKAHEAD(PrimaryExpression() ".") PrimaryExpression()
+  //{ System.out.println( "ExplicitConstructorInvocation before ." ); }
+"." ]
   //{ System.out.println( "ExplicitConstructorInvocation before super" ); }
   "super" Arguments() ";"
   { _ncss++;       Util.debug( "_ncss++" );
-//System.out.println( "\n\nAfter ExplicitConstructorInvocation\n" ); 
+//System.out.println( "\n\nAfter ExplicitConstructorInvocation\n" );
   }
 }
 
@@ -2172,7 +2172,7 @@ ccl 2008-01-24
           {
                   _sName = getToken(0).image;
           }
-    | Name() 
+    | Name()
     [TypeArguments() ["." Identifier()] ]
 ) ( "[" "]" { _sName += "[]"; } )*
 }
@@ -2256,7 +2256,7 @@ void FieldTypeNameLookahead() :
 void NameList() :
 {}
 {
-    Name() [TypeArguments()] 
+    Name() [TypeArguments()]
    ( "," Name() [TypeArguments()]
   )*
 }
@@ -2266,8 +2266,8 @@ void NameList() :
  */
 
 void Expression() :
-{ 
-    //System.out.println( "Expression start" ); 
+{
+    //System.out.println( "Expression start" );
 }
 {
   LOOKAHEAD( PrimaryExpression() AssignmentOperator() )
@@ -2479,10 +2479,10 @@ void PrimaryPrefix() :
   ResultType() "." "class"
 |
          Name() [ LOOKAHEAD(3) "." "super" "." Identifier() ]
-         
+
          /* The [ "." "super" "." Identifier() ]
-            has been added to fix a bug reported by 
-            Chris Williamson. It might cause other problems, 
+            has been added to fix a bug reported by
+            Chris Williamson. It might cause other problems,
             maybe. 2002-05-11 */
 //  { System.out.println( "PrimaryPrefix after Name" ); }
 }
@@ -2540,7 +2540,7 @@ void NullLiteral() :
 
 void Arguments() :
 {
-// System.out.println( "Arguments start" ); 
+// System.out.println( "Arguments start" );
 }
 {
   "(" [ ArgumentList() ] ")"
@@ -2548,7 +2548,7 @@ void Arguments() :
 
 void ArgumentList() :
 {
-// System.out.println( "ArgumentList start" ); 
+// System.out.println( "ArgumentList start" );
 }
 {
   Expression() ( "," Expression() )*
@@ -2712,9 +2712,9 @@ void AssertStatement() :
 void Block() :
 {}
 {
-  "{" 
+  "{"
          //{_ncss++; Util.debug( "Block()._ncss++" );
-         //} 
+         //}
    ( BlockStatement() )* "}"
 }
 
@@ -2724,7 +2724,7 @@ void BlockStatement() :
     //LOOKAHEAD([ "final" ] FieldTypeLookahead() Identifier())
   LOOKAHEAD( Modifiers() Type() ("enum"|<IDENTIFIER>) (";"|"="|","|"[""]") )
   LocalVariableDeclaration() ";"
-        { 
+        {
                 _ncss++;       Util.debug( "_ncss++" );
         }
 |
@@ -2838,9 +2838,9 @@ void ForStatement() :
   "for" "("
   (
       LOOKAHEAD(Modifiers() Type() <IDENTIFIER> ":")
-      Modifiers() Type() <IDENTIFIER> ":" Expression() 
+      Modifiers() Type() <IDENTIFIER> ":" Expression()
     |
- [ ForInit() ] ";" [ Expression() ] ";" [ ForUpdate() ] 
+ [ ForInit() ] ";" [ Expression() ] ";" [ ForUpdate() ]
       )
 ")" Statement()
         { _ncss++;       Util.debug( "_ncss++" );}
@@ -2897,8 +2897,8 @@ void ThrowStatement() :
 {}
 {
   "throw" Expression() ";"
-        { 
-                _ncss++; 
+        {
+                _ncss++;
                 Util.debug( "_ncss++" );
                 _cyc++;
         }
@@ -3036,12 +3036,12 @@ void AnnotationTypeMemberDeclaration():
    FieldDeclaration15(modifiers)
  )
  |
-        ( ";" ) 
+        ( ";" )
         {
             _ncss++;
             Util.debug( "_ncss++" );
         }
- 
+
 }
 
 void DefaultValue():
@@ -3065,7 +3065,7 @@ int Modifiers():
  (
   LOOKAHEAD(2)
   (
-   "public" { modifiers |= ModifierSet.PUBLIC; 
+   "public" { modifiers |= ModifierSet.PUBLIC;
       if ( _tmpToken == null ) {
           _tmpToken = getToken( 0 );
       }
@@ -3193,7 +3193,7 @@ void EnumDeclaration(int modifiers):
                  _vClasses.add(metric);
                  _pPackageMetric.functions += _functions - oldFunctions;
                  _pPackageMetric.classes++;
-                 
+
                  // added by SMS
                  _pPackageMetric.javadocs += _javadocs;
                  //_pPackageMetric.javadocsLn += JavaParserDebugTokenManager._iFormalComments - oldFormal;
@@ -3253,7 +3253,7 @@ void EnumBody():
                _ncss++;
                Util.debug( "_ncss++" );
            }
-    
+
    [ EnumConstant() ( LOOKAHEAD(2) "," EnumConstant() )* ]
         [ "," ]
    [ ";" ( ClassOrInterfaceBodyDeclaration(false) )* ]

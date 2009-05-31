@@ -446,6 +446,10 @@ public class JavancssTest extends AbstractTest
         pJavancss = measureTestFile( 142 );
         bugIf( pJavancss.getNcss() <= 0, "Parsing file Test142.java failed!" );
 
+        // JAVANCSS-12
+        pJavancss = measureTestFile( 143 );
+        bugIf( pJavancss.getNcss() <= 0, "Parsing file Test143.java failed!" );
+
         _exitSubTest();
     }
 
