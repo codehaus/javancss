@@ -6,10 +6,10 @@
 </HEAD>
 <BODY TEXT="#C0C0C0" BGCOLOR="#374B5D" LINK="#FFBA51" VLINK="#FF9200" ALINK="#007EEF">
 &nbsp;
-<TABLE COLS=1 WIDTH="100%" BGCOLOR="#C0C0C0" >
+<TABLE COLS="1" WIDTH="100%" BGCOLOR="#C0C0C0" >
 <TR>
 <TD>
-<TABLE COLS=1 WIDTH="100%" BGCOLOR="#374B5D" >
+<TABLE COLS="1" WIDTH="100%" BGCOLOR="#374B5D" >
 <TR>
 <TD>
 <CENTER>&nbsp;</CENTER>
@@ -126,7 +126,7 @@ easy selection of input source files.</LI>
 </table>
 
 <h2><a name="requirements"></a>System Requirements</h2>
-	Java JDK >= 1.4.1
+	Java JDK &gt;= 1.4.1
 <UL></UL>
 
 
@@ -306,7 +306,7 @@ path is a shell script named 'xslt' that knows how to invoke
 Java with the Xalan 2 main processor class (org.apache.xalan.xslt.Process),
 here is how you can make use of JavaNCSS' XSLT stylesheet:<p>
 <tt>cd javancss-30.51</tt><br>
-<tt>javancss -all -xml -recursive src > example.xml</tt><br>
+<tt>javancss -all -xml -recursive src &gt; example.xml</tt><br>
 <tt>xslt -in example.xml -xsl xslt/javancss2text.xsl</tt><p>
 Have fun. If you create a useful new stylesheet for JavaNCSS,
 I would be happy to get a copy of it.
@@ -336,9 +336,9 @@ Specification but include all kinds of declarations too.
 <P>Actually, the NCSS counter gets incremented by one for each:
 <BR>&nbsp;
 <BR>&nbsp;
-<CENTER><TABLE BORDER NOSAVE >
-<TR NOSAVE>
-<TD NOSAVE></TD>
+<CENTER><TABLE BORDER="0" >
+<TR>
+<TD></TD>
 
 <TD>Examples</TD>
 
@@ -361,8 +361,8 @@ Specification but include all kinds of declarations too.
 <TD></TD>
 </TR>
 
-<TR NOSAVE>
-<TD VALIGN=TOP NOSAVE>Class declaration</TD>
+<TR>
+<TD VALIGN="TOP">Class declaration</TD>
 
 <TD>- <code>public class Foo {</code>
 <BR>- <code>public class Foo extends Bla {</code></TD>
@@ -370,18 +370,18 @@ Specification but include all kinds of declarations too.
 <TD></TD>
 </TR>
 
-<TR NOSAVE>
-<TD VALIGN=TOP NOSAVE>Interface declaration</TD>
+<TR>
+<TD VALIGN="TOP">Interface declaration</TD>
 
 <TD><code>public interface Able {</code></TD>
 
 <TD></TD>
 </TR>
 
-<TR NOSAVE>
-<TD VALIGN=TOP NOSAVE>Field declaration</TD>
+<TR>
+<TD VALIGN="TOP">Field declaration</TD>
 
-<TD VALIGN=TOP NOSAVE>- <code>int a;</code>
+<TD VALIGN="TOP">- <code>int a;</code>
 <BR>- <code>int a, b, c = 5, d = 6;</code></TD>
 
 <TD>No matter how many fields get actually declared through a comma separated
@@ -390,8 +390,8 @@ one statement is counted. So "int a, b, c = 5, d = 6;" gets only +1 count,
 not four or even six (let me know if there is good reason to count it differently).</TD>
 </TR>
 
-<TR NOSAVE>
-<TD VALIGN=TOP NOSAVE>Method declaration</TD>
+<TR>
+<TD VALIGN="TOP">Method declaration</TD>
 
 <TD>- <code>public void cry();</code>
 <BR>- <code>public void gib() throws DeadException {</code></TD>
@@ -399,16 +399,16 @@ not four or even six (let me know if there is good reason to count it differentl
 <TD></TD>
 </TR>
 
-<TR NOSAVE>
+<TR>
 <TD>Constructor declaration</TD>
 
-<TD VALIGN=TOP NOSAVE><code>public Foo() {</code></TD>
+<TD VALIGN="TOP"><code>public Foo() {</code></TD>
 
 <TD></TD>
 </TR>
 
-<TR NOSAVE>
-<TD VALIGN=TOP NOSAVE>Constructor invocation</TD>
+<TR>
+<TD VALIGN="TOP">Constructor invocation</TD>
 
 <TD>- <code>this();</code>
 <BR>- <code>super();</code></TD>
@@ -416,8 +416,8 @@ not four or even six (let me know if there is good reason to count it differentl
 <TD></TD>
 </TR>
 
-<TR NOSAVE>
-<TD VALIGN=TOP NOSAVE>Statement</TD>
+<TR>
+<TD VALIGN="TOP">Statement</TD>
 
 <TD>- <code>i = 0;</code>
 <BR>- <code>if (ok)</code>
@@ -426,7 +426,7 @@ not four or even six (let me know if there is good reason to count it differentl
 <BR>- <code>if (4 == 4) { ; }</code>
 <BR>- <code>} else {</code></TD>
 
-<TD VALIGN=TOP NOSAVE>expression, if, else, while, do, for, switch, break,
+<TD VALIGN="TOP">expression, if, else, while, do, for, switch, break,
 continue, return, throw, synchronized, catch, finally</TD>
 </TR>
 
@@ -696,7 +696,7 @@ counting bug got fixed.
 </li></ol><h4>Bugs Fixed</h4><ol><li>Cyclomatic Complexity Number takes now return and throw
    statements into account.
 </li><li>Ctrl-Z at the end of a source file will be accepted now.
-</li><li>&lt;EOF> at the end of a one line comment ('//') will be
+</li><li>&lt;EOF&gt; at the end of a one line comment ('//') will be
    accepted now.
 </li><li>Empty statements that javac accepts but are not allowed
    according to the Java Language Specification are now parsed
@@ -716,7 +716,7 @@ counting bug got fixed.
 functionality of JavaNCSS, which makes selecting Java source
 files much more convenient.
 <h4>What's New</h4><ol><li>New '-gui' option, which is equivalent to '-all' and
-   presents the output in it's <a href="gui.html">own window</a> instead of &lt;stdout>.
+   presents the output in it's <a href="gui.html">own window</a> instead of &lt;stdout&gt;.
 </li><li>You need swing in order to get this new feature working,
    though command line mode still works without it.
 </li><li>New Jacob feature: a file with absolute file names of all
@@ -740,7 +740,7 @@ files much more convenient.
    class information.
 </li></ol><H3><A NAME=2.4></A>Version 2.4</H3>
          Version 2.4 has been released on January 24, 1998<p><h4>What's New</h4><ol><li>New '-package' option.
-</li><li>When &lt;stdin> is used for input and a parse error occurs the
+</li><li>When &lt;stdin&gt; is used for input and a parse error occurs the
    last class and method successfully parsed is given together
    with the error message. Note, that errors in package or
    import statements or not captured this way.
