@@ -1314,6 +1314,17 @@ void ClassBodyDeclaration() :
 |
   LOOKAHEAD(2)
   Initializer()
+
+//Added by REYNAUD Sebastien (LOGICA)
+|
+  LOOKAHEAD((Annotation())* ( "static" | "abstract" | "final" | "public" | "protected" | "private" | "strictfp" )*  "@" "interface")
+  modifiers = Modifiers()
+  AnnotationTypeDeclaration(modifiers)
+|
+  LOOKAHEAD((Annotation())* "@" "interface")
+  CreationAnnotation()
+//
+
 |
   LOOKAHEAD( (Annotation())* ( "static" | "abstract" | "final" | "public" | "protected" | "private" | "strictfp" )* "class" )
 
@@ -2999,6 +3010,14 @@ void  MemberValueArrayInitializer():
 */
 
 /* Annotation Types. */
+
+//Added by REYNAUD Sebastien (LOGICA)
+void CreationAnnotation():
+{}
+{
+   "@" "interface" <IDENTIFIER> "{" (AnnotationTypeMemberDeclaration())*"}"
+}
+//
 
 void AnnotationTypeDeclaration(int modifiers):
 {}
