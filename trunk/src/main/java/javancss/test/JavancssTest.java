@@ -647,7 +647,7 @@ public class JavancssTest extends AbstractTest
         _enterSubTest( "version" );
 
         String[] args = new String[] { "-version" };
-        Javancss pJavancss = measureWithArgs( args );
+        measureWithArgs( args );
 
         _exitSubTest();
     }
@@ -657,7 +657,7 @@ public class JavancssTest extends AbstractTest
         _enterSubTest( "recursive" );
 
         String[] args = new String[] { "-recursive", getTestFile( "../lib" ).getAbsolutePath()  };
-        Javancss pJavancss = measureWithArgs( args );
+        measureWithArgs( args );
 
         _exitSubTest();
     }
