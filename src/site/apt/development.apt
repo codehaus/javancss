@@ -3,7 +3,7 @@
  -----
  Hervé Boutemy
  -----
- 2009-05-24
+ 2009-06-01
  -----
 
 JavaNCSS Development Details
@@ -14,6 +14,67 @@ JavaNCSS Development Details
   JavaNCSS can actually be built using Ant (<<<ant all>>>) or Maven (<<<mvn package>>>).
 
   JavaNCSS site is built with Maven: <<<mvn site>>>.
+
+
+Guide for JavaNCSS Contributors
+
+ As with any open source project, there are several ways you can help:
+
+ * Join the {{{mail-lists.html}mailing lists}} and answer other user's questions
+
+ * Report bugs, feature requests and other issues in the {{{issue-tracking.html}issue tracking}} application.
+
+ * Build JavaNCSS for yourself, in order to fix bugs.
+
+ * Submit patches to reported issues (both those you find, or that others have filed)
+
+ * Help with the documentation by pointing out areas that are lacking or unclear, and if you are so inclined, submitting patches to correct it.
+
+ []
+
+ Your participation in the community is much appreciated!
+
+* Creating and submitting a patch
+
+ When you have either completed an issue or just want some feedback on the work you have done, create a patch
+ and attach the patch to the issue in question. We have a couple of guidelines when creating patches:
+
+ * Patch the trunk, not a tag. Otherwise, your patch is outdated the moment you create it and might not be applicable
+   to the development head.
+
+ * Add a unit test to show the bug fixed or the new feature.
+
+ * Always create the patch from the root of the project, i.e. where the <<<pom.xml>>> file is.
+
+ * If this was a new piece of work without a JIRA issue, create a JIRA issue for it now.
+
+ * Name the file <<<JAVANCSS-<issue number>.patch>>>.
+
+ * Attach the patch to the JIRA issue you were working on (do not paste its content in as a comment though).
+   When adding the patch add a comment to the issue explaining what it does. Shortly after, someone will apply the patch
+   and close the issue.
+
+ []
+
+ An example on how to create a patch from the command line:
+
+---
+$ svn diff > JAVANCSS-123.patch
+---
+
+ If you are picking up an issue with a existing patch attached to the issue, you can apply the patch to your working
+ directory directly from JIRA like this. The <<<wget>>> and <<<patch>>> commands will only be available if you are
+ on a UNIX platform or using Cygwin on windows.
+
+---
+$ wget -O - -q <URL to the patch from JIRA> | patch -p0
+---
+
+ If the patch is in a local file <<<JAVANCSS-123.patch>>> and you want to apply that use this command:
+
+---
+$ patch -p0 < JAVANCSS-123.patch
+---
 
 
 Guide for JavaNCSS Committers
