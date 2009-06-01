@@ -127,6 +127,11 @@ Guide for JavaNCSS Committers
   as soon as a release has been sync'ed to Maven Central repository, you can't change anything: any change on Codehaus
   main repository will be ignored by Maven Central repository.
 
+* Voting
+
+  To get some feedback from the community for important events of the project, a vote mecanism is encouraged inspired
+  by {{{http://www.apache.org/foundation/voting.html}Apache Voting Process}}. Of course, JavaNCSS community is a lot
+  lighter than Apache, then these instructions are only to be taken as an indication.
 
 External Resources
 
