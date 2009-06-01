@@ -3,6 +3,9 @@
    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
    <link rel="SHORTCUT ICON" href="http://www.kclee.de/clemens/java/javancss/favjavancss.ico" />
    <title>JavaNCSS - A Source Measurement Suite for Java</title>
+   <style type="text/css">
+   tt { color: #fff; }
+   </style>
 </head>
 <body text="#C0C0C0" bgcolor="#374B5D" link="#FFBA51" vlink="#FF9200" alink="#007EEF">
 &nbsp;
@@ -161,31 +164,30 @@ you can get it for free there.-->
 <a name="usage"></a>Usage</h2>
 Make sure <tt>javancss-30.51/lib/javancss.jar</tt>, <tt>javancss-30.51/lib/ccl.jar</tt>, and <tt>javancss30.51/lib/jhbasic.jar</tt> are added to your CLASSPATH.
 <p>
-Then to start JavaNCSS type: <tt><font color="#FFFFFF">java javancss.Main</font></tt>.
-As an alternative you can edit and use either the <font color="#FFFFFF"><tt>JAVANCSS.BAT</tt></font>
-or <tt><font color="#FFFFFF">javancss</font></tt> file. Just change the
-<tt><font color="#FFFFFF">JAVA_HOME</font></tt> and <font color="#FFFFFF"><tt>CLASSPATH</tt></font>
+Then to start JavaNCSS type: <tt>java javancss.Main</tt>.
+As an alternative you can edit and use either the <tt>JAVANCSS.BAT</tt>
+or <tt>javancss</tt> file. Just change the
+<tt>JAVA_HOME</tt> and <tt>CLASSPATH</tt>
 variables according to your system. Make sure you did include the swingall.jar archive in the classpath.
 <p>
 Now for the first run type in (beeing in the <tt>javancss-30.51</tt> directory itself):
 <p>
-<tt><font color="#FFFFFF">./bin/javancss -gui test/*.java</font></tt>
+<tt>./bin/javancss -gui test/*.java</tt>
 <p>
 or
 <p>
-<tt><font color="#FFFFFF">./bin/javancss -gui -recursive test</font></tt>
+<tt>./bin/javancss -gui -recursive test</tt>
 <p>
 For regression test of JavaNCSS use:
 <p>
-<tt><font color="#FFFFFF">java javancss.test.JavancssTest</font></tt>
+<tt>java javancss.test.JavancssTest</tt>
 <p>If no parameter is provided for JavaNCSS, standard
 input (stdin) is used as the input stream. Multiple java source files can
 be specified in the command line. If a '@' char is put in front of a file name, then not this file will be measured but its content will be interpreted as a list of Java source files that
 shall be counted. The '@' functionality can be used recursively inside this file as well. Wild cards are not supported yet. (If
 the operating system processes the command line for the program, then you
-are lucky. Windows doesn't do that.) Instead use something like <tt><font color="#FFFFFF">cat
-*.java | javancss</font></tt> or <tt><font color="#FFFFFF">type *.java
-| javancss</font></tt>. Of course, this can lead to ambiguities when mixing
+are lucky. Windows doesn't do that.) Instead use something like <tt>cat *.java | javancss</tt>
+or <tt>type *.java | javancss</tt>. Of course, this can lead to ambiguities when mixing
 source files that belong to a package with files that doesn't.
 <p> If no option
 is given, JavaNCSS only calculates the total non commenting source statements
@@ -196,94 +198,70 @@ especially at the example at the bottom of that page. You can
 also have a look at the build.xml file that gets distributed with
 JavaNCSS itself (see "javancss" target).
 <h3>Synopsis</h3>
-<tt><font color="#FFFFFF">javancss [-option] stdin | [@]source_file*</font></tt>
+<tt>javancss [-option] stdin | [@]source_file*</tt>
 <h3>
 Options</h3>
 
 <dl>
 
-<dt>
-<tt><font color="#FFFFFF">-ncss</font></tt></dt>
-
+<dt><tt>-ncss</tt></dt>
 <dd>
 This is the default which counts total non commenting source statements
 and nothing else.</dd>
 
-<dt>
-<tt><font color="#FFFFFF">-package</font></tt></dt>
-
+<dt><tt>-package</tt></dt>
 <dd>
 Collects the metrics data for each package. This is the most top level
 view javancss offers for your projects. Take a look here what javancss
 prints out for the Sun JDK 1.1.5 <a href="package.txt">java.*</a> source
 tree.</dd>
 
-<dt>
-<tt><font color="#FFFFFF">-object</font></tt></dt>
-
+<dt><tt>-object</tt></dt>
 <dd>
 Collects the metrics data for each class/interface. For an example program
 output, look <a href="object.txt">here</a>.</dd>
 
-<dt>
-<tt><font color="#FFFFFF">-function</font></tt></dt>
-
+<dt><tt>-function</tt></dt>
 <dd>
 Collects the metrics data for each function. For an example program output,
 look <a href="function.txt">here</a>.</dd>
 
-<dt>
-<tt><font color="#FFFFFF">-all</font></tt></dt>
-
+<dt><tt>-all</tt></dt>
 <dd>
 The same as '-package -object -function'.</dd>
 
-<dt>
-<tt><font color="#FFFFFF">-gui</font></tt></dt>
-
+<dt><tt>-gui</tt></dt>
 <dd>
 Opens a gui to presents the '-all' output in tabbed panels.
 </dd>
 
-<dt>
-<tt><font color="#FFFFFF">-xml</font></tt></dt>
-
+<dt><tt>-xml</tt></dt>
 <dd>
 Output in xml and not in ascii format. Additional option '-all' is recommended.
 </dd>
 
-<dt>
-<tt><font color="#FFFFFF">-out file</font></tt></dt>
-
+<dt><tt>-out file</tt></dt>
 <dd>
 Output goes normally to standard output, with this
 option an output file can be specified.
 </dd>
 
-<dt>
-<tt><font color="#FFFFFF">-recursive</font></tt></dt>
-
+<dt><tt>-recursive</tt></dt>
 <dd>
 Java file in sub directories will be parsed as well. Be careful
 not to get caught in an endless loops because some Unix links.
 </dd>
 
-<dt>
-<tt><font color="#FFFFFF">-check</font></tt></dt>
-
+<dt><tt>-check</tt></dt>
 <dd>
 Trigger JavaNCSS self test suite.
 </dd>
 
-<dt>
-<tt><font color="#FFFFFF">-version</font></tt></dt>
-
+<dt><tt>-version</tt></dt>
 <dd>
 Prints out the version of JavaNCSS.</dd>
 
-<dt>
-<tt><font color="#FFFFFF">-help</font></tt></dt>
-
+<dt><tt>-help</tt></dt>
 <dd>
 Prints out some basic information.</dd>
 </dl>
@@ -456,43 +434,29 @@ a method splits, the "CCN counter" gets incremented by one.
 <p>Each method has a minimum value of 1 per default. For each of the following
 Java keywords/statements this value gets incremented by one:
 <ul>
-<li>
-<tt><font color="#FFFFFF">if</font></tt></li>
-
-<li>
-<tt><font color="#FFFFFF">for</font></tt></li>
-
-<li>
-<tt><font color="#FFFFFF">while</font></tt></li>
-
-<li>
-<tt><font color="#FFFFFF">case</font></tt></li>
-
-<li>
-<tt><font color="#FFFFFF">catch</font></tt></li>
-<li>
-<tt><font color="#FFFFFF">&amp;&amp;</font></tt></li>
-<li>
-<tt><font color="#FFFFFF">||</font></tt></li>
-<li>
-<tt><font color="#FFFFFF">?</font></tt></li>
+<li><tt>if</tt></li>
+<li><tt>for</tt></li>
+<li><tt>while</tt></li>
+<li><tt>case</tt></li>
+<li><tt>catch</tt></li>
+<li><tt>&amp;&amp;</tt></li>
+<li><tt>||</tt></li>
+<li><tt>?</tt></li>
 </ul>
 <!--Also if the control flow of a method returns abortively the <tt>CCN</tt> value will
 be incremented by one:
 <ul>
-<li>
-<tt><font color="FFFFFF">return</font></tt></li>
-<li><tt><font color="FFFFFF">throw</font></tt></li>
+<li><tt>return</tt></li>
+<li><tt>throw</tt></li>
 </ul>
 &nbsp;<br />
 An ordinary return at the end of method (no matter if it's a function or a procedure)
 will not be counted.
 <p>-->
-Note that <tt><font color="#FFFFFF">else</font></tt>, <tt><font color="#FFFFFF">default</font></tt>,
-and <tt><font color="#FFFFFF">finally</font></tt> don't increment the CCN
-value any further. On the other hand, a simple method with a <tt><font color="#FFFFFF">switch</font></tt> statement
-and a huge block of <tt><font color="#FFFFFF">case</font></tt> statements can have a surprisingly high CCN value (still it has the same value when converting a <tt><font color="#FFFFFF">switch</font></tt>
-block to an equivalent sequence of <tt><font color="FFFFFF">if</font></tt> statements).
+Note that <tt>else</tt>, <tt>default</tt>, and <tt>finally</tt> don't increment the CCN
+value any further. On the other hand, a simple method with a <tt>switch</tt> statement
+and a huge block of <tt>case</tt> statements can have a surprisingly high CCN value (still it has the same value when converting a <tt>switch</tt>
+block to an equivalent sequence of <tt>if</tt> statements).
 
 <!--P>The first article about this trivial software metric is one of the most
 cited papers in computer science. Sometimes you just must be the first
