@@ -9,7 +9,8 @@
 JavaNCSS Development Details
 
   JavaNCSS has been moved on August 2008 to Codehaus for a {{{source-repository.html}shared source code repository}}.
-  There is also a {{{issue-tracking.html}bug tracking}} tool.
+  There is also a {{{issue-tracking.html}bug tracking}} tool. Furthermore there are a few
+  {{{mail-lists.html}mailing lists}} available for this project.
 
   JavaNCSS can actually be built using Ant (<<<ant all>>>) or Maven (<<<mvn package>>>).
 
