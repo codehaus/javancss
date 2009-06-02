@@ -89,16 +89,15 @@
       <email>simon.brandhof@codehaus.org</email>
       <timezone>+1</timezone>
     </developer>
-  </developers>
-  <contributors>
-    <contributor>
+    <developer>
+      <id>reynaud_seb</id>
       <name>Sébastien Reynaud</name>
       <email>sebastien.reynaud@logica.com</email>
       <organization>Logica</organization>
       <organizationUrl>http://www.logica.com/</organizationUrl>
       <timezone>+1</timezone>
-    </contributor>
-  </contributors>
+    </developer>
+  </developers>
 
   <properties>
     <project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
