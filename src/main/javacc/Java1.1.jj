@@ -96,6 +96,8 @@ public class JavaParser implements JavaParserInterface
     private boolean _bPrivate  = true;//false;        // added by SMS
     private boolean _bPublic   = true;        // added by SMS
 
+    private int	_nbligne = 0; //Added by REYNAUD Sebastien (LOGICA)
+
     /**
      * For each class the number of formal
      * comments in toplevel methods, constructors, inner
@@ -293,6 +295,8 @@ TOKEN_MGR_DECLS :
     public static int  _iFormalComments = 0;
 
     public static int  _iMultiCommentsLast = 0;
+
+    public static int nbligne = 1; //Added by REYNAUD Sebastien (LOGICA)
 }
 
 /* WHITE SPACE */
@@ -301,10 +305,11 @@ SKIP :
 {
   " "
 | "\t"
-| "\n"
-| "\r"
+| "\n" /*Added by REYNAUD Sebastien (LOGICA)*/ {nbligne++;} //
+| "\r" /*Added by REYNAUD Sebastien (LOGICA)*/ {nbligne++;} //
 | "\f"
 | "\u001a"
+| "\r\n" {nbligne++;} //Added by REYNAUD Sebastien (LOGICA)
 }
 
 /* COMMENTS */
@@ -326,7 +331,7 @@ SPECIAL_TOKEN :
 <IN_SINGLE_LINE_COMMENT>
 SPECIAL_TOKEN :
 {
-    <SINGLE_LINE_COMMENT2: (~["\n","\r"])* ("\n"|"\r"|"\r\n")?>: DEFAULT
+    <SINGLE_LINE_COMMENT2: (~["\n","\r"])* ("\n"|"\r"|"\r\n")?> /*Added by REYNAUD Sebastien (LOGICA)*/ {nbligne++;} /* */: DEFAULT
 }
 
 //<IN_SINGLE_LINE_COMMENT>
@@ -349,7 +354,7 @@ SPECIAL_TOKEN :
 <IN_MULTI_LINE_COMMENT>
 SPECIAL_TOKEN :
 {
-  <END_OF_LINE_MULTI: "\n" | "\r" | "\r\n" > { _iMultiComments++; _iMultiCommentsLast++; } : IN_MULTI_LINE_COMMENT      // added by SMS
+  <END_OF_LINE_MULTI: "\n" | "\r" | "\r\n" > {/*Added by REYNAUD Sebastien (LOGICA)*/ nbligne++; /* */ _iMultiComments++; _iMultiCommentsLast++; } : IN_MULTI_LINE_COMMENT      // added by SMS
   | <MULTI_LINE_COMMENT: "*/" > { _iMultiComments++; _iMultiCommentsLast++; } : DEFAULT                                 // the global counter is incremented
 }
 
@@ -866,6 +871,8 @@ void CompilationUnit() :
     JavaParserTokenManager._iMultiCommentsLast = 0;
 
     _bPrivate = true;//false;
+
+	JavaParserTokenManager.nbligne = 1; //Added by REYNAUD Sebastien (LOGICA)
 }
 {
         {
@@ -930,6 +937,7 @@ void CompilationUnit() :
          {
              Token pToken = getToken(1);
              _loc = pToken.endLine;
+	     _nbligne = JavaParserTokenManager.nbligne; //Added by REYNAUD Sebastien (LOGICA)
          }
 }
 
@@ -1170,6 +1178,17 @@ void UnmodifiedClassDeclaration() :
 		//Added by REYNAUD Sebastien (LOGICA)
 		int oldJavadocs = _javadocs;
 		//
+	
+	//Added by REYNAUD Sebastien (LOGICA)
+	ObjectMetric metric = new ObjectMetric();
+	ObjectMetric metric1 = new ObjectMetric();
+	if (_classLevel == 0) {
+		metric.firstLine = JavaParserTokenManager.nbligne;
+	}else
+	{
+		metric1.firstLine = JavaParserTokenManager.nbligne;
+	}
+	//
 }
 {
         {
@@ -1188,7 +1207,9 @@ void UnmodifiedClassDeclaration() :
                 _classLevel--;
                 if (_classLevel == 0) {
                         //_topLevelClasses++;
-                        ObjectMetric metric = new ObjectMetric();
+
+                        //ObjectMetric metric = new ObjectMetric(); //Removed by REYNAUD Sebastien (LOGICA)
+
                         metric.name = _sPackage + _sClass;
                         metric.ncss = _ncss - oldNcss;
                         metric.functions = _functions - oldFunctions;
@@ -1211,16 +1232,18 @@ void UnmodifiedClassDeclaration() :
 			//Added by REYNAUD Sebastien (LOGICA)
 			else
 			{
-			ObjectMetric metric1 = new ObjectMetric();
+
+	          //ObjectMetric metric1 = new ObjectMetric(); //Removed by REYNAUD Sebastien (LOGICA)
+
                   metric1.name = _sPackage + _sClass ;
-			metric1.ncss = _ncss - oldNcss;
+		  metric1.ncss = _ncss - oldNcss;
                   metric1.functions = _functions - oldFunctions;
                   metric1.classes = _classes - oldClasses;
                   Token lastToken = getToken( 0 );
                   _vClasses.add( metric1 );
                   _pPackageMetric.functions += _functions - oldFunctions;
                   _pPackageMetric.classes++;
-			metric1.javadocs = _javadocs - oldJavadocs;
+		  metric1.javadocs = _javadocs - oldJavadocs;
 			}
 			//
 
@@ -1557,6 +1580,13 @@ void UnmodifiedInterfaceDeclaration() :
 		//Added by REYNAUD Sebastien (LOGICA)
 		int oldJavadocs = _javadocs;
 		//
+
+		//Added by REYNAUD Sebastien (LOGICA)
+	 	ObjectMetric metric = new ObjectMetric();
+	 	metric.firstLine = JavaParserTokenManager.nbligne;
+		ObjectMetric metric1 = new ObjectMetric();
+		metric1.firstLine = JavaParserTokenManager.nbligne;
+		//
 }
 {
         {
@@ -1575,7 +1605,9 @@ void UnmodifiedInterfaceDeclaration() :
                 if (_classLevel == 0)
                 {
                         //_topLevelClasses++;
-                        ObjectMetric metric = new ObjectMetric();
+
+                        //ObjectMetric metric = new ObjectMetric(); //Removed by REYNAUD Sebastien (LOGICA)
+
                         metric.name = _sPackage + _sClass;
                         metric.ncss = _ncss - oldNcss;
                         metric.functions = _functions - oldFunctions;
@@ -1596,15 +1628,17 @@ void UnmodifiedInterfaceDeclaration() :
 			//Added by REYNAUD Sebastien (LOGICA)
 			else
 			{
-			ObjectMetric metric1 = new ObjectMetric();
-                  metric1.name = _sPackage + _sClass;
+
+			//ObjectMetric metric1 = new ObjectMetric();//Removed by REYNAUD Sebastien (LOGICA)
+
+                	metric1.name = _sPackage + _sClass;
 			metric1.ncss = _ncss - oldNcss;
-                  metric1.functions = _functions - oldFunctions;
-                  metric1.classes = _classes - oldClasses;
-                  Token lastToken = getToken( 0 );
-                  _vClasses.add( metric1 );
-                  _pPackageMetric.functions += _functions - oldFunctions;
-                  _pPackageMetric.classes++;
+                  	metric1.functions = _functions - oldFunctions;
+                  	metric1.classes = _classes - oldClasses;
+                  	Token lastToken = getToken( 0 );
+                  	_vClasses.add( metric1 );
+                  	_pPackageMetric.functions += _functions - oldFunctions;
+                  	_pPackageMetric.classes++;
 			//_pPackageMetric.javadocs += _javadocs;
 			metric1.javadocs = _javadocs - oldJavadocs;
 			}
@@ -1732,6 +1766,11 @@ void MethodDeclaration() :
 	//Added by REYNAUD Sebastien (LOGICA)
 	Token myToken = null;
 	_tmpToken=null;
+	//
+
+	//Added by REYNAUD Sebastien (LOGICA)
+	FunctionMetric functionMetrics = new FunctionMetric();
+	functionMetrics.firstLine = JavaParserTokenManager.nbligne;
 	//
 }
 {
@@ -1918,7 +1957,8 @@ void MethodDeclaration() :
              _ncss++;
              Util.debug( "MethodDeclaration()._ncss++" );
 
-             FunctionMetric functionMetrics = new FunctionMetric();
+             //FunctionMetric functionMetrics = new FunctionMetric(); //Removed by REYNAUD Sebastien (LOGICA)
+
              functionMetrics.name = _sPackage + _sClass + _sFunction;
              functionMetrics.ncss = _ncss - oldNcss;
              functionMetrics.ccn = _cyc;
@@ -1995,6 +2035,11 @@ void ConstructorDeclaration() :
 
 	//Added by REYNAUD Sebastien (LOGICA)
 	Token myToken = null;
+	//
+
+	//Added by REYNAUD Sebastien (LOGICA)
+	FunctionMetric functionMetrics = new FunctionMetric();
+	functionMetrics.firstLine = JavaParserTokenManager.nbligne;
 	//
 
 }
@@ -2114,7 +2159,8 @@ void ConstructorDeclaration() :
                 _ncss++;
                 Util.debug( "_ncss++" );
 
-                FunctionMetric functionMetrics = new FunctionMetric();
+                //FunctionMetric functionMetrics = new FunctionMetric(); //Removed by REYNAUD Sebastien (LOGICA)
+
                 functionMetrics.name = _sFunction;
                 functionMetrics.ncss = _ncss - oldNcss;
                 functionMetrics.ccn = _cyc;
@@ -2284,18 +2330,25 @@ void Expression() :
     //System.out.println( "Expression start" );
 }
 {
+
+/*Removed by REYNAUD Sebastien (LOGICA)
+
   LOOKAHEAD( PrimaryExpression() AssignmentOperator() )
   //{ System.out.println( "Expression" ); }
   Assignment()
 |
+*/
+
   ConditionalExpression()
 }
 
+/*Removed by REYNAUD Sebastien (LOGICA)
 void Assignment() :
 {}
 {
   PrimaryExpression() AssignmentOperator() Expression()
 }
+*/
 
 void AssignmentOperator() :
 {}
@@ -2339,11 +2392,27 @@ void AndExpression() :
   EqualityExpression() ( "&" EqualityExpression() )*
 }
 
+/* Removed by REYNAUD Sebastien (LOGICA)
 void EqualityExpression() :
 {}
 {
   InstanceOfExpression() ( ( "==" | "!=" ) InstanceOfExpression() )*
 }
+*/
+
+//Added by REYNAUD Sebastien (LOGICA)
+void EqualityExpression() :
+{}
+{
+  AssigmentExpression() ( ( "==" | "!=" ) AssigmentExpression() )*
+}
+
+void AssigmentExpression() :
+{}
+{
+  InstanceOfExpression() (  "="  InstanceOfExpression() )*
+}
+//
 
 void InstanceOfExpression() :
 {}
@@ -2603,6 +2672,10 @@ void AllocationExpression() :
   LOOKAHEAD(2)
   "new" PrimitiveType() ArrayDimsAndInits()
 |
+	//Added by REYNAUD Sebastien (LOGICA)
+	{ObjectMetric metric = new ObjectMetric();
+     	metric.firstLine = JavaParserTokenManager.nbligne;}
+	//
          "new" Name()
                         // this is all for anonymous classes
                         { sName = _sName; }
@@ -2628,15 +2701,17 @@ void AllocationExpression() :
                         {
 
 				//Added by REYNAUD Sebastien (LOGICA)
-				ObjectMetric metric = new ObjectMetric();
+
+				//ObjectMetric metric = new ObjectMetric(); //Removed by REYNAUD Sebastien (LOGICA)
+
 				metric.name = _sPackage + _sClass;
 				metric.ncss = _ncss - oldNcss;
-		            metric.functions = _functions - oldFunctions;
-            	      metric.classes = _classes - oldClasses;
-                  	Token lastToken = getToken( 0 );
-                  	_vClasses.add( metric );
-                  	_pPackageMetric.functions += _functions - oldFunctions;
-                  	_pPackageMetric.classes++;
+		            	metric.functions = _functions - oldFunctions;
+            	      		metric.classes = _classes - oldClasses;
+                  		Token lastToken = getToken( 0 );
+                  		_vClasses.add( metric );
+                  		_pPackageMetric.functions += _functions - oldFunctions;
+                  		_pPackageMetric.classes++;
 				metric.javadocs = _javadocs - oldJavadocs;
 				//
                                 _classLevel--;
