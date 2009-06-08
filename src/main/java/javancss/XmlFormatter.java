@@ -270,9 +270,9 @@ public class XmlFormatter implements Formatter
         double fAverageClasses  = _divide( lClassesSum , objects );
         double fAverageJavadocs = _divide( lJVDCSum    , objects );
         // added by SMS
-        //double fAverageJVDCL = _divide( lJVDCLSum   , objects );
-        //double fAverageSL         = _divide( lSLSum                , objects );
-        //double fAverageML         = _divide( lMLSum                , objects );
+        double fAverageJVDCL 	  = _divide( lJVDCLSum , objects );
+        double fAverageSL         = _divide( lSLSum , objects );
+        double fAverageML         = _divide( lMLSum , objects );
         //
         //NumberFormat _pNumberFormat = new DecimalFormat("#,##0.00");
         String sRetVal =
@@ -281,9 +281,9 @@ public class XmlFormatter implements Formatter
             "      <functions>" + _pNumberFormat.format( fAverageFuncs ) + "</functions>\n" +
             "      <classes>" + _pNumberFormat.format( fAverageClasses ) + "</classes>\n" +
             "      <javadocs>" + _pNumberFormat.format( fAverageJavadocs ) + "</javadocs>\n" +
-            //"      <javadocs_lines>" + _pNumberFormat.format( fAverageJVDCL ) + "</javadocs_lines>\n" +
-            //"      <single_comment_lines>" + _pNumberFormat.format( fAverageSL ) + "</single_comment_lines>\n" +
-            //"      <implementation_comment_lines>" + _pNumberFormat.format( fAverageML ) + "</implementation_comment_lines>\n" +
+            "      <javadocs_lines>" + _pNumberFormat.format( fAverageJVDCL ) + "</javadocs_lines>\n" +
+            "      <single_comment_lines>" + _pNumberFormat.format( fAverageSL ) + "</single_comment_lines>\n" +
+            "      <implementation_comment_lines>" + _pNumberFormat.format( fAverageML ) + "</implementation_comment_lines>\n" +
             "    </averages>\n" +
             "    <ncss>" + _pNumberFormat.format( _javancss.getNcss() ) + "</ncss>\n";
 
@@ -299,24 +299,38 @@ public class XmlFormatter implements Formatter
         long lClassesSum  = 0;
         long lObjectSum   = 0;
         long lJVDCSum     = 0;
+        
+        // added by REYNAUD Sebastien (LOGICA)
+        long lJVDCSL	  = 0;
+        long lSinglel	  = 0;
+        long lMultil	  = 0;
+        //
+        
         for( Iterator eClasses = vObjectMetrics.iterator(); eClasses.hasNext(); )
         {
             ObjectMetric classMetric = (ObjectMetric)eClasses.next();
-            String sClass = classMetric.name;
+            String sClass  = classMetric.name;
             int objectNcss = classMetric.ncss;
             int functions  = classMetric.functions;
             int classes    = classMetric.classes;
             int jvdcs      = classMetric.javadocs;
 
             // added by SMS
-            //int jvdcsl     = ((Integer)vClassMetrics.elementAt(OBJ_JVDC_LINES)).intValue();
-            //int singlel           = ((Integer)vClassMetrics.elementAt(OBJ_SINGLE_LINES)).intValue();
-            //int multil     = ((Integer)vClassMetrics.elementAt(OBJ_MULTI_LINES)).intValue();
+            int jvdcsl     = ((Integer)vClassMetrics.elementAt(OBJ_JVDC_LINES)).intValue();
+            int singlel    = ((Integer)vClassMetrics.elementAt(OBJ_SINGLE_LINES)).intValue();
+            int multil     = ((Integer)vClassMetrics.elementAt(OBJ_MULTI_LINES)).intValue();
             //
             lObjectSum   += (long)objectNcss;
             lFunctionSum += (long)functions;
             lClassesSum  += (long)classes;
             lJVDCSum     += (long)jvdcs;
+            
+            // added by REYNAUD Sebastien (LOGICA)            
+            lJVDCSL += (long)jvdcsl;
+            lSinglel += (long)singlel;
+            lMultil += (long)multil;
+            //
+            
             sbRetVal.append(
                 "    <object>\n" +
                 "      <name>"      + sClass     + "</name>\n"      +
@@ -324,12 +338,13 @@ public class XmlFormatter implements Formatter
                 "      <functions>" + functions  + "</functions>\n" +
                 "      <classes>"   + classes    + "</classes>\n"   +
                 "      <javadocs>"  + jvdcs      + "</javadocs>\n"  +
-                //"      <javadocs_lines>" + jvdcsl + "</javadocs_lines>\n" +
-                //"      <single_comment_lines>" + singlel + "</single_comment_lines>\n" +
-                //"      <implementation_comment_lines>" + multil + "</implementation_comment_lines>\n" +
+                "      <javadocs_lines>" + jvdcsl + "</javadocs_lines>\n" +
+                "      <single_comment_lines>" + singlel + "</single_comment_lines>\n" +
+                "      <implementation_comment_lines>" + multil + "</implementation_comment_lines>\n" +
                 "    </object>\n" );
         }
 
+        /* Removed by REYNAUD Sebastien (LOGICA)
         sbRetVal.append( _formatObjectResume( vObjectMetrics.size()
                                         , lObjectSum
                                         , lFunctionSum
@@ -339,6 +354,20 @@ public class XmlFormatter implements Formatter
                                         , _javancss.getSl()
                                         , _javancss.getMl()
                                         ) );
+
+		*/
+        
+        // added by REYNAUD Sebastien (LOGICA)
+        sbRetVal.append( _formatObjectResume( vObjectMetrics.size()
+                , lObjectSum
+                , lFunctionSum
+                , lClassesSum
+                , lJVDCSum
+                , lJVDCSL
+                , lSinglel
+                , lMultil
+                ) );
+        //
 
         sbRetVal.append( "  </objects>\n" );
 
