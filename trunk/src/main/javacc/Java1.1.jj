@@ -1174,19 +1174,11 @@ void UnmodifiedClassDeclaration() :
         int oldNcss = _ncss;
         int oldFunctions = _functions;
         int oldClasses = _classes;
-
-		//Added by REYNAUD Sebastien (LOGICA)
-		int oldJavadocs = _javadocs;
-		//
 	
 	//Added by REYNAUD Sebastien (LOGICA)
 	ObjectMetric metric = new ObjectMetric();
-	ObjectMetric metric1 = new ObjectMetric();
 	if (_classLevel == 0) {
 		metric.firstLine = JavaParserTokenManager.nbligne;
-	}else
-	{
-		metric1.firstLine = JavaParserTokenManager.nbligne;
 	}
 	//
 }
@@ -1229,23 +1221,6 @@ void UnmodifiedClassDeclaration() :
                         //_pPackageMetric.multiLn += JavaParserTokenManager._iMultiComments - oldMulti;
                         //
                 }
-			//Added by REYNAUD Sebastien (LOGICA)
-			else
-			{
-
-	          //ObjectMetric metric1 = new ObjectMetric(); //Removed by REYNAUD Sebastien (LOGICA)
-
-                  metric1.name = _sPackage + _sClass ;
-		  metric1.ncss = _ncss - oldNcss;
-                  metric1.functions = _functions - oldFunctions;
-                  metric1.classes = _classes - oldClasses;
-                  Token lastToken = getToken( 0 );
-                  _vClasses.add( metric1 );
-                  _pPackageMetric.functions += _functions - oldFunctions;
-                  _pPackageMetric.classes++;
-		  metric1.javadocs = _javadocs - oldJavadocs;
-			}
-			//
 
                 _functions = oldFunctions;
                 _classes = oldClasses + 1;
@@ -1577,15 +1552,10 @@ void UnmodifiedInterfaceDeclaration() :
         int oldFunctions = _functions;
         int oldClasses = _classes;
 
-		//Added by REYNAUD Sebastien (LOGICA)
-		int oldJavadocs = _javadocs;
-		//
 
 		//Added by REYNAUD Sebastien (LOGICA)
 	 	ObjectMetric metric = new ObjectMetric();
 	 	metric.firstLine = JavaParserTokenManager.nbligne;
-		ObjectMetric metric1 = new ObjectMetric();
-		metric1.firstLine = JavaParserTokenManager.nbligne;
 		//
 }
 {
@@ -1625,24 +1595,6 @@ void UnmodifiedInterfaceDeclaration() :
                         //_pPackageMetric.multiLn += JavaParserTokenManager._iMultiComments - oldMulti;
                         //
                 }
-			//Added by REYNAUD Sebastien (LOGICA)
-			else
-			{
-
-			//ObjectMetric metric1 = new ObjectMetric();//Removed by REYNAUD Sebastien (LOGICA)
-
-                	metric1.name = _sPackage + _sClass;
-			metric1.ncss = _ncss - oldNcss;
-                  	metric1.functions = _functions - oldFunctions;
-                  	metric1.classes = _classes - oldClasses;
-                  	Token lastToken = getToken( 0 );
-                  	_vClasses.add( metric1 );
-                  	_pPackageMetric.functions += _functions - oldFunctions;
-                  	_pPackageMetric.classes++;
-			//_pPackageMetric.javadocs += _javadocs;
-			metric1.javadocs = _javadocs - oldJavadocs;
-			}
-			//
 
                 _functions = oldFunctions;
                 _classes = oldClasses + 1;
@@ -2663,19 +2615,11 @@ void AllocationExpression() :
         int oldClasses = _classes;
         String sName;
 
-	//Added by REYNAUD Sebastien (LOGICA)
-	int oldJavadocs = _javadocs;
-	int oldNcss = _ncss;
-	//
 }
 {
   LOOKAHEAD(2)
   "new" PrimitiveType() ArrayDimsAndInits()
 |
-	//Added by REYNAUD Sebastien (LOGICA)
-	{ObjectMetric metric = new ObjectMetric();
-     	metric.firstLine = JavaParserTokenManager.nbligne;}
-	//
          "new" Name()
                         // this is all for anonymous classes
                         { sName = _sName; }
@@ -2690,30 +2634,12 @@ void AllocationExpression() :
                                  _sClass += ".";
                          }
                          /*_sClass += sName;*/
-                         //_sClass += sName + "$" + _anonClassCount ;//Removed by REYNAUD Sebastien (LOGICA)
+                         _sClass += sName + "$" + _anonClassCount ;
 
-				//Added by REYNAUD Sebastien (LOGICA)
-				_sClass += sName;
-				//
                          _classLevel ++;
                  }
                         ClassBody()
                         {
-
-				//Added by REYNAUD Sebastien (LOGICA)
-
-				//ObjectMetric metric = new ObjectMetric(); //Removed by REYNAUD Sebastien (LOGICA)
-
-				metric.name = _sPackage + _sClass;
-				metric.ncss = _ncss - oldNcss;
-		            	metric.functions = _functions - oldFunctions;
-            	      		metric.classes = _classes - oldClasses;
-                  		Token lastToken = getToken( 0 );
-                  		_vClasses.add( metric );
-                  		_pPackageMetric.functions += _functions - oldFunctions;
-                  		_pPackageMetric.classes++;
-				metric.javadocs = _javadocs - oldJavadocs;
-				//
                                 _classLevel--;
                                 _functions = oldFunctions;
                                 _classes = oldClasses + 1;
