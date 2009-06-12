@@ -2502,7 +2502,7 @@ void PrimaryPrefix() :
   "this" 
 
    //Added by REYNAUD Sebastien (LOGICA)
-   (".")? (Identifier())?
+   (".")? ("new")? (Identifier())?
    //
 
          //|
