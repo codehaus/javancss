@@ -299,13 +299,13 @@ public class XmlFormatter implements Formatter
         long lClassesSum  = 0;
         long lObjectSum   = 0;
         long lJVDCSum     = 0;
-        
+
         // added by REYNAUD Sebastien (LOGICA)
         long lJVDCSL	  = 0;
         long lSinglel	  = 0;
         long lMultil	  = 0;
         //
-        
+
         for( Iterator eClasses = vObjectMetrics.iterator(); eClasses.hasNext(); )
         {
             ObjectMetric classMetric = (ObjectMetric)eClasses.next();
@@ -316,21 +316,21 @@ public class XmlFormatter implements Formatter
             int jvdcs      = classMetric.javadocs;
 
             // added by SMS
-            int jvdcsl     = ((Integer)vClassMetrics.elementAt(OBJ_JVDC_LINES)).intValue();
-            int singlel    = ((Integer)vClassMetrics.elementAt(OBJ_SINGLE_LINES)).intValue();
-            int multil     = ((Integer)vClassMetrics.elementAt(OBJ_MULTI_LINES)).intValue();
+            int jvdcsl     = classMetric.javadocsLn;
+            int singlel    = classMetric.singleLn;
+            int multil     = classMetric.multiLn;
             //
             lObjectSum   += (long)objectNcss;
             lFunctionSum += (long)functions;
             lClassesSum  += (long)classes;
             lJVDCSum     += (long)jvdcs;
-            
-            // added by REYNAUD Sebastien (LOGICA)            
+
+            // added by REYNAUD Sebastien (LOGICA)
             lJVDCSL += (long)jvdcsl;
             lSinglel += (long)singlel;
             lMultil += (long)multil;
             //
-            
+
             sbRetVal.append(
                 "    <object>\n" +
                 "      <name>"      + sClass     + "</name>\n"      +
@@ -356,7 +356,7 @@ public class XmlFormatter implements Formatter
                                         ) );
 
 		*/
-        
+
         // added by REYNAUD Sebastien (LOGICA)
         sbRetVal.append( _formatObjectResume( vObjectMetrics.size()
                 , lObjectSum
