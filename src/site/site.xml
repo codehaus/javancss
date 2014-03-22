@@ -25,6 +25,9 @@
 
     <menu name="General Information">
       <item name="Home" href="/index.html"/>
+    </menu>
+
+    <menu name="Development">
       <item name="Development" href="/development.html"/>
       <item name="TODO" href="/todo.html"/>
     </menu>
