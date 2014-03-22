@@ -278,20 +278,6 @@
               <goal>run</goal>
             </goals>
           </execution>
-          <execution>
-            <id>site</id>
-            <phase>site</phase>
-            <configuration>
-              <tasks>
-                <copy todir="target/site">
-                  <fileset dir="doc" />
-                </copy>
-              </tasks>
-            </configuration>
-            <goals>
-              <goal>run</goal>
-            </goals>
-          </execution>
         </executions>
       </plugin>
       <plugin>
