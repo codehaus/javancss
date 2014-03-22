@@ -32,22 +32,22 @@ for.
 
 <p>JavaNCSS is a simple command line utility which measures two standard
 source code metrics for the Java programming language. The metrics are
-collected globally, for each class and/or for each function.
+collected globally, for each class and/or for each function.</p>
 
 <p>Here is an example about what JavaNCSS prints out for the Sun JDK 1.1.5
 <a href="package.txt">java.*</a> source tree (update: JDK 1.5 api source tree
-consists of 569'830 ncss).
+consists of 569'830 ncss).</p>
 
 <p>JavaNCSS can optionally present its output with a little
 <a href="gui.html">graphical user interface</a>. To interactively select Java source
 files for counting, <a href="http://www.kclee.de/clemens/jacob/">Jacob</a> (a Java class browser and project
-manager) can be used for this purpose.
+manager) can be used for this purpose.</p>
 
 <p>JavaNCSS can also be used out of an Ant <code>build.xml</code> script as it
 comes bundled with an Ant task written by Steve Jernigan.
-The JavaNCSS Ant Task is documented on a <a href="JavancssAntTask.html">separate page</a>.
+The JavaNCSS Ant Task is documented on a <a href="JavancssAntTask.html">separate page</a>.</p>
 
-<p>You can always find the newest version of this page at: <a href="http://www.kclee.de/clemens/java/javancss/">http://www.kclee.de/clemens/java/javancss/</a>
+<p>You can always find the newest version of this page at: <a href="http://www.kclee.de/clemens/java/javancss/">http://www.kclee.de/clemens/java/javancss/</a></p>
 
 
 
@@ -148,7 +148,7 @@ Class library which will be part of the next JDK 1.2. Swing can be downloaded
 from Javasoft's <a href="http://developer.javasoft.com/servlet/SessionServlet?action=showLogin&url=/developer/earlyAccess/">Developer
 Connection</a> (requires membership). If you don't have a password yet,
 you can get it for free there.-->
-<br />&nbsp;
+<br />&nbsp;</p>
 
 
 <h2><a name="usage"></a>Usage</h2>
@@ -158,19 +158,19 @@ Then to start JavaNCSS type: <tt>java javancss.Main</tt>.
 As an alternative you can edit and use either the <tt>JAVANCSS.BAT</tt>
 or <tt>javancss</tt> file. Just change the
 <tt>JAVA_HOME</tt> and <tt>CLASSPATH</tt>
-variables according to your system. Make sure you did include the swingall.jar archive in the classpath.
+variables according to your system. Make sure you did include the swingall.jar archive in the classpath.</p>
 <p>
-Now for the first run type in (beeing in the <tt>javancss-30.51</tt> directory itself):
+Now for the first run type in (beeing in the <tt>javancss-30.51</tt> directory itself):</p>
 <p>
-<tt>./bin/javancss -gui test/*.java</tt>
+<tt>./bin/javancss -gui test/*.java</tt></p>
 <p>
 or
+</p><p>
+<tt>./bin/javancss -gui -recursive test</tt></p>
 <p>
-<tt>./bin/javancss -gui -recursive test</tt>
+For regression test of JavaNCSS use:</p>
 <p>
-For regression test of JavaNCSS use:
-<p>
-<tt>java javancss.test.JavancssTest</tt>
+<tt>java javancss.test.JavancssTest</tt></p>
 <p>If no parameter is provided for JavaNCSS, standard
 input (stdin) is used as the input stream. Multiple java source files can
 be specified in the command line. If a '@' char is put in front of a file name, then not this file will be measured but its content will be interpreted as a list of Java source files that
@@ -178,15 +178,15 @@ shall be counted. The '@' functionality can be used recursively inside this file
 the operating system processes the command line for the program, then you
 are lucky. Windows doesn't do that.) Instead use something like <tt>cat *.java | javancss</tt>
 or <tt>type *.java | javancss</tt>. Of course, this can lead to ambiguities when mixing
-source files that belong to a package with files that doesn't.
+source files that belong to a package with files that doesn't.</p>
 <p> If no option
 is given, JavaNCSS only calculates the total non commenting source statements
-(NCSS) of the given input.
+(NCSS) of the given input.</p>
 <p>JavaNCSS can also be used conveniently via Ant. For details
 have a look at the <a href="JavancssAntTask.html">JavaNCSS Ant Task page</a>,
 especially at the example at the bottom of that page. You can
 also have a look at the build.xml file that gets distributed with
-JavaNCSS itself (see "javancss" target).
+JavaNCSS itself (see "javancss" target).</p>
 
 <h3>Synopsis</h3>
 <tt>javancss [-option] stdin | [@]source_file*</tt>
@@ -273,24 +273,24 @@ with NCSS greater some limit).<p>
 Assuming you have e.g. Xalan2 installed and somewhere in your
 path is a shell script named 'xslt' that knows how to invoke
 Java with the Xalan 2 main processor class (org.apache.xalan.xslt.Process),
-here is how you can make use of JavaNCSS' XSLT stylesheet:<p>
+here is how you can make use of JavaNCSS' XSLT stylesheet:</p><p>
 <tt>cd javancss-30.51</tt><br />
 <tt>javancss -all -xml -recursive src &gt; example.xml</tt><br />
-<tt>xslt -in example.xml -xsl xslt/javancss2text.xsl</tt><p>
+<tt>xslt -in example.xml -xsl xslt/javancss2text.xsl</tt></p><p>
 Have fun. If you create a useful new stylesheet for JavaNCSS,
-I would be happy to get a copy of it.
+I would be happy to get a copy of it.</p>
 
 <h4>SVG Output</h4>
 Yves Coene <i><a href="mailto:Yves.Coene@spacebel.be">&lt;Yves.Coene@spacebel.be&gt;</a></i> has donated some XSLT stylesheets which produce beautiful
 SVG charts out of JavaNCSS's XML output.<p>
 
 Use e.g. batik as an SVG viewer and have a look at the example
-files in directory xslt/svg under the JavaNCSS home directory.<p>
+files in directory xslt/svg under the JavaNCSS home directory.</p><p>
 
-Here is an <a href="chart_ncss.svg">example SVG chart</a> file.<p>
+Here is an <a href="chart_ncss.svg">example SVG chart</a> file.</p><p>
 
 Generation of SVG files is similar to using other XSLT stylesheets
-as described above.
+as described above.</p>
 
 
 
@@ -304,7 +304,7 @@ Specification but include all kinds of declarations too.
 
 <p>Actually, the NCSS counter gets incremented by one for each:
 <br />&nbsp;
-<br />&nbsp;
+<br />&nbsp;</p>
 
 <center><table BORDER="0">
 <tr>
@@ -413,7 +413,7 @@ never get counted, the same applies to blocks in general.
 
 <p>In some cases consecutive semicolons are illegal according to the JLS
 but JavaNCSS still tolerates them (thought JavaNCSS is still more strict
-as 'javac'). Nevertheless they are never counted as two statements.
+as 'javac'). Nevertheless they are never counted as two statements.</p>
 
 <h3>Cyclomatic Complexity Number (CCN)</h3>
 CCN is also know as McCabe Metric. There exists a much hyped theory behind
@@ -422,7 +422,7 @@ it based on graph theory, but it all comes down to simply counting 'if',
 a method splits, the "CCN counter" gets incremented by one.
 
 <p>Each method has a minimum value of 1 per default. For each of the following
-Java keywords/statements this value gets incremented by one:
+Java keywords/statements this value gets incremented by one:</p>
 <ul>
 <li><tt>if</tt></li>
 <li><tt>for</tt></li>
@@ -464,23 +464,23 @@ Release date still open.
 
 <h3>Version 32.53</h3>
 Version 32.53 has been released on May 31, 2009<p>
-Fixed bugs <a href="http://jira.codehaus.org/browse/JAVANCSS-9">JavaNCSS-9</a>, <a href="http://jira.codehaus.org/browse/JAVANCSS-12">12</a>, <a href="http://jira.codehaus.org/browse/JAVANCSS-13">13</a>, <a href="http://jira.codehaus.org/browse/JAVANCSS-14">14</a>, <a href="http://jira.codehaus.org/browse/JAVANCSS-15">15</a>, <a href="http://jira.codehaus.org/browse/JAVANCSS-16">16</a>, <a href="http://jira.codehaus.org/browse/JAVANCSS-17">17</a>, <a href="http://jira.codehaus.org/browse/JAVANCSS-18">18</a>, <a href="http://jira.codehaus.org/browse/JAVANCSS-19">19</a>, <a href="http://jira.codehaus.org/browse/JAVANCSS-20">20</a>, <a href="http://jira.codehaus.org/browse/JAVANCSS-21">21</a>, and <a href="http://jira.codehaus.org/browse/JAVANCSS-22">22</a>.
+Fixed bugs <a href="http://jira.codehaus.org/browse/JAVANCSS-9">JavaNCSS-9</a>, <a href="http://jira.codehaus.org/browse/JAVANCSS-12">12</a>, <a href="http://jira.codehaus.org/browse/JAVANCSS-13">13</a>, <a href="http://jira.codehaus.org/browse/JAVANCSS-14">14</a>, <a href="http://jira.codehaus.org/browse/JAVANCSS-15">15</a>, <a href="http://jira.codehaus.org/browse/JAVANCSS-16">16</a>, <a href="http://jira.codehaus.org/browse/JAVANCSS-17">17</a>, <a href="http://jira.codehaus.org/browse/JAVANCSS-18">18</a>, <a href="http://jira.codehaus.org/browse/JAVANCSS-19">19</a>, <a href="http://jira.codehaus.org/browse/JAVANCSS-20">20</a>, <a href="http://jira.codehaus.org/browse/JAVANCSS-21">21</a>, and <a href="http://jira.codehaus.org/browse/JAVANCSS-22">22</a>.</p>
 <p>
-Big thanks to S&eacute;bastien Reynaud for difficult Java grammar patches and Herv&eacute; Boutemy for applying them as well as adding his own fixes to close all bugs listed above. Follow the bug reports for more people supporting us with reports and patches!
+Big thanks to S&eacute;bastien Reynaud for difficult Java grammar patches and Herv&eacute; Boutemy for applying them as well as adding his own fixes to close all bugs listed above. Follow the bug reports for more people supporting us with reports and patches!</p>
 
 <h3>Version 31.52</h3>
 Version 31.52 has been released on May 21, 2009<p>
 Fixed bugs <a href="http://jira.codehaus.org/browse/JAVANCSS-10">JAVANCSS-10</a> and <a href="http://jira.codehaus.org/browse/JAVANCSS-4">JAVANCSS-4</a>. Added options to see the parse tree in debug mode as well as a new experimental Java 1.5 grammar parser, also intended to use for debugging purposes.
-<br />Note that this version requires Java 1.5.
+<br />Note that this version requires Java 1.5.</p>
 
 <h3>Version 30.51</h3>
-Version 30.51 has been released on February 7, 2009<p>Project has been moved to Codehaus using public Subversion repository and Maven project structure. Thanks to Herv&eacute; Boutemy and Simon Brandhof!
+Version 30.51 has been released on February 7, 2009<p>Project has been moved to Codehaus using public Subversion repository and Maven project structure. Thanks to Herv&eacute; Boutemy and Simon Brandhof!</p>
 
 <h3>Version 29.50</h3>
-Version 29.50 has been released on April 8, 2008<p>Fixed two Java 1.5 grammar parser bugs. Thanks to Don Kautz and Isabelle Guimiot!
+Version 29.50 has been released on April 8, 2008<p>Fixed two Java 1.5 grammar parser bugs. Thanks to Don Kautz and Isabelle Guimiot!</p>
 
 <h3>Version 28.49</h3>
-Version 28.49 has been released on October 6, 2006<p>Various Java 1.5 grammar parser bugs fixed.
+Version 28.49 has been released on October 6, 2006<p>Various Java 1.5 grammar parser bugs fixed.</p>
 <h4>What's New</h4>
 <ol>
 <li>New "ant test" task. Use "ant check" as before for
@@ -491,29 +491,29 @@ Version 28.49 has been released on October 6, 2006<p>Various Java 1.5 grammar pa
 <ol><li>Various Java 1.5 grammar parser bugs fixed.</li></ol>
 
 <h3><a name="27.48"></a>Version 27.48</h3>
-Version 27.48 has been released on July 25, 2006<p>Javadoc bug fixed.
+Version 27.48 has been released on July 25, 2006<p>Javadoc bug fixed.</p>
 <h4>Fixed Bugs</h4>
 <ol><li>Javadoc bug fixed, reported by Kyle Blaney.</li></ol>
 
 <h3><a name="25.45"></a>Version 25.45</h3>
-Version 25.45 has been released on May 14, 2006<p>Various Java 1.5 parser bugs fixes.
+Version 25.45 has been released on May 14, 2006<p>Various Java 1.5 parser bugs fixes.</p>
 <h4>Fixed Bugs</h4>
 <ol><li>Various small Java 1.5 parser bugs fixes.</li></ol>
 
 <h3><a name="24.44"></a>Version 24.44</h3>
-Version 24.44 has been released on April 24, 2006<p>Fix in method counter in Java 1.5 grammar code.
+Version 24.44 has been released on April 24, 2006<p>Fix in method counter in Java 1.5 grammar code.</p>
 <h4>Fixed Bugs</h4>
 <ol><li>Fix in method counter in Java 1.5 grammar code, detected by
    Don Morrison.
 </li></ol>
 
 <h3><a name="23.43"></a>Version 23.43</h3>
-Version 23.43 has been released on April 23, 2006<p>Fix in Enum parser.
+Version 23.43 has been released on April 23, 2006<p>Fix in Enum parser.</p>
 <h4>Fixed Bugs</h4>
 <ol><li>Fix in Enum parser, reported by Don Morrison.</li></ol>
 
 <h3><a name="22.42"></a>Version 22.42</h3>
-Version 22.42 has been released on April 16, 2006<p>Java 1.5 support.
+Version 22.42 has been released on April 16, 2006<p>Java 1.5 support.</p>
 <h4>What's New</h4>
 <ol><li>Support for all new language features in Java
    1.5.</li>
@@ -523,7 +523,7 @@ Version 22.42 has been released on April 16, 2006<p>Java 1.5 support.
 </ol>
 
 <h3><a name="21.41"></a>Version 21.41</h3>
-Version 21.41 has been released on September 6, 2002<p>SVG charts can be generated with new XSLT stylesheets.
+Version 21.41 has been released on September 6, 2002<p>SVG charts can be generated with new XSLT stylesheets.</p>
 <h4>What's New</h4>
 <ol>
 <li>Ives Coene donated XSLT stylesheets which generate beautiful
@@ -546,7 +546,7 @@ Version 21.41 has been released on September 6, 2002<p>SVG charts can be generat
 
 <h3><a name="20.40"></a>Version 20.40</h3>
 Version 20.40 has been released on July 5, 2002<p>Two new XSLT stylesheets, one of them to convert the JavaNCSS
-XML output to HTML.
+XML output to HTML.</p>
 <h4>What's New</h4>
 <ol>
 <li>Terry Skelton donated an XSLT stylesheet to convert the XML
@@ -559,7 +559,7 @@ XML output to HTML.
 </ol>
 
 <h3><a name="19.39"></a>Version 19.39</h3>
-Version 19.39 has been released on June 8, 2002<p>Ant task written by Steve Jernigan.
+Version 19.39 has been released on June 8, 2002<p>Ant task written by Steve Jernigan.</p>
 <h4>What's New</h4>
 <ol>
 <li>JavaNCSS has now bundled the Ant task from Steve Jernigan.
@@ -570,7 +570,7 @@ Version 19.39 has been released on June 8, 2002<p>Ant task written by Steve Jern
 </ol>
 
 <h3><a name="18.38"></a>Version 18.38</h3>
-Version 18.38 has been released on May 11, 2002<p>Fixed a rare parsing bug.
+Version 18.38 has been released on May 11, 2002<p>Fixed a rare parsing bug.</p>
 <h4>Fixed Bugs</h4>
 <ol>
 <li>Could not parse accessing an element of the parent class of
@@ -579,7 +579,7 @@ Version 18.38 has been released on May 11, 2002<p>Fixed a rare parsing bug.
 </ol>
 
 <h3><a name="17.37"></a>Version 17.37</h3>
-Version 17.37 has been released on May 4, 2002<p>Javadocs metric on package level and example XSLT stylesheet.
+Version 17.37 has been released on May 4, 2002<p>Javadocs metric on package level and example XSLT stylesheet.</p>
 <h4>What's New</h4>
 <ol>
 <li>Javadocs are now also displayed on a package level thanks
@@ -601,7 +601,7 @@ Version 17.37 has been released on May 4, 2002<p>Javadocs metric on package leve
 </ol>
 
 <h3><a name="16.34"></a>Version 16.34</h3>
-Version 16.34 has been released on April 7, 2002<p>Recursive feature, support of JDK 1.4 assert statements.
+Version 16.34 has been released on April 7, 2002<p>Recursive feature, support of JDK 1.4 assert statements.</p>
 <h4>What's New</h4>
 <ol>
 <li>Paako Hannu provided code to recursively parse all Java files
@@ -617,7 +617,7 @@ Version 16.34 has been released on April 7, 2002<p>Recursive feature, support of
 </ol>
 
 <h3><a name="15.32"></a>Version 15.32</h3>
-Version 15.32 has been released on November 21, 2001<p>New -out option.
+Version 15.32 has been released on November 21, 2001<p>New -out option.</p>
 <h4>What's New</h4>
 <ol>
 <li>New option -out to specify output file. By default std out is
@@ -636,7 +636,7 @@ Version 15.32 has been released on November 21, 2001<p>New -out option.
 </ol>
 
 <h3><a name="14.31"></a>Version 14.31</h3>
-Version 14.31 has been released on June 16, 2001<p>Major XML format bug fix.
+Version 14.31 has been released on June 16, 2001<p>Major XML format bug fix.</p>
 <h4>Bugs Fixed</h4>
 <ol>
 <li>XML format for object section was not well formed
@@ -645,7 +645,7 @@ Version 14.31 has been released on June 16, 2001<p>Major XML format bug fix.
 </ol>
 
 <h3><a name="13.30"></a>Version 13.30</h3>
-Version 13.30 has been released on June 14, 2001<p>Optional xml output.
+Version 13.30 has been released on June 14, 2001<p>Optional xml output.</p>
 <h4>What's New</h4>
 <ol>
 <li>Output in xml format of collected data. Use option -xml
@@ -660,7 +660,7 @@ Version 13.30 has been released on June 14, 2001<p>Optional xml output.
 </ol>
 
 <h3><a name="12.27"></a>Version 12.27</h3>
-Version 12.27 has been released on March 27, 2001<p>Minor bug fix release.
+Version 12.27 has been released on March 27, 2001<p>Minor bug fix release.</p>
 <h4>Bugs Fixed</h4>
 <ol>
 <li>Failure to parse 'this( name, o, (String)null, array );'
@@ -668,7 +668,7 @@ Version 12.27 has been released on March 27, 2001<p>Minor bug fix release.
 </ol>
 
 <h3><a name="11.26"></a>Version 11.26</h3>
-Version 11.26 has been released on March 23, 2001<p>Minor bug fix release.
+Version 11.26 has been released on March 23, 2001<p>Minor bug fix release.</p>
 <h4>Bugs Fixed</h4>
 <ol>
 <li>Failure to parse 'this.var = x;' as the first statement in
@@ -676,7 +676,7 @@ Version 11.26 has been released on March 23, 2001<p>Minor bug fix release.
 </ol>
 
 <h3><a name="10.25"></a>Version 10.25</h3>
-Version 10.25 has been released on March 21, 2001<p>Minor improvements.
+Version 10.25 has been released on March 21, 2001<p>Minor improvements.</p>
 <h4>What's New</h4>
 <ol>
 <li>JAVANCSS_HOME in javancss.bat is now set automaticly.</li>
@@ -688,7 +688,7 @@ Version 10.25 has been released on March 21, 2001<p>Minor improvements.
 </ol>
 
 <h3><a name="9.24"></a>Version 9.24</h3>
-Version 9.24 has been released on October 4, 2000<p>Fixed a small Java parser bug.
+Version 9.24 has been released on October 4, 2000<p>Fixed a small Java parser bug.</p>
 <h4>What's New</h4>
 <ol>
 <li>No new features.</li>
@@ -697,7 +697,7 @@ Version 9.24 has been released on October 4, 2000<p>Fixed a small Java parser bu
 <ol><li>Fixed a small Java parser bug reported by Ramon Felciano.</li></ol>
 
 <h3><a name="8.23"></a>Version 8.23</h3>
-Version 8.23 has been released on July 1, 2000<p>Javadoc comments for methods are now counted.
+Version 8.23 has been released on July 1, 2000<p>Javadoc comments for methods are now counted.</p>
 <h4>What's New</h4>
 <ol>
 <li>Javadoc comments for methods are now counted. The output
@@ -706,7 +706,7 @@ Version 8.23 has been released on July 1, 2000<p>Javadoc comments for methods ar
 </ol>
 
 <h3><a name="7.21"></a>Version 7.21</h3>
-Version 7.21 has been released on January 31, 2000<p>Published now under the GNU General Public License.
+Version 7.21 has been released on January 31, 2000<p>Published now under the GNU General Public License.</p>
 <h4>What's New</h4>
 <ol>
 <li>Javancss is now distributed under the GNU General Public
@@ -715,7 +715,7 @@ Version 7.21 has been released on January 31, 2000<p>Published now under the GNU
 </ol>
 
 <h3><a name="6.19"></a>Version 6.19</h3>
-Version 6.19 has been released on November 12, 1998<p>More tolerant towards parser errors.
+Version 6.19 has been released on November 12, 1998<p>More tolerant towards parser errors.</p>
 <h4>What's New</h4>
 <ol>
 <li>Javancss now continues with parsing the next source
@@ -725,7 +725,7 @@ Version 6.19 has been released on November 12, 1998<p>More tolerant towards pars
 </ol>
 
 <h3><a name="6.18"></a>Version 6.18</h3>
-Version 6.18 has been released on July 28, 1998<p>More tolerant towards parser errors.
+Version 6.18 has been released on July 28, 1998<p>More tolerant towards parser errors.</p>
 <h4>What's New</h4>
 <ol>
 <li>Javancss now continues with parsing the next source
@@ -735,7 +735,7 @@ Version 6.18 has been released on July 28, 1998<p>More tolerant towards parser e
 
 <h3><a name="5.16"></a>Version 5.16</h3>
 Version 5.16 has been released on July 24, 1998<p>Some weird input gets now accepted by the parser and a CCN
-counting bug got fixed.
+counting bug got fixed.</p>
 <h4>What's New</h4>
 <ol>
 <li>Added self test. Start it with:
@@ -758,7 +758,7 @@ counting bug got fixed.
 </ol>
 
 <h3><a name="4.10"></a>Version 4.10</h3>
-Version 4.10 has been released on March 8, 1998<p>Just a minor bug fix version.
+Version 4.10 has been released on March 8, 1998<p>Just a minor bug fix version.</p>
 <h4>Bugs Fixed</h4>
 <ol>
 <li>Swing and AWT components where mixed which resulted in some
@@ -770,7 +770,7 @@ Version 4.10 has been released on March 8, 1998<p>Just a minor bug fix version.
 Version 3.9 has been released on February 17, 1998<p>New is a GUI frontend. Additionally the project manager Jacob
 (<a href="http://www.kclee.com/clemens/jacob/">http://www.kclee.com/clemens/jacob/</a>) now includes the full
 functionality of JavaNCSS, which makes selecting Java source
-files much more convenient.
+files much more convenient.</p>
 <h4>What's New</h4>
 <ol>
 <li>New '-gui' option, which is equivalent to '-all' and
@@ -802,7 +802,7 @@ files much more convenient.
 </ol>
 
 <h3><a name="2.4"></a>Version 2.4</h3>
-Version 2.4 has been released on January 24, 1998<p>
+Version 2.4 has been released on January 24, 1998
 <h4>What's New</h4>
 <ol>
 <li>New '-package' option.</li>
@@ -828,7 +828,7 @@ Version 2.4 has been released on January 24, 1998<p>
 </ol>
 
 <h3><a name="1.2"></a>Version 1.2</h3>
-Version 1.2 has been released on May 7, 1997<p>
+Version 1.2 has been released on May 7, 1997
 
 
 
@@ -948,17 +948,17 @@ Mike Clark's JDepend
 "traverses a set of Java source file directories and generates design quality metrics for each Java package.
 JDepend allows you to automatically measure the quality of a design in terms of its extensibility,
 reusability, and maintainability to effectively manage and
-control package dependencies."<p>
+control package dependencies."
 
-While JavaNCSS simply lets you know how much source code
+<p>While JavaNCSS simply lets you know how much source code
 you have to deal with (ncss metric), JDepend informs you
 about the package structure of your code and helps you
 spotting weaknesses in your global code organization,
 e.g. identifying dependency cycles, creating a few independent
-packages on which most other package rely on, etc.<p>
+packages on which most other package rely on, etc.</p>
 
-You can use JDepend as a quantitative
-measurement tool as well.
+<p>You can use JDepend as a quantitative
+measurement tool as well.</p>
 </li>
 
 <li><a href="http://proguard.sourceforge.net/">ProGuard</a> -
@@ -966,15 +966,15 @@ ProGuard is a class file shrinker and obfuscator
 by
 Eric Lafortune. It differs from
 other offerings in its simple and compact configuration, its speed,
-and its modest memory usage.<p>
+and its modest memory usage.
 
-ProGuard is an application which has made use of JavaNCSS
+<p>ProGuard is an application which has made use of JavaNCSS
 in an unexpected way: "... I've taken the liberty of
 using JavaNCSS for producing test results with ProGuard, and,
 vice versa, for producing statistics about ProGuard. You can
 find the references in the Results section and the Quality
 section respectively. The latter section shows how I have
-integrated JavaNCSS in a nightly build process."</li>
+integrated JavaNCSS in a nightly build process."</p></li>
 <!--<li>
 <a href="http://207.92.81.101/rsm.htm">RSM, C &amp; C++ Code Quality and
 Metrics Tool</a> - A similar tool as JavaNCSS written in C for the C language.</li>-->
