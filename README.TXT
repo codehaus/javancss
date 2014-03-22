@@ -4,7 +4,8 @@ JavaNCSS
 A Source Measurement Suite for Java
 
 URL
-   http://www.kclee.de/clemens/java/javancss/
+   http://javancss.codehaus.org/
+   (was http://www.kclee.de/clemens/java/javancss/)
 
 DESCRIPTION
    Ever wondered how many lines of code or how many classes there
@@ -27,7 +28,7 @@ FEATURES
    - Command line driven.
    - A GUI is provided for better output browsing as well as the
      integration of JavaNCSS in a project manager and class
-     browser named Jacob (http://www.kclee.com/clemens/jacob/) for
+     browser named Jacob (http://www.kclee.de/clemens/jacob/) for
      easy selection of input source files.
    - XML output (optional).
    - XSLT stylesheets provided for further generation of HTML, 
@@ -35,7 +36,7 @@ FEATURES
      reports.
    - Ant task (written by Steve Jernigan).
    - 100% Pure Java.
-   - Free software (GNU GPL).
+   - Free software (GNU LGPL).
 
 SYSTEM REQUIREMENTS
    Java JDK >= 1.4.1
