@@ -12,7 +12,7 @@ JavaNCSS Development Details
   There is also a {{{./issue-tracking.html}bug tracking}} tool. Furthermore there are a few
   {{{./mail-lists.html}mailing lists}} available for this project.
 
-  JavaNCSS can actually be built using Ant (<<<ant all>>>) or Maven (<<<mvn package>>>).
+  JavaNCSS is built using Maven: <<<mvn package>>>.
 
   JavaNCSS site is built with Maven: <<<mvn site>>>.
 
