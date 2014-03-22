@@ -26,6 +26,7 @@
     <menu name="General Information">
       <item name="Home" href="/index.html"/>
       <item name="Release History" href="/release-history.html"/>
+      <item name="Credits" href="/credits.html"/>
     </menu>
 
     <menu name="Development">
