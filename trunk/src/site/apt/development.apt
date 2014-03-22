@@ -8,9 +8,9 @@
 
 JavaNCSS Development Details
 
-  JavaNCSS has been moved on August 2008 to Codehaus for a {{{source-repository.html}shared source code repository}}.
-  There is also a {{{issue-tracking.html}bug tracking}} tool. Furthermore there are a few
-  {{{mail-lists.html}mailing lists}} available for this project.
+  JavaNCSS has been moved on August 2008 to Codehaus for a {{{./source-repository.html}shared source code repository}}.
+  There is also a {{{./issue-tracking.html}bug tracking}} tool. Furthermore there are a few
+  {{{./mail-lists.html}mailing lists}} available for this project.
 
   JavaNCSS can actually be built using Ant (<<<ant all>>>) or Maven (<<<mvn package>>>).
 
@@ -21,9 +21,9 @@ Guide for JavaNCSS Contributors
 
  As with any open source project, there are several ways you can help:
 
- * Join the {{{mail-lists.html}mailing lists}} and answer other user's questions
+ * Join the {{{./mail-lists.html}mailing lists}} and answer other user's questions
 
- * Report bugs, feature requests and other issues in the {{{issue-tracking.html}issue tracking}} application.
+ * Report bugs, feature requests and other issues in the {{{./issue-tracking.html}issue tracking}} application.
 
  * Build JavaNCSS for yourself, in order to fix bugs.
 
@@ -124,7 +124,7 @@ Guide for JavaNCSS Committers
   []
 
   The release is deployed on {{{http://repository.codehaus.org/org/codehaus/javancss/}Codehaus main repository}}, which
-  is sync'ed once a day on {{{http://repo1.maven.org/maven2/org/codehaus/javancss/}Maven Central repository}}. Note that
+  is sync'ed once a day on {{{http://repo.maven.apache.org/maven2/org/codehaus/javancss/}Maven Central repository}}. Note that
   as soon as a release has been sync'ed to Maven Central repository, you can't change anything: any change on Codehaus
   main repository will be ignored by Maven Central repository.
 
