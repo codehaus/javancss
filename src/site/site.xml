@@ -25,6 +25,7 @@
 
     <menu name="General Information">
       <item name="Home" href="/index.html"/>
+      <item name="Release History" href="/release-history.html"/>
     </menu>
 
     <menu name="Development">
