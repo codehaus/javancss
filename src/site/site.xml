@@ -18,6 +18,7 @@
 
   <body>
     <links>
+      <item name="JavaNCSS Maven Plugin" href="http://mojo.codehaus.org/javancss-maven-plugin/"/>
       <item name="Maven" href="http://maven.apache.org/"/>
       <item name="Ant" href="http://ant.apache.org/"/>
       <item name="Chr. Clemens Lee" href="http://www.kclee.de/clemens/java/"/>
