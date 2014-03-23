@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 
 <project name="JavaNCSS"
-  xmlns="http://maven.apache.org/DECORATION/1.0.0"
+  xmlns="http://maven.apache.org/DECORATION/1.4.0"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/DECORATION/1.0.0 http://maven.apache.org/xsd/decoration-1.0.0.xsd">
+  xsi:schemaLocation="http://maven.apache.org/DECORATION/1.4.0 http://maven.apache.org/xsd/decoration-1.4.0.xsd">
   <bannerLeft>
     <name>JavaNCSS</name>
     <href>http://javancss.codehaus.org/</href>
@@ -21,8 +21,10 @@
       <item name="JavaNCSS Maven Plugin" href="http://mojo.codehaus.org/javancss-maven-plugin/"/>
       <item name="Maven" href="http://maven.apache.org/"/>
       <item name="Ant" href="http://ant.apache.org/"/>
-      <item name="Chr. Clemens Lee" href="http://www.kclee.de/clemens/java/"/>
     </links>
+    <breadcrumbs>
+      <item name="Chr. Clemens Lee" href="http://www.kclee.de/clemens/java/"/>
+    </breadcrumbs>
 
     <menu name="General Information">
       <item name="Home" href="/index.html"/>
