@@ -450,6 +450,7 @@ public class JavancssTest extends AbstractTest
         _checkParse( 144 ); // JAVANCSS-13
         _checkParse( 145 ); // JAVANCSS-14
         _checkParse( 146 ); // JAVANCSS-17
+        _checkParse( 148 ); // JAVANCSS-49
 
         _exitSubTest();
     }
