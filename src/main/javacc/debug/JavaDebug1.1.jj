@@ -96,6 +96,8 @@ public class JavaParserDebug implements JavaParserInterface
     private boolean _bPrivate  = true;//false;        // added by SMS
     private boolean _bPublic   = true;        // added by SMS
 
+    private int	_nbligne = 0; //Added by REYNAUD Sebastien (LOGICA)
+
     /**
      * For each class the number of formal
      * comments in toplevel methods, constructors, inner
@@ -293,6 +295,8 @@ TOKEN_MGR_DECLS :
     public static int  _iFormalComments = 0;
 
     public static int  _iMultiCommentsLast = 0;
+
+    public static int nbligne = 1; //Added by REYNAUD Sebastien (LOGICA)
 }
 
 /* WHITE SPACE */
@@ -305,6 +309,7 @@ SKIP :
 | "\r"
 | "\f"
 | "\u001a"
+| "\r\n" {nbligne++;} //Added by REYNAUD Sebastien (LOGICA)
 }
 
 /* COMMENTS */
@@ -326,7 +331,7 @@ SPECIAL_TOKEN :
 <IN_SINGLE_LINE_COMMENT>
 SPECIAL_TOKEN :
 {
-    <SINGLE_LINE_COMMENT2: (~["\n","\r"])* ("\n"|"\r"|"\r\n")?>: DEFAULT
+    <SINGLE_LINE_COMMENT2: (~["\n","\r"])* ("\n"|"\r"|"\r\n")?> /*Added by REYNAUD Sebastien (LOGICA)*/ {nbligne++;} /* */: DEFAULT
 }
 
 //<IN_SINGLE_LINE_COMMENT>
@@ -349,7 +354,7 @@ SPECIAL_TOKEN :
 <IN_MULTI_LINE_COMMENT>
 SPECIAL_TOKEN :
 {
-  <END_OF_LINE_MULTI: "\n" | "\r" | "\r\n" > { _iMultiComments++; _iMultiCommentsLast++; } : IN_MULTI_LINE_COMMENT      // added by SMS
+  <END_OF_LINE_MULTI: "\n" | "\r" | "\r\n" > {/*Added by REYNAUD Sebastien (LOGICA)*/ nbligne++; /* */ _iMultiComments++; _iMultiCommentsLast++; } : IN_MULTI_LINE_COMMENT      // added by SMS
   | <MULTI_LINE_COMMENT: "*/" > { _iMultiComments++; _iMultiCommentsLast++; } : DEFAULT                                 // the global counter is incremented
 }
 
@@ -866,6 +871,8 @@ void CompilationUnit() :
     JavaParserDebugTokenManager._iMultiCommentsLast = 0;
 
     _bPrivate = true;//false;
+
+	JavaParserDebugTokenManager.nbligne = 1; //Added by REYNAUD Sebastien (LOGICA)
 }
 {
         {
@@ -930,6 +937,7 @@ void CompilationUnit() :
          {
              Token pToken = getToken(1);
              _loc = pToken.endLine;
+	     _nbligne = JavaParserDebugTokenManager.nbligne; //Added by REYNAUD Sebastien (LOGICA)
          }
 }
 
@@ -1168,7 +1176,10 @@ void UnmodifiedClassDeclaration() :
         int oldClasses = _classes;
 
 		//Added by REYNAUD Sebastien (LOGICA)
-		int oldJavadocs = _javadocs;
+	ObjectMetric metric = new ObjectMetric();
+	if (_classLevel == 0) {
+		metric.firstLine = JavaParserDebugTokenManager.nbligne;
+	}
 		//
 }
 {
@@ -1188,7 +1199,9 @@ void UnmodifiedClassDeclaration() :
                 _classLevel--;
                 if (_classLevel == 0) {
                         //_topLevelClasses++;
-                        ObjectMetric metric = new ObjectMetric();
+
+                        //ObjectMetric metric = new ObjectMetric(); //Removed by REYNAUD Sebastien (LOGICA)
+
                         metric.name = _sPackage + _sClass;
                         metric.ncss = _ncss - oldNcss;
                         metric.functions = _functions - oldFunctions;
@@ -1208,21 +1221,6 @@ void UnmodifiedClassDeclaration() :
                         //_pPackageMetric.multiLn += JavaParserDebugTokenManager._iMultiComments - oldMulti;
                         //
                 }
-			//Added by REYNAUD Sebastien (LOGICA)
-			else
-			{
-			ObjectMetric metric1 = new ObjectMetric();
-                  metric1.name = _sPackage + _sClass ;
-			metric1.ncss = _ncss - oldNcss;
-                  metric1.functions = _functions - oldFunctions;
-                  metric1.classes = _classes - oldClasses;
-                  Token lastToken = getToken( 0 );
-                  _vClasses.add( metric1 );
-                  _pPackageMetric.functions += _functions - oldFunctions;
-                  _pPackageMetric.classes++;
-			metric1.javadocs = _javadocs - oldJavadocs;
-			}
-			//
 
                 _functions = oldFunctions;
                 _classes = oldClasses + 1;
@@ -1555,7 +1553,8 @@ void UnmodifiedInterfaceDeclaration() :
         int oldClasses = _classes;
 
 		//Added by REYNAUD Sebastien (LOGICA)
-		int oldJavadocs = _javadocs;
+	 	ObjectMetric metric = new ObjectMetric();
+	 	metric.firstLine = JavaParserDebugTokenManager.nbligne;
 		//
 }
 {
@@ -1575,7 +1574,9 @@ void UnmodifiedInterfaceDeclaration() :
                 if (_classLevel == 0)
                 {
                         //_topLevelClasses++;
-                        ObjectMetric metric = new ObjectMetric();
+
+                        //ObjectMetric metric = new ObjectMetric(); //Removed by REYNAUD Sebastien (LOGICA)
+
                         metric.name = _sPackage + _sClass;
                         metric.ncss = _ncss - oldNcss;
                         metric.functions = _functions - oldFunctions;
@@ -1593,22 +1594,6 @@ void UnmodifiedInterfaceDeclaration() :
                         //_pPackageMetric.multiLn += JavaParserDebugTokenManager._iMultiComments - oldMulti;
                         //
                 }
-			//Added by REYNAUD Sebastien (LOGICA)
-			else
-			{
-			ObjectMetric metric1 = new ObjectMetric();
-                  metric1.name = _sPackage + _sClass;
-			metric1.ncss = _ncss - oldNcss;
-                  metric1.functions = _functions - oldFunctions;
-                  metric1.classes = _classes - oldClasses;
-                  Token lastToken = getToken( 0 );
-                  _vClasses.add( metric1 );
-                  _pPackageMetric.functions += _functions - oldFunctions;
-                  _pPackageMetric.classes++;
-			//_pPackageMetric.javadocs += _javadocs;
-			metric1.javadocs = _javadocs - oldJavadocs;
-			}
-			//
 
                 _functions = oldFunctions;
                 _classes = oldClasses + 1;
@@ -1732,6 +1717,11 @@ void MethodDeclaration() :
 	//Added by REYNAUD Sebastien (LOGICA)
 	Token myToken = null;
 	_tmpToken=null;
+	//
+
+	//Added by REYNAUD Sebastien (LOGICA)
+	FunctionMetric functionMetrics = new FunctionMetric();
+	functionMetrics.firstLine = JavaParserDebugTokenManager.nbligne;
 	//
 }
 {
@@ -1918,7 +1908,8 @@ void MethodDeclaration() :
              _ncss++;
              Util.debug( "MethodDeclaration()._ncss++" );
 
-             FunctionMetric functionMetrics = new FunctionMetric();
+             //FunctionMetric functionMetrics = new FunctionMetric(); //Removed by REYNAUD Sebastien (LOGICA)
+
              functionMetrics.name = _sPackage + _sClass + _sFunction;
              functionMetrics.ncss = _ncss - oldNcss;
              functionMetrics.ccn = _cyc;
@@ -1976,6 +1967,14 @@ void FormalParameter() :
     Type() [ "..." ] VariableDeclaratorId()
 }
 
+void CatchParameter() :
+{}
+{
+    //[ "final" ]
+           Modifiers()
+    Type() ( LOOKAHEAD(2) "|" Type() )* [ "|" ] VariableDeclaratorId()
+}
+
 void ConstructorDeclaration() :
 {
         int oldNcss = _ncss;
@@ -1995,6 +1994,11 @@ void ConstructorDeclaration() :
 
 	//Added by REYNAUD Sebastien (LOGICA)
 	Token myToken = null;
+	//
+
+	//Added by REYNAUD Sebastien (LOGICA)
+	FunctionMetric functionMetrics = new FunctionMetric();
+	functionMetrics.firstLine = JavaParserDebugTokenManager.nbligne;
 	//
 
 }
@@ -2114,7 +2118,8 @@ void ConstructorDeclaration() :
                 _ncss++;
                 Util.debug( "_ncss++" );
 
-                FunctionMetric functionMetrics = new FunctionMetric();
+                //FunctionMetric functionMetrics = new FunctionMetric(); //Removed by REYNAUD Sebastien (LOGICA)
+
                 functionMetrics.name = _sFunction;
                 functionMetrics.ncss = _ncss - oldNcss;
                 functionMetrics.ccn = _cyc;
@@ -2284,18 +2289,25 @@ void Expression() :
     //System.out.println( "Expression start" );
 }
 {
+
+/*Removed by REYNAUD Sebastien (LOGICA)
+
   LOOKAHEAD( PrimaryExpression() AssignmentOperator() )
   //{ System.out.println( "Expression" ); }
   Assignment()
 |
+*/
+
   ConditionalExpression()
 }
 
+/*Removed by REYNAUD Sebastien (LOGICA)
 void Assignment() :
 {}
 {
   PrimaryExpression() AssignmentOperator() Expression()
 }
+*/
 
 void AssignmentOperator() :
 {}
@@ -2339,11 +2351,27 @@ void AndExpression() :
   EqualityExpression() ( "&" EqualityExpression() )*
 }
 
+/* Removed by REYNAUD Sebastien (LOGICA)
 void EqualityExpression() :
 {}
 {
   InstanceOfExpression() ( ( "==" | "!=" ) InstanceOfExpression() )*
 }
+*/
+
+//Added by REYNAUD Sebastien (LOGICA)
+void EqualityExpression() :
+{}
+{
+  AssigmentExpression() ( ( "==" | "!=" ) AssigmentExpression() )*
+}
+
+void AssigmentExpression() :
+{}
+{
+  InstanceOfExpression() (  "="  InstanceOfExpression() )*
+}
+//
 
 void InstanceOfExpression() :
 {}
@@ -2481,7 +2509,7 @@ void PrimaryPrefix() :
   "this" 
 
    //Added by REYNAUD Sebastien (LOGICA)
-   (".")? (Identifier())?
+   (".")? ("new")? (Identifier())?
    //
 
          //|
@@ -2594,10 +2622,6 @@ void AllocationExpression() :
         int oldClasses = _classes;
         String sName;
 
-	//Added by REYNAUD Sebastien (LOGICA)
-	int oldJavadocs = _javadocs;
-	int oldNcss = _ncss;
-	//
 }
 {
   LOOKAHEAD(2)
@@ -2617,28 +2641,12 @@ void AllocationExpression() :
                                  _sClass += ".";
                          }
                          /*_sClass += sName;*/
-                         //_sClass += sName + "$" + _anonClassCount ;//Removed by REYNAUD Sebastien (LOGICA)
+                         _sClass += sName + "$" + _anonClassCount ;
 
-				//Added by REYNAUD Sebastien (LOGICA)
-				_sClass += sName;
-				//
                          _classLevel ++;
                  }
                         ClassBody()
                         {
-
-				//Added by REYNAUD Sebastien (LOGICA)
-				ObjectMetric metric = new ObjectMetric();
-				metric.name = _sPackage + _sClass;
-				metric.ncss = _ncss - oldNcss;
-		            metric.functions = _functions - oldFunctions;
-            	      metric.classes = _classes - oldClasses;
-                  	Token lastToken = getToken( 0 );
-                  	_vClasses.add( metric );
-                  	_pPackageMetric.functions += _functions - oldFunctions;
-                  	_pPackageMetric.classes++;
-				metric.javadocs = _javadocs - oldJavadocs;
-				//
                                 _classLevel--;
                                 _functions = oldFunctions;
                                 _classes = oldClasses + 1;
@@ -2950,9 +2958,25 @@ void TryStatement() :
  */
 {}
 {
-  "try" Block()
-  ( "catch" "(" FormalParameter() ")" Block() { _ncss++;       Util.debug( "_ncss++" ); _cyc++; } )*
+  TryBlock()
+  ( "catch" "(" CatchParameter() ")" Block() { _ncss++;       Util.debug( "_ncss++" ); _cyc++; } )*
   [ "finally" Block() { _ncss++;       Util.debug( "_ncss++" );} ]
+}
+
+void TryBlock() :
+{}
+{
+//  LOOKAHEAD(2) "try" "(" ( LocalVariableDeclaration() [ ";" ] ")" | ")" ) Block()
+  LOOKAHEAD(2) "try" "(" ( TryWithResources() ")" | ")" ) Block()
+  |
+  "try" Block()
+}
+
+void TryWithResources() :
+{}
+{
+//  LocalVariableDeclaration() [ ";" ]
+  LocalVariableDeclaration() ( ";" LocalVariableDeclaration() )*
 }
 
 void Identifier() :
