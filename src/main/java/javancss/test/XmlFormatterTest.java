@@ -86,7 +86,8 @@ public class XmlFormatterTest extends AbstractTest {
         try
         {
             String sText = XMLUtil.getXML( sXML, getXslFile( "javancss2text.xsl" ) );
-            FileUtil.writeFile( "/tmp/t", sText );
+            FileUtil.writeFile( "./t", sText );
+            sText = sText.replaceAll( "(?:\r\n|\n\r)", "\n" );
             String sCompare = FileUtil.readFile( getTestFile( "Output32.txt" ).getAbsolutePath() );
             Assert( sText.equals( sCompare ), sText );
         }
