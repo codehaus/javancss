@@ -2291,24 +2291,18 @@ void Expression() :
 }
 {
 
-/*Removed by REYNAUD Sebastien (LOGICA)
-
   LOOKAHEAD( PrimaryExpression() AssignmentOperator() )
   //{ System.out.println( "Expression" ); }
   Assignment()
 |
-*/
-
   ConditionalExpression()
 }
 
-/*Removed by REYNAUD Sebastien (LOGICA)
 void Assignment() :
 {}
 {
   PrimaryExpression() AssignmentOperator() Expression()
 }
-*/
 
 void AssignmentOperator() :
 {}
