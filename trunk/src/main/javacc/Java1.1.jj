@@ -3402,6 +3402,8 @@ void TypeArguments():
 //Added by REYNAUD Sebastien (LOGICA)
 	"<" TypeArgument() ( LOOKAHEAD(2) "," TypeArgument() )* ">"
 //
+    |
+    "<>"
 
 }
 
