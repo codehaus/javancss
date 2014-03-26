@@ -1174,7 +1174,7 @@ void UnmodifiedClassDeclaration() :
         int oldNcss = _ncss;
         int oldFunctions = _functions;
         int oldClasses = _classes;
-	
+
 	//Added by REYNAUD Sebastien (LOGICA)
 	ObjectMetric metric = new ObjectMetric();
 	if (_classLevel == 0) {
@@ -1968,6 +1968,14 @@ void FormalParameter() :
     Type() [ "..." ] VariableDeclaratorId()
 }
 
+void CatchParameter() :
+{}
+{
+    //[ "final" ]
+           Modifiers()
+    Type() ( LOOKAHEAD(2) "|" Type() )* [ "|" ] VariableDeclaratorId()
+}
+
 void ConstructorDeclaration() :
 {
         int oldNcss = _ncss;
@@ -2499,7 +2507,7 @@ void PrimaryPrefix() :
   Literal()
 |
 //    { System.out.println( "PrimaryPrefix: this" ); }
-  "this" 
+  "this"
 
    //Added by REYNAUD Sebastien (LOGICA)
    (".")? ("new")? (Identifier())?
@@ -2951,9 +2959,25 @@ void TryStatement() :
  */
 {}
 {
-  "try" Block()
-  ( "catch" "(" FormalParameter() ")" Block() { _ncss++;       Util.debug( "_ncss++" ); _cyc++; } )*
+  TryBlock()
+  ( "catch" "(" CatchParameter() ")" Block() { _ncss++;       Util.debug( "_ncss++" ); _cyc++; } )*
   [ "finally" Block() { _ncss++;       Util.debug( "_ncss++" );} ]
+}
+
+void TryBlock() :
+{}
+{
+//  LOOKAHEAD(2) "try" "(" ( LocalVariableDeclaration() [ ";" ] ")" | ")" ) Block()
+  LOOKAHEAD(2) "try" "(" ( TryWithResources() ")" | ")" ) Block()
+  |
+  "try" Block()
+}
+
+void TryWithResources() :
+{}
+{
+//  LocalVariableDeclaration() [ ";" ]
+  LocalVariableDeclaration() ( ";" LocalVariableDeclaration() )*
 }
 
 void Identifier() :
