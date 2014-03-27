@@ -9,7 +9,6 @@
 
     <fileSet>
       <includes>
-        <include>build.xml</include>
         <include>COPYING</include>
         <include>javancss.dtd</include>
         <include>pom.xml</include>
