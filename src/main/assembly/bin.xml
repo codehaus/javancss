@@ -15,7 +15,6 @@
         <include>pom.xml</include>
         <include>README.TXT</include>
         <include>bin/javancss.bat</include>
-        <include>doc/</include>
         <include>lib/</include>
         <include>src/</include>
         <include>test/</include>
