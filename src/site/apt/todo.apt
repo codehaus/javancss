@@ -1,12 +1,25 @@
  ----
  JavaNCSS TODO list
  -----
- Hervé Boutemy
+ Hervé Boutemy, Peter Kofler
  -----
- August 2008
+ March 2013
  -----
 
 JavaNCSS TODO list
+
+  * Maven build
+  
+    * fix all warnings in mvn clean verify site
+    
+    * maybe lib/*.jar files should be copied in assembly phase from actual dependencies, delete commited Jar files, start scripts need to be updated
+    
+  * Dependencies are non standard dependencies, not hosted on CodeHaus and not maintained any more?
+  
+    * at least add source-jar to dependencies; see http://www.kclee.de/clemens/java/ccl/; jhbasic is javax.help from sun.
+    
+    * maybe get rid of dependencies by copying only the relevant classes into this project
+
 
   * use JUnit?
 
