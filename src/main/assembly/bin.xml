@@ -15,7 +15,6 @@
         <include>bin/javancss.bat</include>
         <include>lib/</include>
         <include>src/</include>
-        <include>test/</include>
         <include>xslt/</include>
       </includes>
     </fileSet>
