@@ -72,7 +72,7 @@ public abstract class AbstractTest extends Test
 
     public void main( File baseDir )
     {
-        setTestDir( new File( baseDir, "test" ) );
+        setTestDir( new File( baseDir, "src/test/resources" ) );
         setVerbose( true );
         setTiming ( true );
         run();
