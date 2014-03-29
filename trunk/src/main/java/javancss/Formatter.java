@@ -36,11 +36,15 @@ import java.io.Writer;
  */
 public interface Formatter
 {
-    public void printPackageNcss(Writer w) throws IOException;
+    public void printPackageNcss( Writer w )
+        throws IOException;
 
-    public void printObjectNcss(Writer w) throws IOException;
+    public void printObjectNcss( Writer w )
+        throws IOException;
 
-    public void printFunctionNcss(Writer w) throws IOException;
+    public void printFunctionNcss( Writer w )
+        throws IOException;
 
-    public void printJavaNcss(Writer w) throws IOException;
+    public void printJavaNcss( Writer w )
+        throws IOException;
 }

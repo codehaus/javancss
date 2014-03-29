@@ -27,7 +27,8 @@ package javancss;
  * @author  Hervé Boutemy
  * @version $Id$
  */
-public abstract class Metric implements Comparable
+public abstract class Metric
+    implements Comparable
 {
     public String name = ".";
     /** Non Commenting Source Statements (NCSS). */
@@ -53,7 +54,8 @@ public abstract class Metric implements Comparable
         multiLn = 0;
     }
 
-    public String toString() {
+    public String toString()
+    {
         return name;
     }
 

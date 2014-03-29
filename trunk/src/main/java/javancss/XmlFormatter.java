@@ -38,15 +38,17 @@ import ccl.util.Util;
  * @author    Chr. Clemens Lee <clemens@kclee.com>
  * @version   $Id$
  */
-public class XmlFormatter implements Formatter
+public class XmlFormatter
+    implements Formatter
 {
     private final Javancss _javancss;
 
     private double _divide( int divident, int divisor )
     {
         double dRetVal = 0.0;
-        if ( divisor > 0) {
-            dRetVal = Math.round(((double)divident/(double)divisor)*100)/100.0;
+        if ( divisor > 0 )
+        {
+            dRetVal = Math.round( ( (double) divident / (double) divisor ) * 100 ) / 100.0;
         }
 
         return dRetVal;
@@ -55,8 +57,9 @@ public class XmlFormatter implements Formatter
     private double _divide( long divident, long divisor )
     {
         double dRetVal = 0.0;
-        if ( divisor > 0) {
-            dRetVal = Math.round(((double)divident/(double)divisor)*100)/100.0;
+        if ( divisor > 0 )
+        {
+            dRetVal = Math.round( ( (double) divident / (double) divisor ) * 100 ) / 100.0;
         }
 
         return dRetVal;
@@ -189,12 +192,13 @@ public class XmlFormatter implements Formatter
         _javancss = javancss;
 
         _pNumberFormat = NumberFormat.getInstance( Locale.US );
-        ((DecimalFormat)_pNumberFormat).applyPattern( "#,##0.00" );
+        ( (DecimalFormat) _pNumberFormat ).applyPattern( "#,##0.00" );
     }
 
-    public void printPackageNcss(Writer w) throws IOException
+    public void printPackageNcss( Writer w )
+        throws IOException
     {
-        w.write("  <packages>\n" );
+        w.write( "  <packages>\n" );
         List vPackageMetrics = _javancss.getPackageMetrics();
 
         int packages = vPackageMetrics.size();
@@ -207,9 +211,9 @@ public class XmlFormatter implements Formatter
         int singleLnSum = 0;
         int multiLnSum = 0;
         //
-        for( Iterator ePackages = vPackageMetrics.iterator(); ePackages.hasNext(); )
+        for ( Iterator ePackages = vPackageMetrics.iterator(); ePackages.hasNext(); )
         {
-            PackageMetric pPackageMetric = (PackageMetric)ePackages.next();
+            PackageMetric pPackageMetric = (PackageMetric) ePackages.next();
 
             classesSum += pPackageMetric.classes;
             functionsSum += pPackageMetric.functions;
@@ -290,7 +294,9 @@ public class XmlFormatter implements Formatter
         return sRetVal;
     }
 
-    public void printObjectNcss(Writer w) throws IOException {
+    public void printObjectNcss( Writer w )
+        throws IOException
+    {
         w.write( "  <objects>\n" );
 
         List/*<ObjectMetric>*/ vObjectMetrics = _javancss.getObjectMetrics();
@@ -306,9 +312,9 @@ public class XmlFormatter implements Formatter
         long lMultil	  = 0;
         //
 
-        for( Iterator eClasses = vObjectMetrics.iterator(); eClasses.hasNext(); )
+        for ( Iterator eClasses = vObjectMetrics.iterator(); eClasses.hasNext(); )
         {
-            ObjectMetric classMetric = (ObjectMetric)eClasses.next();
+            ObjectMetric classMetric = (ObjectMetric) eClasses.next();
             String sClass  = classMetric.name;
             int objectNcss = classMetric.ncss;
             int functions  = classMetric.functions;
@@ -404,7 +410,8 @@ public class XmlFormatter implements Formatter
         return sRetVal;
     }
 
-    public void printFunctionNcss(Writer w) throws IOException
+    public void printFunctionNcss( Writer w )
+        throws IOException
     {
         w.write( "  <functions>\n" );
 
@@ -413,9 +420,9 @@ public class XmlFormatter implements Formatter
         long lFunctionSum = 0;
         long lCCNSum      = 0;
         long lJVDCSum     = 0;
-        for( Iterator eFunctions = vFunctionMetrics.iterator(); eFunctions.hasNext(); )
+        for ( Iterator eFunctions = vFunctionMetrics.iterator(); eFunctions.hasNext(); )
         {
-            FunctionMetric functionMetric = (FunctionMetric)eFunctions.next();
+            FunctionMetric functionMetric = (FunctionMetric) eFunctions.next();
             String sFunction = functionMetric.name;
             int functionNcss = functionMetric.ncss;
             int functionCCN  = functionMetric.ccn;
@@ -454,8 +461,10 @@ public class XmlFormatter implements Formatter
         w.write( "  </functions>\n" );
     }
 
-    public void printJavaNcss(Writer w) throws IOException {
-        w.write("  <ncss>" + _javancss.getNcss() + "</ncss>\n"
+    public void printJavaNcss( Writer w )
+        throws IOException
+    {
+        w.write( "  <ncss>" + _javancss.getNcss() + "</ncss>\n"
                //+
                //"  <javadocs>" + _javancss.getJvdc() + "</javadocs>\n" +
                //"  <javadocs_lines>" + _javancss.getJdcl() + "</javadocs_lines>\n" +
@@ -464,18 +473,20 @@ public class XmlFormatter implements Formatter
                );
     }
 
-    static public void printStart(Writer w) throws IOException
+    static public void printStart( Writer w )
+        throws IOException
     {
         Calendar calendar = Util.getCalendar();
 
-        w.write("<?xml version=\"1.0\"?>\n" +
-               "<javancss>\n" +
-               "  <date>" + Util.getDate( calendar ) + "</date>\n" +
-               "  <time>" + Util.getTime( calendar ) + "</time>\n");
+        w.write( "<?xml version=\"1.0\"?>\n"
+                        + "<javancss>\n"
+                        + "  <date>" + Util.getDate( calendar ) + "</date>\n"
+                        + "  <time>" + Util.getTime( calendar ) + "</time>\n" );
     }
 
-    static public void printEnd(Writer w) throws IOException
+    static public void printEnd( Writer w )
+        throws IOException
     {
-        w.write("</javancss>\n");
+        w.write( "</javancss>\n" );
     }
 }
