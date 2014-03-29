@@ -10,7 +10,6 @@
     <fileSet>
       <includes>
         <include>COPYING</include>
-        <include>javancss.dtd</include>
         <include>pom.xml</include>
         <include>README.TXT</include>
         <include>bin/javancss.bat</include>
