@@ -28,10 +28,6 @@ Now for the first run type in (being in the <tt>javancss-30.51</tt> directory it
 or
 </p><p>
 <tt>./bin/javancss -gui -recursive src/test/resources/</tt></p>
-<p>
-For regression test of JavaNCSS use:</p>
-<p>
-<tt>java javancss.test.JavancssTest</tt></p>
 <p>If no parameter is provided for JavaNCSS, standard
 input (stdin) is used as the input stream. Multiple java source files can
 be specified in the command line. If a '@' char is put in front of a file name, then not this file will be measured but its content will be interpreted as a list of Java source files that
@@ -102,11 +98,6 @@ option an output file can be specified.
 <dd>
 Java file in sub directories will be parsed as well. Be careful
 not to get caught in an endless loops because some Unix links.
-</dd>
-
-<dt><tt>-check</tt></dt>
-<dd>
-Trigger JavaNCSS self test suite.
 </dd>
 
 <dt><tt>-version</tt></dt>
