@@ -21,6 +21,9 @@ Boston, MA 02111-1307, USA.  */
 
 package javancss;
 
+import java.io.IOException;
+import java.io.Writer;
+
 /**
  * Interface that each class generating output has to implement.
  * The two main implementations to generate ascii and xml output.<p/>
@@ -33,11 +36,11 @@ package javancss;
  */
 public interface Formatter
 {
-    public String printPackageNcss();
+    public void printPackageNcss(Writer w) throws IOException;
 
-    public String printObjectNcss();
+    public void printObjectNcss(Writer w) throws IOException;
 
-    public String printFunctionNcss();
+    public void printFunctionNcss(Writer w) throws IOException;
 
-    public String printJavaNcss();
+    public void printJavaNcss(Writer w) throws IOException;
 }

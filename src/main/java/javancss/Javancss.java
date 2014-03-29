@@ -35,6 +35,7 @@ import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.io.Reader;
 import java.io.UnsupportedEncodingException;
+import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -362,20 +363,20 @@ public class Javancss implements Exitable
         return _vFunctionMetrics;
     }
 
-    public String printObjectNcss() {
-        return getFormatter().printObjectNcss();
+    public void printObjectNcss(Writer w) throws IOException {
+        getFormatter().printObjectNcss(w);
     }
 
-    public String printFunctionNcss() {
-        return getFormatter().printFunctionNcss();
+    public void printFunctionNcss(Writer w) throws IOException {
+        getFormatter().printFunctionNcss(w);
     }
 
-    public String printPackageNcss() {
-        return getFormatter().printPackageNcss();
+    public void printPackageNcss(Writer w) throws IOException {
+        getFormatter().printPackageNcss(w);
     }
 
-    public String printJavaNcss() {
-        return getFormatter().printJavaNcss();
+    public void printJavaNcss(Writer w) throws IOException {
+        getFormatter().printJavaNcss(w);
     }
 
     public Javancss( List/*<File>*/ vJavaSourceFiles_ )
@@ -684,13 +685,13 @@ public class Javancss implements Exitable
 
         if ( useXML() )
         {
-            pw.print( XmlFormatter.printStart() );
+            XmlFormatter.printStart(pw);
         }
 
         if (htOptions.get( "package" ) != null ||
             htOptions.get( "all" ) != null)
         {
-            pw.print( printPackageNcss() );
+            printPackageNcss(pw);
             bNoNCSS = true;
         }
         if (htOptions.get( "object" ) != null ||
@@ -700,7 +701,7 @@ public class Javancss implements Exitable
             {
                 pw.println();
             }
-            pw.print( printObjectNcss() );
+            printObjectNcss(pw);
             bNoNCSS = true;
         }
         if (htOptions.get( "function" ) != null ||
@@ -710,18 +711,18 @@ public class Javancss implements Exitable
             {
                 pw.println();
             }
-            pw.print( printFunctionNcss() );
+            printFunctionNcss(pw);
             bNoNCSS = true;
         }
         if (!bNoNCSS) {
-            pw.print( printJavaNcss() );
+            printJavaNcss(pw);
         }
 
         if ( useXML() )
         {
             if ( !bNoNCSS )
             {
-                pw.print( printJavaNcss() );
+                printJavaNcss(pw);
             }
             pw.println( "</javancss>" );
         }

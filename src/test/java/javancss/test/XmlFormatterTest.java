@@ -1,12 +1,12 @@
 package javancss.test;
 
 import java.io.File;
+import java.io.StringWriter;
 
 import ccl.util.FileUtil;
 import ccl.util.Test;
 import ccl.util.Util;
 import ccl.xml.XMLUtil;
-
 import javancss.Javancss;
 import javancss.XmlFormatter;
 
@@ -27,12 +27,16 @@ public class XmlFormatterTest extends AbstractTest {
         Javancss pJavancss = new Javancss( getTestFile( 57 ) );
         pJavancss.setXML( true );
 
-        String sXML = XmlFormatter.printStart()
-               + pJavancss.printPackageNcss()
-               + pJavancss.printObjectNcss()
-               + pJavancss.printFunctionNcss()
-               + pJavancss.printJavaNcss()
-               + XmlFormatter.printEnd();
+        StringWriter sw = new StringWriter();
+
+        XmlFormatter.printStart( sw );
+        pJavancss.printPackageNcss( sw );
+        pJavancss.printObjectNcss( sw );
+        pJavancss.printFunctionNcss( sw );
+        pJavancss.printJavaNcss( sw );
+        XmlFormatter.printEnd( sw );
+
+        String sXML = sw.toString(); 
 
         try
         {
@@ -47,23 +51,27 @@ public class XmlFormatterTest extends AbstractTest {
         pJavancss = new Javancss( getTestFile( 117 ) );
         pJavancss.setXML( true );
 
-        sXML = XmlFormatter.printStart()
-               + pJavancss.printPackageNcss()
-               + pJavancss.printObjectNcss()
-               + pJavancss.printFunctionNcss()
-               + pJavancss.printJavaNcss()
-               + XmlFormatter.printEnd();
+        XmlFormatter.printStart( sw );
+        pJavancss.printPackageNcss( sw );
+        pJavancss.printObjectNcss( sw );
+        pJavancss.printFunctionNcss( sw );
+        pJavancss.printJavaNcss( sw );
+        XmlFormatter.printEnd( sw );
+
+        sXML = sw.toString(); 
         Assert( Util.isEmpty( sXML ) == false );
 
         pJavancss = new Javancss( getTestFile( 118 ) );
         pJavancss.setXML( true );
 
-        sXML = XmlFormatter.printStart()
-               + pJavancss.printPackageNcss()
-               + pJavancss.printObjectNcss()
-               + pJavancss.printFunctionNcss()
-               + pJavancss.printJavaNcss()
-               + XmlFormatter.printEnd();
+        XmlFormatter.printStart( sw );
+        pJavancss.printPackageNcss( sw );
+        pJavancss.printObjectNcss( sw );
+        pJavancss.printFunctionNcss( sw );
+        pJavancss.printJavaNcss( sw );
+        XmlFormatter.printEnd( sw );
+
+        sXML = sw.toString(); 
         Assert( Util.isEmpty( sXML ) == false );
     }
 
@@ -76,12 +84,16 @@ public class XmlFormatterTest extends AbstractTest {
         Javancss pJavancss = new Javancss( getTestFile( 32 ) );
         pJavancss.setXML( true );
 
-        String sXML = XmlFormatter.printStart()
-               + pJavancss.printPackageNcss()
-               + pJavancss.printObjectNcss()
-               + pJavancss.printFunctionNcss()
-               + pJavancss.printJavaNcss()
-               + XmlFormatter.printEnd();
+        StringWriter sw = new StringWriter();
+
+        XmlFormatter.printStart( sw );
+        pJavancss.printPackageNcss( sw );
+        pJavancss.printObjectNcss( sw );
+        pJavancss.printFunctionNcss( sw );
+        pJavancss.printJavaNcss( sw );
+        XmlFormatter.printEnd( sw );
+
+        String sXML = sw.toString(); 
 
         try
         {

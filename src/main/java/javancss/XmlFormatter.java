@@ -21,6 +21,8 @@ Boston, MA 02111-1307, USA.  */
 
 package javancss;
 
+import java.io.IOException;
+import java.io.Writer;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.Calendar;
@@ -190,9 +192,9 @@ public class XmlFormatter implements Formatter
         ((DecimalFormat)_pNumberFormat).applyPattern( "#,##0.00" );
     }
 
-    public String printPackageNcss()
+    public void printPackageNcss(Writer w) throws IOException
     {
-        StringBuffer sbRetVal = new StringBuffer( "  <packages>\n" );
+        w.write("  <packages>\n" );
         List vPackageMetrics = _javancss.getPackageMetrics();
 
         int packages = vPackageMetrics.size();
@@ -218,7 +220,7 @@ public class XmlFormatter implements Formatter
             singleLnSum += pPackageMetric.singleLn;
             multiLnSum += pPackageMetric.multiLn;
             //
-            sbRetVal.append(
+            w.write(
                    "    <package>\n" +
                    "      <name>" + pPackageMetric.name + "</name>\n" +
                    "      <classes>" + pPackageMetric.classes + "</classes>\n" +
@@ -231,7 +233,7 @@ public class XmlFormatter implements Formatter
                    "    </package>\n" );
         }
 
-        sbRetVal.append(
+        w.write(
                "    <total>\n" +
                "      <classes>" + classesSum + "</classes>\n" +
                "      <functions>" + functionsSum + "</functions>\n" +
@@ -242,7 +244,7 @@ public class XmlFormatter implements Formatter
                "      <multi_comment_lines>" + multiLnSum + "</multi_comment_lines>\n" +
                "    </total>\n" );
 
-        sbRetVal.append( _formatPackageMatrix( packages
+        w.write( _formatPackageMatrix( packages
                                          , classesSum
                                          , functionsSum
                                          , ncssSum
@@ -251,9 +253,7 @@ public class XmlFormatter implements Formatter
                                          , singleLnSum                                // added by SMS
                                          , multiLnSum               ) );                // added by SMS
 
-        sbRetVal.append( "  </packages>\n" );
-
-        return sbRetVal.toString();
+        w.write( "  </packages>\n" );
     }
 
     private String _formatObjectResume( int objects
@@ -290,8 +290,8 @@ public class XmlFormatter implements Formatter
         return sRetVal;
     }
 
-    public String printObjectNcss() {
-        StringBuffer sbRetVal = new StringBuffer( "  <objects>\n" );
+    public void printObjectNcss(Writer w) throws IOException {
+        w.write( "  <objects>\n" );
 
         List/*<ObjectMetric>*/ vObjectMetrics = _javancss.getObjectMetrics();
 
@@ -331,7 +331,7 @@ public class XmlFormatter implements Formatter
             lMultil += (long)multil;
             //
 
-            sbRetVal.append(
+            w.write(
                 "    <object>\n" +
                 "      <name>"      + sClass     + "</name>\n"      +
                 "      <ncss>"      + objectNcss + "</ncss>\n"      +
@@ -358,7 +358,7 @@ public class XmlFormatter implements Formatter
 		*/
 
         // added by REYNAUD Sebastien (LOGICA)
-        sbRetVal.append( _formatObjectResume( vObjectMetrics.size()
+        w.write( _formatObjectResume( vObjectMetrics.size()
                 , lObjectSum
                 , lFunctionSum
                 , lClassesSum
@@ -369,9 +369,7 @@ public class XmlFormatter implements Formatter
                 ) );
         //
 
-        sbRetVal.append( "  </objects>\n" );
-
-        return sbRetVal.toString();
+        w.write( "  </objects>\n" );
     }
 
     private String _formatFunctionResume( int functions
@@ -406,11 +404,9 @@ public class XmlFormatter implements Formatter
         return sRetVal;
     }
 
-    public String printFunctionNcss()
+    public void printFunctionNcss(Writer w) throws IOException
     {
-        StringBuffer sRetVal = new StringBuffer(80000);
-
-        sRetVal.append( "  <functions>\n" );
+        w.write( "  <functions>\n" );
 
         List vFunctionMetrics = _javancss.getFunctionMetrics();
 
@@ -434,7 +430,7 @@ public class XmlFormatter implements Formatter
             lFunctionSum += (long)functionNcss;
             lCCNSum      += (long)functionCCN;
             lJVDCSum     += (long)functionJVDC;
-            sRetVal.append(
+            w.write(
                            "    <function>\n" +
                            "      <name>" + sFunction + "</name>\n" +
                            "      <ncss>" + functionNcss + "</ncss>\n" +
@@ -446,7 +442,7 @@ public class XmlFormatter implements Formatter
                            "    </function>\n" );
         }
 
-        sRetVal.append( _formatFunctionResume( vFunctionMetrics.size()
+        w.write( _formatFunctionResume( vFunctionMetrics.size()
                                                , lFunctionSum
                                                , lCCNSum
                                                , lJVDCSum
@@ -455,33 +451,31 @@ public class XmlFormatter implements Formatter
                                                , _javancss.getMl()
                                                ) );
 
-        sRetVal.append( "  </functions>\n" );
-
-        return sRetVal.toString();
+        w.write( "  </functions>\n" );
     }
 
-    public String printJavaNcss() {
-        return        "  <ncss>" + _javancss.getNcss() + "</ncss>\n"
+    public void printJavaNcss(Writer w) throws IOException {
+        w.write("  <ncss>" + _javancss.getNcss() + "</ncss>\n"
                //+
                //"  <javadocs>" + _javancss.getJvdc() + "</javadocs>\n" +
                //"  <javadocs_lines>" + _javancss.getJdcl() + "</javadocs_lines>\n" +
                //"  <single_comment_lines>" + _javancss.getSl() + "</single_comment_lines>\n" +
                //"  <implementation_comment_lines>" + _javancss.getSl() + "</implementation_comment_lines>\n";
-               ;
+               );
     }
 
-    static public String printStart()
+    static public void printStart(Writer w) throws IOException
     {
         Calendar calendar = Util.getCalendar();
 
-        return "<?xml version=\"1.0\"?>\n" +
+        w.write("<?xml version=\"1.0\"?>\n" +
                "<javancss>\n" +
                "  <date>" + Util.getDate( calendar ) + "</date>\n" +
-               "  <time>" + Util.getTime( calendar ) + "</time>\n";
+               "  <time>" + Util.getTime( calendar ) + "</time>\n");
     }
 
-    static public String printEnd()
+    static public void printEnd(Writer w) throws IOException
     {
-        return "</javancss>\n";
+        w.write("</javancss>\n");
     }
 }
