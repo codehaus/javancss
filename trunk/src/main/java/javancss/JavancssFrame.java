@@ -184,7 +184,7 @@ public class JavancssFrame extends MainJFrame {
         SwingUtil.centerComponent(this);
     }
 
-    public void showJavancss(Javancss pJavancss_) {
+    public void showJavancss(Javancss pJavancss_) throws IOException {
         _bStop = false;
         _bSave = false;
         if (_oldThreadPriority != -1) {
@@ -247,9 +247,19 @@ public class JavancssFrame extends MainJFrame {
             pSimpleDateFormat.setTimeZone(pTimeZone);
             String sDate = pSimpleDateFormat.format(new Date()) + " " + pTimeZone.getID();
 
-            _txtPackage.setText(sDate + "\n\n" + pJavancss_.printPackageNcss());
-            _txtObject.setText(sDate + "\n\n" + pJavancss_.printObjectNcss());
-            _txtFunction.setText(sDate + "\n\n" + pJavancss_.printFunctionNcss());
+            StringWriter sw=new StringWriter();
+            pJavancss_.printPackageNcss(sw);
+
+            _txtPackage.setText(sDate + "\n\n" + sw.toString());
+            
+            sw=new StringWriter();
+            pJavancss_.printObjectNcss(sw);
+            
+            _txtObject.setText(sDate + "\n\n" + sw.toString());
+
+            sw=new StringWriter();
+            pJavancss_.printFunctionNcss(sw);
+            _txtFunction.setText(sDate + "\n\n" + sw.toString());
 
             if (pJavancss_.getLastErrorMessage() != null) {
                 _txtError = new JTextArea();

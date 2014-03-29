@@ -21,6 +21,8 @@ Boston, MA 02111-1307, USA.  */
 
 package javancss;
 
+import java.io.IOException;
+import java.io.Writer;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.Iterator;
@@ -168,13 +170,13 @@ public class AsciiFormatter implements Formatter
         ((DecimalFormat)_pNumberFormat).applyPattern( "#,##0.00" );
     }
 
-    public String printPackageNcss()
+    public void printPackageNcss(Writer w) throws IOException
     {
         List vPackageMetrics = _javancss.getPackageMetrics();
 
         int packages = vPackageMetrics.size();
 
-        StringBuffer sbRetVal = new StringBuffer( _formatListHeader( packages
+        w.write( _formatListHeader( packages
                                             , new String[] {   "  Classes"
                                                              , "Functions"
                                                              , "     NCSS"
@@ -193,7 +195,7 @@ public class AsciiFormatter implements Formatter
             functionsSum += pPackageMetric.functions;
             ncssSum      += pPackageMetric.ncss;
             javadocsSum  += pPackageMetric.javadocs;
-            sbRetVal.append( _formatListLine( pPackageMetric.name
+            w.write( _formatListLine( pPackageMetric.name
                                         , new int[] { pPackageMetric.classes
                                                       , pPackageMetric.functions
                                                       , pPackageMetric.ncss
@@ -203,23 +205,21 @@ public class AsciiFormatter implements Formatter
 
         int packagesLength = Util.itoa( packages ).length();
         int spaces = Math.max( packagesLength, LEN_NR ) + 1;
-        sbRetVal.append( Util.multiplyChar(' ', spaces ) +
+        w.write( Util.multiplyChar(' ', spaces ) +
                "--------- --------- --------- ---------" + NL );
 
-        sbRetVal.append( Util.multiplyChar(' ', spaces )
+        w.write( Util.multiplyChar(' ', spaces )
             + Util.paddWithSpace( classesSum, 9 ) + ' '
             + Util.paddWithSpace( functionsSum, 9 ) + ' '
             + Util.paddWithSpace( ncssSum, 9 ) + ' '
             + Util.paddWithSpace( javadocsSum, 9 )
             + " Total" + NL + NL );
 
-        sbRetVal.append( _formatPackageMatrix( packages
+        w.write( _formatPackageMatrix( packages
                                          , classesSum
                                          , functionsSum
                                          , javadocsSum
                                          , ncssSum      ) );
-
-        return sbRetVal.toString();
     }
 
     private String _formatObjectResume( int objects
@@ -246,10 +246,10 @@ public class AsciiFormatter implements Formatter
         return sRetVal;
     }
 
-    public String printObjectNcss() {
+    public void printObjectNcss(Writer w) throws IOException {
         List/*<ObjectMetric>*/ vObjectMetrics = _javancss.getObjectMetrics();
 
-        StringBuffer sbRetVal = new StringBuffer( _formatListHeader( vObjectMetrics.size()
+        w.write( _formatListHeader( vObjectMetrics.size()
                                             , new String[] { "NCSS"
                                                              , "Functions"
                                                              , "Classes"
@@ -271,20 +271,18 @@ public class AsciiFormatter implements Formatter
             lFunctionSum += (long)functions;
             lClassesSum  += (long)classes;
             lJVDCSum     += (long)jvdcs;
-            sbRetVal.append( _formatListLine( sClass
+            w.write( _formatListLine( sClass
                                         , new int[] { objectNcss
                                                       , functions
                                                       , classes
                                                       , jvdcs     } ) );
         }
 
-        sbRetVal.append( _formatObjectResume( vObjectMetrics.size()
+        w.write( _formatObjectResume( vObjectMetrics.size()
                                         , lObjectSum
                                         , lFunctionSum
                                         , lClassesSum
                                         , lJVDCSum            ) );
-
-        return sbRetVal.toString();
     }
 
     private String _formatFunctionResume( int functions
@@ -308,13 +306,11 @@ public class AsciiFormatter implements Formatter
         return sRetVal;
     }
 
-    public String printFunctionNcss()
+    public void printFunctionNcss(Writer w) throws IOException
     {
-        StringBuffer sRetVal = new StringBuffer(80000);
-
         List vFunctionMetrics = _javancss.getFunctionMetrics();
 
-        sRetVal.append( _formatListHeader( vFunctionMetrics.size()
+        w.write( _formatListHeader( vFunctionMetrics.size()
                                            , new String[] { "NCSS"
                                                             , "CCN"
                                                             , "JVDC"
@@ -334,22 +330,20 @@ public class AsciiFormatter implements Formatter
             lFunctionSum += (long)functionNcss;
             lCCNSum      += (long)functionCCN;
             lJVDCSum     += (long)functionJVDC;
-            sRetVal.append( _formatListLine( sFunction
+            w.write( _formatListLine( sFunction
                                              , new int[] { functionNcss
                                                            , functionCCN
                                                            , functionJVDC } ) );
         }
 
-        sRetVal.append( _formatFunctionResume( vFunctionMetrics.size()
+        w.write( _formatFunctionResume( vFunctionMetrics.size()
                                                , lFunctionSum
                                                , lCCNSum
                                                , lJVDCSum              ) );
-
-        return sRetVal.toString();
     }
 
-    public String printJavaNcss()
+    public void printJavaNcss(Writer w) throws IOException
     {
-        return "Java NCSS: " + _javancss.getNcss() + NL;
+        w.write("Java NCSS: " + _javancss.getNcss() + NL);
     }
 }

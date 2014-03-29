@@ -25,6 +25,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.io.StringReader;
+import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -32,7 +33,6 @@ import java.util.List;
 import ccl.util.FileUtil;
 import ccl.util.Test;
 import ccl.util.Util;
-
 import javancss.FunctionMetric;
 import javancss.Javancss;
 import javancss.ObjectMetric;
@@ -535,24 +535,28 @@ public class JavancssTest extends AbstractTest
         bugIf( ncss38 == pJavancss.getNcss() );
 
         pJavancss = measureTestFile( 56 );
-        String sOutput56 = pJavancss.printPackageNcss();
-        sOutput56 += "\n";
-        sOutput56 += pJavancss.printObjectNcss();
-        sOutput56 += "\n";
-        sOutput56 += pJavancss.printFunctionNcss();
-        sOutput56 = Util.replace( sOutput56, "\r\n", "\n" );
+        StringWriter sw=new StringWriter();
+        pJavancss.printPackageNcss(sw);
+        sw.write("\n");
+        pJavancss.printObjectNcss(sw);
+        sw.write("\n");
+        pJavancss.printFunctionNcss(sw);
+
+        String sOutput56 = Util.replace( sw.toString(), "\r\n", "\n" );
         String sCompare56 = FileUtil.readFile( getTestFile( "Output56.txt" ).getAbsolutePath() );
         Assert( sOutput56.equals( sCompare56 ), "File test/Output56.txt and javancss output differs:\n" + sOutput56 );
 
         // check that javadocs are counted correctly
         // after patches for additional comment counting
         pJavancss = measureTestFile( 32 );
-        String sOutput32 = pJavancss.printPackageNcss();
-        sOutput32 += "\n";
-        sOutput32 += pJavancss.printObjectNcss();
-        sOutput32 += "\n";
-        sOutput32 += pJavancss.printFunctionNcss();
-        sOutput32 = Util.replace( sOutput32, "\r\n", "\n" );
+        sw=new StringWriter();
+        pJavancss.printPackageNcss(sw);
+        sw.write("\n");
+        pJavancss.printObjectNcss(sw);
+        sw.write("\n");
+        pJavancss.printFunctionNcss(sw);
+
+        String sOutput32 = Util.replace( sw.toString(), "\r\n", "\n" );
         String sCompare32 = FileUtil.readFile( getTestFile( "Output32.txt" ).getAbsolutePath() );
         Assert( sOutput32.equals( sCompare32 ), "File test/Output32.txt and javancss output differs:\n" + sOutput32 );
 
