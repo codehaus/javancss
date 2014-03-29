@@ -42,16 +42,16 @@ SYSTEM REQUIREMENTS
    Java JDK >= 1.4.1
    
 INSTALLATION
-   See file javancss-X.Y/doc/index.html
+   See http://javancss.codehaus.org/
 
 LICENSE
    GNU LGPL 3.0
 
 VERSION
-   See file javancss-X.Y/doc/index.html#release
+   See http://javancss.codehaus.org/release-history.html
 
 DATE
-   See file javancss-X.Y/doc/index.html#release
+   See http://javancss.codehaus.org/release-history.html
 
 AUTHORS
    Chr. Clemens Lee, <clemens@kclee.de>
