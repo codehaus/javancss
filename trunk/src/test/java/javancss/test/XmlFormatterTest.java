@@ -121,7 +121,7 @@ public class XmlFormatterTest extends AbstractTest {
 
     private File getXslFile( String filename )
     {
-        return new File( getTestDir(), ".." + File.separator + "xslt" + File.separator + filename );
+        return new File( getTestDir(), "../../../xslt/" + filename );
     }
 
     /**
