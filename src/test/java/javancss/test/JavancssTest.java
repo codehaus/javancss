@@ -535,12 +535,12 @@ public class JavancssTest extends AbstractTest
         bugIf( ncss38 == pJavancss.getNcss() );
 
         pJavancss = measureTestFile( 56 );
-        StringWriter sw=new StringWriter();
-        pJavancss.printPackageNcss(sw);
-        sw.write("\n");
-        pJavancss.printObjectNcss(sw);
-        sw.write("\n");
-        pJavancss.printFunctionNcss(sw);
+        StringWriter sw = new StringWriter();
+        pJavancss.printPackageNcss( sw );
+        sw.write( "\n" );
+        pJavancss.printObjectNcss( sw );
+        sw.write( "\n" );
+        pJavancss.printFunctionNcss( sw );
 
         String sOutput56 = Util.replace( sw.toString(), "\r\n", "\n" );
         String sCompare56 = FileUtil.readFile( getTestFile( "Output56.txt" ).getAbsolutePath() );
@@ -549,12 +549,12 @@ public class JavancssTest extends AbstractTest
         // check that javadocs are counted correctly
         // after patches for additional comment counting
         pJavancss = measureTestFile( 32 );
-        sw=new StringWriter();
-        pJavancss.printPackageNcss(sw);
-        sw.write("\n");
-        pJavancss.printObjectNcss(sw);
-        sw.write("\n");
-        pJavancss.printFunctionNcss(sw);
+        sw = new StringWriter();
+        pJavancss.printPackageNcss( sw );
+        sw.write( "\n" );
+        pJavancss.printObjectNcss( sw );
+        sw.write( "\n" );
+        pJavancss.printFunctionNcss( sw );
 
         String sOutput32 = Util.replace( sw.toString(), "\r\n", "\n" );
         String sCompare32 = FileUtil.readFile( getTestFile( "Output32.txt" ).getAbsolutePath() );

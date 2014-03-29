@@ -141,7 +141,8 @@ public class Javancss implements Exitable
         }
     }
 
-    private void _measureSource( File sSourceFile_ ) throws IOException, Exception, Error
+    private void _measureSource( File sSourceFile_ )
+        throws IOException, Exception, Error
     {
         Reader reader = null;
 
@@ -202,7 +203,8 @@ public class Javancss implements Exitable
         }
     }
 
-    private void _measureSource( Reader reader ) throws IOException, Exception, Error
+    private void _measureSource( Reader reader )
+        throws IOException, Exception, Error
     {
         Util.debug( "_measureSource(Reader).ENTER" );
         // Util.debug( "_measureSource(Reader).parser15: -->" + (_pInit.getOptions().get( "parser15" ) + "<--" );
@@ -295,7 +297,8 @@ public class Javancss implements Exitable
         }
     }
 
-    private void _measureFiles( List/*<File>*/ vJavaSourceFiles_ ) throws IOException, ParseException, TokenMgrError
+    private void _measureFiles( List/* <File> */vJavaSourceFiles_ )
+        throws IOException, ParseException, TokenMgrError
     {
         // for each file
         for ( Iterator e = vJavaSourceFiles_.iterator(); e.hasNext(); )
@@ -317,7 +320,8 @@ public class Javancss implements Exitable
      * If arguments were provided, they are used, otherwise
      * the input stream is used.
      */
-    private void _measureRoot( Reader reader ) throws IOException, Exception, Error
+    private void _measureRoot( Reader reader )
+        throws IOException, Exception, Error
     {
         _htPackages = new HashMap();
 
@@ -343,7 +347,8 @@ public class Javancss implements Exitable
         Collections.sort( _vPackageMetrics );
     }
 
-    public List getImports() {
+    public List getImports()
+    {
         return _vImports;
     }
 
@@ -352,41 +357,56 @@ public class Javancss implements Exitable
      * First element has name of package,
      * then begin of line, etc.
      */
-    public Object[] getPackage() {
+    public Object[] getPackage()
+    {
         return _aoPackage;
     }
 
     /**
      * The same as getFunctionMetrics?!
      */
-    public List/*<FunctionMetric>*/ getFunctions() {
+    public List/* <FunctionMetric> */getFunctions()
+    {
         return _vFunctionMetrics;
     }
 
-    public void printObjectNcss(Writer w) throws IOException {
-        getFormatter().printObjectNcss(w);
+    public void printObjectNcss( Writer w )
+        throws IOException
+    {
+        getFormatter().printObjectNcss( w );
     }
 
-    public void printFunctionNcss(Writer w) throws IOException {
-        getFormatter().printFunctionNcss(w);
+    public void printFunctionNcss( Writer w )
+        throws IOException
+    {
+        getFormatter().printFunctionNcss( w );
     }
 
-    public void printPackageNcss(Writer w) throws IOException {
-        getFormatter().printPackageNcss(w);
+    public void printPackageNcss( Writer w )
+        throws IOException
+    {
+        getFormatter().printPackageNcss( w );
     }
 
-    public void printJavaNcss(Writer w) throws IOException {
-        getFormatter().printJavaNcss(w);
+    public void printJavaNcss( Writer w )
+        throws IOException
+    {
+        getFormatter().printJavaNcss( w );
     }
 
     public Javancss( List/*<File>*/ vJavaSourceFiles_ )
     {
         _vJavaSourceFiles = vJavaSourceFiles_;
-        try {
-            _measureRoot(newReader(System.in));
-        } catch(Exception e) {
+        try
+        {
+            _measureRoot( newReader( System.in ) );
+        }
+        catch ( Exception e )
+        {
             e.printStackTrace();
-        } catch(TokenMgrError pError) {
+        }
+        catch ( TokenMgrError pError )
+        {
             pError.printStackTrace();
         }
     }
@@ -396,13 +416,18 @@ public class Javancss implements Exitable
         Util.debug( "Javancss.<init>(String).sJavaSourceFile_: " + sJavaSourceFile_ );
         _sErrorMessage = null;
         _vJavaSourceFiles = new ArrayList();
-        _vJavaSourceFiles.add(sJavaSourceFile_);
-        try {
-            _measureRoot(newReader(System.in));
-        } catch(Exception e) {
+        _vJavaSourceFiles.add( sJavaSourceFile_ );
+        try
+        {
+            _measureRoot( newReader( System.in ) );
+        }
+        catch ( Exception e )
+        {
             Util.debug( "Javancss.<init>(String).e: " + e );
             e.printStackTrace();
-        } catch(TokenMgrError pError) {
+        }
+        catch ( TokenMgrError pError )
+        {
             Util.debug( "Javancss.<init>(String).pError: " + pError );
             pError.printStackTrace();
         }
@@ -412,53 +437,68 @@ public class Javancss implements Exitable
      * Only way to create object that does not immediately
      * start to parse.
      */
-    public Javancss() {
+    public Javancss()
+    {
         super();
 
         _sErrorMessage = null;
         _thrwError = null;
     }
 
-    public boolean parseImports() {
-        if ( _sJavaSourceFile == null ) {
+    public boolean parseImports()
+    {
+        if ( _sJavaSourceFile == null )
+        {
             Util.debug( "Javancss.parseImports().NO_FILE" );
 
             return true;
         }
         Reader reader = createSourceReader( _sJavaSourceFile );
-        if ( reader == null ) {
+        if ( reader == null )
+        {
             Util.debug( "Javancss.parseImports().NO_DIS" );
 
             return true;
         }
 
-        try {
+        try
+        {
             Util.debug( "Javancss.parseImports().START_PARSING" );
-            if ( Util.isDebug() == false ) {
-              _pJavaParser = (JavaParserInterface)(new JavaParser(reader));
-            } else {
-              _pJavaParser = (JavaParserInterface)(new JavaParserDebug(reader));
+            if ( Util.isDebug() == false )
+            {
+                _pJavaParser = (JavaParserInterface) ( new JavaParser( reader ) );
+            }
+            else
+            {
+                _pJavaParser = (JavaParserInterface) ( new JavaParserDebug( reader ) );
             }
             _pJavaParser.parseImportUnit();
             _vImports = _pJavaParser.getImports();
             _aoPackage = _pJavaParser.getPackageObjects();
             Util.debug( "Javancss.parseImports().END_PARSING" );
-        } catch(Exception pParseException) {
+        }
+        catch ( Exception pParseException )
+        {
             Util.debug( "Javancss.parseImports().PARSE_EXCEPTION" );
-            if (_sErrorMessage == null) {
+            if ( _sErrorMessage == null )
+            {
                 _sErrorMessage = "";
             }
             _sErrorMessage += "ParseException in STDIN";
-            if (_pJavaParser != null) {
+            if ( _pJavaParser != null )
+            {
                 _sErrorMessage += "\nLast useful checkpoint: \"" + _pJavaParser.getLastFunction() + "\"\n";
             }
             _sErrorMessage += pParseException.getMessage() + "\n";
             _thrwError = pParseException;
 
             return true;
-        } catch(Error pTokenMgrError) {
+        }
+        catch ( Error pTokenMgrError )
+        {
             Util.debug( "Javancss.parseImports().TOKEN_ERROR" );
-            if (_sErrorMessage == null) {
+            if ( _sErrorMessage == null )
+            {
                 _sErrorMessage = "";
             }
             _sErrorMessage += "TokenMgrError in STDIN\n";
@@ -471,17 +511,24 @@ public class Javancss implements Exitable
         return false;
     }
 
-    public void setSourceFile( File javaSourceFile_ ) {
+    public void setSourceFile( File javaSourceFile_ )
+    {
         _sJavaSourceFile = javaSourceFile_;
         _vJavaSourceFiles = new ArrayList();
-        _vJavaSourceFiles.add(javaSourceFile_);
+        _vJavaSourceFiles.add( javaSourceFile_ );
     }
 
-    public Javancss(Reader reader) {
-        try {
-            _measureRoot(reader);
-        } catch(Exception e) {
-        } catch(TokenMgrError pError) {
+    public Javancss( Reader reader )
+    {
+        try
+        {
+            _measureRoot( reader );
+        }
+        catch ( Exception e )
+        {
+        }
+        catch ( TokenMgrError pError )
+        {
         }
     }
 
@@ -493,22 +540,22 @@ public class Javancss implements Exitable
     private static void _addJavaFiles( File dir, List v/*<File>*/ )
     {
         File[] files = dir.listFiles();
-        if( files == null || files.length == 0 )
+        if ( files == null || files.length == 0 )
         {
             return;
         }
 
-        for( int i = 0; i < files.length; i++ )
+        for ( int i = 0; i < files.length; i++ )
         {
             File newFile = files[i];
-            if( newFile.isDirectory() )
+            if ( newFile.isDirectory() )
             {
-                //Recurse!!!
+                // Recurse!!!
                 _addJavaFiles( newFile, v );
             }
             else
             {
-                if( newFile.getName().endsWith( ".java" ) )
+                if ( newFile.getName().endsWith( ".java" ) )
                 {
                     v.add( newFile );
                 }
@@ -516,7 +563,8 @@ public class Javancss implements Exitable
         }
     }
 
-    private List/*<File>*/ findFiles( List/*<String>*/ filenames, boolean recursive ) throws IOException
+    private List/* <File> */findFiles( List/* <String> */filenames, boolean recursive )
+        throws IOException
     {
         if ( Util.isDebug() )
         {
@@ -539,7 +587,7 @@ public class Javancss implements Exitable
         List newFiles = new ArrayList();
         for ( Iterator iter = filenames.iterator(); iter.hasNext(); )
         {
-            String filename = (String)iter.next();
+            String filename = (String) iter.next();
 
             // if the file specifies other files...
             if ( filename.startsWith( "@" ) )
@@ -597,8 +645,10 @@ public class Javancss implements Exitable
     /**
      * @deprecated use Javancss(String[]) instead, since the sRcsHeader_ parameter is not useful
      */
-    public Javancss(String[] asArgs_, String sRcsHeader_) throws IOException {
-        this(asArgs_);
+    public Javancss( String[] asArgs_, String sRcsHeader_ )
+        throws IOException
+    {
+        this( asArgs_ );
     }
 
     /**
@@ -607,9 +657,12 @@ public class Javancss implements Exitable
      * Other constructors might be helpful to use Javancss out
      * of other programs.
      */
-    public Javancss(String[] asArgs_) throws IOException {
-        _pInit = new Init(this, asArgs_, Main.S_RCS_HEADER, S_INIT__FILE_CONTENT);
-        if (_bExit) {
+    public Javancss( String[] asArgs_ )
+        throws IOException
+    {
+        _pInit = new Init( this, asArgs_, Main.S_RCS_HEADER, S_INIT__FILE_CONTENT );
+        if ( _bExit )
+        {
             return;
         }
         Map htOptions = _pInit.getOptions();
@@ -621,25 +674,30 @@ public class Javancss implements Exitable
 
         if ( htOptions.get( "gui" ) != null )
         {
-            final JavancssFrame pJavancssFrame = new JavancssFrame(_pInit);
-            /*final Thread pThread = Thread.currentThread();*/
-            pJavancssFrame.addWindowListener(new WindowAdapter() {
-                    public void windowClosing(WindowEvent e_) {
-                        Util.debug("JavancssAll.run().WindowAdapter.windowClosing().1");
-                        pJavancssFrame.setVisible(false);
-                        pJavancssFrame.dispose();
-                    }
-                });
-            pJavancssFrame.setVisible(true);
+            final JavancssFrame pJavancssFrame = new JavancssFrame( _pInit );
+            /* final Thread pThread = Thread.currentThread(); */
+            pJavancssFrame.addWindowListener( new WindowAdapter()
+            {
+                public void windowClosing( WindowEvent e_ )
+                {
+                    Util.debug( "JavancssAll.run().WindowAdapter.windowClosing().1" );
+                    pJavancssFrame.setVisible( false );
+                    pJavancssFrame.dispose();
+                }
+            } );
+            pJavancssFrame.setVisible( true );
 
-            try {
-                _measureRoot(newReader(System.in));
-            } catch(Throwable pThrowable) {
+            try
+            {
+                _measureRoot( newReader( System.in ) );
+            }
+            catch ( Throwable pThrowable )
+            {
                 // shouldn't we print something here?
             }
 
-            pJavancssFrame.showJavancss(this);
-            pJavancssFrame.setSelectedTab(JavancssFrame.S_PACKAGES);
+            pJavancssFrame.showJavancss( this );
+            pJavancssFrame.setSelectedTab( JavancssFrame.S_PACKAGES );
             pJavancssFrame.run();
 
             return;
@@ -650,7 +708,7 @@ public class Javancss implements Exitable
         {
             _measureRoot( newReader( System.in ) );
         }
-        catch(Throwable pThrowable)
+        catch ( Throwable pThrowable )
         {
         }
         if ( getLastErrorMessage() != null )
@@ -664,14 +722,16 @@ public class Javancss implements Exitable
 
         boolean bNoNCSS = false;
 
-        String sOutputFile = (String)htOptions.get( "out" );
+        String sOutputFile = (String) htOptions.get( "out" );
         OutputStream out = System.out;
-        if (sOutputFile != null)
+        if ( sOutputFile != null )
         {
             try
             {
                 out = new FileOutputStream( FileUtil.normalizeFileName( sOutputFile ) );
-            } catch ( Exception exception ) {
+            }
+            catch ( Exception exception )
+            {
                 Util.printlnErr( "Error opening output file '"
                                  + sOutputFile
                                  + "': " + exception.getMessage() );
@@ -681,48 +741,46 @@ public class Javancss implements Exitable
             }
         }
         // TODO: encoding configuration support for result output
-        PrintWriter pw = useXML() ? new PrintWriter(new OutputStreamWriter(out, "UTF-8")) : new PrintWriter(out);
+        PrintWriter pw = useXML() ? new PrintWriter( new OutputStreamWriter( out, "UTF-8" ) ) : new PrintWriter( out );
 
         if ( useXML() )
         {
-            XmlFormatter.printStart(pw);
+            XmlFormatter.printStart( pw );
         }
 
-        if (htOptions.get( "package" ) != null ||
-            htOptions.get( "all" ) != null)
+        if ( htOptions.get( "package" ) != null || htOptions.get( "all" ) != null )
         {
-            printPackageNcss(pw);
+            printPackageNcss( pw );
             bNoNCSS = true;
         }
-        if (htOptions.get( "object" ) != null ||
-            htOptions.get( "all" ) != null)
+        if ( htOptions.get( "object" ) != null || htOptions.get( "all" ) != null )
         {
             if ( bNoNCSS )
             {
                 pw.println();
             }
-            printObjectNcss(pw);
+            printObjectNcss( pw );
             bNoNCSS = true;
         }
-        if (htOptions.get( "function" ) != null ||
-            htOptions.get( "all" ) != null)
+        if ( htOptions.get( "function" ) != null || htOptions.get( "all" ) != null )
         {
             if ( bNoNCSS )
             {
                 pw.println();
             }
-            printFunctionNcss(pw);
+            printFunctionNcss( pw );
             bNoNCSS = true;
         }
-        if (!bNoNCSS) {
-            printJavaNcss(pw);
+        if ( !bNoNCSS )
+        {
+            printJavaNcss( pw );
         }
 
         if ( useXML() )
         {
             if ( !bNoNCSS )
             {
-                printJavaNcss(pw);
+                printJavaNcss( pw );
             }
             pw.println( "</javancss>" );
         }
@@ -730,23 +788,27 @@ public class Javancss implements Exitable
         if ( sOutputFile != null )
         {
             pw.close();
-        } else
+        }
+        else
         {
             // stdout is used: don't close but ensure everything is flushed
             pw.flush();
         }
     }
 
-    public int getNcss() {
+    public int getNcss()
+    {
         return _ncss;
     }
 
-    public int getLOC() {
+    public int getLOC()
+    {
         return _loc;
     }
 
     // added by SMS
-    public int getJvdc() {
+    public int getJvdc()
+    {
         return _pJavaParser.getJvdc();
     }
 
@@ -754,47 +816,58 @@ public class Javancss implements Exitable
      * JDCL stands for javadoc comment lines (while jvdc stands
      * for number of javadoc comments).
      */
-    public int getJdcl() {
+    public int getJdcl()
+    {
         return JavaParserTokenManager._iFormalComments;
     }
 
-    public int getSl() {
+    public int getSl()
+    {
         return JavaParserTokenManager._iSingleComments;
     }
 
-    public int getMl() {
+    public int getMl()
+    {
         return JavaParserTokenManager._iMultiComments;
     }
+
     //
 
-    public List getFunctionMetrics() {
-        return(_vFunctionMetrics);
+    public List getFunctionMetrics()
+    {
+        return ( _vFunctionMetrics );
     }
 
-    public List/*<ObjectMetric>*/ getObjectMetrics() {
-        return(_vObjectMetrics);
+    public List/* <ObjectMetric> */getObjectMetrics()
+    {
+        return ( _vObjectMetrics );
     }
 
     /**
      * Returns list of packages in the form
      * PackageMetric objects.
      */
-    public List getPackageMetrics() {
-        return(_vPackageMetrics);
+    public List getPackageMetrics()
+    {
+        return ( _vPackageMetrics );
     }
 
-    public String getLastErrorMessage() {
-        if (_sErrorMessage == null) {
+    public String getLastErrorMessage()
+    {
+        if ( _sErrorMessage == null )
+        {
             return null;
         }
         return _sErrorMessage;
     }
 
-    public Throwable getLastError() {
+    public Throwable getLastError()
+    {
         return _thrwError;
     }
 
-    public void setExit() {
+    public void setExit()
+    {
         _bExit = true;
     }
 

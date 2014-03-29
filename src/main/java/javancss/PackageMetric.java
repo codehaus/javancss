@@ -27,7 +27,8 @@ package javancss;
  * @author  Chr. Clemens Lee <clemens@kclee.com>
  * @version $Id$
  */
-public class PackageMetric extends Metric
+public class PackageMetric
+    extends Metric
 {
     public int classes    = 0;
     public int functions  = 0;
@@ -44,8 +45,10 @@ public class PackageMetric extends Metric
         functions = 0;
     }
 
-    public void add(PackageMetric pPackageMetric_) {
-        if (pPackageMetric_ == null) {
+    public void add( PackageMetric pPackageMetric_ )
+    {
+        if ( pPackageMetric_ == null )
+        {
             return;
         }
         classes    += pPackageMetric_.classes;

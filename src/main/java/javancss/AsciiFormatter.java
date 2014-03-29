@@ -62,7 +62,7 @@ public class AsciiFormatter implements Formatter
         _length = Util.itoa( lines ).length();
         int spaces = Math.max( 0, _length - LEN_NR );
         _length = spaces + LEN_NR;
-        sRetVal.append( Util.multiplyChar(' ', spaces) );
+        sRetVal.append( Util.multiplyChar( ' ', spaces ) );
         sRetVal.append( "Nr." );
         for( int nr = 0; nr < header.length; nr++ )
         {
@@ -95,8 +95,9 @@ public class AsciiFormatter implements Formatter
     private double _divide( int divident, int divisor )
     {
         double dRetVal = 0.0;
-        if ( divisor > 0) {
-            dRetVal = Math.round(((double)divident/(double)divisor)*100)/100.0;
+        if ( divisor > 0 )
+        {
+            dRetVal = Math.round( ( (double) divident / (double) divisor ) * 100 ) / 100.0;
         }
 
         return dRetVal;
@@ -105,8 +106,9 @@ public class AsciiFormatter implements Formatter
     private double _divide( long divident, long divisor )
     {
         double dRetVal = 0.0;
-        if ( divisor > 0) {
-            dRetVal = Math.round(((double)divident/(double)divisor)*100)/100.0;
+        if ( divisor > 0 )
+        {
+            dRetVal = Math.round( ( (double) divident / (double) divisor ) * 100 ) / 100.0;
         }
 
         return dRetVal;
@@ -118,23 +120,23 @@ public class AsciiFormatter implements Formatter
                                          , int javadocsSum
                                          , int ncssSum      )
     {
-        ((DecimalFormat)_pNumberFormat).applyPattern( "###0.00" );
-        int maxItemLength = _pNumberFormat.format(ncssSum).length();
-        maxItemLength = Math.max(9, maxItemLength);
+        ( (DecimalFormat) _pNumberFormat ).applyPattern( "###0.00" );
+        int maxItemLength = _pNumberFormat.format( ncssSum ).length();
+        maxItemLength = Math.max( 9, maxItemLength );
         String sRetVal =
             Util.paddWithSpace( "Packages" , maxItemLength ) + ' '
-            + Util.paddWithSpace("Classes", maxItemLength) + ' '
-            + Util.paddWithSpace("Functions", maxItemLength) + ' '
-            + Util.paddWithSpace("NCSS", maxItemLength) + ' '
-            + Util.paddWithSpace("Javadocs", maxItemLength)
+            + Util.paddWithSpace( "Classes", maxItemLength ) + ' '
+            + Util.paddWithSpace( "Functions", maxItemLength ) + ' '
+            + Util.paddWithSpace( "NCSS", maxItemLength ) + ' '
+            + Util.paddWithSpace( "Javadocs", maxItemLength )
             + " | per" + NL
 
-            + Util.multiplyChar( '-', (maxItemLength + 1)*6 + 1 ) + NL
-            + Util.paddWithSpace(_pNumberFormat.format(packages), maxItemLength) + ' '
-            + Util.paddWithSpace(_pNumberFormat.format(classesSum), maxItemLength) + ' '
-            + Util.paddWithSpace(_pNumberFormat.format(functionsSum), maxItemLength) + ' '
-            + Util.paddWithSpace(_pNumberFormat.format(ncssSum), maxItemLength) + ' '
-            + Util.paddWithSpace(_pNumberFormat.format(javadocsSum), maxItemLength)
+            + Util.multiplyChar( '-', ( maxItemLength + 1 ) * 6 + 1 ) + NL
+            + Util.paddWithSpace( _pNumberFormat.format( packages ), maxItemLength ) + ' '
+            + Util.paddWithSpace( _pNumberFormat.format( classesSum ), maxItemLength ) + ' '
+            + Util.paddWithSpace( _pNumberFormat.format( functionsSum ), maxItemLength ) + ' '
+            + Util.paddWithSpace( _pNumberFormat.format( ncssSum ), maxItemLength ) + ' '
+            + Util.paddWithSpace( _pNumberFormat.format( javadocsSum ), maxItemLength )
             + " | Project" + NL
 
             + Util.multiplyChar( ' ', maxItemLength + 1 )
@@ -170,7 +172,8 @@ public class AsciiFormatter implements Formatter
         ((DecimalFormat)_pNumberFormat).applyPattern( "#,##0.00" );
     }
 
-    public void printPackageNcss(Writer w) throws IOException
+    public void printPackageNcss( Writer w )
+        throws IOException
     {
         List vPackageMetrics = _javancss.getPackageMetrics();
 
@@ -189,7 +192,7 @@ public class AsciiFormatter implements Formatter
         int ncssSum      = 0;
         for( Iterator ePackages = vPackageMetrics.iterator(); ePackages.hasNext(); )
         {
-            PackageMetric pPackageMetric = (PackageMetric)ePackages.next();
+            PackageMetric pPackageMetric = (PackageMetric) ePackages.next();
 
             classesSum   += pPackageMetric.classes;
             functionsSum += pPackageMetric.functions;
@@ -205,10 +208,10 @@ public class AsciiFormatter implements Formatter
 
         int packagesLength = Util.itoa( packages ).length();
         int spaces = Math.max( packagesLength, LEN_NR ) + 1;
-        w.write( Util.multiplyChar(' ', spaces ) +
+        w.write( Util.multiplyChar( ' ', spaces ) +
                "--------- --------- --------- ---------" + NL );
 
-        w.write( Util.multiplyChar(' ', spaces )
+        w.write( Util.multiplyChar( ' ', spaces )
             + Util.paddWithSpace( classesSum, 9 ) + ' '
             + Util.paddWithSpace( functionsSum, 9 ) + ' '
             + Util.paddWithSpace( ncssSum, 9 ) + ' '
@@ -233,21 +236,23 @@ public class AsciiFormatter implements Formatter
         double fAverageClasses  = _divide( lClassesSum , objects );
         double fAverageJavadocs = _divide( lJVDCSum    , objects );
         String sRetVal = "Average Object NCSS:             "
-            + Util.paddWithSpace(_pNumberFormat.format(fAverageNcss),     9) + NL
+            + Util.paddWithSpace( _pNumberFormat.format( fAverageNcss ),     9 ) + NL
             + "Average Object Functions:        "
-            + Util.paddWithSpace(_pNumberFormat.format(fAverageFuncs),    9) + NL
+            + Util.paddWithSpace( _pNumberFormat.format( fAverageFuncs ),    9 ) + NL
             + "Average Object Inner Classes:    "
-            + Util.paddWithSpace(_pNumberFormat.format(fAverageClasses),  9) + NL
+            + Util.paddWithSpace( _pNumberFormat.format( fAverageClasses ),  9 ) + NL
             + "Average Object Javadoc Comments: "
-            + Util.paddWithSpace(_pNumberFormat.format(fAverageJavadocs), 9) + NL
+            + Util.paddWithSpace( _pNumberFormat.format( fAverageJavadocs ), 9 ) + NL
             + "Program NCSS:                    "
-            + Util.paddWithSpace(_pNumberFormat.format(_javancss.getNcss()), 9) + NL;
+            + Util.paddWithSpace( _pNumberFormat.format( _javancss.getNcss() ), 9 ) + NL;
 
         return sRetVal;
     }
 
-    public void printObjectNcss(Writer w) throws IOException {
-        List/*<ObjectMetric>*/ vObjectMetrics = _javancss.getObjectMetrics();
+    public void printObjectNcss( Writer w )
+        throws IOException
+    {
+        List/* <ObjectMetric> */vObjectMetrics = _javancss.getObjectMetrics();
 
         w.write( _formatListHeader( vObjectMetrics.size()
                                             , new String[] { "NCSS"
@@ -259,18 +264,18 @@ public class AsciiFormatter implements Formatter
         long lClassesSum  = 0;
         long lObjectSum   = 0;
         long lJVDCSum     = 0;
-        for( Iterator eClasses = vObjectMetrics.iterator(); eClasses.hasNext(); )
+        for ( Iterator eClasses = vObjectMetrics.iterator(); eClasses.hasNext(); )
         {
-            ObjectMetric classMetric = (ObjectMetric)eClasses.next();
+            ObjectMetric classMetric = (ObjectMetric) eClasses.next();
             String sClass = classMetric.name;
             int objectNcss = classMetric.ncss;
             int functions  = classMetric.functions;
             int classes    = classMetric.classes;
             int jvdcs      = classMetric.javadocs;
-            lObjectSum   += (long)objectNcss;
-            lFunctionSum += (long)functions;
-            lClassesSum  += (long)classes;
-            lJVDCSum     += (long)jvdcs;
+            lObjectSum   += (long) objectNcss;
+            lFunctionSum += (long) functions;
+            lClassesSum  += (long) classes;
+            lJVDCSum     += (long) jvdcs;
             w.write( _formatListLine( sClass
                                         , new int[] { objectNcss
                                                       , functions
@@ -295,18 +300,19 @@ public class AsciiFormatter implements Formatter
         double fAverageJVDC = _divide( lJVDCSum    , functions );
 
         String sRetVal = "Average Function NCSS: "
-            + Util.paddWithSpace(_pNumberFormat.format(fAverageNcss), 10) + NL
+            + Util.paddWithSpace( _pNumberFormat.format( fAverageNcss ), 10 ) + NL
             + "Average Function CCN:  "
-            + Util.paddWithSpace(_pNumberFormat.format(fAverageCCN),  10) + NL
+            + Util.paddWithSpace( _pNumberFormat.format( fAverageCCN ),  10 ) + NL
             + "Average Function JVDC: "
-            + Util.paddWithSpace(_pNumberFormat.format(fAverageJVDC), 10) + NL
+            + Util.paddWithSpace( _pNumberFormat.format( fAverageJVDC ), 10 ) + NL
             + "Program NCSS:          "
-            + Util.paddWithSpace(_pNumberFormat.format(_javancss.getNcss()), 10) + NL;
+            + Util.paddWithSpace( _pNumberFormat.format( _javancss.getNcss() ), 10 ) + NL;
 
         return sRetVal;
     }
 
-    public void printFunctionNcss(Writer w) throws IOException
+    public void printFunctionNcss( Writer w )
+        throws IOException
     {
         List vFunctionMetrics = _javancss.getFunctionMetrics();
 
@@ -319,17 +325,17 @@ public class AsciiFormatter implements Formatter
         long lFunctionSum = 0;
         long lCCNSum      = 0;
         long lJVDCSum     = 0;
-        for( Iterator eFunctions = vFunctionMetrics.iterator(); eFunctions.hasNext(); )
+        for ( Iterator eFunctions = vFunctionMetrics.iterator(); eFunctions.hasNext(); )
         {
-            FunctionMetric functionMetric = (FunctionMetric)eFunctions.next();
+            FunctionMetric functionMetric = (FunctionMetric) eFunctions.next();
             String sFunction = functionMetric.name;
             int functionNcss = functionMetric.ncss;
             int functionCCN  = functionMetric.ccn;
             int functionJVDC = functionMetric.javadocs;
 
-            lFunctionSum += (long)functionNcss;
-            lCCNSum      += (long)functionCCN;
-            lJVDCSum     += (long)functionJVDC;
+            lFunctionSum += (long) functionNcss;
+            lCCNSum      += (long) functionCCN;
+            lJVDCSum     += (long) functionJVDC;
             w.write( _formatListLine( sFunction
                                              , new int[] { functionNcss
                                                            , functionCCN
@@ -342,8 +348,9 @@ public class AsciiFormatter implements Formatter
                                                , lJVDCSum              ) );
     }
 
-    public void printJavaNcss(Writer w) throws IOException
+    public void printJavaNcss( Writer w )
+        throws IOException
     {
-        w.write("Java NCSS: " + _javancss.getNcss() + NL);
+        w.write( "Java NCSS: " + _javancss.getNcss() + NL );
     }
 }

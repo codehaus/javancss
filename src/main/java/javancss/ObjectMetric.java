@@ -27,7 +27,8 @@ package javancss;
  * @author  Hervé Boutemy
  * @version $Id$
  */
-public class ObjectMetric extends Metric
+public class ObjectMetric
+    extends Metric
 {
     /** Cyclomatic Complexity Number (McCabe metric) */
     public int ccn = 0;
