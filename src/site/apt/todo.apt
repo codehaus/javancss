@@ -12,7 +12,7 @@ JavaNCSS TODO list
   
     * fix all warnings in mvn clean verify site
     
-    * maybe lib/*.jar files should be copied in assembly phase from actual dependencies, delete commited Jar files, start scripts need to be updated
+    * maybe lib/*.jar files should be copied in assembly phase from actual dependencies, delete committed Jar files, start scripts need to be updated
     
   * Dependencies are non standard dependencies, not hosted on CodeHaus and not maintained any more?
   
@@ -27,7 +27,7 @@ JavaNCSS TODO list
     {{{http://maven.apache.org/plugins/maven-surefire-report-plugin/}Maven reporting integration}},
     with {{{http://mojo.codehaus.org/cobertura-maven-plugin/}code coverage too}}
 
-    * cons: remove "javancss -check" option
+    * cons: none
 
     Test available in svn {{{branches/javancss-junit}}}, with reports
     {{{http://javancss.codehaus.org/junit/project-reports.html}here}} (compare with
@@ -45,6 +45,8 @@ JavaNCSS TODO list
 
 
 Done
+
+  * remove "javancss -check" option
 
   * use <<<File>>>s instead of <<<String>>>s
 
