@@ -26,7 +26,6 @@ import java.io.Writer;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.Calendar;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 
@@ -199,7 +198,7 @@ public class XmlFormatter
         throws IOException
     {
         w.write( "  <packages>\n" );
-        List vPackageMetrics = _javancss.getPackageMetrics();
+        List<PackageMetric> vPackageMetrics = _javancss.getPackageMetrics();
 
         int packages = vPackageMetrics.size();
         int classesSum = 0;
@@ -211,10 +210,8 @@ public class XmlFormatter
         int singleLnSum = 0;
         int multiLnSum = 0;
         //
-        for ( Iterator ePackages = vPackageMetrics.iterator(); ePackages.hasNext(); )
+        for ( PackageMetric pPackageMetric : vPackageMetrics )
         {
-            PackageMetric pPackageMetric = (PackageMetric) ePackages.next();
-
             classesSum += pPackageMetric.classes;
             functionsSum += pPackageMetric.functions;
             ncssSum += pPackageMetric.ncss;
@@ -299,7 +296,7 @@ public class XmlFormatter
     {
         w.write( "  <objects>\n" );
 
-        List/*<ObjectMetric>*/ vObjectMetrics = _javancss.getObjectMetrics();
+        List<ObjectMetric> vObjectMetrics = _javancss.getObjectMetrics();
 
         long lFunctionSum = 0;
         long lClassesSum  = 0;
@@ -312,9 +309,8 @@ public class XmlFormatter
         long lMultil	  = 0;
         //
 
-        for ( Iterator eClasses = vObjectMetrics.iterator(); eClasses.hasNext(); )
+        for ( ObjectMetric classMetric : vObjectMetrics )
         {
-            ObjectMetric classMetric = (ObjectMetric) eClasses.next();
             String sClass  = classMetric.name;
             int objectNcss = classMetric.ncss;
             int functions  = classMetric.functions;
@@ -415,14 +411,13 @@ public class XmlFormatter
     {
         w.write( "  <functions>\n" );
 
-        List vFunctionMetrics = _javancss.getFunctionMetrics();
+        List<FunctionMetric> vFunctionMetrics = _javancss.getFunctionMetrics();
 
         long lFunctionSum = 0;
         long lCCNSum      = 0;
         long lJVDCSum     = 0;
-        for ( Iterator eFunctions = vFunctionMetrics.iterator(); eFunctions.hasNext(); )
+        for ( FunctionMetric functionMetric : vFunctionMetrics )
         {
-            FunctionMetric functionMetric = (FunctionMetric) eFunctions.next();
             String sFunction = functionMetric.name;
             int functionNcss = functionMetric.ncss;
             int functionCCN  = functionMetric.ccn;

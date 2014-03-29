@@ -109,16 +109,16 @@ public class JavaParser implements JavaParserInterface
      * should instead put your copyright notice).
      */
     private int    _javadocs   = 0;              // global javadocs
-    private List/*<FunctionMetric>*/ _vFunctions = new ArrayList();   // holds the statistics for each method
+    private List<FunctionMetric> _vFunctions = new ArrayList<FunctionMetric>();   // holds the statistics for each method
 
     /**
      * Metrics for each class/interface are stored in this
      * vector.
      */
-    private List/*<ObjectMetric>*/ _vClasses = new ArrayList();
+    private List<ObjectMetric> _vClasses = new ArrayList<ObjectMetric>();
     private List _vImports = new ArrayList();
     private Object[] _aoPackage = null;
-    private Map/*<String,PackageMetric>*/ _htPackage = new HashMap();
+    private Map<String, PackageMetric> _htPackage = new HashMap<String, PackageMetric>();
     private PackageMetric _pPackageMetric;
 
     private Token _tmpToken = null;
@@ -165,7 +165,7 @@ public class JavaParser implements JavaParserInterface
     /**
      * @return Top level classes in sorted order
      */
-    public List/*<ObjectMetric>*/ getObject() {
+    public List<ObjectMetric> getObject() {
         Collections.sort(_vClasses);
         return _vClasses;
     }
@@ -173,7 +173,7 @@ public class JavaParser implements JavaParserInterface
     /**
      * @return The empty package consists of the name ".".
      */
-    public Map/*<String,PackageMetric>*/ getPackage() {
+    public Map<String, PackageMetric> getPackage() {
         return _htPackage;
     }
 
@@ -926,8 +926,7 @@ void CompilationUnit() :
       _pPackageMetric.multiLn    = JavaParserTokenManager._iMultiComments  - oldMulti;
       //
 
-      PackageMetric pckmPrevious = (PackageMetric)_htPackage.
-             get(_formatPackage(_sPackage));
+      PackageMetric pckmPrevious = _htPackage.get(_formatPackage(_sPackage));
       _pPackageMetric.add(pckmPrevious);
       _htPackage.put(_formatPackage(_sPackage),
                      _pPackageMetric);
@@ -1154,7 +1153,7 @@ void ClassDeclaration() :
                  tmpToken = tmpToken.specialToken;
              }
              */
-             metric = (ObjectMetric)_vClasses.get( _vClasses.size() - 1);
+             metric = _vClasses.get( _vClasses.size() - 1);
              metric.javadocs = _javadocs;
 
              // added by SMS

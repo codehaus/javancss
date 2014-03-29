@@ -2,10 +2,17 @@ package javancss.parser;
 
 import java.util.*;
 
+import javancss.FunctionMetric;
+import javancss.ObjectMetric;
+import javancss.PackageMetric;
+
 public interface JavaParserInterface
 {
-    public void parse() throws Exception;
-    public void parseImportUnit() throws Exception;
+    public void parse()
+        throws Exception;
+
+    public void parseImportUnit()
+        throws Exception;
 
     public int getNcss();
     
@@ -18,17 +25,17 @@ public interface JavaParserInterface
       return _topLevelClasses;
       }*/
     
-    public List/*<FunctionMetric>*/ getFunction();
+    public List<FunctionMetric> getFunction();
     
     /**
      * @return Top level classes in sorted order
      */
-    public List/*<ObjectMetric>*/ getObject();
+    public List<ObjectMetric> getObject();
     
     /**
      * @return The empty package consists of the name ".".
      */
-    public Map/*<String,PackageMetric>*/ getPackage();
+    public Map<String, PackageMetric> getPackage();
     
     public List getImports();
 

@@ -25,7 +25,6 @@ import java.io.IOException;
 import java.io.Writer;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 
@@ -175,7 +174,7 @@ public class AsciiFormatter implements Formatter
     public void printPackageNcss( Writer w )
         throws IOException
     {
-        List vPackageMetrics = _javancss.getPackageMetrics();
+        List<PackageMetric> vPackageMetrics = _javancss.getPackageMetrics();
 
         int packages = vPackageMetrics.size();
 
@@ -190,10 +189,8 @@ public class AsciiFormatter implements Formatter
         int functionsSum = 0;
         int javadocsSum  = 0;
         int ncssSum      = 0;
-        for( Iterator ePackages = vPackageMetrics.iterator(); ePackages.hasNext(); )
+        for( PackageMetric pPackageMetric : vPackageMetrics )
         {
-            PackageMetric pPackageMetric = (PackageMetric) ePackages.next();
-
             classesSum   += pPackageMetric.classes;
             functionsSum += pPackageMetric.functions;
             ncssSum      += pPackageMetric.ncss;
@@ -252,7 +249,7 @@ public class AsciiFormatter implements Formatter
     public void printObjectNcss( Writer w )
         throws IOException
     {
-        List/* <ObjectMetric> */vObjectMetrics = _javancss.getObjectMetrics();
+        List<ObjectMetric> vObjectMetrics = _javancss.getObjectMetrics();
 
         w.write( _formatListHeader( vObjectMetrics.size()
                                             , new String[] { "NCSS"
@@ -264,9 +261,8 @@ public class AsciiFormatter implements Formatter
         long lClassesSum  = 0;
         long lObjectSum   = 0;
         long lJVDCSum     = 0;
-        for ( Iterator eClasses = vObjectMetrics.iterator(); eClasses.hasNext(); )
+        for ( ObjectMetric classMetric : vObjectMetrics )
         {
-            ObjectMetric classMetric = (ObjectMetric) eClasses.next();
             String sClass = classMetric.name;
             int objectNcss = classMetric.ncss;
             int functions  = classMetric.functions;
@@ -314,7 +310,7 @@ public class AsciiFormatter implements Formatter
     public void printFunctionNcss( Writer w )
         throws IOException
     {
-        List vFunctionMetrics = _javancss.getFunctionMetrics();
+        List<FunctionMetric> vFunctionMetrics = _javancss.getFunctionMetrics();
 
         w.write( _formatListHeader( vFunctionMetrics.size()
                                            , new String[] { "NCSS"
@@ -325,9 +321,8 @@ public class AsciiFormatter implements Formatter
         long lFunctionSum = 0;
         long lCCNSum      = 0;
         long lJVDCSum     = 0;
-        for ( Iterator eFunctions = vFunctionMetrics.iterator(); eFunctions.hasNext(); )
+        for ( FunctionMetric functionMetric : vFunctionMetrics )
         {
-            FunctionMetric functionMetric = (FunctionMetric) eFunctions.next();
             String sFunction = functionMetric.name;
             int functionNcss = functionMetric.ncss;
             int functionCCN  = functionMetric.ccn;

@@ -22,12 +22,12 @@ Boston, MA 02111-1307, USA.  */
 package javancss.test;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.io.StringReader;
 import java.io.StringWriter;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import ccl.util.FileUtil;
@@ -155,10 +155,9 @@ public class JavancssTest extends AbstractTest
 
     private void _checkJavadocLines( int[] aTestFile, String sPackage, int javadocLines )
     {
-        List files = new ArrayList();
-        for( int i = 0; i < aTestFile.length; i++ )
+        List<File> files = new ArrayList<File>();
+        for( int next : aTestFile )
         {
-            int next = aTestFile[ i ];
             files.add( getTestFile( next ) );
         }
 
@@ -168,13 +167,11 @@ public class JavancssTest extends AbstractTest
 
     private void _checkJavadocLines( Javancss pJavancss, String sPackage, int javadocLines )
     {
-        List vPackageMetrics = pJavancss.getPackageMetrics();
+        List<PackageMetric> vPackageMetrics = pJavancss.getPackageMetrics();
         Assert( vPackageMetrics.size() >= 1 );
         PackageMetric pmPackage = null;
-        Iterator ePackageMetrics = vPackageMetrics.iterator();
-        while( ePackageMetrics.hasNext() )
+        for ( PackageMetric pmNext : vPackageMetrics )
         {
-            PackageMetric pmNext = (PackageMetric)ePackageMetrics.next();
             if ( pmNext.name.equals( sPackage ) )
             {
                 pmPackage = pmNext;
@@ -191,12 +188,14 @@ public class JavancssTest extends AbstractTest
         bugIf( pJavancss.getNcss() <= 0, "Parsing file Test" + testFile + ".java failed!" );
     }
 
-    public JavancssTest() {
+    public JavancssTest()
+    {
         super();
     }
 
-    public JavancssTest(Test pTest_) {
-        super(pTest_);
+    public JavancssTest( Test pTest_ )
+    {
+        super( pTest_ );
     }
 
     protected void _doIt()
@@ -324,7 +323,7 @@ public class JavancssTest extends AbstractTest
         int ncss57 = pJavancss.getNcss();
         pJavancss = measureTestFile( 2 );
         ncss57 += pJavancss.getNcss();
-        List vFiles = new ArrayList();
+        List<File> vFiles = new ArrayList<File>();
         vFiles.add( getTestFile( 1 ) );
         vFiles.add( getTestFile( 42 ) );
         vFiles.add( getTestFile( 2 ) );
@@ -477,7 +476,7 @@ public class JavancssTest extends AbstractTest
         _checkNcssAndLoc( 11 );
 
         pJavancss = _checkNcssAndLoc( 12 );
-        List/*<FunctionMetric>*/ vFunctions = pJavancss.getFunctionMetrics();
+        List<FunctionMetric> vFunctions = pJavancss.getFunctionMetrics();
         String sFirstFunction = ( (FunctionMetric) vFunctions.get( 0 ) ).name;
         bugIf( sFirstFunction == null );
         /* System.out.println( sFirstFunction ); */
@@ -521,7 +520,7 @@ public class JavancssTest extends AbstractTest
         bugIf( !sFirstFunction.equals( "ccl.util.Test11.atoi(String)" ) );
         String sSomeFunction = ( (FunctionMetric) vFunctions.get( 32 ) ).name;
         bugIf( !sSomeFunction.equals( "Test12.readFile(URL)" ), "Function: " + sSomeFunction );
-        List vPackages = pJavancss.getPackageMetrics();
+        List<PackageMetric> vPackages = pJavancss.getPackageMetrics();
         bugIf( vPackages.size() != 2 );
         int ncss38 = pJavancss.getNcss();
 
@@ -566,7 +565,7 @@ public class JavancssTest extends AbstractTest
     private void _checkJvdcs( int testFileNumber, int expectedJvdcsResult )
     {
         Javancss pJavancss = measureTestFile( testFileNumber );
-        List/*<ObjectMetric>*/ vObjectMetrics = pJavancss.getObjectMetrics();
+        List<ObjectMetric> vObjectMetrics = pJavancss.getObjectMetrics();
         ObjectMetric classMetric = (ObjectMetric) vObjectMetrics.get( 0 );
         int jvdcs = classMetric.javadocs;
         /* int jvdc = pJavancss.getJvdc(); */
@@ -583,7 +582,7 @@ public class JavancssTest extends AbstractTest
 
         // CCN for return and throw
         Javancss pJavancss = measureTestFile( 40 );
-        List/*<FunctionMetric>*/ vFunctions = pJavancss.getFunctionMetrics();
+        List<FunctionMetric> vFunctions = pJavancss.getFunctionMetrics();
         bugIf( vFunctions.size() != 1 );
         assertCCN( vFunctions, 0, 3 );
 
@@ -606,9 +605,9 @@ public class JavancssTest extends AbstractTest
         _exitSubTest();
     }
 
-    private void assertCCN( List vFunctions, int methodIndex, int expectedCCN )
+    private void assertCCN( List<FunctionMetric> vFunctions, int methodIndex, int expectedCCN )
     {
-        int ccn = ( (FunctionMetric) vFunctions.get( methodIndex ) ).ccn;
+        int ccn = vFunctions.get( methodIndex ).ccn;
         Assert( ccn == expectedCCN, "Expected ccn was " + expectedCCN + " but the result is: " + ccn );
     }
 

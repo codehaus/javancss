@@ -27,7 +27,8 @@ package javancss;
  * @author  Hervé Boutemy
  * @version $Id$
  */
-public class FunctionMetric  extends Metric
+public class FunctionMetric
+    extends Metric
 {
     public int ccn = 0;
 

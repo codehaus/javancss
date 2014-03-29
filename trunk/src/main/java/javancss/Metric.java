@@ -28,7 +28,7 @@ package javancss;
  * @version $Id$
  */
 public abstract class Metric
-    implements Comparable
+    implements Comparable<Metric>
 {
     public String name = ".";
     /** Non Commenting Source Statements (NCSS). */
@@ -59,14 +59,14 @@ public abstract class Metric
         return name;
     }
 
-    public int compareTo( Object o )
+    public int compareTo( Metric m )
     {
-        return name.compareTo( ((Metric)o).name );
+        return name.compareTo( m.name );
     }
 
-    public boolean equals( Object o )
+    public boolean equals( Metric m )
     {
-        return compareTo( o ) == 0;
+        return compareTo( m ) == 0;
     }
 
     public int hashCode()
