@@ -216,18 +216,35 @@
         <configuration>
           <executable>java</executable>
           <classpathScope>test</classpathScope>
-          <arguments>
-            <argument>-classpath</argument>
-            <classpath />
-            <argument>javancss.test.JavancssTest</argument>
-          </arguments>
         </configuration>
         <executions>
           <execution>
+            <id>JavancssTest</id>
             <phase>test</phase>
             <goals>
               <goal>exec</goal>
             </goals>
+            <configuration>
+              <arguments>
+                <argument>-classpath</argument>
+                <classpath />
+                <argument>javancss.test.JavancssTest</argument>
+              </arguments>
+            </configuration>
+          </execution>
+          <execution>
+            <id>XmlFormatterTest</id>
+            <phase>test</phase>
+            <goals>
+              <goal>exec</goal>
+            </goals>
+            <configuration>
+              <arguments>
+                <argument>-classpath</argument>
+                <classpath />
+                <argument>javancss.test.XmlFormatterTest</argument>
+              </arguments>
+            </configuration>
           </execution>
         </executions>
       </plugin>
