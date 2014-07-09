@@ -158,7 +158,7 @@ public class JavaParser implements JavaParserInterface
       return _topLevelClasses;
       }*/
 
-    public List/*<FunctionMetric>*/ getFunction() {
+    public List<FunctionMetric> getFunction() {
         return _vFunctions;
     }
 
@@ -2871,8 +2871,8 @@ void ForStatement() :
 {
   "for" "("
   (
-      LOOKAHEAD(Modifiers() Type() <IDENTIFIER> ":")
-      Modifiers() Type() <IDENTIFIER> ":" Expression()
+      LOOKAHEAD(Modifiers() Type() VariableDeclaratorId() ":")
+      Modifiers() Type() VariableDeclaratorId() ":" Expression()
     |
  [ ForInit() ] ";" [ Expression() ] ";" [ ForUpdate() ]
       )
