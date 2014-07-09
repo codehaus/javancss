@@ -242,7 +242,7 @@
               <goal>javacc</goal>
             </goals>
             <configuration>
-              <jdkVersion>1.4</jdkVersion>
+              <jdkVersion>1.5</jdkVersion>
             </configuration>
           </execution>
         </executions>
@@ -360,7 +360,7 @@
           <overview>${project.basedir}/src/overview.html</overview>
           <linksource>true</linksource>
           <links>
-            <link>http://java.sun.com/j2se/1.4.2/docs/api</link>
+            <link>http://docs.oracle.com/javase/1.5.0/docs/api/</link>
             <link>http://www.kclee.de/clemens/java/ccl/api</link>
           </links>
         </configuration>

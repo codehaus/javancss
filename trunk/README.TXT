@@ -39,7 +39,7 @@ FEATURES
    - Free software (GNU LGPL).
 
 SYSTEM REQUIREMENTS
-   Java JDK >= 1.4.1
+   Java JDK >= 1.5
    
 INSTALLATION
    See http://javancss.codehaus.org/
