@@ -55,8 +55,6 @@ import javancss.parser.JavaParserInterface;
 import javancss.parser.JavaParserTokenManager;
 import javancss.parser.TokenMgrError;
 import javancss.parser.debug.JavaParserDebug;
-import javancss.parser.java15.JavaParser15;
-import javancss.parser.java15.debug.JavaParser15Debug;
 
 /**
  * While the Java parser class might be the heart of JavaNCSS,
@@ -79,7 +77,7 @@ public class Javancss
         "[Help]\n"+
         "; Please do not edit the Help section\n"+
         "HelpUsage=@srcfiles.txt | *.java | <stdin>\n" +
-        "Options=ncss,package,object,function,all,gui,xml,out,recursive,check,encoding,parser15\n" +
+        "Options=ncss,package,object,function,all,gui,xml,out,recursive,check,encoding\n" +
         "ncss=b,o,Counts the program NCSS (default).\n" +
         "package=b,o,Assembles a statistic on package level.\n" +
         "object=b,o,Counts the object NCSS.\n" +
@@ -90,7 +88,6 @@ public class Javancss
         "out=s,o,Output file name. By default output goes to standard out.\n"+
         "recursive=b,o,Recurse to subdirs.\n" +
         "encoding=s,o,Encoding used while reading source files (default: platform encoding).\n" +
-        "parser15=b,o,Use new experimental Java 1.5 parser.\n" +
         "\n" +
         "[Colors]\n" +
         "UseSystemColors=true\n";
@@ -207,39 +204,21 @@ public class Javancss
         throws IOException, Exception, Error
     {
         Util.debug( "_measureSource(Reader).ENTER" );
-        // Util.debug( "_measureSource(Reader).parser15: -->" + (_pInit.getOptions().get( "parser15" ) + "<--" );
         // Util.panicIf( _pInit == null );
         // Util.panicIf( _pInit.getOptions() == null );
         Util.debug( "_measureSource(Reader).ENTER2" );
         try
         {
             // create a parser object
-            boolean parser15 = _pInit != null && _pInit.getOptions() != null && _pInit.getOptions().get( "parser15" ) != null;
             if ( Util.isDebug() )
             {
-                if ( parser15 )
-                {
-                    Util.debug( "creating JavaParser15Debug" );
-                    _pJavaParser = new JavaParser15Debug( reader );
-                }
-                else
-                {
-                    Util.debug( "creating JavaParserDebug" );
-                    _pJavaParser = new JavaParserDebug( reader );
-                }
+                Util.debug( "creating JavaParserDebug" );
+                _pJavaParser = new JavaParserDebug( reader );
             }
             else
             {
-                if ( parser15 )
-                {
-                    Util.debug( "creating JavaParser15" );
-                    _pJavaParser = new JavaParser15( reader );
-                }
-                else
-                {
-                    Util.debug( "creating JavaParser" );
-                    _pJavaParser = new JavaParser( reader );
-                }
+                Util.debug( "creating JavaParser" );
+                _pJavaParser = new JavaParser( reader );
             }
 
             // execute the parser
