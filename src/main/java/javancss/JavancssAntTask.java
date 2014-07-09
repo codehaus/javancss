@@ -286,6 +286,7 @@ public class JavancssAntTask extends MatchingTask {
      * Executes this task.
      * @throws BuildException if an error occurs.
      */
+    @Override
     public void execute() throws BuildException {
         if (srcdir == null) {
             throw new BuildException("srcdir attribute must be set!");
@@ -297,7 +298,7 @@ public class JavancssAntTask extends MatchingTask {
             throw new BuildException("srcdir is not a directory!");
         }
 
-        List fileList = findFilesToAnalyse();
+        List<File> fileList = findFilesToAnalyse();
 
         // First check thresholds
         if (thresholdsExceeded(fileList) && abortOnFail) {
@@ -321,7 +322,7 @@ public class JavancssAntTask extends MatchingTask {
      * @return {@link #SUCCESS} if there were no errors; otherwise {@link #FAILURE}.
      * @throws BuildException if an error occurs whilst generating the report.
      */
-    private int generateReport(List fileList) {
+    private int generateReport(List<File> fileList) {
         // If an output file has not been specified no report should be
         // generated
         if (!generateReport) {
@@ -360,7 +361,7 @@ public class JavancssAntTask extends MatchingTask {
      * @param fileList the files to be analysed.
      * @return true if any of the thresholds have been exceeded; false otherwise.
      */
-    private boolean thresholdsExceeded(List fileList) {
+    private boolean thresholdsExceeded(List<File> fileList) {
         return packageThresholdsExceeded(fileList) ||
                 classThresholdsExceeded(fileList) ||
                 functionThresholdsExceeded(fileList);
@@ -372,9 +373,9 @@ public class JavancssAntTask extends MatchingTask {
      * testing thresholds as the Javancss object does not have a constructor
      * that lets us make use of the -recursive option
      */
-    private List findFilesToAnalyse() {
+    private List<File> findFilesToAnalyse() {
         DirectoryScanner ds = super.getDirectoryScanner(srcdir);
-        String files[] = ds.getIncludedFiles();
+        String[] files = ds.getIncludedFiles();
         if (files.length == 0) {
             log("No files in specified directory " + srcdir, 3);
         }
@@ -387,8 +388,8 @@ public class JavancssAntTask extends MatchingTask {
      * @return a vector of paths. The path is constructed by prepending this
      * task's source directory to each filename.
      */
-    private List copyFiles(String[] filesArray) {
-        List returnVector = new ArrayList(filesArray.length);
+    private List<File> copyFiles(String[] filesArray) {
+        List<File> returnVector = new ArrayList<File>(filesArray.length);
         for (int i = 0; i < filesArray.length; i++) {
             returnVector.add(new File(srcdir, filesArray[i]));
         }
@@ -410,8 +411,8 @@ public class JavancssAntTask extends MatchingTask {
      * @param fileList a list of all source files to be analysed.
      * @return the command line arguments to be sent to JavaNCSS.
      */
-    private String[] getCommandLineArguments(List fileList) {
-        List arguments = new ArrayList();
+    private String[] getCommandLineArguments(List<File> fileList) {
+        List<String> arguments = new ArrayList<String>();
 
         // Set metrics to be generated
         if (packageMetrics) {
@@ -440,7 +441,7 @@ public class JavancssAntTask extends MatchingTask {
 
         String[] javancssArguments = new String[arguments.size()];
         for (int argument = 0; argument < arguments.size(); argument++) {
-            javancssArguments[argument] = (String) arguments.get(argument);
+            javancssArguments[argument] = arguments.get(argument);
         }
         return javancssArguments;
     }
@@ -451,7 +452,7 @@ public class JavancssAntTask extends MatchingTask {
      * @param fileList the source files to be analysed.
      * @return a file containing a list of all specified source files.
      */
-    private File createSourceListFile(List fileList) {
+    private File createSourceListFile(List<File> fileList) {
         File srcListFile;
         try {
             srcListFile = File.createTempFile("srcList", null);
@@ -477,7 +478,7 @@ public class JavancssAntTask extends MatchingTask {
      * @return the JavaNCSS object containing details of the code whose metrics
      * are to be checked.
      */
-    private Javancss getJavaNcss(List fileList)
+    private Javancss getJavaNcss(List<File> fileList)
     {
         if (javancss == null)
         {
@@ -492,7 +493,7 @@ public class JavancssAntTask extends MatchingTask {
      * @param fileList the files to be analysed.
      * @return true if a threshold has been exceeded; false otherwise.
      */
-    private boolean packageThresholdsExceeded(List fileList) {
+    private boolean packageThresholdsExceeded(List<File> fileList) {
         boolean failed = false;
         if (!((classPerPkgMax == Integer.MAX_VALUE) &&
                 (classPerPkgMin == -1) &&
@@ -500,9 +501,9 @@ public class JavancssAntTask extends MatchingTask {
                 (funcPerPkgMin == -1) &&
                 (ncssPerPkgMax == Integer.MAX_VALUE) &&
                 (ncssPerPkgMin == -1))) {
-            List pkgMetrics = getJavaNcss(fileList).getPackageMetrics();
+           List<PackageMetric> pkgMetrics = getJavaNcss(fileList).getPackageMetrics();
             for (int i = 0; i < pkgMetrics.size(); i++) {
-                PackageMetric pkgMetric = (PackageMetric) pkgMetrics.get(i);
+                PackageMetric pkgMetric = pkgMetrics.get(i);
                 failed = packageThresholdExceeded(pkgMetric) || failed;
             }
         }
@@ -550,7 +551,7 @@ public class JavancssAntTask extends MatchingTask {
      * @param fileList the files to be analysed.
      * @return true if a threshold has been exceeded; false otherwise.
      */
-    private boolean classThresholdsExceeded(List fileList) {
+    private boolean classThresholdsExceeded(List<File> fileList) {
         boolean failed = false;
         if (!((classPerClassMax == Integer.MAX_VALUE) &&
                 (classPerClassMin == -1) &&
@@ -560,9 +561,9 @@ public class JavancssAntTask extends MatchingTask {
                 (jvdcPerClassMin == -1) &&
                 (ncssPerClassMax == Integer.MAX_VALUE) &&
                 (ncssPerClassMin == -1))) {
-            List objMetrics = getJavaNcss(fileList).getObjectMetrics();
+            List<ObjectMetric> objMetrics = getJavaNcss(fileList).getObjectMetrics();
             for (int i = 0; i < objMetrics.size(); i++) {
-                ObjectMetric objMetric = (ObjectMetric) objMetrics.get(i);
+                ObjectMetric objMetric = objMetrics.get(i);
                 failed = classThresholdExceeded(objMetric) || failed;
             }
         }
@@ -623,7 +624,7 @@ public class JavancssAntTask extends MatchingTask {
      * @param fileList the files to be analysed.
      * @return true if a threshold has been exceeded; false otherwise.
      */
-    private boolean functionThresholdsExceeded(List fileList) {
+    private boolean functionThresholdsExceeded(List<File> fileList) {
         boolean failed = false;
         //check thresholds
         if (!((jvdcPerFuncMax == Integer.MAX_VALUE) &&
@@ -633,9 +634,9 @@ public class JavancssAntTask extends MatchingTask {
                 (ncssPerFuncMax == Integer.MAX_VALUE) &&
                 (ncssPerFuncMin == -1))) {
             //call getFunctionMetrics
-            List funcMetrics = getJavaNcss(fileList).getFunctionMetrics();
+            List<FunctionMetric> funcMetrics = getJavaNcss(fileList).getFunctionMetrics();
             for (int i = 0; i < funcMetrics.size(); i++) {
-                FunctionMetric funcMetric = (FunctionMetric) funcMetrics.get(i);
+                FunctionMetric funcMetric = funcMetrics.get(i);
                 failed = functionThresholdExceeded(funcMetric) || failed;
             }
         }

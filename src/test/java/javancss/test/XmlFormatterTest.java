@@ -127,6 +127,7 @@ public class XmlFormatterTest extends AbstractTest {
     /**
      * Test code goes here.
      */
+    @Override
     protected void _doIt()
         throws Exception
     {

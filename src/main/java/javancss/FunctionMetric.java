@@ -37,6 +37,7 @@ public class FunctionMetric
         super();
     }
 
+    @Override
     public void clear()
     {
         super.clear();
