@@ -663,7 +663,7 @@ public class JavancssTest extends AbstractTest
     {
         _enterSubTest( "recursive" );
 
-        String[] args = new String[] { "-recursive", getTestFile( "../lib" ).getAbsolutePath()  };
+        String[] args = new String[] { "-recursive", getTestFile( "../../../lib" ).getAbsolutePath()  };
         measureWithArgs( args );
 
         _exitSubTest();
