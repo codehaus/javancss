@@ -255,7 +255,15 @@ public class JavancssTest extends AbstractTest
         _checkNcss( 28, 465 );
         _checkNcss( 29, 1 );
 
-        // Nr. 42
+        // ;; in java.sql.Connection
+        try
+        {
+            _checkNcss( 32, 26 );
+        }
+        catch ( Error eJavaSQLConnection )
+        {
+            bugIf( true, "java.sql.Connection double semicolon" );
+        }
         // missing lf in last line/<EOF> not in single line
         try
         {
@@ -289,7 +297,6 @@ public class JavancssTest extends AbstractTest
         {
             bugIf( true, "0x0actrl-Z" );
         }
-        // Nr. 46
         // semicolons not allowed by JLS, but not counted anyway.
         try
         {
@@ -298,16 +305,6 @@ public class JavancssTest extends AbstractTest
         catch ( Error eEmptyStatements )
         {
             bugIf( true, "Empty statments." );
-        }
-        // Nr. 47
-        // ;; in java.sql.Connection
-        try
-        {
-            _checkNcss( 32, 26 );
-        }
-        catch ( Error eJavaSQLConnection )
-        {
-            bugIf( true, "java.sql.Connection double semicolon" );
         }
 
         // javancss parsed a file which it shouldn't
@@ -331,8 +328,11 @@ public class JavancssTest extends AbstractTest
         pJavancss = new Javancss( vFiles );
         bugIf( pJavancss.getNcss() != ncss57, "ncss57: " + ncss57 + " pJavancss.getNcss(): " + pJavancss.getNcss() );
 
-        // Bug reported by .. .
-        // Test48.java should be parsed.
+        // TODO 44
+        // TODO 45
+        // TODO 46
+        // TODO 47? interface
+        
         _checkParse( 48 );
 
         _checkNcss( 49, 3 );
@@ -370,6 +370,8 @@ public class JavancssTest extends AbstractTest
          * like this: F150MemoryMap f150Map = (F150MemoryMap) F150.super.memMap;
          */
         _checkNcss( 70, 4 );
+        
+        // TODO 71? anonymous subclasses
 
         // test for strictfp interface and static inner interface
         _checkNcss( 73, 1 );
@@ -429,6 +431,7 @@ public class JavancssTest extends AbstractTest
         _checkNcss( 115, 11663 );
         _checkNcss( 116, 12 );
         _checkNcss( 117, 15 );
+        // TODO 118? enum
         _checkNcss( 119, 2 );
         _checkNcss( 120, 3 );
         _checkNcss( 121, 5 );
@@ -442,18 +445,25 @@ public class JavancssTest extends AbstractTest
         _checkNcss( 130, 5 );
         _checkNcss( 131, 6 );
         _checkNcss( 132, 12 );
+        // TOODO 133?
         _checkNcss( 134, 4 );
+        // TODO 135? annotation
         _checkNcss( 136, 2 );
+        // 137 skipped
         _checkNcss( 138, 3 );
         _checkParse( 142 ); // JAVANCSS-12
         _checkParse( 143 ); // JAVANCSS-9
         _checkParse( 144 ); // JAVANCSS-13
         _checkParse( 145 ); // JAVANCSS-14
         _checkParse( 146 ); // JAVANCSS-17
+        // TODO 147? anonymous subcluss
         _checkParse( 148 ); // JAVANCSS-49
         _checkParse( 149 ); // JAVANCSS-46
         _checkParse( 150 ); // JAVANCSS-53 
         _checkParse( 151 ); // JAVANCSS-45 
+        // TODO PK _checkParse( 152 ); // JAVANCSS-57 open!
+        // TODO PK _checkParse( 153 ); // JAVANCSS-54 open!
+        // TODO PK _checkParse( 154 ); // JAVANCSS-52 open!
 
         _exitSubTest();
     }
