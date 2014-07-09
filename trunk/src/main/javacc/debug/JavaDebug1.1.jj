@@ -926,8 +926,7 @@ void CompilationUnit() :
       _pPackageMetric.multiLn    = JavaParserDebugTokenManager._iMultiComments  - oldMulti;
       //
 
-      PackageMetric pckmPrevious = (PackageMetric)_htPackage.
-             get(_formatPackage(_sPackage));
+      PackageMetric pckmPrevious = _htPackage.get(_formatPackage(_sPackage));
       _pPackageMetric.add(pckmPrevious);
       _htPackage.put(_formatPackage(_sPackage),
                      _pPackageMetric);
@@ -1154,7 +1153,7 @@ void ClassDeclaration() :
                  tmpToken = tmpToken.specialToken;
              }
              */
-             metric = (ObjectMetric)_vClasses.get( _vClasses.size() - 1);
+             metric = _vClasses.get( _vClasses.size() - 1);
              metric.javadocs = _javadocs;
 
              // added by SMS
@@ -2869,8 +2868,8 @@ void ForStatement() :
 {
   "for" "("
   (
-      LOOKAHEAD(Modifiers() Type() <IDENTIFIER> ":")
-      Modifiers() Type() <IDENTIFIER> ":" Expression()
+      LOOKAHEAD(Modifiers() Type() VariableDeclaratorId() ":")
+      Modifiers() Type() VariableDeclaratorId() ":" Expression()
     |
  [ ForInit() ] ";" [ Expression() ] ";" [ ForUpdate() ]
       )
