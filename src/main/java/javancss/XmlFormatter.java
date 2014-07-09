@@ -322,15 +322,15 @@ public class XmlFormatter
             int singlel    = classMetric.singleLn;
             int multil     = classMetric.multiLn;
             //
-            lObjectSum   += (long)objectNcss;
-            lFunctionSum += (long)functions;
-            lClassesSum  += (long)classes;
-            lJVDCSum     += (long)jvdcs;
+            lObjectSum   += objectNcss;
+            lFunctionSum += functions;
+            lClassesSum  += classes;
+            lJVDCSum     += jvdcs;
 
             // added by REYNAUD Sebastien (LOGICA)
-            lJVDCSL += (long)jvdcsl;
-            lSinglel += (long)singlel;
-            lMultil += (long)multil;
+            lJVDCSL += jvdcsl;
+            lSinglel += singlel;
+            lMultil += multil;
             //
 
             w.write(
@@ -429,9 +429,9 @@ public class XmlFormatter
             //int functionML                = ((Integer)vSingleFunctionMetrics.elementAt(FCT_MULTI_LINES)).intValue();
             //
 
-            lFunctionSum += (long)functionNcss;
-            lCCNSum      += (long)functionCCN;
-            lJVDCSum     += (long)functionJVDC;
+            lFunctionSum += functionNcss;
+            lCCNSum      += functionCCN;
+            lJVDCSum     += functionJVDC;
             w.write(
                            "    <function>\n" +
                            "      <name>" + sFunction + "</name>\n" +
