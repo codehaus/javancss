@@ -77,7 +77,7 @@ public class Javancss
         "[Help]\n"+
         "; Please do not edit the Help section\n"+
         "HelpUsage=@srcfiles.txt | *.java | <stdin>\n" +
-        "Options=ncss,package,object,function,all,gui,xml,out,recursive,check,encoding\n" +
+        "Options=ncss,package,object,function,all,gui,xml,out,recursive,encoding\n" +
         "ncss=b,o,Counts the program NCSS (default).\n" +
         "package=b,o,Assembles a statistic on package level.\n" +
         "object=b,o,Counts the object NCSS.\n" +
