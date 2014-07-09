@@ -74,6 +74,7 @@ public class JavancssFrame extends MainJFrame {
 
     private Init _pInit = null;
 
+    @Override
     public void save() {
         String sFullProjectName = FileUtil.concatPath
                (_sProjectPath, _sProjectName.toLowerCase());
@@ -117,10 +118,10 @@ public class JavancssFrame extends MainJFrame {
     }
 
     private void _setMenuBar() {
-        Vector vMenus = new Vector();
+        Vector<Vector<String>> vMenus = new Vector<Vector<String>>();
 
-        Vector vFileMenu = new Vector();
-        Vector vHelpMenu = new Vector();
+        Vector<String> vFileMenu = new Vector<String>();
+        Vector<String> vHelpMenu = new Vector<String>();
 
         vFileMenu.addElement("File");
         vFileMenu.addElement(S_MN_F_SAVE);
@@ -140,6 +141,7 @@ public class JavancssFrame extends MainJFrame {
     /**
      * Returns init object provided with constructor.
      */
+    @Override
     public Init getInit() {
         return _pInit;
     }
@@ -285,6 +287,7 @@ public class JavancssFrame extends MainJFrame {
     private boolean _bStop = false;
     private boolean _bSave = false;
 
+    @Override
     public void run() {
         _bSave = false;
         while(!_bStop) {
@@ -316,6 +319,7 @@ public class JavancssFrame extends MainJFrame {
         }
     }
 
+    @Override
     public void setVisible(boolean bVisible_) {
         if (bVisible_) {
             _oldThreadPriority = Thread.currentThread().getPriority();
@@ -348,6 +352,7 @@ public class JavancssFrame extends MainJFrame {
 
     private boolean _bAboutSelected = false;
 
+    @Override
     public void actionPerformed(ActionEvent pActionEvent_) {
         Util.debug("JavancssFrame.actionPerformed(..).1");
         Object oSource = pActionEvent_.getSource();

@@ -54,6 +54,7 @@ public abstract class Metric
         multiLn = 0;
     }
 
+    @Override
     public String toString()
     {
         return name;
@@ -69,6 +70,7 @@ public abstract class Metric
         return compareTo( m ) == 0;
     }
 
+    @Override
     public int hashCode()
     {
         return name.hashCode();

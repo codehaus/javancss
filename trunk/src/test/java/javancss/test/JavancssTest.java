@@ -198,6 +198,7 @@ public class JavancssTest extends AbstractTest
         super( pTest_ );
     }
 
+    @Override
     protected void _doIt()
         throws Exception
     {
@@ -477,7 +478,7 @@ public class JavancssTest extends AbstractTest
 
         pJavancss = _checkNcssAndLoc( 12 );
         List<FunctionMetric> vFunctions = pJavancss.getFunctionMetrics();
-        String sFirstFunction = ( (FunctionMetric) vFunctions.get( 0 ) ).name;
+        String sFirstFunction = vFunctions.get( 0 ).name;
         bugIf( sFirstFunction == null );
         /* System.out.println( sFirstFunction ); */
         bugIf( !sFirstFunction.equals( "Test12.readFile(URL)" ), sFirstFunction );
@@ -485,9 +486,9 @@ public class JavancssTest extends AbstractTest
         // Nr. 22
         pJavancss = measureTestFile( 19 );
         vFunctions = pJavancss.getFunctionMetrics();
-        sFirstFunction = ( (FunctionMetric) vFunctions.get( 0 ) ).name;
+        sFirstFunction = vFunctions.get( 0 ).name;
         bugIf( !sFirstFunction.equals( "test.Test19.foo(String[],Controller)" ), sFirstFunction );
-        sFirstFunction = ( (FunctionMetric) vFunctions.get( 3 ) ).name;
+        sFirstFunction = vFunctions.get( 3 ).name;
         bugIf( !sFirstFunction.equals( "test.Test19.main(String[])" ) );
 
         pJavancss = _checkNcss( 23, 10 );
@@ -516,9 +517,9 @@ public class JavancssTest extends AbstractTest
         pJavancss = new Javancss( new StringReader( sTogether ) );
         vFunctions = pJavancss.getFunctionMetrics();
         Util.debug( "JavancssTest._doIt().vFunctions: " + vFunctions );
-        sFirstFunction = ( (FunctionMetric) vFunctions.get( 0 ) ).name;
+        sFirstFunction = vFunctions.get( 0 ).name;
         bugIf( !sFirstFunction.equals( "ccl.util.Test11.atoi(String)" ) );
-        String sSomeFunction = ( (FunctionMetric) vFunctions.get( 32 ) ).name;
+        String sSomeFunction = vFunctions.get( 32 ).name;
         bugIf( !sSomeFunction.equals( "Test12.readFile(URL)" ), "Function: " + sSomeFunction );
         List<PackageMetric> vPackages = pJavancss.getPackageMetrics();
         bugIf( vPackages.size() != 2 );
@@ -566,7 +567,7 @@ public class JavancssTest extends AbstractTest
     {
         Javancss pJavancss = measureTestFile( testFileNumber );
         List<ObjectMetric> vObjectMetrics = pJavancss.getObjectMetrics();
-        ObjectMetric classMetric = (ObjectMetric) vObjectMetrics.get( 0 );
+        ObjectMetric classMetric = vObjectMetrics.get( 0 );
         int jvdcs = classMetric.javadocs;
         /* int jvdc = pJavancss.getJvdc(); */
         bugIf( jvdcs != expectedJvdcsResult, "Parsing file Test" + testFileNumber + ".java failed. Jvdc is " + jvdcs

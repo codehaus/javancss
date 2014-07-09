@@ -40,6 +40,7 @@ public class ObjectMetric
         super();
     }
 
+    @Override
     public void clear()
     {
         super.clear();

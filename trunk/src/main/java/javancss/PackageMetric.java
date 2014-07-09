@@ -38,6 +38,7 @@ public class PackageMetric
         super();
     }
 
+    @Override
     public void clear()
     {
         super.clear();

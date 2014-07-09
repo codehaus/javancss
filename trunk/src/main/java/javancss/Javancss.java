@@ -53,7 +53,6 @@ import ccl.util.Util;
 import javancss.parser.JavaParser;
 import javancss.parser.JavaParserInterface;
 import javancss.parser.JavaParserTokenManager;
-import javancss.parser.ParseException;
 import javancss.parser.TokenMgrError;
 import javancss.parser.debug.JavaParserDebug;
 import javancss.parser.java15.JavaParser15;
@@ -110,7 +109,7 @@ public class Javancss
     private List<FunctionMetric> _vFunctionMetrics = new ArrayList<FunctionMetric>();
     private List<ObjectMetric> _vObjectMetrics = new ArrayList<ObjectMetric>();
     private List<PackageMetric> _vPackageMetrics = null;
-    private List _vImports = null;
+    private List<Object[]> _vImports = null;
     private Map<String,PackageMetric> _htPackages = null;
     private Object[] _aoPackage = null;
 
@@ -252,17 +251,17 @@ public class Javancss
             // add new data to global vector
             _vFunctionMetrics.addAll( _pJavaParser.getFunction() );
             _vObjectMetrics.addAll( _pJavaParser.getObject() );
-            Map htNewPackages = _pJavaParser.getPackage();
+            Map<String, PackageMetric> htNewPackages = _pJavaParser.getPackage();
 
             /* List vNewPackages = new Vector(); */
-            for ( Iterator ePackages = htNewPackages.entrySet().iterator(); ePackages.hasNext(); )
+            for ( Iterator<Map.Entry<String, PackageMetric>> ePackages = htNewPackages.entrySet().iterator(); ePackages.hasNext(); )
             {
-                String sPackage = (String) ( (Map.Entry) ePackages.next() ).getKey();
+                String sPackage = ePackages.next().getKey();
 
-                PackageMetric pckmNext = (PackageMetric) htNewPackages.get( sPackage );
+                PackageMetric pckmNext = htNewPackages.get( sPackage );
                 pckmNext.name = sPackage;
 
-                PackageMetric pckmPrevious = (PackageMetric) _htPackages.get( sPackage );
+                PackageMetric pckmPrevious = _htPackages.get( sPackage );
                 pckmNext.add( pckmPrevious );
 
                 _htPackages.put( sPackage, pckmNext );
@@ -299,7 +298,7 @@ public class Javancss
     }
 
     private void _measureFiles( List<File> vJavaSourceFiles_ )
-        throws IOException, ParseException, TokenMgrError
+        throws TokenMgrError
     {
         // for each file
         for ( File file : vJavaSourceFiles_ )
@@ -343,7 +342,7 @@ public class Javancss
         Collections.sort( _vPackageMetrics );
     }
 
-    public List getImports()
+    public List<Object[]> getImports()
     {
         return _vImports;
     }
@@ -639,6 +638,7 @@ public class Javancss
     /**
      * @deprecated use Javancss(String[]) instead, since the sRcsHeader_ parameter is not useful
      */
+    @Deprecated
     public Javancss( String[] asArgs_, String sRcsHeader_ )
         throws IOException
     {
@@ -672,6 +672,7 @@ public class Javancss
             /* final Thread pThread = Thread.currentThread(); */
             pJavancssFrame.addWindowListener( new WindowAdapter()
             {
+                @Override
                 public void windowClosing( WindowEvent e_ )
                 {
                     Util.debug( "JavancssAll.run().WindowAdapter.windowClosing().1" );
