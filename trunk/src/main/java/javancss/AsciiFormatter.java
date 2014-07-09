@@ -268,10 +268,10 @@ public class AsciiFormatter implements Formatter
             int functions  = classMetric.functions;
             int classes    = classMetric.classes;
             int jvdcs      = classMetric.javadocs;
-            lObjectSum   += (long) objectNcss;
-            lFunctionSum += (long) functions;
-            lClassesSum  += (long) classes;
-            lJVDCSum     += (long) jvdcs;
+            lObjectSum   += objectNcss;
+            lFunctionSum += functions;
+            lClassesSum  += classes;
+            lJVDCSum     += jvdcs;
             w.write( _formatListLine( sClass
                                         , new int[] { objectNcss
                                                       , functions
@@ -328,9 +328,9 @@ public class AsciiFormatter implements Formatter
             int functionCCN  = functionMetric.ccn;
             int functionJVDC = functionMetric.javadocs;
 
-            lFunctionSum += (long) functionNcss;
-            lCCNSum      += (long) functionCCN;
-            lJVDCSum     += (long) functionJVDC;
+            lFunctionSum += functionNcss;
+            lCCNSum      += functionCCN;
+            lJVDCSum     += functionJVDC;
             w.write( _formatListLine( sFunction
                                              , new int[] { functionNcss
                                                            , functionCCN
