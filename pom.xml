@@ -291,17 +291,14 @@
         <version>1.7</version>
         <executions>
           <execution>
-            <id>test</id>
+            <id>JavancssAntTaskTest</id>
             <phase>test</phase>
             <configuration>
-              <tasks>
-                <path id="task.classpath">
-                  <pathelement path="lib/javancssanttask.jar" />
-                  <path refid="maven.compile.classpath" />
-                </path>
+              <target>
+                <path id="task.classpath" refid="maven.compile.classpath" />
                 <taskdef name="javancss" classname="javancss.JavancssAntTask" classpathref="task.classpath" />
                 <javancss srcdir="src/main/java" includes="**/*.java" generateReport="yes" ccnPerFuncMax="100" abortOnFail="true" classMetrics="false" functionMetrics="false" />
-              </tasks>
+              </target>
             </configuration>
             <goals>
               <goal>run</goal>
