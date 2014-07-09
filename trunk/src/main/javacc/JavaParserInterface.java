@@ -37,7 +37,7 @@ public interface JavaParserInterface
      */
     public Map<String, PackageMetric> getPackage();
     
-    public List getImports();
+    public List<Object[]> getImports();
 
     /**
      * name, beginLine, ...
