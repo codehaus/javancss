@@ -2850,14 +2850,14 @@ void DoStatement() :
 void ForStatement() :
 {}
 {
-  "for" "("
+  "for" "(" (Annotation())?
   (
       LOOKAHEAD(Modifiers() Type() VariableDeclaratorId() ":")
       Modifiers() Type() VariableDeclaratorId() ":" Expression()
     |
- [ ForInit() ] ";" [ Expression() ] ";" [ ForUpdate() ]
-      )
-")" Statement()
+      [ ForInit() ] ";" [ Expression() ] ";" [ ForUpdate() ]
+  )
+  ")" Statement()
         { _ncss++;       Util.debug( "_ncss++" );}
 }
 
