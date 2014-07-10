@@ -27,68 +27,70 @@ import javancss.FunctionMetric;
 import javancss.Javancss;
 import ccl.util.Test;
 
-public class CCNTest extends AbstractTest {
+public class CCNTest
+    extends AbstractTest
+{
 
-   /**
-    * Tests the cyclomatic complexity number measurement.
-    */
-   public void testCCN()
-   {
-       _enterSubTest( "ccn" );
+    /**
+     * Tests the cyclomatic complexity number measurement.
+     */
+    public void testCCN()
+    {
+        _enterSubTest( "ccn" );
 
-       // CCN for return and throw
-       Javancss pJavancss = measureTestFile( 40 );
-       List<FunctionMetric> vFunctions = pJavancss.getFunctionMetrics();
-       bugIf( vFunctions.size() != 1 );
-       assertCCN( vFunctions, 0, 3 );
+        // CCN for return and throw
+        Javancss pJavancss = measureTestFile( 40 );
+        List<FunctionMetric> vFunctions = pJavancss.getFunctionMetrics();
+        bugIf( vFunctions.size() != 1 );
+        assertCCN( vFunctions, 0, 3 );
 
-       pJavancss = measureTestFile( 41 );
-       vFunctions = pJavancss.getFunctionMetrics();
-       assertCCN( vFunctions, 0, 3 );
-       assertCCN( vFunctions, 1, 1 );
-       assertCCN( vFunctions, 2, 3 );
-       assertCCN( vFunctions, 3, 3 );
-       assertCCN( vFunctions, 4, 1 );
+        pJavancss = measureTestFile( 41 );
+        vFunctions = pJavancss.getFunctionMetrics();
+        assertCCN( vFunctions, 0, 3 );
+        assertCCN( vFunctions, 1, 1 );
+        assertCCN( vFunctions, 2, 3 );
+        assertCCN( vFunctions, 3, 3 );
+        assertCCN( vFunctions, 4, 1 );
 
-       pJavancss = measureTestFile( 72 );
-       vFunctions = pJavancss.getFunctionMetrics();
-       assertCCN( vFunctions, 0, 4 );
-       assertCCN( vFunctions, 1, 5 );
-       assertCCN( vFunctions, 2, 4 );
-       assertCCN( vFunctions, 3, 4 );
-       assertCCN( vFunctions, 4, 2 );
+        pJavancss = measureTestFile( 72 );
+        vFunctions = pJavancss.getFunctionMetrics();
+        assertCCN( vFunctions, 0, 4 );
+        assertCCN( vFunctions, 1, 5 );
+        assertCCN( vFunctions, 2, 4 );
+        assertCCN( vFunctions, 3, 4 );
+        assertCCN( vFunctions, 4, 2 );
 
-       _exitSubTest();
-   }
+        _exitSubTest();
+    }
 
-   private void assertCCN( List<FunctionMetric> vFunctions, int methodIndex, int expectedCCN )
-   {
-       int ccn = vFunctions.get( methodIndex ).ccn;
-       Assert( ccn == expectedCCN, "Expected ccn was " + expectedCCN + " but the result is: " + ccn );
-   }
+    private void assertCCN( List<FunctionMetric> vFunctions, int methodIndex, int expectedCCN )
+    {
+        int ccn = vFunctions.get( methodIndex ).ccn;
+        Assert( ccn == expectedCCN, "Expected ccn was " + expectedCCN + " but the result is: " + ccn );
+    }
 
-   public CCNTest()
-   {
-       super();
-   }
+    public CCNTest()
+    {
+        super();
+    }
 
-   public CCNTest( Test pTest_ )
-   {
-       super( pTest_ );
-   }
+    public CCNTest( Test pTest_ )
+    {
+        super( pTest_ );
+    }
 
-   /**
-    * Test code goes here.
-    */
-   @Override
-   protected void _doIt()
-   {
-      testCCN();
-   }
-   
-   public static void main( String[] asArg_ )
-   {
-       new CCNTest().main();
-   }
-   
+    /**
+     * Test code goes here.
+     */
+    @Override
+    protected void _doIt()
+    {
+        testCCN();
+    }
+
+    public static void main( String[] asArg_ )
+    {
+        new CCNTest().main();
+    }
+
 }

@@ -40,26 +40,28 @@ import javancss.PackageMetric;
  *   $Id$
  *   3. 9. 1996
  */
-public class JavancssTest extends AbstractTest
+public class JavancssTest
+    extends AbstractTest
 {
 
-   private Javancss measureWithArgs( String[] args ) throws IOException
-   {
-       // turn stdout off
-       PrintStream psStdout = System.out;
+    private Javancss measureWithArgs( String[] args )
+        throws IOException
+    {
+        // turn stdout off
+        PrintStream psStdout = System.out;
 
-       try
-       {
-           System.setOut( new PrintStream( new ByteArrayOutputStream() ) );
-           return new Javancss(args);
-       }
-       finally
-       {
-           // turn stdout back on
-           System.setOut( psStdout );
-       }
-   }
-   
+        try
+        {
+            System.setOut( new PrintStream( new ByteArrayOutputStream() ) );
+            return new Javancss( args );
+        }
+        finally
+        {
+            // turn stdout back on
+            System.setOut( psStdout );
+        }
+    }
+
     public JavancssTest()
     {
         super();
@@ -80,7 +82,7 @@ public class JavancssTest extends AbstractTest
         ncssTest.setTestDir( getTestDir() );
         ncssTest.run();
         setTests( ncssTest );
-        
+
         ParseTest parseTest = new ParseTest( this );
         parseTest.setTestDir( getTestDir() );
         parseTest.run();
@@ -97,7 +99,7 @@ public class JavancssTest extends AbstractTest
         setTests( ccnTest );
 
         testCummulating();
-        
+
         testEncoding();
 
         testVersion();
@@ -115,10 +117,10 @@ public class JavancssTest extends AbstractTest
         new JavancssTest().main();
     }
 
-    private void testCummulating() 
-       throws IOException 
+    private void testCummulating()
+        throws IOException
     {
-       _enterSubTest( "cummulating" );
+        _enterSubTest( "cummulating" );
 
         // Nr. 35
         String sTogether;
@@ -156,8 +158,9 @@ public class JavancssTest extends AbstractTest
 
         _exitSubTest();
     }
-    
-    public void testEncoding() throws IOException
+
+    public void testEncoding()
+        throws IOException
     {
         _enterSubTest( "encoding" );
 
@@ -173,7 +176,8 @@ public class JavancssTest extends AbstractTest
         _exitSubTest();
     }
 
-    public void testVersion() throws IOException
+    public void testVersion()
+        throws IOException
     {
         _enterSubTest( "version" );
 
@@ -183,11 +187,12 @@ public class JavancssTest extends AbstractTest
         _exitSubTest();
     }
 
-    public void testRecursive() throws IOException
+    public void testRecursive()
+        throws IOException
     {
         _enterSubTest( "recursive" );
 
-        String[] args = new String[] { "-recursive", getTestFile( "../../../lib" ).getAbsolutePath()  };
+        String[] args = new String[] { "-recursive", getTestFile( "../../../lib" ).getAbsolutePath() };
         measureWithArgs( args );
 
         _exitSubTest();
