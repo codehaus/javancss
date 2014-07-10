@@ -2494,48 +2494,29 @@ void PrimaryExpression() :
 void PrimaryPrefix() :
 {}
 {
-  Literal()
+    Literal()
 |
 //    { System.out.println( "PrimaryPrefix: this" ); }
-  "this" 
+    "this"
 
-   //Added by REYNAUD Sebastien (LOGICA)
-   (".")? ("new")? (Identifier())?
-   //
-
-         //|
-         //LOOKAHEAD( 2 )
-         //"super" "(" Expression() ")"
-         //{ System.out.println( "\n\nAfter PrimaryPrefix super(Expression)\n" ); }
+    (".")? (TypeParameters())? ("new")? (Identifier())?
 |
-  LOOKAHEAD(2)
-//  { System.out.println( "Before PrimaryPrefix super." ); }
-
-  //"super" "." Identifier() //removed by REYNAUD Sebastien (LOGICA)
-
-
-//Added by REYNAUD Sebastien (LOGICA)
-"super" (".")? (Identifier())?
-//
-
+    LOOKAHEAD(2)
+//    { System.out.println( "Before PrimaryPrefix super." ); }
+    "super" (".")? (TypeParameters())? (Identifier())?
 |
-         //{ System.out.println( "\n\nBefore PrimaryPrefix (Expression)\n" ); }
-  "(" Expression() ")"
+//    { System.out.println( "\n\nBefore PrimaryPrefix (Expression)\n" ); }
+    "(" Expression() ")"
 |
-  AllocationExpression()
-//  { System.out.println( "PrimaryPrefix After AllocationExpression" ); }
+    AllocationExpression()
+//    { System.out.println( "PrimaryPrefix After AllocationExpression" ); }
 |
-  LOOKAHEAD( ResultType() "." "class" )
-//  { System.out.println( "PrimaryPrefix ResultType" ); }
-  ResultType() "." "class"
+    LOOKAHEAD( ResultType() "." "class" )
+//    { System.out.println( "PrimaryPrefix ResultType" ); }
+    ResultType() "." "class"
 |
-         Name() [ LOOKAHEAD(3) "." "super" "." Identifier() ]
-
-         /* The [ "." "super" "." Identifier() ]
-            has been added to fix a bug reported by
-            Chris Williamson. It might cause other problems,
-            maybe. 2002-05-11 */
-//  { System.out.println( "PrimaryPrefix after Name" ); }
+    Name() [ LOOKAHEAD(3) "." "super" "." Identifier() ]
+//    { System.out.println( "PrimaryPrefix after Name" ); }
 }
 
 void PrimarySuffix() :
