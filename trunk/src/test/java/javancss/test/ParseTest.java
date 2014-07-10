@@ -24,7 +24,7 @@ package javancss.test;
 import javancss.Javancss;
 import ccl.util.Test;
 
-public class ParseTest extends CommonJavancssTest {
+public class ParseTest extends AbstractTest {
 
    private void testParse() 
    {
