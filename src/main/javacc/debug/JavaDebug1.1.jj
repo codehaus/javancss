@@ -2429,9 +2429,6 @@ void UnaryExpressionNotPlusMinus() :
 {
   ( "~" | "!" ) UnaryExpression()
 |
-         //  LOOKAHEAD( PostfixLookahead() )
-         //  PostfixExpression()
-         //|
   LOOKAHEAD( CastLookahead() )
   CastExpression()
 |
@@ -2444,21 +2441,13 @@ void UnaryExpressionNotPlusMinus() :
 void CastLookahead() :
 {}
 {
-  LOOKAHEAD(2)
-  "(" PrimitiveType()
+  LOOKAHEAD(3)
+  "(" PrimitiveType() ")"
 |
-         //  LOOKAHEAD("(" Name() "[")
-         //  "(" Name() "[" "]"
-         //|
-         // LOOKAHEAD(3)
-         //  "(" Name() ")" ( "~" | "!" | "(" | Identifier() | "this" | "super" | "new" | Literal() )
   LOOKAHEAD("(" Type() "[")
-  "(" Type() "[" "]"
+  "(" Type() "[" "]" ")"
 |
   "(" Type() ")" ( "~" | "!" | "(" | Identifier() | "this" | "super" | "new" | Literal() )
-         //|
-         // LOOKAHEAD(3)
-         // "(" Type() ")"  UnaryExpressionNotPlusMinus()
 }
 
 // To fix bug Test48.java. Clemens [2000-10-03]
