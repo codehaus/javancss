@@ -31,7 +31,7 @@ import javancss.Javancss;
 import javancss.ObjectMetric;
 import javancss.PackageMetric;
 
-public class JavancssJavadocTest extends CommonJavancssTest {
+public class JavadocTest extends CommonJavancssTest {
 
    /**
     * There has been a bug introduced for version 16.34 which
@@ -135,12 +135,12 @@ public class JavancssJavadocTest extends CommonJavancssTest {
                        + " and not " + expectedJvdcsResult + "." );
    }
 
-   public JavancssJavadocTest()
+   public JavadocTest()
    {
        super();
    }
 
-   public JavancssJavadocTest( Test pTest_ )
+   public JavadocTest( Test pTest_ )
    {
        super( pTest_ );
    }
@@ -157,7 +157,7 @@ public class JavancssJavadocTest extends CommonJavancssTest {
    
    public static void main( String[] asArg_ )
    {
-       new JavancssJavadocTest().main();
+       new JavadocTest().main();
    }
    
 }
