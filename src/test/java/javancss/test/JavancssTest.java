@@ -116,7 +116,10 @@ public class JavancssTest extends CommonJavancssTest
         javadocTest.run();
         setTests( javadocTest );
 
-        testCCN();
+        JavancssCCNTest ccnTest = new JavancssCCNTest( this );
+        ccnTest.setTestDir( getTestDir() );
+        ccnTest.run();
+        setTests( ccnTest );
 
         testEncoding();
 
@@ -476,44 +479,6 @@ public class JavancssTest extends CommonJavancssTest
         Assert( sOutput32.equals( sCompare32 ), "File test/Output32.txt and javancss output differs:\n" + sOutput32 );
 
         _exitSubTest();
-    }
-
-    /**
-     * Tests the cyclomatic complexity number measurement.
-     */
-    public void testCCN()
-    {
-        _enterSubTest( "ccn" );
-
-        // CCN for return and throw
-        Javancss pJavancss = measureTestFile( 40 );
-        List<FunctionMetric> vFunctions = pJavancss.getFunctionMetrics();
-        bugIf( vFunctions.size() != 1 );
-        assertCCN( vFunctions, 0, 3 );
-
-        pJavancss = measureTestFile( 41 );
-        vFunctions = pJavancss.getFunctionMetrics();
-        assertCCN( vFunctions, 0, 3 );
-        assertCCN( vFunctions, 1, 1 );
-        assertCCN( vFunctions, 2, 3 );
-        assertCCN( vFunctions, 3, 3 );
-        assertCCN( vFunctions, 4, 1 );
-
-        pJavancss = measureTestFile( 72 );
-        vFunctions = pJavancss.getFunctionMetrics();
-        assertCCN( vFunctions, 0, 4 );
-        assertCCN( vFunctions, 1, 5 );
-        assertCCN( vFunctions, 2, 4 );
-        assertCCN( vFunctions, 3, 4 );
-        assertCCN( vFunctions, 4, 2 );
-
-        _exitSubTest();
-    }
-
-    private void assertCCN( List<FunctionMetric> vFunctions, int methodIndex, int expectedCCN )
-    {
-        int ccn = vFunctions.get( methodIndex ).ccn;
-        Assert( ccn == expectedCCN, "Expected ccn was " + expectedCCN + " but the result is: " + ccn );
     }
 
     public static void main( String[] asArg_ )
