@@ -35,7 +35,6 @@ import ccl.util.Test;
 import ccl.util.Util;
 import javancss.FunctionMetric;
 import javancss.Javancss;
-import javancss.ObjectMetric;
 import javancss.PackageMetric;
 
 /**
@@ -44,13 +43,8 @@ import javancss.PackageMetric;
  *   $Id$
  *   3. 9. 1996
  */
-public class JavancssTest extends AbstractTest
+public class JavancssTest extends CommonJavancssTest
 {
-    private Javancss measureTestFile( int testFileId )
-    {
-        return new Javancss( getTestFile( testFileId ) );
-    }
-
     private Javancss _checkNcss( int testNumber, int expectedNcss )
     {
         Javancss pJavancss = measureTestFile( testNumber );
@@ -91,97 +85,6 @@ public class JavancssTest extends AbstractTest
         return pJavancss;
     }
 
-    /**
-     * There has been a bug introduced for version 16.34 which
-     * counts Javadoc comments (**) for fields as well as for
-     * methods, while I am only in the later ones.
-     * File Test20 has 6 methods and 6 + 1 ** comments.
-     * This test should make sure that 3 attribute comments
-     * won't be counted.
-     */
-    public void testJavadocs()
-    {
-        _enterSubTest( "javadocs" );
-
-        _checkJvdcs( 20, 7 );
-        _checkJvdcs( 68, 2 );
-        _checkJvdcs( 121, 2 );
-        _checkJvdcs( 122, 1 );
-
-        //Added by REYNAUD Sebastien (LOGICA) for JAVANCSS-20
-        _checkJvdcs( 139 , 3 );
-        _checkJvdcs( 140 , 2 );
-        _checkJvdcs( 141 , 1 );
-        //
-
-        _exitSubTest();
-    }
-
-    /**
-     * Check that Javadoc line counts are correct.
-     * There is one bug where there are only two files with
-     * a package jacob in the test directory (Test1.java and
-     * Test28.java), and while both have no javadocs at all,
-     * the count is still 11. The eleven seem to come from
-     * files Test20.java and Test21.java.
-     * This test shall trace this bug down and shall later asure
-     * that it got fixed.
-     */
-    public void testJavadocLines()
-    {
-        _enterSubTest( "javadoc lines" );
-
-        _checkJavadocLines( 28, "jacob", 0 );
-
-        //
-        // same test with more files
-        //
-        _checkJavadocLines( new int[] { 20, 21, 28 }, "jacob", 0 );
-
-        _checkJavadocLines( 68, ".", 6 );
-        _checkJavadocLines( 69, ".", 4 );
-        _checkJavadocLines( new int[] { 68, 69 }, ".", 10 );
-        _checkJavadocLines( 65, "idebughc.testsuite", 14 );
-
-        _exitSubTest();
-    }
-
-    private void _checkJavadocLines( int testFile, String sPackage, int javadocLines )
-    {
-        Javancss pJavancss = measureTestFile( testFile );
-
-        _checkJavadocLines( pJavancss, sPackage, javadocLines );
-    }
-
-    private void _checkJavadocLines( int[] aTestFile, String sPackage, int javadocLines )
-    {
-        List<File> files = new ArrayList<File>();
-        for( int next : aTestFile )
-        {
-            files.add( getTestFile( next ) );
-        }
-
-        Javancss pJavancss = new Javancss( files );
-        _checkJavadocLines( pJavancss, sPackage, javadocLines );
-    }
-
-    private void _checkJavadocLines( Javancss pJavancss, String sPackage, int javadocLines )
-    {
-        List<PackageMetric> vPackageMetrics = pJavancss.getPackageMetrics();
-        Assert( vPackageMetrics.size() >= 1 );
-        PackageMetric pmPackage = null;
-        for ( PackageMetric pmNext : vPackageMetrics )
-        {
-            if ( pmNext.name.equals( sPackage ) )
-            {
-                pmPackage = pmNext;
-            }
-        }
-        Assert( pmPackage != null );
-        Assert( pmPackage.javadocsLn == javadocLines
-                , "pmJacob.javadocsLn: " + pmPackage + ": " + pmPackage.javadocsLn );
-    }
-
     private void _checkParse( int testFile )
     {
         Javancss pJavancss = measureTestFile( testFile );
@@ -208,9 +111,10 @@ public class JavancssTest extends AbstractTest
 
         testNcssAndMore();
 
-        testJavadocLines();
-
-        testJavadocs();
+        JavancssJavadocTest javadocTest = new JavancssJavadocTest( this );
+        javadocTest.setTestDir( getTestDir() );
+        javadocTest.run();
+        setTests( javadocTest );
 
         testCCN();
 
@@ -572,17 +476,6 @@ public class JavancssTest extends AbstractTest
         Assert( sOutput32.equals( sCompare32 ), "File test/Output32.txt and javancss output differs:\n" + sOutput32 );
 
         _exitSubTest();
-    }
-
-    private void _checkJvdcs( int testFileNumber, int expectedJvdcsResult )
-    {
-        Javancss pJavancss = measureTestFile( testFileNumber );
-        List<ObjectMetric> vObjectMetrics = pJavancss.getObjectMetrics();
-        ObjectMetric classMetric = vObjectMetrics.get( 0 );
-        int jvdcs = classMetric.javadocs;
-        /* int jvdc = pJavancss.getJvdc(); */
-        bugIf( jvdcs != expectedJvdcsResult, "Parsing file Test" + testFileNumber + ".java failed. Jvdc is " + jvdcs
-                        + " and not " + expectedJvdcsResult + "." );
     }
 
     /**
