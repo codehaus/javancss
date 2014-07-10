@@ -77,7 +77,7 @@ public class Javancss
         "[Help]\n"+
         "; Please do not edit the Help section\n"+
         "HelpUsage=@srcfiles.txt | *.java | <stdin>\n" +
-        "Options=ncss,package,object,function,all,gui,xml,out,recursive,encoding\n" +
+        "Options=ncss,package,object,function,all,gui,xml,out,recursive,encoding,debug\n" +
         "ncss=b,o,Counts the program NCSS (default).\n" +
         "package=b,o,Assembles a statistic on package level.\n" +
         "object=b,o,Counts the object NCSS.\n" +
@@ -88,6 +88,7 @@ public class Javancss
         "out=s,o,Output file name. By default output goes to standard out.\n"+
         "recursive=b,o,Recurse to subdirs.\n" +
         "encoding=s,o,Encoding used while reading source files (default: platform encoding).\n" +
+        "debug=b,o,Set debug mode.\n" +
         "\n" +
         "[Colors]\n" +
         "UseSystemColors=true\n";
@@ -371,27 +372,11 @@ public class Javancss
     public Javancss( List<File> vJavaSourceFiles_ )
     {
         _vJavaSourceFiles = vJavaSourceFiles_;
-        try
-        {
-            _measureRoot( newReader( System.in ) );
-        }
-        catch ( Exception e )
-        {
-            e.printStackTrace();
-        }
-        catch ( TokenMgrError pError )
-        {
-            pError.printStackTrace();
-        }
+        _measureRoot();
     }
 
-    public Javancss( File sJavaSourceFile_ )
-    {
-        Util.debug( "Javancss.<init>(String).sJavaSourceFile_: " + sJavaSourceFile_ );
-        _sErrorMessage = null;
-        _vJavaSourceFiles = new ArrayList<File>();
-        _vJavaSourceFiles.add( sJavaSourceFile_ );
-        try
+   private void _measureRoot() throws Error {
+      try
         {
             _measureRoot( newReader( System.in ) );
         }
@@ -405,6 +390,15 @@ public class Javancss
             Util.debug( "Javancss.<init>(String).pError: " + pError );
             pError.printStackTrace();
         }
+   }
+
+    public Javancss( File sJavaSourceFile_ )
+    {
+        Util.debug( "Javancss.<init>(String).sJavaSourceFile_: " + sJavaSourceFile_ );
+        _sErrorMessage = null;
+        _vJavaSourceFiles = new ArrayList<File>();
+        _vJavaSourceFiles.add( sJavaSourceFile_ );
+        _measureRoot();
     }
 
     /**
@@ -640,6 +634,7 @@ public class Javancss
         }
         Map<String, String> htOptions = _pInit.getOptions();
 
+        Util.setDebug( htOptions.get( "debug" ) );
         setEncoding( htOptions.get( "encoding" ) );
 
         // the arguments (the files) to be processed
