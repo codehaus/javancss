@@ -36,12 +36,6 @@ import javancss.Javancss;
 public class JavancssTest extends CommonJavancssTest
 {
 
-    private void _checkParse( int testFile )
-    {
-        Javancss pJavancss = measureTestFile( testFile );
-        bugIf( pJavancss.getNcss() <= 0, "Parsing file Test" + testFile + ".java failed!" );
-    }
-
     public JavancssTest()
     {
         super();
@@ -63,7 +57,10 @@ public class JavancssTest extends CommonJavancssTest
         ncssTest.run();
         setTests( ncssTest );
         
-        testParse();
+        ParseTest parseTest = new ParseTest( this );
+        parseTest.setTestDir( getTestDir() );
+        parseTest.run();
+        setTests( parseTest );
 
         JavadocTest javadocTest = new JavadocTest( this );
         javadocTest.setTestDir( getTestDir() );
@@ -87,31 +84,6 @@ public class JavancssTest extends CommonJavancssTest
         setTests( xmlTest );
     }
 
-    void testParse() 
-    {
-       _enterSubTest( "parse" );
-
-       _checkParse( 48 );
-
-       _checkParse( 50 );
-
-       _checkParse( 142 ); // JAVANCSS-12
-       _checkParse( 143 ); // JAVANCSS-9
-       _checkParse( 144 ); // JAVANCSS-13
-       _checkParse( 145 ); // JAVANCSS-14
-       _checkParse( 146 ); // JAVANCSS-17
-       // TODO 147? anonymous subcluss
-       _checkParse( 148 ); // JAVANCSS-49
-       _checkParse( 149 ); // JAVANCSS-46
-       _checkParse( 150 ); // JAVANCSS-53 
-       _checkParse( 151 ); // JAVANCSS-45 
-       _checkParse( 152 ); // JAVANCSS-57
-       _checkParse( 153 ); // JAVANCSS-54
-       // TODO PK _checkParse( 154 ); // JAVANCSS-52 open!
-       
-       _exitSubTest();
-    }
-    
     public static void main( String[] asArg_ )
     {
         new JavancssTest().main();
