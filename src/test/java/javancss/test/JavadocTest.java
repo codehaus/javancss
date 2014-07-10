@@ -158,6 +158,6 @@ public class JavadocTest extends AbstractTest {
    public static void main( String[] asArg_ )
    {
        new JavadocTest().main();
-   }
-   
+    }
+
 }

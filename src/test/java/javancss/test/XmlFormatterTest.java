@@ -17,7 +17,9 @@ import javancss.XmlFormatter;
  * @version $Id$
  * @author  Chr. Clemens Lee
  */
-public class XmlFormatterTest extends AbstractTest {
+public class XmlFormatterTest
+    extends AbstractTest
+{
     /**
      * Is it at least possible to properly parse generated xml code?
      */
@@ -36,14 +38,14 @@ public class XmlFormatterTest extends AbstractTest {
         pJavancss.printJavaNcss( sw );
         XmlFormatter.printEnd( sw );
 
-        String sXML = sw.toString(); 
+        String sXML = sw.toString();
 
         try
         {
             String sText = XMLUtil.getXML( sXML, getXslFile( "xmltest.xsl" ) );
             Assert( sText.equals( "79" ), sText );
         }
-        catch( NoClassDefFoundError error )
+        catch ( NoClassDefFoundError error )
         {
             Util.print( "skipped: 'xalan.jar' and or 'xerces.jar' library missing." );
         }
@@ -58,7 +60,7 @@ public class XmlFormatterTest extends AbstractTest {
         pJavancss.printJavaNcss( sw );
         XmlFormatter.printEnd( sw );
 
-        sXML = sw.toString(); 
+        sXML = sw.toString();
         Assert( Util.isEmpty( sXML ) == false );
 
         pJavancss = new Javancss( getTestFile( 118 ) );
@@ -71,7 +73,7 @@ public class XmlFormatterTest extends AbstractTest {
         pJavancss.printJavaNcss( sw );
         XmlFormatter.printEnd( sw );
 
-        sXML = sw.toString(); 
+        sXML = sw.toString();
         Assert( Util.isEmpty( sXML ) == false );
     }
 
@@ -93,7 +95,7 @@ public class XmlFormatterTest extends AbstractTest {
         pJavancss.printJavaNcss( sw );
         XmlFormatter.printEnd( sw );
 
-        String sXML = sw.toString(); 
+        String sXML = sw.toString();
 
         try
         {
@@ -103,7 +105,7 @@ public class XmlFormatterTest extends AbstractTest {
             String sCompare = FileUtil.readFile( getTestFile( "Output32.txt" ).getAbsolutePath() );
             Assert( sText.equals( sCompare ), sText );
         }
-        catch( NoClassDefFoundError error )
+        catch ( NoClassDefFoundError error )
         {
             Util.print( "skipped: 'xalan.jar' and or 'xerces.jar' library missing." );
         }
@@ -131,7 +133,7 @@ public class XmlFormatterTest extends AbstractTest {
     protected void _doIt()
         throws Exception
     {
-        testParsing ();
+        testParsing();
         testXML2Text();
     }
 
