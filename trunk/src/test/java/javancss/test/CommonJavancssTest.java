@@ -21,6 +21,10 @@ Boston, MA 02111-1307, USA.  */
 
 package javancss.test;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.PrintStream;
+
 import ccl.util.Test;
 import javancss.Javancss;
 
@@ -32,8 +36,23 @@ public abstract class CommonJavancssTest extends AbstractTest
        return new Javancss( getTestFile( testFileId ) );
    }
 
-   // cont
-   
+   protected Javancss measureWithArgs( String[] args ) throws IOException
+   {
+       // turn stdout off
+       PrintStream psStdout = System.out;
+
+       try
+       {
+           System.setOut( new PrintStream( new ByteArrayOutputStream() ) );
+           return new Javancss(args);
+       }
+       finally
+       {
+           // turn stdout back on
+           System.setOut( psStdout );
+       }
+   }
+
    public CommonJavancssTest()
    {
        super();
