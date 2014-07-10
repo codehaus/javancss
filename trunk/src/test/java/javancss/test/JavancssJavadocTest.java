@@ -26,7 +26,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ccl.util.Test;
-import ccl.util.Util;
 
 import javancss.Javancss;
 import javancss.ObjectMetric;
