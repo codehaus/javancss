@@ -92,10 +92,12 @@ public class Javancss
         "[Colors]\n" +
         "UseSystemColors=true\n";
 
+    private static final String DEFAULT_ENCODING = null;
+    
     private boolean _bExit = false;
 
     private List<File> _vJavaSourceFiles = null;
-    private String encoding = null;
+    private String encoding = DEFAULT_ENCODING;
 
     private String _sErrorMessage = null;
     private Throwable _thrwError = null;
@@ -370,12 +372,20 @@ public class Javancss
 
     public Javancss( List<File> vJavaSourceFiles_ )
     {
+        this( vJavaSourceFiles_, DEFAULT_ENCODING );
+    }
+
+    public Javancss( List<File> vJavaSourceFiles_, String encoding_ )
+    {
+        setEncoding( encoding_ );
         _vJavaSourceFiles = vJavaSourceFiles_;
         _measureRoot();
     }
 
-   private void _measureRoot() throws Error {
-      try
+    private void _measureRoot()
+        throws Error
+    {
+        try
         {
             _measureRoot( newReader( System.in ) );
         }
@@ -389,11 +399,17 @@ public class Javancss
             Util.debug( "Javancss.<init>(String).pError: " + pError );
             pError.printStackTrace();
         }
-   }
+    }
 
     public Javancss( File sJavaSourceFile_ )
     {
+        this( sJavaSourceFile_, DEFAULT_ENCODING );
+    }
+
+    public Javancss( File sJavaSourceFile_, String encoding_ )
+    {
         Util.debug( "Javancss.<init>(String).sJavaSourceFile_: " + sJavaSourceFile_ );
+        setEncoding( encoding_ );
         _sErrorMessage = null;
         _vJavaSourceFiles = new ArrayList<File>();
         _vJavaSourceFiles.add( sJavaSourceFile_ );
@@ -487,6 +503,12 @@ public class Javancss
 
     public Javancss( Reader reader )
     {
+        this( reader, DEFAULT_ENCODING );
+    }
+
+    public Javancss( Reader reader, String encoding_ )
+    {
+        setEncoding( encoding_ );
         try
         {
             _measureRoot( reader );
@@ -773,7 +795,6 @@ public class Javancss
         return _loc;
     }
 
-    // added by SMS
     public int getJvdc()
     {
         return _pJavaParser.getJvdc();
@@ -797,8 +818,6 @@ public class Javancss
     {
         return JavaParserTokenManager._iMultiComments;
     }
-
-    //
 
     public List<FunctionMetric> getFunctionMetrics()
     {
@@ -847,8 +866,7 @@ public class Javancss
 
     public boolean useXML()
     {
-        return _bXML
-               || (_pInit != null && _pInit.getOptions().get( "xml" ) != null );
+        return _bXML || ( _pInit != null && _pInit.getOptions().get( "xml" ) != null );
     }
 
     public Formatter getFormatter()
