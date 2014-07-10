@@ -232,20 +232,6 @@
               </arguments>
             </configuration>
           </execution>
-          <execution>
-            <id>XmlFormatterTest</id>
-            <phase>test</phase>
-            <goals>
-              <goal>exec</goal>
-            </goals>
-            <configuration>
-              <arguments>
-                <argument>-classpath</argument>
-                <classpath />
-                <argument>javancss.test.XmlFormatterTest</argument>
-              </arguments>
-            </configuration>
-          </execution>
         </executions>
       </plugin>
       <plugin>
