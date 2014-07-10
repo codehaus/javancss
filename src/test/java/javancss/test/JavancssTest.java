@@ -461,7 +461,7 @@ public class JavancssTest extends AbstractTest
         _checkParse( 149 ); // JAVANCSS-46
         _checkParse( 150 ); // JAVANCSS-53 
         _checkParse( 151 ); // JAVANCSS-45 
-        // TODO PK _checkParse( 152 ); // JAVANCSS-57 open!
+        _checkParse( 152 ); // JAVANCSS-57
         // TODO PK _checkParse( 153 ); // JAVANCSS-54 open!
         // TODO PK _checkParse( 154 ); // JAVANCSS-52 open!
 
