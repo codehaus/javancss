@@ -16,4 +16,13 @@ public class AnnotationsInForLoops
              i.next();
          }
      }
+
+     public void apacheIterator(Iterator some_iterator)
+     {
+        for (@SuppressWarnings("unchecked") Iterator<SomeType> i = new org.apache.commons.collections.iterators.ListIteratorWrapper(some_iterator); i.hasNext(); ) { 
+           
+        }
+     }
+     
+     
 }
