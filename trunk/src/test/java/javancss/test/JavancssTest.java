@@ -111,12 +111,12 @@ public class JavancssTest extends CommonJavancssTest
 
         testNcssAndMore();
 
-        JavancssJavadocTest javadocTest = new JavancssJavadocTest( this );
+        JavadocTest javadocTest = new JavadocTest( this );
         javadocTest.setTestDir( getTestDir() );
         javadocTest.run();
         setTests( javadocTest );
 
-        JavancssCCNTest ccnTest = new JavancssCCNTest( this );
+        CCNTest ccnTest = new CCNTest( this );
         ccnTest.setTestDir( getTestDir() );
         ccnTest.run();
         setTests( ccnTest );

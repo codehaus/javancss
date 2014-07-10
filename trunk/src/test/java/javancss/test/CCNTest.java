@@ -27,7 +27,7 @@ import javancss.FunctionMetric;
 import javancss.Javancss;
 import ccl.util.Test;
 
-public class JavancssCCNTest extends CommonJavancssTest {
+public class CCNTest extends CommonJavancssTest {
 
    /**
     * Tests the cyclomatic complexity number measurement.
@@ -67,12 +67,12 @@ public class JavancssCCNTest extends CommonJavancssTest {
        Assert( ccn == expectedCCN, "Expected ccn was " + expectedCCN + " but the result is: " + ccn );
    }
 
-   public JavancssCCNTest()
+   public CCNTest()
    {
        super();
    }
 
-   public JavancssCCNTest( Test pTest_ )
+   public CCNTest( Test pTest_ )
    {
        super( pTest_ );
    }
@@ -88,7 +88,7 @@ public class JavancssCCNTest extends CommonJavancssTest {
    
    public static void main( String[] asArg_ )
    {
-       new JavancssCCNTest().main();
+       new CCNTest().main();
    }
    
 }
