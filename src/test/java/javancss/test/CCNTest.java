@@ -27,7 +27,7 @@ import javancss.FunctionMetric;
 import javancss.Javancss;
 import ccl.util.Test;
 
-public class CCNTest extends CommonJavancssTest {
+public class CCNTest extends AbstractTest {
 
    /**
     * Tests the cyclomatic complexity number measurement.

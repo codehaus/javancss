@@ -31,7 +31,7 @@ import javancss.Javancss;
 import javancss.ObjectMetric;
 import javancss.PackageMetric;
 
-public class JavadocTest extends CommonJavancssTest {
+public class JavadocTest extends AbstractTest {
 
    /**
     * There has been a bug introduced for version 16.34 which

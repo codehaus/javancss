@@ -23,19 +23,17 @@ package javancss.test;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.StringReader;
 import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.List;
 
 import javancss.FunctionMetric;
 import javancss.Javancss;
-import javancss.PackageMetric;
 import ccl.util.FileUtil;
 import ccl.util.Test;
 import ccl.util.Util;
 
-public class NcssTest extends CommonJavancssTest {
+public class NcssTest extends AbstractTest {
 
    private Javancss _checkNcss( int testNumber, int expectedNcss )
    {
@@ -344,40 +342,6 @@ public class NcssTest extends CommonJavancssTest {
        // Nr. 30
        pJavancss = _checkNcss( 25, 12 );
        bugIf( pJavancss.getFunctionMetrics().size() != 9 );
-
-       // Nr. 35
-       String sTogether;
-       String sTest11 = "";
-       String sTest12 = "";
-       try
-       {
-           sTest11 = FileUtil.readFile( getTestFile( 11 ).getAbsolutePath() );
-           sTest12 = FileUtil.readFile( getTestFile( 12 ).getAbsolutePath() );
-       }
-       catch ( IOException e )
-       {
-           bugIf( true );
-       }
-       sTogether = sTest11 + sTest12;
-       pJavancss = new Javancss( new StringReader( sTogether ) );
-       vFunctions = pJavancss.getFunctionMetrics();
-       Util.debug( "JavancssTest._doIt().vFunctions: " + vFunctions );
-       sFirstFunction = vFunctions.get( 0 ).name;
-       bugIf( !sFirstFunction.equals( "ccl.util.Test11.atoi(String)" ) );
-       String sSomeFunction = vFunctions.get( 32 ).name;
-       bugIf( !sSomeFunction.equals( "Test12.readFile(URL)" ), "Function: " + sSomeFunction );
-       List<PackageMetric> vPackages = pJavancss.getPackageMetrics();
-       bugIf( vPackages.size() != 2 );
-       int ncss38 = pJavancss.getNcss();
-
-       String[] asArg = new String[3];
-       asArg[0] = getTestFile( 11 ).getAbsolutePath();
-       asArg[1] = asArg[0];
-       asArg[2] = getTestFile( 12 ).getAbsolutePath();
-       pJavancss = measureWithArgs( asArg );
-       vPackages = pJavancss.getPackageMetrics();
-       bugIf( vPackages.size() != 2 );
-       bugIf( ncss38 == pJavancss.getNcss() );
 
        pJavancss = measureTestFile( 56 );
        StringWriter sw = new StringWriter();

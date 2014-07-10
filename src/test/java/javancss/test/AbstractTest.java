@@ -23,6 +23,8 @@ package javancss.test;
 
 import java.io.File;
 
+import javancss.Javancss;
+
 import ccl.util.Test;
 
 /**
@@ -55,6 +57,11 @@ public abstract class AbstractTest extends Test
         return getTestFile( "Test" + testFileId + ".java" );
     }
 
+    protected Javancss measureTestFile( int testFileId )
+    {
+        return new Javancss( getTestFile( testFileId ) );
+    }
+    
     protected AbstractTest()
     {
         super();

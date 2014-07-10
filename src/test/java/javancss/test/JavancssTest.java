@@ -21,11 +21,18 @@ Boston, MA 02111-1307, USA.  */
 
 package javancss.test;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.PrintStream;
+import java.io.StringReader;
+import java.util.List;
 
+import ccl.util.FileUtil;
 import ccl.util.Test;
 import ccl.util.Util;
+import javancss.FunctionMetric;
 import javancss.Javancss;
+import javancss.PackageMetric;
 
 /**
  * Test class for the JavaNCSS application.
@@ -33,9 +40,26 @@ import javancss.Javancss;
  *   $Id$
  *   3. 9. 1996
  */
-public class JavancssTest extends CommonJavancssTest
+public class JavancssTest extends AbstractTest
 {
 
+   private Javancss measureWithArgs( String[] args ) throws IOException
+   {
+       // turn stdout off
+       PrintStream psStdout = System.out;
+
+       try
+       {
+           System.setOut( new PrintStream( new ByteArrayOutputStream() ) );
+           return new Javancss(args);
+       }
+       finally
+       {
+           // turn stdout back on
+           System.setOut( psStdout );
+       }
+   }
+   
     public JavancssTest()
     {
         super();
@@ -72,6 +96,8 @@ public class JavancssTest extends CommonJavancssTest
         ccnTest.run();
         setTests( ccnTest );
 
+        testCummulating();
+        
         testEncoding();
 
         testVersion();
@@ -89,6 +115,48 @@ public class JavancssTest extends CommonJavancssTest
         new JavancssTest().main();
     }
 
+    private void testCummulating() 
+       throws IOException 
+    {
+       _enterSubTest( "cummulating" );
+
+        // Nr. 35
+        String sTogether;
+        String sTest11 = "";
+        String sTest12 = "";
+        try
+        {
+            sTest11 = FileUtil.readFile( getTestFile( 11 ).getAbsolutePath() );
+            sTest12 = FileUtil.readFile( getTestFile( 12 ).getAbsolutePath() );
+        }
+        catch ( IOException e )
+        {
+            bugIf( true );
+        }
+        sTogether = sTest11 + sTest12;
+        Javancss pJavancss = new Javancss( new StringReader( sTogether ) );
+        List<FunctionMetric> vFunctions = pJavancss.getFunctionMetrics();
+        Util.debug( "JavancssTest._doIt().vFunctions: " + vFunctions );
+        String sFirstFunction = vFunctions.get( 0 ).name;
+        bugIf( !sFirstFunction.equals( "ccl.util.Test11.atoi(String)" ) );
+        String sSomeFunction = vFunctions.get( 32 ).name;
+        bugIf( !sSomeFunction.equals( "Test12.readFile(URL)" ), "Function: " + sSomeFunction );
+        List<PackageMetric> vPackages = pJavancss.getPackageMetrics();
+        bugIf( vPackages.size() != 2 );
+        int ncss38 = pJavancss.getNcss();
+
+        String[] asArg = new String[3];
+        asArg[0] = getTestFile( 11 ).getAbsolutePath();
+        asArg[1] = asArg[0];
+        asArg[2] = getTestFile( 12 ).getAbsolutePath();
+        pJavancss = measureWithArgs( asArg );
+        vPackages = pJavancss.getPackageMetrics();
+        bugIf( vPackages.size() != 2 );
+        bugIf( ncss38 == pJavancss.getNcss() );
+
+        _exitSubTest();
+    }
+    
     public void testEncoding() throws IOException
     {
         _enterSubTest( "encoding" );
