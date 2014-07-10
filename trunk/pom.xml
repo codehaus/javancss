@@ -318,7 +318,10 @@
           <artifactId>maven-surefire-plugin</artifactId>
           <version>2.17</version>
           <configuration>
-            <skipTests>true</skipTests>
+            <excludes>
+              <!-- legacy tests using main -->
+              <exclude>javancss/test/*.class</exclude>
+            </excludes>
           </configuration>
         </plugin>
       </plugins>
@@ -342,6 +345,12 @@
       <artifactId>ant</artifactId>
       <version>1.6.5</version>
       <optional>true</optional>
+    </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.11</version>
+      <scope>test</scope>
     </dependency>
   </dependencies>
 
