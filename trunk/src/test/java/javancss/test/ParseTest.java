@@ -50,6 +50,7 @@ public class ParseTest
         _checkParse( 153 ); // JAVANCSS-54
         _checkParse( 154 ); // JAVANCSS-52
         _checkParse( 155 ); // JAVANCSS-28
+        _checkParse( 156 ); // hexadecimal floating-point literals
 
         _exitSubTest();
     }
