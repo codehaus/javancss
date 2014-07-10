@@ -49,6 +49,7 @@ public class ParseTest
         _checkParse( 152 ); // JAVANCSS-57
         _checkParse( 153 ); // JAVANCSS-54
         _checkParse( 154 ); // JAVANCSS-52
+        _checkParse( 155 ); // JAVANCSS-28
 
         _exitSubTest();
     }
