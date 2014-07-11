@@ -15,7 +15,7 @@ public interface JavaParserInterface
         throws Exception;
 
     public int getNcss();
-    
+
     public int getLOC();
 
     // added by SMS
@@ -24,19 +24,19 @@ public interface JavaParserInterface
     /*public int getTopLevelClasses() {
       return _topLevelClasses;
       }*/
-    
+
     public List<FunctionMetric> getFunction();
-    
+
     /**
      * @return Top level classes in sorted order
      */
     public List<ObjectMetric> getObject();
-    
+
     /**
      * @return The empty package consists of the name ".".
      */
     public Map<String, PackageMetric> getPackage();
-    
+
     public List<Object[]> getImports();
 
     /**
