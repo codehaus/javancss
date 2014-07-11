@@ -30,8 +30,8 @@ package javancss;
 public class PackageMetric
     extends Metric
 {
-    public int classes    = 0;
-    public int functions  = 0;
+    public int classes = 0;
+    public int functions = 0;
 
     public PackageMetric()
     {
@@ -42,7 +42,7 @@ public class PackageMetric
     public void clear()
     {
         super.clear();
-        classes   = 0;
+        classes = 0;
         functions = 0;
     }
 
@@ -52,13 +52,13 @@ public class PackageMetric
         {
             return;
         }
-        classes    += pPackageMetric_.classes;
-        functions  += pPackageMetric_.functions;
-        ncss       += pPackageMetric_.ncss;
+        classes += pPackageMetric_.classes;
+        functions += pPackageMetric_.functions;
+        ncss += pPackageMetric_.ncss;
 
-        javadocs   += pPackageMetric_.javadocs;
+        javadocs += pPackageMetric_.javadocs;
         javadocsLn += pPackageMetric_.javadocsLn;
-        singleLn   += pPackageMetric_.singleLn;
-        multiLn    += pPackageMetric_.multiLn;
+        singleLn += pPackageMetric_.singleLn;
+        multiLn += pPackageMetric_.multiLn;
     }
 }

@@ -31,6 +31,7 @@ public abstract class Metric
     implements Comparable<Metric>
 {
     public String name = ".";
+
     /** Non Commenting Source Statements (NCSS). */
     public int ncss = 0;
     public int firstLine = 0;
