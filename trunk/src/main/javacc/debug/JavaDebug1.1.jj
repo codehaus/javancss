@@ -116,7 +116,7 @@ public class JavaParserDebug implements JavaParserInterface
      * vector.
      */
     private List<ObjectMetric> _vClasses = new ArrayList<ObjectMetric>();
-    private List _vImports = new ArrayList();
+    private List<Object[]> _vImports = new ArrayList<Object[]>();
     private Object[] _aoPackage = null;
     private Map<String, PackageMetric> _htPackage = new HashMap<String, PackageMetric>();
     private PackageMetric _pPackageMetric;
@@ -177,7 +177,7 @@ public class JavaParserDebug implements JavaParserInterface
         return _htPackage;
     }
 
-    public List getImports() {
+    public List<Object[]> getImports() {
         return _vImports;
     }
 
@@ -1210,7 +1210,7 @@ void UnmodifiedClassDeclaration() :
                         metric.ncss = _ncss - oldNcss;
                         metric.functions = _functions - oldFunctions;
                         metric.classes = _classes - oldClasses;
-                        Token lastToken = getToken( 0 );
+                        //Token lastToken = getToken( 0 );
                         //metric.add( new Integer( lastToken.endLine ) );
                         //metric.add( new Integer( lastToken.endColumn ) );
                         //metric.add( new Integer( _javadocs ) );
@@ -1462,7 +1462,7 @@ void InterfaceDeclaration() :
                  }
                  tmpToken = tmpToken.specialToken;
                  }*/
-             metric = (ObjectMetric)_vClasses.get( _vClasses.size() - 1 );
+             metric = _vClasses.get( _vClasses.size() - 1 );
              metric.javadocs = _javadocs;
 
              // added by SMS
@@ -3210,7 +3210,7 @@ void EnumDeclaration(int modifiers):
                  metric.ncss = _ncss - oldNcss;
                  metric.functions = _functions - oldFunctions;
                  metric.classes = _classes - oldClasses;
-                 Token lastToken = getToken( 0 );
+                 //Token lastToken = getToken( 0 );
                  //metric.add( new Integer( lastToken.endLine ) );
                  //metric.add( new Integer( lastToken.endColumn ) );
                  metric.javadocs = _javadocs;
