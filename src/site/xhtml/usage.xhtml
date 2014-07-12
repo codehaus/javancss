@@ -13,15 +13,15 @@
 </table>
 
 <h2><a name="usage"></a>Usage</h2>
-Make sure <tt>javancss-30.51/lib/javancss.jar</tt>, <tt>javancss-30.51/lib/ccl.jar</tt>, and <tt>javancss30.51/lib/jhbasic.jar</tt> are added to your CLASSPATH.
+Make sure <tt>javancss-x.y/lib/javancss.jar</tt>, <tt>javancss-x.y/lib/ccl.jar</tt>, and <tt>javancssx.y/lib/jhbasic.jar</tt> are added to your CLASSPATH.
 <p>
 Then to start JavaNCSS type: <tt>java javancss.Main</tt>.
-As an alternative you can edit and use either the <tt>JAVANCSS.BAT</tt>
+As an alternative you can edit and use either the <tt>javancss.bat</tt>
 or <tt>javancss</tt> file. Just change the
 <tt>JAVA_HOME</tt> and <tt>CLASSPATH</tt>
-variables according to your system. Make sure you did include the swingall.jar archive in the classpath.</p>
+variables according to your system.</p>
 <p>
-Now for the first run type in (being in the <tt>javancss-30.51</tt> directory itself):</p>
+Now for the first run type in (being in the <tt>javancss-x.y</tt> directory itself):</p>
 <p>
 <tt>./bin/javancss -gui src/test/resources/*.java</tt></p>
 <p>
@@ -111,7 +111,7 @@ Prints out some basic information.</dd>
 
 <a name="xslt"></a><h3>XSLT Stylesheets</h3>
 
-JavaNCSS comes with some XSLT stylesheet (<tt>javancss-30.51/xslt/javancss2text.xsl</tt> and <tt>javancss-30.51/xslt/javancss2html.xsl</tt>). These stylesheets can be used to
+JavaNCSS comes with some XSLT stylesheet (<tt>javancss-x.y/xslt/javancss2text.xsl</tt> and <tt>javancss-x.y/xslt/javancss2html.xsl</tt>). These stylesheets can be used to
 convert XML output from JavaNCSS to ASCII or HTML output. In case of
 the ASCII output this is of course
 quite boring and much slower as JavaNCSS creates the identical output
@@ -126,7 +126,7 @@ Assuming you have e.g. Xalan2 installed and somewhere in your
 path is a shell script named 'xslt' that knows how to invoke
 Java with the Xalan 2 main processor class (org.apache.xalan.xslt.Process),
 here is how you can make use of JavaNCSS' XSLT stylesheet:</p><p>
-<tt>cd javancss-30.51</tt><br />
+<tt>cd javancss-x.y</tt><br />
 <tt>javancss -all -xml -recursive src &gt; example.xml</tt><br />
 <tt>xslt -in example.xml -xsl xslt/javancss2text.xsl</tt></p><p>
 Have fun. If you create a useful new stylesheet for JavaNCSS,
