@@ -699,6 +699,7 @@ public class Javancss
         }
         catch ( Throwable pThrowable )
         {
+            pThrowable.printStackTrace(System.err);
         }
         if ( getLastErrorMessage() != null )
         {
@@ -708,8 +709,6 @@ public class Javancss
                 return;
             }
         }
-
-        boolean bNoNCSS = false;
 
         String sOutputFile = htOptions.get( "out" );
         OutputStream out = System.out;
@@ -725,18 +724,37 @@ public class Javancss
                                  + sOutputFile
                                  + "': " + exception.getMessage() );
 
-                out = System.out;
                 sOutputFile = null;
             }
         }
         // TODO: encoding configuration support for result output
-        PrintWriter pw = useXML() ? new PrintWriter( new OutputStreamWriter( out, "UTF-8" ) ) : new PrintWriter( out );
+        final PrintWriter pw = useXML() ? new PrintWriter( new OutputStreamWriter( out, "UTF-8" ) ) : new PrintWriter( out );
+        try {
 
+            format( pw, htOptions );
+
+        } finally {
+            if ( sOutputFile != null )
+            {
+                pw.close();
+            }
+            else
+            {
+                // stdout is used: don't close but ensure everything is flushed
+                pw.flush();
+            }
+        }
+    }
+
+    private void format( final PrintWriter pw, Map<String, String> htOptions )
+        throws IOException
+    {
         if ( useXML() )
         {
             XmlFormatter.printStart( pw );
         }
-
+   
+        boolean bNoNCSS = false;
         if ( htOptions.get( "package" ) != null || htOptions.get( "all" ) != null )
         {
             printPackageNcss( pw );
@@ -764,24 +782,10 @@ public class Javancss
         {
             printJavaNcss( pw );
         }
-
+   
         if ( useXML() )
         {
-            if ( !bNoNCSS )
-            {
-                printJavaNcss( pw );
-            }
             pw.println( "</javancss>" );
-        }
-
-        if ( sOutputFile != null )
-        {
-            pw.close();
-        }
-        else
-        {
-            // stdout is used: don't close but ensure everything is flushed
-            pw.flush();
         }
     }
 
