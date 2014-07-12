@@ -281,7 +281,6 @@ public class Javancss
     private void _measureFiles( List<File> vJavaSourceFiles_ )
         throws TokenMgrError
     {
-        // for each file
         for ( File file : vJavaSourceFiles_ )
         {
             try
@@ -291,6 +290,7 @@ public class Javancss
             catch ( Throwable pThrowable )
             {
                 // hmm, do nothing? Use getLastError() or so to check for details.
+                // error details have been written into lastError
             }
         }
     }
@@ -401,15 +401,10 @@ public class Javancss
         {
             _measureRoot( newReader( System.in ) );
         }
-        catch ( Exception e )
+        catch ( Throwable pThrowable )
         {
-            Util.debug( "Javancss.<init>(String).e: " + e );
-            e.printStackTrace();
-        }
-        catch ( TokenMgrError pError )
-        {
-            Util.debug( "Javancss.<init>(String).pError: " + pError );
-            pError.printStackTrace();
+            Util.debug( "Javancss._measureRoot().e: " + pThrowable );
+            pThrowable.printStackTrace(System.err);
         }
     }
 
@@ -525,11 +520,10 @@ public class Javancss
         {
             _measureRoot( reader );
         }
-        catch ( Exception e )
+        catch ( Throwable pThrowable )
         {
-        }
-        catch ( TokenMgrError pError )
-        {
+            Util.debug( "Javancss.<init>(Reader).e: " + pThrowable );
+            pThrowable.printStackTrace(System.err);
         }
     }
 
@@ -668,6 +662,7 @@ public class Javancss
         Map<String, String> htOptions = _pInit.getOptions();
 
         setEncoding( htOptions.get( "encoding" ) );
+        setXML( htOptions.get( "xml" ) != null );
 
         // the arguments (the files) to be processed
         _vJavaSourceFiles = findFiles( _pInit.getArguments(), htOptions.get( "recursive" ) != null );
@@ -695,6 +690,7 @@ public class Javancss
             catch ( Throwable pThrowable )
             {
                 // shouldn't we print something here?
+                // error details have been written into lastError
             }
 
             pJavancssFrame.showJavancss( this );
@@ -711,6 +707,7 @@ public class Javancss
         }
         catch ( Throwable pThrowable )
         {
+            Util.debug( "Javancss.<init>(String[]).e: " + pThrowable );
             pThrowable.printStackTrace(System.err);
         }
         if ( getLastErrorMessage() != null )
@@ -831,12 +828,12 @@ public class Javancss
 
     public List<FunctionMetric> getFunctionMetrics()
     {
-        return ( _vFunctionMetrics );
+        return _vFunctionMetrics;
     }
 
     public List<ObjectMetric> getObjectMetrics()
     {
-        return ( _vObjectMetrics );
+        return _vObjectMetrics;
     }
 
     /**
@@ -845,15 +842,11 @@ public class Javancss
      */
     public List<PackageMetric> getPackageMetrics()
     {
-        return ( _vPackageMetrics );
+        return _vPackageMetrics;
     }
 
     public String getLastErrorMessage()
     {
-        if ( _sErrorMessage == null )
-        {
-            return null;
-        }
         return _sErrorMessage;
     }
 
@@ -876,7 +869,7 @@ public class Javancss
 
     public boolean useXML()
     {
-        return _bXML || ( _pInit != null && _pInit.getOptions().get( "xml" ) != null );
+        return _bXML;
     }
 
     public Formatter getFormatter()

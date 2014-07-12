@@ -495,12 +495,12 @@ public class JavancssAntTask extends MatchingTask {
      */
     private boolean packageThresholdsExceeded(List<File> fileList) {
         boolean failed = false;
-        if (!((classPerPkgMax == Integer.MAX_VALUE) &&
-                (classPerPkgMin == -1) &&
-                (funcPerPkgMax == Integer.MAX_VALUE) &&
-                (funcPerPkgMin == -1) &&
-                (ncssPerPkgMax == Integer.MAX_VALUE) &&
-                (ncssPerPkgMin == -1))) {
+        if (!(classPerPkgMax == Integer.MAX_VALUE &&
+                classPerPkgMin == -1 &&
+                funcPerPkgMax == Integer.MAX_VALUE &&
+                funcPerPkgMin == -1 &&
+                ncssPerPkgMax == Integer.MAX_VALUE &&
+                ncssPerPkgMin == -1)) {
            List<PackageMetric> pkgMetrics = getJavaNcss(fileList).getPackageMetrics();
             for (int i = 0; i < pkgMetrics.size(); i++) {
                 PackageMetric pkgMetric = pkgMetrics.get(i);
@@ -553,14 +553,14 @@ public class JavancssAntTask extends MatchingTask {
      */
     private boolean classThresholdsExceeded(List<File> fileList) {
         boolean failed = false;
-        if (!((classPerClassMax == Integer.MAX_VALUE) &&
-                (classPerClassMin == -1) &&
-                (funcPerClassMax == Integer.MAX_VALUE) &&
-                (funcPerClassMin == -1) &&
-                (jvdcPerClassMax == Integer.MAX_VALUE) &&
-                (jvdcPerClassMin == -1) &&
-                (ncssPerClassMax == Integer.MAX_VALUE) &&
-                (ncssPerClassMin == -1))) {
+        if (!(classPerClassMax == Integer.MAX_VALUE &&
+                classPerClassMin == -1 &&
+                funcPerClassMax == Integer.MAX_VALUE &&
+                funcPerClassMin == -1 &&
+                jvdcPerClassMax == Integer.MAX_VALUE &&
+                jvdcPerClassMin == -1 &&
+                ncssPerClassMax == Integer.MAX_VALUE &&
+                ncssPerClassMin == -1)) {
             List<ObjectMetric> objMetrics = getJavaNcss(fileList).getObjectMetrics();
             for (int i = 0; i < objMetrics.size(); i++) {
                 ObjectMetric objMetric = objMetrics.get(i);
@@ -627,12 +627,12 @@ public class JavancssAntTask extends MatchingTask {
     private boolean functionThresholdsExceeded(List<File> fileList) {
         boolean failed = false;
         //check thresholds
-        if (!((jvdcPerFuncMax == Integer.MAX_VALUE) &&
-                (jvdcPerFuncMin == -1) &&
-                (ccnPerFuncMax == Integer.MAX_VALUE) &&
-                (ccnPerFuncMin == -1) &&
-                (ncssPerFuncMax == Integer.MAX_VALUE) &&
-                (ncssPerFuncMin == -1))) {
+        if (!(jvdcPerFuncMax == Integer.MAX_VALUE &&
+                jvdcPerFuncMin == -1 &&
+                ccnPerFuncMax == Integer.MAX_VALUE &&
+                ccnPerFuncMin == -1 &&
+                ncssPerFuncMax == Integer.MAX_VALUE &&
+                ncssPerFuncMin == -1)) {
             //call getFunctionMetrics
             List<FunctionMetric> funcMetrics = getJavaNcss(fileList).getFunctionMetrics();
             for (int i = 0; i < funcMetrics.size(); i++) {
