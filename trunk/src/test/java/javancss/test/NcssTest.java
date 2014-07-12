@@ -271,7 +271,6 @@ public class NcssTest
         _checkNcss( 115, 11663 );
         _checkNcss( 116, 12 );
         _checkNcss( 117, 15 );
-        // TODO 118? enum
         _checkNcss( 119, 2 );
         _checkNcss( 120, 3 );
         _checkNcss( 121, 5 );
@@ -287,7 +286,6 @@ public class NcssTest
         _checkNcss( 132, 12 );
         _checkNcss( 134, 4 );
         _checkNcss( 136, 2 );
-        // 137 skipped
         _checkNcss( 138, 3 );
 
         _exitSubTest();
