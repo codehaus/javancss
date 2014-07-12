@@ -99,8 +99,9 @@
     <developer>
       <id>pkofler</id>
       <name>Peter Kofler</name>
-      <email>peter dot kofler at code-cop dot org</email>
-      <url>http://www.code-cop.org/</url>
+      <email>peter.kofler@code-cop.org</email>
+      <organization>Code Cop</organization>
+      <organizationUrl>http://www.code-cop.org/</organizationUrl>
       <timezone>+1</timezone>
     </developer>
   </developers>
