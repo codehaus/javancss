@@ -32,16 +32,24 @@ public class ParseTest
     {
         _enterSubTest( "parse" );
 
+        _checkParse( 31 ); // java.net.Socket, why?
+        _checkParse( 33 ); // java.text.Decimalformat, why?
+        _checkParse( 34 ); // java.text.TextBoundaryData, why?
+        
         _checkParse( 48 );
 
         _checkParse( 50 );
+
+        _checkParse( 71 ); // class declared in method
+        _checkParse( 133 ); // char.class
+        _checkParse( 135 ); // annotation 
 
         _checkParse( 142 ); // JAVANCSS-12
         _checkParse( 143 ); // JAVANCSS-9
         _checkParse( 144 ); // JAVANCSS-13
         _checkParse( 145 ); // JAVANCSS-14
         _checkParse( 146 ); // JAVANCSS-17
-        // TODO 147? anonymous subcluss
+        _checkParse( 147 ); // anonymous subcluss 
         _checkParse( 148 ); // JAVANCSS-49
         _checkParse( 149 ); // JAVANCSS-46
         _checkParse( 150 ); // JAVANCSS-53 

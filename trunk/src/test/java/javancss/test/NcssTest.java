@@ -105,6 +105,7 @@ public class NcssTest
         _checkNcss( 27, 4 );
         _checkNcss( 28, 465 );
         _checkNcss( 29, 1 );
+        _checkNcss( 30, 3 );
 
         // ;; in java.sql.Connection
         try
@@ -179,13 +180,7 @@ public class NcssTest
         pJavancss = new Javancss( vFiles );
         bugIf( pJavancss.getNcss() != ncss57, "ncss57: " + ncss57 + " pJavancss.getNcss(): " + pJavancss.getNcss() );
 
-        // TODO 44
-        // TODO 45
-        // TODO 46
-        // TODO 47? interface
-
         _checkNcss( 49, 3 );
-
         _checkNcss( 51, 8 );
         _checkNcss( 52, 12 );
         _checkNcss( 53, 4 );
@@ -217,8 +212,6 @@ public class NcssTest
          * like this: F150MemoryMap f150Map = (F150MemoryMap) F150.super.memMap;
          */
         _checkNcss( 70, 4 );
-
-        // TODO 71? anonymous subclasses
 
         // test for strictfp interface and static inner interface
         _checkNcss( 73, 1 );
@@ -292,9 +285,7 @@ public class NcssTest
         _checkNcss( 130, 5 );
         _checkNcss( 131, 6 );
         _checkNcss( 132, 12 );
-        // TOODO 133?
         _checkNcss( 134, 4 );
-        // TODO 135? annotation
         _checkNcss( 136, 2 );
         // 137 skipped
         _checkNcss( 138, 3 );
@@ -340,7 +331,7 @@ public class NcssTest
         pJavancss = _checkNcss( 23, 10 );
         vFunctions = pJavancss.getFunctionMetrics();
         bugIf( vFunctions.size() != 7 );
-        bugIf( new Javancss( getTestFile( 24 ) ).getFunctionMetrics().size() != vFunctions.size() );
+        bugIf( measureTestFile( 24 ).getFunctionMetrics().size() != vFunctions.size() );
 
         // Nr. 30
         pJavancss = _checkNcss( 25, 12 );

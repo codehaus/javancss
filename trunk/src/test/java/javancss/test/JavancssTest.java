@@ -110,6 +110,8 @@ public class JavancssTest
         xmlTest.setTestDir( getTestDir() );
         xmlTest.run();
         setTests( xmlTest );
+        
+        ensureAllTestFilesUsed();
     }
 
     public static void main( String[] asArg_ )
