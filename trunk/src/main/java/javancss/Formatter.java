@@ -47,4 +47,10 @@ public interface Formatter
 
     public void printJavaNcss( Writer w )
         throws IOException;
+
+    public void printStart( Writer w )
+        throws IOException;
+
+    public void printEnd( Writer w )
+        throws IOException;
 }

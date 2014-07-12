@@ -468,7 +468,7 @@ public class XmlFormatter
                );
     }
 
-    static public void printStart( Writer w )
+    public void printStart( Writer w )
         throws IOException
     {
         Calendar calendar = Util.getCalendar();
@@ -479,7 +479,7 @@ public class XmlFormatter
                         + "  <time>" + Util.getTime( calendar ) + "</time>\n" );
     }
 
-    static public void printEnd( Writer w )
+    public void printEnd( Writer w )
         throws IOException
     {
         w.write( "</javancss>\n" );
