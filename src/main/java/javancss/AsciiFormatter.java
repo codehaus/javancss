@@ -348,4 +348,12 @@ public class AsciiFormatter implements Formatter
     {
         w.write( "Java NCSS: " + _javancss.getNcss() + NL );
     }
+
+    public void printStart( Writer w )
+    {
+    }
+
+    public void printEnd( Writer w )
+    {
+    }
 }

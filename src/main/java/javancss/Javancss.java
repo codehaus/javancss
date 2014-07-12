@@ -370,6 +370,18 @@ public class Javancss
         getFormatter().printJavaNcss( w );
     }
 
+    public void printStart( Writer pw )
+        throws IOException
+    {
+        getFormatter().printStart( pw );
+    }
+
+    public void printEnd( Writer pw )
+        throws IOException
+    {
+        getFormatter().printEnd( pw );
+    }
+    
     public Javancss( List<File> vJavaSourceFiles_ )
     {
         this( vJavaSourceFiles_, DEFAULT_ENCODING );
@@ -746,13 +758,10 @@ public class Javancss
         }
     }
 
-    private void format( final PrintWriter pw, Map<String, String> htOptions )
+    private void format( PrintWriter pw, Map<String, String> htOptions )
         throws IOException
     {
-        if ( useXML() )
-        {
-            XmlFormatter.printStart( pw );
-        }
+        printStart( pw );
    
         boolean bNoNCSS = false;
         if ( htOptions.get( "package" ) != null || htOptions.get( "all" ) != null )
@@ -783,10 +792,7 @@ public class Javancss
             printJavaNcss( pw );
         }
    
-        if ( useXML() )
-        {
-            pw.println( "</javancss>" );
-        }
+        printEnd( pw );
     }
 
     public int getNcss()

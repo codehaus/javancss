@@ -8,7 +8,6 @@ import ccl.util.Test;
 import ccl.util.Util;
 import ccl.xml.XMLUtil;
 import javancss.Javancss;
-import javancss.XmlFormatter;
 
 /**
  * This test class checks that the xml output feature is
@@ -31,12 +30,12 @@ public class XmlFormatterTest
 
         StringWriter sw = new StringWriter();
 
-        XmlFormatter.printStart( sw );
+        pJavancss.printStart( sw );
         pJavancss.printPackageNcss( sw );
         pJavancss.printObjectNcss( sw );
         pJavancss.printFunctionNcss( sw );
         pJavancss.printJavaNcss( sw );
-        XmlFormatter.printEnd( sw );
+        pJavancss.printEnd( sw );
 
         String sXML = sw.toString();
 
@@ -53,12 +52,12 @@ public class XmlFormatterTest
         pJavancss = measureTestFile( 117 );
         pJavancss.setXML( true );
 
-        XmlFormatter.printStart( sw );
+        pJavancss.printStart( sw );
         pJavancss.printPackageNcss( sw );
         pJavancss.printObjectNcss( sw );
         pJavancss.printFunctionNcss( sw );
         pJavancss.printJavaNcss( sw );
-        XmlFormatter.printEnd( sw );
+        pJavancss.printEnd( sw );
 
         sXML = sw.toString();
         Assert( Util.isEmpty( sXML ) == false );
@@ -66,12 +65,12 @@ public class XmlFormatterTest
         pJavancss = measureTestFile( 118 );
         pJavancss.setXML( true );
 
-        XmlFormatter.printStart( sw );
+        pJavancss.printStart( sw );
         pJavancss.printPackageNcss( sw );
         pJavancss.printObjectNcss( sw );
         pJavancss.printFunctionNcss( sw );
         pJavancss.printJavaNcss( sw );
-        XmlFormatter.printEnd( sw );
+        pJavancss.printEnd( sw );
 
         sXML = sw.toString();
         Assert( Util.isEmpty( sXML ) == false );
@@ -88,12 +87,12 @@ public class XmlFormatterTest
 
         StringWriter sw = new StringWriter();
 
-        XmlFormatter.printStart( sw );
+        pJavancss.printStart( sw );
         pJavancss.printPackageNcss( sw );
         pJavancss.printObjectNcss( sw );
         pJavancss.printFunctionNcss( sw );
         pJavancss.printJavaNcss( sw );
-        XmlFormatter.printEnd( sw );
+        pJavancss.printEnd( sw );
 
         String sXML = sw.toString();
 
