@@ -438,7 +438,8 @@ TOKEN :
   < #DECIMAL_LITERAL: ["1"-"9"] (["0"-"9","_"])* >
 |
   < HEX_LITERAL: "0" ["x","X"]
-  (    ["0","1"] "." (["0"-"9","a"-"f","A"-"F"])+ <EXPONENT> (["f","F","d","D"])? // hexadecimal floating-point literals    
+  (
+    ["0","1"] "." (["0"-"9","a"-"f","A"-"F"])+ <EXPONENT> (["f","F","d","D"])? // hexadecimal floating-point literals
   |
     (["0"-"9","a"-"f","A"-"F","_"])+
   )
@@ -1324,55 +1325,39 @@ void ClassBodyDeclaration() :
 |
   LOOKAHEAD(2)
   Initializer()
-
-//Added by REYNAUD Sebastien (LOGICA)
 |
-  LOOKAHEAD((Annotation())* ( "static" | "abstract" | "final" | "public" | "protected" | "private" | "strictfp" )*  "@" "interface")
+  LOOKAHEAD(( "static" | "abstract" | "final" | "public" | "protected" | "private" | "strictfp" | Annotation() )*  "@" "interface")
   modifiers = Modifiers()
   AnnotationTypeDeclaration(modifiers)
 |
   LOOKAHEAD((Annotation())* "@" "interface")
   CreationAnnotation()
-//
-
 |
-  LOOKAHEAD( (Annotation())* ( "static" | "abstract" | "final" | "public" | "protected" | "private" | "strictfp" )* "class" )
-
-	//(Annotation())*	//Removed by REYNAUD Sebastien (LOGICA)
-
+  LOOKAHEAD(( "static" | "abstract" | "final" | "public" | "protected" | "private" | "strictfp" | Annotation() )* "class" )
   NestedClassDeclaration()
 |
   LOOKAHEAD( Modifiers() "interface" )
-  //LOOKAHEAD( ( "static" | "abstract" | "final" | "public" | "protected" | "private" | "strictfp" )* "interface" )
   modifiers = Modifiers()
   NestedInterfaceDeclaration()
-  |
+|
    LOOKAHEAD( Modifiers() "enum" )
    modifiers = Modifiers()
    EnumDeclaration(modifiers)
 |
-         //LOOKAHEAD( [ TypeParameters() ] <IDENTIFIER> "(" )
-         LOOKAHEAD( (Annotation())* [ "public" | "protected" | "private" ] [ TypeParameters() ] Name() "(" )
-         //{ System.out.println( "\n\nClassDeclaration\n" ); }
-
-	//(Annotation())* //Removed by REYNAUD Sebastien (LOGICA)
-
-  ConstructorDeclaration()
+   LOOKAHEAD( ( "public" | "protected" | "private" | Annotation() )* [ TypeParameters() ] Name() "(" )
+   ConstructorDeclaration()
 |
   LOOKAHEAD( MethodDeclarationLookahead() )
-         //{ System.out.println( "\n\nMethodDeclaration\n" ); }
   MethodDeclaration()
 |
-  (Annotation())* FieldDeclaration()
+  FieldDeclaration()
 }
 
 // This production is to determine lookahead only.
 void MethodDeclarationLookahead() :
 {}
 {
-    ( Annotation() )*
-    ( "public" | "protected" | "private" | "static" | "abstract" | "final" | "native" | "synchronized" | "strictfp" )*
-    ( Annotation() )*
+  ( "public" | "protected" | "private" | "static" | "abstract" | "final" | "native" | "synchronized" | "strictfp" | Annotation() )*
   [ TypeParameters() ]
   ResultType() Identifier() "("
 }
@@ -1646,7 +1631,7 @@ void FieldDeclaration() :
 {
   ( "public" { bPublic = true; }        // added by SMS
   | "protected" { bPublic = true; }     // added by SMS
-  | "private" | "static" | "final" | "transient" | "volatile" )*
+  | "private" | "static" | "final" | "transient" | "volatile" | Annotation() )*
 
   // added by SMS
   {             tmpToken = getToken( 0 );
@@ -1676,7 +1661,7 @@ void FieldDeclaration() :
                     tmpToken = tmpToken.specialToken;
                 }
   }
-  (Annotation())* Type() VariableDeclarator() ( "," VariableDeclarator() )* ";"
+  Type() VariableDeclarator() ( "," VariableDeclarator() )* ";"
   { _ncss++; Util.debug( "_ncss++" ); }
 }
 
@@ -1776,52 +1761,49 @@ void MethodDeclaration() :
           tmpToken = getToken( 0 );
       }
   }
-| "static"
+    | "static"
   {
       if ( tmpToken == null ) {
           tmpToken = getToken( 0 );
       }
   }
-| "abstract"
+    | "abstract"
   {
       if ( tmpToken == null ) {
           tmpToken = getToken( 0 );
       }
   }
-| "final"
+    | "final"
   {
       if ( tmpToken == null ) {
           tmpToken = getToken( 0 );
       }
   }
-| "native"
+    | "native"
   {
       if ( tmpToken == null ) {
           tmpToken = getToken( 0 );
       }
   }
-| "synchronized"
+    | "synchronized"
   {
       if ( tmpToken == null ) {
           tmpToken = getToken( 0 );
       }
   }
-| "strictfp"
+    | "strictfp"
   {
       if ( tmpToken == null ) {
           tmpToken = getToken( 0 );
       }
   }
+    | Annotation()
+ /*{
+      if ( tmpToken == null ) {
+          tmpToken = getToken( 0 );
+      }
+  }*/
   )*
-
-    ( Annotation() )*
-
-         /*{
-      if ( tmpToken == null ) {
-          tmpToken = getToken( 0 );
-      }
-      }*/
-
 
   [ TypeParameters() ]
 
@@ -3104,57 +3086,57 @@ int Modifiers():
       if ( _tmpToken == null ) {
           _tmpToken = getToken( 0 );
       }
-}
+    }
   |
    "static" { modifiers |= ModifierSet.STATIC;       if ( _tmpToken == null ) {
           _tmpToken = getToken( 0 );
       }
-}
+    }
   |
    "protected" { modifiers |= ModifierSet.PROTECTED;       if ( _tmpToken == null ) {
        _tmpToken = getToken( 0 );
       }
-}
+    }
   |
    "private" { modifiers |= ModifierSet.PRIVATE;       if ( _tmpToken == null ) {
           _tmpToken = getToken( 0 );
       }
-}
+    }
   |
    "final" { modifiers |= ModifierSet.FINAL;       if ( _tmpToken == null ) {
        _tmpToken = getToken( 0 );
       }
-}
+    }
   |
    "abstract" { modifiers |= ModifierSet.ABSTRACT;       if ( _tmpToken == null ) {
           _tmpToken = getToken( 0 );
       }
-}
+    }
   |
    "synchronized" { modifiers |= ModifierSet.SYNCHRONIZED;       if ( _tmpToken == null ) {
           _tmpToken = getToken( 0 );
       }
-}
+    }
   |
    "native" { modifiers |= ModifierSet.NATIVE;       if ( _tmpToken == null ) {
           _tmpToken = getToken( 0 );
       }
-}
+    }
   |
    "transient" { modifiers |= ModifierSet.TRANSIENT;       if ( _tmpToken == null ) {
           _tmpToken = getToken( 0 );
       }
-}
+    }
   |
    "volatile" { modifiers |= ModifierSet.VOLATILE;       if ( _tmpToken == null ) {
           _tmpToken = getToken( 0 );
       }
-}
+    }
   |
    "strictfp" { modifiers |= ModifierSet.STRICTFP;       if ( _tmpToken == null ) {
           _tmpToken = getToken( 0 );
       }
-}
+    }
   |
    Annotation()
   )

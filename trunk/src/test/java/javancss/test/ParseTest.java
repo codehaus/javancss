@@ -60,6 +60,7 @@ public class ParseTest
         _checkParse( 155 ); // JAVANCSS-28
         _checkParse( 156 ); // hexadecimal floating-point literals
         _checkParse( 157 ); // Java 7 literals
+        _checkParse( 158 ); // JAVANCSS-48
 
         _exitSubTest();
     }
