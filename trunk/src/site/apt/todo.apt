@@ -27,9 +27,9 @@ JavaNCSS TODO list
     {{{http://maven.apache.org/plugins/maven-surefire-report-plugin/}Maven reporting integration}},
     with {{{http://mojo.codehaus.org/cobertura-maven-plugin/}code coverage too}}
 
-    * cons: none
+    * cons: large effort to change all tests, the tests use their own testing and assertion framework
 
-    Test available in svn {{{branches/javancss-junit}}}, with reports
+    Test available in SVN {{{http://svn.codehaus.org/javancss/branches/javancss-junit/}branches/javancss-junit}}, with reports
     {{{http://javancss.codehaus.org/junit/project-reports.html}here}} (compare with
     {{{http://javancss.codehaus.org/project-reports.html}actual ones}}).
 
