@@ -2,7 +2,7 @@
 Copyright (C) 2000 Chr. Clemens Lee <clemens@kclee.com>.
 
 This file is part of JavaNCSS
-(http://www.kclee.com/clemens/java/javancss/).
+(http://www.kclee.de/clemens/java/javancss/).
 
 JavaNCSS is free software; you can redistribute it and/or modify it
 under the terms of the GNU General Public License as published by the
@@ -44,7 +44,7 @@ import ccl.util.Util;
  * java applications. To start JavaNCSS from the command line,
  * gui mode or not, class 'Main' is used.
  *
- * @author  <a href="http://www.kclee.com/clemens/">Chr. Clemens Lee</a> (<a href="mailto:clemens@kclee.com"><i>clemens@kclee.com</i></a>)
+ * @author  <a href="http://www.kclee.de/clemens/">Chr. Clemens Lee</a> (<a href="mailto:clemens@kclee.com"><i>clemens@kclee.com</i></a>)
  * @version $Id$
  */
 public class JavancssFrame extends MainJFrame {

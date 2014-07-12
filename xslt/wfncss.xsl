@@ -86,7 +86,7 @@
         <hr size="2"/>
         <xsl:apply-templates/>
         <hr size="2"/>
-        <h6>Report generated using <a href="http://www.kclee.com/clemens/java/javancss/">JavaNCSS</a> and <a href="http://jakarta.apache.org">Ant</a>.</h6>
+        <h6>Report generated using <a href="http://www.kclee.de/clemens/java/javancss/">JavaNCSS</a> and <a href="http://jakarta.apache.org">Ant</a>.</h6>
       </body>
     </html>
   </xsl:template>
