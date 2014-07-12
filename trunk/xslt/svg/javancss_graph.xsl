@@ -58,7 +58,7 @@
         <tr>
         <td><h3>JavaNCSS Analysis</h3></td>
         <td>
-        <p align="right">Designed for use with <a href="http://www.kclee.com/clemens/java/javancss/">JavaNCSS</a>.</p>
+        <p align="right">Designed for use with <a href="http://www.kclee.de/clemens/java/javancss/">JavaNCSS</a>.</p>
         </td>
         </tr>        
     </table>

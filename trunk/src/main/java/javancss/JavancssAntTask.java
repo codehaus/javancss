@@ -3,7 +3,7 @@ Copyright (C) 2002 Steve Jernigan <sjernigan@iname.com>.
 
 This file is part of JavaNCSS2Ant and JavaNCSS
 (http://sourceforge.net/projects/javancss2ant/ ,
-http://www.kclee.com/clemens/java/javancss/).
+http://www.kclee.de/clemens/java/javancss/).
 
 JavaNCSS2Ant and JavaNCSS are free software; you can redistribute it and/or modify it
 under the terms of the GNU General Public License as published by the
@@ -53,7 +53,7 @@ import org.apache.tools.ant.types.Path;
  * of the tool whereupon it was submitted for inclusion in Ant itself.
  *
  * <p>JavaNCSS was developed by Christoph Clemens Lee and is available
- * <a href="http://www.kclee.com/clemens/java/javancss/">here</a>.
+ * <a href="http://www.kclee.de/clemens/java/javancss/">here</a>.
  *
  * @author Phillip Wells
  * @author Steve Jernigan

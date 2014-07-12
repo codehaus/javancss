@@ -3,7 +3,7 @@
 Copyright (C) 2002 Chr. Clemens Lee <clemens@kclee.com>.
 
 This file is part of JavaNCSS
-(http://www.kclee.com/clemens/java/javancss/).
+(http://www.kclee.de/clemens/java/javancss/).
 
 JavaNCSS is free software; you can redistribute it and/or modify it
 under the terms of the GNU General Public License as published by the
