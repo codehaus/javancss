@@ -22,9 +22,11 @@ Boston, MA 02111-1307, USA.  */
 package javancss.test;
 
 import java.io.File;
+import java.io.FileFilter;
+import java.util.HashSet;
+import java.util.Set;
 
 import javancss.Javancss;
-
 import ccl.util.Test;
 
 /**
@@ -35,6 +37,8 @@ import ccl.util.Test;
  */
 public abstract class AbstractTest extends Test
 {
+    private static final Set<File> parsedFiles = new HashSet<File>();
+
     private File testDir = null;
 
     public void setTestDir( File testDir_ )
@@ -47,9 +51,11 @@ public abstract class AbstractTest extends Test
         return testDir;
     }
 
-    protected File getTestFile( String filename )
+    protected File getTestFile( String filename_ )
     {
-        return new File( testDir, filename );
+        File file = new File( testDir, filename_ );
+        parsedFiles.add( file );
+        return file;
     }
 
     protected File getTestFile( int testFileId )
@@ -60,6 +66,24 @@ public abstract class AbstractTest extends Test
     protected Javancss measureTestFile( int testFileId )
     {
         return new Javancss( getTestFile( testFileId ) );
+    }
+    
+    protected void ensureAllTestFilesUsed()
+    {
+        File[] existingFiles = testDir.listFiles( new FileFilter()
+        {
+            public boolean accept( File path )
+            {
+                return path.getName().endsWith( ".java" );
+            }
+        } );
+        for ( File ef : existingFiles )
+        {
+            if ( !parsedFiles.contains( ef ) )
+            {
+                bugIf( !parsedFiles.contains( ef ), "Test file " + ef + " has not been parsed!" );
+            }
+        }
     }
     
     protected AbstractTest()

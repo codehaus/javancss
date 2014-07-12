@@ -46,15 +46,14 @@ public class JavadocTest extends AbstractTest {
        _enterSubTest( "javadocs" );
 
        _checkJvdcs( 20, 7 );
+       _checkJvdcs( 46, 3 );
+       _checkJvdcs( 47, 2 );
        _checkJvdcs( 68, 2 );
        _checkJvdcs( 121, 2 );
        _checkJvdcs( 122, 1 );
-
-       //Added by REYNAUD Sebastien (LOGICA) for JAVANCSS-20
-       _checkJvdcs( 139 , 3 );
-       _checkJvdcs( 140 , 2 );
-       _checkJvdcs( 141 , 1 );
-       //
+       _checkJvdcs( 139 , 3 ); // JAVANCSS-20
+       _checkJvdcs( 140 , 2 ); // JAVANCSS-20
+       _checkJvdcs( 141 , 1 ); // JAVANCSS-20
 
        _exitSubTest();
    }

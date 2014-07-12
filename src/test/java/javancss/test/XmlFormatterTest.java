@@ -26,7 +26,7 @@ public class XmlFormatterTest
     public void testParsing()
         throws Exception
     {
-        Javancss pJavancss = new Javancss( getTestFile( 57 ) );
+        Javancss pJavancss = measureTestFile( 57 );
         pJavancss.setXML( true );
 
         StringWriter sw = new StringWriter();
@@ -50,7 +50,7 @@ public class XmlFormatterTest
             Util.print( "skipped: 'xalan.jar' and or 'xerces.jar' library missing." );
         }
 
-        pJavancss = new Javancss( getTestFile( 117 ) );
+        pJavancss = measureTestFile( 117 );
         pJavancss.setXML( true );
 
         XmlFormatter.printStart( sw );
@@ -63,7 +63,7 @@ public class XmlFormatterTest
         sXML = sw.toString();
         Assert( Util.isEmpty( sXML ) == false );
 
-        pJavancss = new Javancss( getTestFile( 118 ) );
+        pJavancss = measureTestFile( 118 );
         pJavancss.setXML( true );
 
         XmlFormatter.printStart( sw );
@@ -83,7 +83,7 @@ public class XmlFormatterTest
     public void testXML2Text()
         throws Exception
     {
-        Javancss pJavancss = new Javancss( getTestFile( 32 ) );
+        Javancss pJavancss = measureTestFile( 32 );
         pJavancss.setXML( true );
 
         StringWriter sw = new StringWriter();
