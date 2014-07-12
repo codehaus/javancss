@@ -80,6 +80,9 @@ $ patch -p0 < JAVANCSS-123.patch
 
 Guide for JavaNCSS Committers
 
+  JavaNCSS uses the same formatting conventions as Maven. There is an Eclipse and an Idea configuration, see 
+  {{{http://maven.apache.org/developers/conventions/code.html}Maven Conventions}}.
+
   To deploy JavaNCSS site or artifact (either SNAPSHOT or release), you'll need to have your Codehaus credentials
   defined in <<<~/.m2/settings.xml>>> for <<<codehaus.org>>> server:
 
