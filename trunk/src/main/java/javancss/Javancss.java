@@ -101,6 +101,7 @@ public class Javancss
 
     private String _sErrorMessage = null;
     private Throwable _thrwError = null;
+    private File _lastParsedFile = null;
 
     private JavaParserInterface _pJavaParser = null;
     private int _ncss = 0;
@@ -855,6 +856,11 @@ public class Javancss
         return _thrwError;
     }
 
+    public File getLastParsedFile()
+    {
+        return _lastParsedFile;
+    }
+
     public void setExit()
     {
         _bExit = true;
@@ -901,6 +907,7 @@ public class Javancss
     private Reader newReader( File file )
         throws FileNotFoundException, UnsupportedEncodingException
     {
+        _lastParsedFile = file;
         return newReader( new FileInputStream( file ) );
     }
 }
