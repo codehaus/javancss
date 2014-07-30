@@ -41,7 +41,7 @@
       <item name="TODO" href="/todo.html"/>
     </menu>
 
-    ${reports}
+    <menu ref="reports" inherit="bottom" />
 
   </body>
 </project>
