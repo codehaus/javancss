@@ -1,0 +1,91 @@
+<html>
+<head>
+   <link rel="SHORTCUT ICON" href="favjavancss.ico" />
+   <title>JavaNCSS - A Source Measurement Suite for Java</title>
+</head>
+<body>
+<table>
+<tr>
+<td>
+<center><h1>JavaNCSS - A Source Measurement Suite for Java</h1></center>
+</td>
+</tr>
+</table>
+
+<br />Ever wondered how many lines of code or how many classes there are
+in&nbsp; the Sun JDK? Curious about the size of your own projects - or
+do you want to keep track of your work-progress. That's what JavaNCSS is
+for.
+
+<p>JavaNCSS is a simple command line utility which measures two standard
+source code metrics for the Java programming language. The metrics are
+collected globally, for each class and/or for each function.</p>
+
+<p>Here is an example about what JavaNCSS prints out for the Sun JDK 1.1.5
+<a href="package.txt">java.*</a> source tree (update: JDK 1.5 api source tree
+consists of 569'830 ncss).</p>
+
+<p>JavaNCSS can optionally present its output with a little
+<a href="gui.html">graphical user interface</a>. To interactively select Java source
+files for counting, <a href="http://www.kclee.de/clemens/jacob/">Jacob</a> (a Java class browser and project
+manager) can be used for this purpose.</p>
+
+<p>JavaNCSS can also be used out of an Ant <code>build.xml</code> script as it
+comes bundled with an Ant task written by Steve Jernigan.
+The JavaNCSS Ant Task is documented on a <a href="JavancssAntTask.html">separate page</a>.</p>
+
+<p>You can always find the newest version of this page at: <a href="http://javancss.codehaus.org/">http://javancss.codehaus.org/</a>
+(was previously at <a href="http://www.kclee.de/clemens/java/javancss/">http://www.kclee.de/clemens/java/javancss/</a>).</p>
+
+
+
+<h2><a name="features"></a>Features and Metrics JavaNCSS Provides</h2>
+<ul>
+<li>Metrics can be applied to global-, class-, or function-level.</li>
+
+<li>Non Commenting Source Statements (NCSS).</li>
+
+<li>Cyclomatic Complexity Number (McCabe metric).</li>
+
+<li>Packages, classes, functions and inner classes are counted.</li>
+
+<li>Number of formal Javadoc comments per class and method.</li>
+
+<li>Average values are calculated.</li>
+
+<li>Command line driven.</li>
+
+<li>A GUI is provided for better output browsing as well as the
+integration of JavaNCSS in a project manager and class browser
+named <a href="http://www.kclee.de/clemens/jacob/">Jacob</a> for
+easy selection of input source files.</li>
+
+<li>XML output (optional).</li>
+
+<li>XSLT stylesheets provided for further generation of HTML,
+     and SVG reports and as a basis for your own custom
+     reports.</li>
+
+<li>Ant task (written by Steve Jernigan).</li>
+
+<li>Support for Java 1.5 syntax (generics, enums, etc.).</li>
+
+<li>Support for Java 1.7 syntax (try with resource, literals, etc.).</li>
+
+<li>100% pure Java.</li>
+
+<li>Free software (GNU LGPL).</li>
+
+</ul>
+
+
+
+<h2><a name="requirements"></a>System Requirements</h2>
+	Java JDK &gt;= 1.5
+
+
+<h2><a name="download"></a>Downloading</h2>
+<a href="javancss-${project.version}.zip">JavaNCSS Version ${project.version}</a>
+
+</body>
+</html>

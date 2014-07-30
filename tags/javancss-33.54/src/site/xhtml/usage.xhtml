@@ -1,0 +1,148 @@
+<html>
+<head>
+   <link rel="SHORTCUT ICON" href="favjavancss.ico" />
+   <title>JavaNCSS - Usage</title>
+</head>
+<body>
+<table>
+<tr>
+<td>
+<center><h1>JavaNCSS - Usage</h1></center>
+</td>
+</tr>
+</table>
+
+<h2><a name="usage"></a>Usage</h2>
+Make sure <tt>javancss-x.y/lib/javancss.jar</tt>, <tt>javancss-x.y/lib/ccl.jar</tt>, and <tt>javancssx.y/lib/jhbasic.jar</tt> are added to your CLASSPATH.
+<p>
+Then to start JavaNCSS type: <tt>java javancss.Main</tt>.
+As an alternative you can edit and use either the <tt>javancss.bat</tt>
+or <tt>javancss</tt> file. Just change the
+<tt>JAVA_HOME</tt> and <tt>CLASSPATH</tt>
+variables according to your system.</p>
+<p>
+Now for the first run type in (being in the <tt>javancss-x.y</tt> directory itself):</p>
+<p>
+<tt>./bin/javancss -gui src/test/resources/*.java</tt></p>
+<p>
+or
+</p><p>
+<tt>./bin/javancss -gui -recursive src/test/resources/</tt></p>
+<p>If no parameter is provided for JavaNCSS, standard
+input (stdin) is used as the input stream. Multiple java source files can
+be specified in the command line. If a '@' char is put in front of a file name, then not this file will be measured but its content will be interpreted as a list of Java source files that
+shall be counted. The '@' functionality can be used recursively inside this file as well. Wild cards are not supported yet. (If
+the operating system processes the command line for the program, then you
+are lucky. Windows doesn't do that.) Instead use something like <tt>cat *.java | javancss</tt>
+or <tt>type *.java | javancss</tt>. Of course, this can lead to ambiguities when mixing
+source files that belong to a package with files that doesn't.</p>
+<p> If no option
+is given, JavaNCSS only calculates the total non commenting source statements
+(NCSS) of the given input.</p>
+<p>JavaNCSS can also be used conveniently via Ant. For details
+have a look at the <a href="JavancssAntTask.html">JavaNCSS Ant Task page</a>,
+especially at the example at the bottom of that page. You can
+also have a look at the build.xml file that gets distributed with
+JavaNCSS itself (see "javancss" target).</p>
+
+<h3>Synopsis</h3>
+<tt>javancss [-option] stdin | [@]source_file*</tt>
+
+<h3>Options</h3>
+
+<dl>
+
+<dt><tt>-ncss</tt></dt>
+<dd>
+This is the default which counts total non commenting source statements
+and nothing else.</dd>
+
+<dt><tt>-package</tt></dt>
+<dd>
+Collects the metrics data for each package. This is the most top level
+view javancss offers for your projects. Take a look here what javancss
+prints out for the Sun JDK 1.1.5 <a href="package.txt">java.*</a> source
+tree.</dd>
+
+<dt><tt>-object</tt></dt>
+<dd>
+Collects the metrics data for each class/interface. For an example program
+output, look <a href="object.txt">here</a>.</dd>
+
+<dt><tt>-function</tt></dt>
+<dd>
+Collects the metrics data for each function. For an example program output,
+look <a href="function.txt">here</a>.</dd>
+
+<dt><tt>-all</tt></dt>
+<dd>
+The same as '-package -object -function'.</dd>
+
+<dt><tt>-gui</tt></dt>
+<dd>
+Opens a gui to presents the '-all' output in tabbed panels.
+</dd>
+
+<dt><tt>-xml</tt></dt>
+<dd>
+Output in xml and not in ascii format. Additional option '-all' is recommended.
+</dd>
+
+<dt><tt>-out file</tt></dt>
+<dd>
+Output goes normally to standard output, with this
+option an output file can be specified.
+</dd>
+
+<dt><tt>-recursive</tt></dt>
+<dd>
+Java file in sub directories will be parsed as well. Be careful
+not to get caught in an endless loops because some Unix links.
+</dd>
+
+<dt><tt>-version</tt></dt>
+<dd>
+Prints out the version of JavaNCSS.</dd>
+
+<dt><tt>-help</tt></dt>
+<dd>
+Prints out some basic information.</dd>
+</dl>
+
+<a name="xslt"></a><h3>XSLT Stylesheets</h3>
+
+JavaNCSS comes with some XSLT stylesheet (<tt>javancss-x.y/xslt/javancss2text.xsl</tt> and <tt>javancss-x.y/xslt/javancss2html.xsl</tt>). These stylesheets can be used to
+convert XML output from JavaNCSS to ASCII or HTML output. In case of
+the ASCII output this is of course
+quite boring and much slower as JavaNCSS creates the identical output
+by default anyway. But you can use this stylesheet (or any of the others
+shipped as well) as a starting
+point to have your own presentation format.
+You could also change sort rules (e.g. sort by NCSS)
+or add your own filters to the output (e.g. show only methods
+with NCSS greater some limit).<p>
+
+Assuming you have e.g. Xalan2 installed and somewhere in your
+path is a shell script named 'xslt' that knows how to invoke
+Java with the Xalan 2 main processor class (org.apache.xalan.xslt.Process),
+here is how you can make use of JavaNCSS' XSLT stylesheet:</p><p>
+<tt>cd javancss-x.y</tt><br />
+<tt>javancss -all -xml -recursive src &gt; example.xml</tt><br />
+<tt>xslt -in example.xml -xsl xslt/javancss2text.xsl</tt></p><p>
+Have fun. If you create a useful new stylesheet for JavaNCSS,
+I would be happy to get a copy of it.</p>
+
+<h4>SVG Output</h4>
+Yves Coene <i><a href="mailto:Yves.Coene@spacebel.be">&lt;Yves.Coene@spacebel.be&gt;</a></i> has donated some XSLT stylesheets which produce beautiful
+SVG charts out of JavaNCSS's XML output.<p>
+
+Use e.g. batik as an SVG viewer and have a look at the example
+files in directory xslt/svg under the JavaNCSS home directory.</p><p>
+
+Here is an <a href="chart_ncss.svg">example SVG chart</a> file.</p><p>
+
+Generation of SVG files is similar to using other XSLT stylesheets
+as described above.</p>
+
+</body>
+</html>

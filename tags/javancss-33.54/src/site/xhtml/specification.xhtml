@@ -1,0 +1,170 @@
+<html>
+<head>
+   <link rel="SHORTCUT ICON" href="favjavancss.ico" />
+   <title>JavaNCSS - Specification</title>
+</head>
+<body>
+<table>
+<tr>
+<td>
+<center><h1>JavaNCSS - Specification</h1></center>
+</td>
+</tr>
+</table>
+
+<h2><a name="specification"></a>Specification</h2>
+
+<h3>Non Commenting Source Statements (NCSS)</h3>
+Statements for JavaNCSS are not statements as specified in the Java Language
+Specification but include all kinds of declarations too.
+<br />Roughly spoken, NCSS is approximately equivalent to counting ';' and
+'{' characters in Java source files.
+
+<p>Actually, the NCSS counter gets incremented by one for each:
+<br />&nbsp;
+<br />&nbsp;</p>
+
+<center><table BORDER="0">
+<tr>
+<th></th>
+<th>Examples</th>
+<th>Comment</th>
+</tr>
+
+<tr>
+<td>Package declaration</td>
+
+<td><code>package java.lang;</code></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td>Import declaration</td>
+
+<td><code>import java.awt.*;</code></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td valign="top">Class declaration</td>
+
+<td>- <code>public class Foo {</code>
+<br />- <code>public class Foo extends Bla {</code></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td valign="top">Interface declaration</td>
+
+<td><code>public interface Able {</code></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td valign="top">Field declaration</td>
+
+<td valign="top">- <code>int a;</code>
+<br />- <code>int a, b, c = 5, d = 6;</code></td>
+
+<td>No matter how many fields get actually declared through a comma separated
+list, and no matter if these fields get actually initialized, only
+one statement is counted. So "int a, b, c = 5, d = 6;" gets only +1 count,
+not four or even six (let me know if there is good reason to count it differently).</td>
+</tr>
+
+<tr>
+<td valign="top">Method declaration</td>
+
+<td>- <code>public void cry();</code>
+<br />- <code>public void gib() throws DeadException {</code></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td>Constructor&nbsp;declaration</td>
+
+<td valign="top"><code>public Foo() {</code></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td valign="top">Constructor invocation</td>
+
+<td>- <code>this();</code>
+<br />- <code>super();</code></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td valign="top">Statement</td>
+
+<td>- <code>i = 0;</code>
+<br />- <code>if (ok)</code>
+<br />- <code>if (exit) {</code>
+<br />- <code>if (3 == 4);</code>
+<br />- <code>if (4 == 4) { ; }</code>
+<br />- <code>} else {</code></td>
+
+<td valign="top">expression, if, else, while, do, for, switch, break,
+continue, return, throw, synchronized, catch, finally</td>
+</tr>
+
+<tr>
+<td>Label</td>
+
+<td><code>fine :</code></td>
+
+<td>normal, case, default</td>
+</tr>
+</table></center>
+&nbsp;<br />
+Not counted are empty statements, empty blocks or semicolons after closing
+brackets. Of course, comments don't get counted too. Closing brackets also
+never get counted, the same applies to blocks in general.
+
+<p>In some cases consecutive semicolons are illegal according to the JLS
+but JavaNCSS still tolerates them (thought JavaNCSS is still more strict
+as 'javac'). Nevertheless they are never counted as two statements.</p>
+
+<h3>Cyclomatic Complexity Number (CCN)</h3>
+CCN is also know as McCabe Metric. There exists a much hyped theory behind
+it based on graph theory, but it all comes down to simply counting 'if',
+'for', 'while' statements etc. in a method. Whenever the control flow of
+a method splits, the "CCN counter" gets incremented by one.
+
+<p>Each method has a minimum value of 1 per default. For each of the following
+Java keywords/statements this value gets incremented by one:</p>
+<ul>
+<li><tt>if</tt></li>
+<li><tt>for</tt></li>
+<li><tt>while</tt></li>
+<li><tt>case</tt></li>
+<li><tt>catch</tt></li>
+<li><tt>&amp;&amp;</tt></li>
+<li><tt>||</tt></li>
+<li><tt>?</tt></li>
+</ul>
+<!--Also if the control flow of a method returns abortively the <tt>CCN</tt> value will
+be incremented by one:
+<ul>
+<li><tt>return</tt></li>
+<li><tt>throw</tt></li>
+</ul>
+&nbsp;<br />
+An ordinary return at the end of method (no matter if it's a function or a procedure)
+will not be counted.
+<p>-->
+Note that <tt>else</tt>, <tt>default</tt>, and <tt>finally</tt> don't increment the CCN
+value any further. On the other hand, a simple method with a <tt>switch</tt> statement
+and a huge block of <tt>case</tt> statements can have a surprisingly high CCN value (still it has the same value when converting a <tt>switch</tt>
+block to an equivalent sequence of <tt>if</tt> statements).
+
+</body>
+</html>

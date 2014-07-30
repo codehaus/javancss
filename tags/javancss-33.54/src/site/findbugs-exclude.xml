@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<FindBugsFilter>
+  <Match classregex="javancss.parser.*" />
+  <Match classregex="javancss.parser.debug.*" />
+  <Match classregex="javancss.parser.java15.*" />
+  <Match classregex="javancss.parser.java15.debug.*" />
+</FindBugsFilter>

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<html>
+<head>
+   <link rel="SHORTCUT ICON" href="favjavancss.ico" />
+   <title>JavaNCSS - Credits</title>
+</head>
+<body>
+<table>
+<tr>
+<td>
+<center><h1>JavaNCSS - Credits</h1></center>
+</td>
+</tr>
+</table>
+
+<h2><a name="copyright"></a>Copyright Notice</h2>
+JavaNCSS is free software distributed under the GNU Lesser General Public License.
+Copyright Chr. Clemens Lee.
+
+<h2><a name="credits"></a>Credits</h2>
+
+<h3>Authors</h3>
+The currently active crew with permission to write into the source code repository can be found <a href="http://xircles.codehaus.org/projects/javancss/members">here</a> [2009-02-07].
+<ul>
+<li>Thanks to Metamata and Suntest for the JavaCC parser generator
+and especially the Java grammar on which JavaNCSS is based.</li>
+<li>Ted Leung for a patch for the -out option.</li>
+<li>Steve Jernigan for an Ant task fro JavaNCSS. This task can be
+downloaded separately from <a href="http://sourceforge.net/projects/javancss2ant/">http://sourceforge.net/projects/javancss2ant/</a>
+but is distributed with JavaNCSS as well. This task has also some
+additional features such as checks of user defined thresholds
+on individual metrics.</li>
+<li>Pääkö for a patch for the -recursive feature [2002-03-16].</li>
+<li>John Wilson for a patch to use "\r\n" on Windows to end
+lines for JavaNCSS's ascii output.</li>
+<li>Emilio Gongora and Guillermo Rodriguez for patches to count
+number of lines of comments. Applying these patches is not
+finished yet and the only result you can see already is the
+the new Javadocs info for packages.</li>
+<li>Phillip Wells for working on Steve Jernigan's Ant task and
+submitting it to the Ant project to be added into the optional.jar
+file [2002-06-08].</li>
+<li>Ross Gardler (ross at saafe.org) donated an XSLT stylesheet to convert the xml
+   output of JavaNCSS to a format very close to HTML. This
+   can be used to generate custom HTML pages for your project [2002-06-15].</li>
+<li>Terry Skelton (tskelton15 at attbi.com) donated an XSLT stylesheet to convert
+ the XML output of JavaNCSS to HTML. [2002-07-05].</li>
+<li>Yves Coene (Yves.Coene at spacebel.be)
+donated XSLT stylesheets which generate beautiful
+SVG charts from the JavaNCSS XML output [2002-09-04].</li>
+<li>Rajesh Raheja  (Rajesh.Raheja at oracle.com)
+donated an XSLT stylesheet, which generates a simple
+HTML report of all metrics which exceed a certain limit
+[2003-05-11].</li>
+<li>Chris Povirk for a patch in the XML handling for enums [2006-06-12].</li>
+<li>David Chwalisz for enhancements to the ant build.xml script [2006-10-06].</li>
+<li>Simon Brandhof for opening and moving JavaNCSS to the Codhaus development infrastructure (and Jira for bug tracking) [2009-02-07]. This will open up development to better collaboration with other developers and possibly will lead to new talent contributing much needed updates.</li>
+<li>Herv&eacute; Boutemy for moving the whole project to Maven and cleaning up all kind of code areas (encoding etc.) [2009-02-07].</li>
+<li>Freddy Mallet for a draft version of a new Java parser, which will allow easier extension of JavaNCSS by traversing Java source code via the visitor pattern [2009-02-07]. Hopefully this might also lead to more people being able to fix grammar bugs or updating the grammar to Java language extensions.</li>
+<li>S&eacute;bastien Reynaud for many difficult Java grammar fixes [2009-06-01].</li>
+<li>Peter Kofler for many Java grammar fixes [2014-07-12].</li>
+</ul>
+
+<h3>Thanks To</h3>
+<ul>
+<li>Frans van Gool for HtmlViewer (which got replaced by JavaHelp since JavaNCSS version 7).</li>
+<li>Thanks to the users of JavaNCSS and to the people who provided valuable feedback and requests.</li>
+<li>Thanks to Glen Cordrey for the tip how to set the JAVANCSS_HOME variable automaticly in javancss.bat.</li>
+<li>Joseph Kiniry for bug reports for the parser and example test code (2001-06-16).</li>
+<li>Jonathan Doughty for the error report of JavaNCSS not being able to handle JDK 1.4 assertions.</li>
+<li>Carsten Lergenmüller for two error reports regarding
+the '-recursive' feature.</li>
+<li>Chris Williamson for finding a rare parsing bug having to do
+with inner, outer, and super classes [2002-05-11].</li>
+<li><a href="mailto:twl@sauria.com">Ted Leung</a> for writing
+an Ant task for JavaNCSS of his own. Unfortunately I never
+got around looking into it and adding it to JavaNCSS. Finally
+when I found the time I decided to go for Steve Jernigan's
+task, as that adds some new features to JavaNCSS and has
+detailed documentation. Thought Ted's task has a simpler
+interface with its parameter names sticking nearer to the
+original JavaNCSS options [2002-06-08].</li>
+<li><a href="mailto:david_brandt@us.ibm.com">David Brandt</a> fixed the wrong Javadocs per
+Function value for XML output [2002-07-21].</li>
+<li><a href="mailto:vesa_karvonen@hotmail.com">Vesa Karvonen</a> for feedback regarding the overloaded
+'functions' element in the XML DTD, which has led to the
+conversion stylesheet 'javancss_no_functions_overloading.xsl'
+[2002-08-04].</li>
+<li>Again Vesa Karvonen for a bug report that revealed the incorrect production of
+XML output in conjunction with some exotic locale setting [2002-09-03].</li>
+<li><a href="mailto:Brad.Kiewel@fiserv.com">Brad Kiewel</a> for
+patching the build.xml Ant file to add a manifest to the
+javancss.jar file, so JavaNCSS can now be executed
+via java's -jar option [2002-09-04].</li>
+<li>Anthony Sobey for pointing out that the '&amp;&amp;', '||', and '?'
+statements haven't been considered for measuring cyclomatic complexity numbers [2003-12-14].</li>
+<li>Bill Burcham for adding SVG doctype definitions to the SVG stylesheets [2003-12-22].</li>
+<li>Wally Bowles for the suggestion to use 'Method' instead
+of 'Function'. Has been applied so far only to an optional
+HTML output style sheet [2004-08-08].</li>
+<li>Don Morrison, Lakshman Srilakshmanan, Eduardo Sherington for various bug reports [2006-05-14].</li>
+<li>Tom Mitchell for bug reports and test code in the Java 1.5 parser code [2006-06-12].</li>
+<li>Charles L, Anver Sotnikov, James Burton, Byron du Preez, Martin Lehofer, Darren M. Siegel, David Chwalisz for a bug reports and test code in the Java 1.5 parser code [2006-10-06].</li>
+<li>Don Kautz and Isabelle Guimiot for bug reports and test code for the Java 1.5 parser code [2008-04-08].</li>
+<li>Jean-Laurent de Morlhon for good morale when moving to Codehaus [2009-02-07]!</li>
+</ul>
+
+</body>
+</html>
