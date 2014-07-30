@@ -10,7 +10,7 @@
 
   <groupId>org.codehaus.javancss</groupId>
   <artifactId>javancss</artifactId>
-  <version>33.54</version>
+  <version>34.55-SNAPSHOT</version>
   <packaging>jar</packaging>
 
   <name>JavaNCSS</name>
@@ -69,9 +69,9 @@
   </issueManagement>
 
   <scm>
-    <connection>scm:svn:http://svn.codehaus.org/javancss/tags/javancss-33.54</connection>
-    <developerConnection>scm:svn:https://svn.codehaus.org/javancss/tags/javancss-33.54</developerConnection>
-    <url>http://fisheye.codehaus.org/browse/javancss/tags/javancss-33.54</url>
+    <connection>scm:svn:http://svn.codehaus.org/javancss/trunk/</connection>
+    <developerConnection>scm:svn:https://svn.codehaus.org/javancss/trunk/</developerConnection>
+    <url>http://fisheye.codehaus.org/browse/javancss/trunk/</url>
   </scm>
 
   <developers>
