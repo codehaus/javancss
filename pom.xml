@@ -35,20 +35,26 @@
       <subscribe>dev-subscribe@javancss.codehaus.org</subscribe>
       <unsubscribe>dev-unsubscribe@javancss.codehaus.org</unsubscribe>
       <post>dev@javancss.codehaus.org</post>
-      <archive>http://archive.javancss.codehaus.org/dev/</archive>
+      <archive>http://markmail.org/list/org.codehaus.javancss.dev</archive>
     </mailingList>
     <mailingList>
       <name>User List</name>
       <subscribe>user-subscribe@javancss.codehaus.org</subscribe>
       <unsubscribe>user-unsubscribe@javancss.codehaus.org</unsubscribe>
       <post>user@javancss.codehaus.org</post>
-      <archive>http://archive.javancss.codehaus.org/user/</archive>
+      <archive>http://markmail.org/list/org.codehaus.javancss.user</archive>
     </mailingList>
     <mailingList>
       <name>Commits List</name>
       <subscribe>scm-subscribe@javancss.codehaus.org</subscribe>
       <unsubscribe>scm-unsubscribe@javancss.codehaus.org</unsubscribe>
-      <archive>http://archive.javancss.codehaus.org/scm/</archive>
+      <archive>http://markmail.org/list/org.codehaus.javancss.scm</archive>
+    </mailingList>
+    <mailingList>
+      <name>Announce</name>
+      <subscribe>announce-subscribe@javancss.codehaus.org</subscribe>
+      <unsubscribe>announce-unsubscribe@javancss.codehaus.org</unsubscribe>
+      <archive>http://markmail.org/list/org.codehaus.javancss.announce</archive>
     </mailingList>
   </mailingLists>
 
