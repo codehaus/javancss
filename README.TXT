@@ -35,6 +35,8 @@ FEATURES
      and SVG reports and as a basis for your own custom 
      reports.
    - Ant task (written by Steve Jernigan).
+   - Support for Java 1.5 syntax (generics, enums, etc.).
+   - Support for Java 1.7 syntax (try with resource, literals, etc.).
    - 100% Pure Java.
    - Free software (GNU LGPL).
 
