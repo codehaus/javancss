@@ -10,7 +10,7 @@
 
   <groupId>org.codehaus.javancss</groupId>
   <artifactId>javancss</artifactId>
-  <version>34.55-SNAPSHOT</version>
+  <version>33.54-SNAPSHOT</version>
   <packaging>jar</packaging>
 
   <name>JavaNCSS</name>
