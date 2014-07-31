@@ -1,0 +1,56 @@
+ ----
+ JavaNCSS TODO list
+ -----
+ Hervé Boutemy, Peter Kofler
+ -----
+ March 2013
+ -----
+
+JavaNCSS TODO list
+
+  * Maven build
+  
+    * fix all warnings in mvn clean verify site
+    
+    * maybe lib/*.jar files should be copied in assembly phase from actual dependencies, delete committed Jar files, start scripts need to be updated
+    
+  * Dependencies are non standard dependencies, not hosted on CodeHaus and not maintained any more?
+  
+    * at least add source-jar to dependencies; see http://www.kclee.de/clemens/java/ccl/; jhbasic is javax.help from sun.
+    
+    * maybe get rid of dependencies by copying only the relevant classes into this project
+
+
+  * use JUnit?
+
+    * pros: well known by many developers, IDE integration,
+    {{{http://maven.apache.org/plugins/maven-surefire-report-plugin/}Maven reporting integration}},
+    with {{{http://mojo.codehaus.org/cobertura-maven-plugin/}code coverage too}}
+
+    * cons: large effort to change all tests, the tests use their own testing and assertion framework
+
+    Test available in SVN {{{http://svn.codehaus.org/javancss/branches/javancss-junit/}branches/javancss-junit}}, with reports
+    {{{http://javancss.codehaus.org/junit/project-reports.html}here}} (compare with
+    {{{http://javancss.codehaus.org/project-reports.html}actual ones}}).
+
+
+  * avoid <<<Object[] aoImport>>>?
+
+    * create an Import class, both for imports and package?
+
+    * or transform it to simple String, since token position (= other fields) is not really useful?
+
+
+  * improve exception handling
+
+
+Done
+
+  * remove "javancss -check" option
+
+  * use <<<File>>>s instead of <<<String>>>s
+
+  * create Metric classes instead of <<<Vector\<String, Integer, ...\>>>>
+
+  * use Collection API instead of <<<Vector>>> and <<<Hashtable>>>
+ 
