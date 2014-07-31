@@ -5,7 +5,7 @@
 
   <groupId>org.codehaus.javancss</groupId>
   <artifactId>javancss</artifactId>
-  <version>34.55-SNAPSHOT</version>
+  <version>33.54-SNAPSHOT</version>
   <packaging>jar</packaging>
 
   <name>JavaNCSS</name>
@@ -211,6 +211,9 @@
           <version>2.5</version>
           <configuration>
             <tagBase>https://svn.codehaus.org/javancss/tags</tagBase>
+            <useReleaseProfile>false</useReleaseProfile>
+            <goals>deploy</goals>
+            <arguments>-Pjavancss-release</arguments>
           </configuration>
         </plugin>
         <plugin>
