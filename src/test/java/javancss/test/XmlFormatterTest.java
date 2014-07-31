@@ -119,7 +119,6 @@ public class XmlFormatterTest
         try
         {
             String sText = XMLUtil.getXML( sXML, getXslFile( "javancss2text.xsl" ) );
-            FileUtil.writeFile( "./t", sText );
             sText = sText.replaceAll( "(?:\r\n|\n\r)", "\n" );
             String sCompare = FileUtil.readFile( getTestFile( "Output32.txt" ).getAbsolutePath() );
             Assert( sText.equals( sCompare ), sText );
