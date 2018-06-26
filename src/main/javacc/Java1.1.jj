@@ -2574,7 +2574,7 @@ void PrimarySuffix() :
 //  { System.out.println( "PrimarySuffix . Identifier()" ); }
   "." Identifier()
 |
-  Arguments()
+  Arguments() [ "{" MethodDeclaration() "}"]
 }
 
 void Literal() :
