@@ -3002,7 +3002,7 @@ void TryWithResources() :
 {}
 {
 //  LocalVariableDeclaration() [ ";" ]
-  LocalVariableDeclaration() ( ";" LocalVariableDeclaration() )*
+  LocalVariableDeclaration() ( LOOKAHEAD(2) ";" LocalVariableDeclaration() )* [ ";" ]
 }
 
 void Identifier() :
