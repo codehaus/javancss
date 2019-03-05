@@ -134,6 +134,8 @@ public class LamdasAndMethodRefs {
         }).map(String::toUpperCase).sorted().forEach(
                  System.out::println);
 
+	Runnable runnable = (Runnable)() -> System.out.println("Test");
+
     }
 
 }
