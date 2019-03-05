@@ -215,6 +215,7 @@ public class JavaParser implements JavaParserInterface
      public static final int TRANSIENT = 0x0100;
      public static final int VOLATILE = 0x0200;
      public static final int STRICTFP = 0x1000;
+     public static final int DEFAULT = 0x2000;
 
      /** A set of accessors that indicate whether the specified modifier
          is in the set. */
@@ -259,6 +260,11 @@ public class JavaParser implements JavaParserInterface
        return (modifiers & STRICTFP) != 0;
      }
 
+     public boolean isDefault(int modifiers)
+     {
+       return (modifiers & DEFAULT) != 0;
+     }
+
      public boolean isSynchronized(int modifiers)
      {
        return (modifiers & SYNCHRONIZED) != 0;
@@ -282,6 +288,36 @@ public class JavaParser implements JavaParserInterface
         return modifiers & ~mod;
      }
    }
+
+  public static void main(String args[]) {
+    JavaParser parser;
+    if (args.length == 0) {
+      System.out.println("Java Parser Version 1.1:  Reading from standard input . . .");
+      parser = new JavaParser(System.in);
+    } else if (args.length == 1) {
+      System.out.println("Java Parser Version 1.1:  Reading from file " + args[0] + " . . .");
+      try {
+        parser = new JavaParser(new java.io.FileInputStream(args[0]));
+      } catch (java.io.FileNotFoundException e) {
+        System.out.println("Java Parser Version 1.1:  File " + args[0] + " not found.");
+        return;
+      }
+    } else {
+      System.out.println("Java Parser Version 1.1:  Usage is one of:");
+      System.out.println("         java javancss.parser.JavaParser < inputfile");
+      System.out.println("OR");
+      System.out.println("         java javancss.parser.JavaParser inputfile");
+      return;
+    }
+    try {
+      parser.CompilationUnit();
+      System.out.println("Java Parser Version 1.1:  Java program parsed successfully.");
+    } catch (ParseException e) {
+      System.out.println(e.getMessage());
+      System.out.println("Java Parser Version 1.1:  Encountered errors during parse.");
+    }
+  }
+
 }
 
 PARSER_END(JavaParser)
@@ -808,6 +844,8 @@ TOKEN :
 | < COMMA: "," >
 | < DOT: "." >
 | < AT: "@" >
+| < LAMBDA: "->" >
+| < DOUBLECOLON: "::" >
 }
 
 /* OPERATORS */
@@ -1357,7 +1395,7 @@ void ClassBodyDeclaration() :
 void MethodDeclarationLookahead() :
 {}
 {
-  ( "public" | "protected" | "private" | "static" | "abstract" | "final" | "native" | "synchronized" | "strictfp" | Annotation() )*
+  ( "public" | "protected" | "private" | "static" | "abstract" | "final" | "native" | "synchronized" | "strictfp" | "default" | Annotation() )*
   [ TypeParameters() ]
   ResultType() Identifier() "("
 }
@@ -1793,6 +1831,12 @@ void MethodDeclaration() :
       }
   }
 | "strictfp"
+  {
+      if ( tmpToken == null ) {
+          tmpToken = getToken( 0 );
+      }
+  }
+| "default"
   {
       if ( tmpToken == null ) {
           tmpToken = getToken( 0 );
@@ -2282,7 +2326,14 @@ void Expression() :
     //System.out.println( "Expression start" );
 }
 {
+  LOOKAHEAD(LambdaExpression())  LambdaExpression() 
+|
+  AssignmentExpression()
+}
 
+void AssignmentExpression() :
+{}
+{
   LOOKAHEAD( PrimaryExpression() AssignmentOperator() )
   //{ System.out.println( "Expression" ); }
   Assignment()
@@ -2465,6 +2516,8 @@ void CastExpression() :
   LOOKAHEAD("(" PrimitiveType())
   "(" Type() ")" UnaryExpression()
 |
+  LOOKAHEAD("(" Type() ")" LambdaExpression()) "(" Type() ")" LambdaExpression()
+|
   "(" Type() ")" UnaryExpressionNotPlusMinus()
 }
 
@@ -2473,6 +2526,8 @@ void PrimaryExpression() :
 //    { System.out.println( "Before PrimaryExpression" ); }
 }
 {
+  LOOKAHEAD(MethodReference()) MethodReference()
+|
   PrimaryPrefix() ( LOOKAHEAD(2) PrimarySuffix() )*
 }
 
@@ -2521,7 +2576,7 @@ void PrimarySuffix() :
 //  { System.out.println( "PrimarySuffix . Identifier()" ); }
   "." Identifier()
 |
-  Arguments()
+  Arguments() [ "{" MethodDeclaration() "}"]
 }
 
 void Literal() :
@@ -2781,9 +2836,25 @@ void SwitchStatement() :
                 _localCases = 0;
         }
   "switch" "(" Expression() ")" "{"
-    ( SwitchLabel() ( BlockStatement() )* )*
+  (SwitchCase())*
   "}"
         { _ncss++;       Util.debug( "_ncss++" );}
+}
+
+void SwitchCase() : 
+{}
+{
+    SwitchLabel() SwitchBlockStatements()
+}
+
+void SwitchBlockStatements() :
+{}
+{
+    LOOKAHEAD(SwitchLabel()) {}
+|
+    BlockStatement() SwitchBlockStatements()
+|
+    {}
 }
 
 void SwitchLabel() :
@@ -2800,7 +2871,7 @@ void SwitchLabel() :
   "default" ":"
         {
                 _ncss++;       Util.debug( "_ncss++" );
-        }
+}
 }
 
 void IfStatement() :
@@ -2933,7 +3004,7 @@ void TryWithResources() :
 {}
 {
 //  LocalVariableDeclaration() [ ";" ]
-  LocalVariableDeclaration() ( ";" LocalVariableDeclaration() )*
+  LocalVariableDeclaration() ( LOOKAHEAD(2) ";" LocalVariableDeclaration() )* [ ";" ]
 }
 
 void Identifier() :
@@ -3138,6 +3209,11 @@ int Modifiers():
 }
   |
    "strictfp" { modifiers |= ModifierSet.STRICTFP;       if ( _tmpToken == null ) {
+          _tmpToken = getToken( 0 );
+      }
+}
+  |
+   "default" { modifiers |= ModifierSet.DEFAULT;       if ( _tmpToken == null ) {
           _tmpToken = getToken( 0 );
       }
 }
@@ -3443,3 +3519,47 @@ void MemberSelector():
   "." TypeArguments() <IDENTIFIER>
 }
 
+void LambdaExpression():
+{}
+{
+   LambdaParameters() "->" LambdaBody()
+}
+
+void LambdaParameters():
+{}
+{
+   <IDENTIFIER> 
+|
+   LOOKAHEAD("(" InferredFormalParameterList() ")") "(" InferredFormalParameterList() ")"
+|
+   LOOKAHEAD( [FormalParameters()] ) [FormalParameters()] 
+}
+
+void InferredFormalParameterList():
+{}
+{
+   <IDENTIFIER> ( ","  <IDENTIFIER> )*
+}
+
+
+void LambdaBody():
+{}
+{
+   Expression()
+|
+   Block()
+}
+
+void MethodReference():
+{}
+{
+   "super" "::" [TypeArguments()] <IDENTIFIER>
+|
+   LOOKAHEAD( 4 ) Name() "." "super" "::" [TypeArguments()] <IDENTIFIER>
+|
+//   ClassType() "::" [TypeArguments()] "new" and ArrayType() "::" "new" is included in below
+   LOOKAHEAD(ReferenceType() "::" [TypeArguments()] ( <IDENTIFIER> | "new" )) ReferenceType() "::" [TypeArguments()] ( <IDENTIFIER> | "new" )
+|
+//   Name() "::" [TypeArguments()] <IDENTIFIER> is included in below
+   PrimaryPrefix() ( LOOKAHEAD(2) PrimarySuffix() )* "::" [TypeArguments()] <IDENTIFIER>
+}
